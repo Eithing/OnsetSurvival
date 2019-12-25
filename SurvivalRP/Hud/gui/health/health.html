@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <div>
+        <canvas id="c" width="150" height="40"></canvas>
+        <div class="progress">
+            <img src="burger.png" class="image">
+            <div class="container1">
+                <div class="progress1 progress-striped1">
+                    <div class="progress-bar1" id="editable1">
+                    </div>
+                </div>
+            </div>
+            <img src="water.png" class="image2">
+            <div class="container2">
+                <div class="progress2 progress-striped2">
+                    <div class="progress-bar2" id="editable2">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+<link rel="stylesheet" type="text/css" href="health.css" />
+
+<script>
+    var life = 100;
+
+    function drawLine(ctx, y, h) {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillRect(0, y, ctx.canvas.width, h);
+        ctx.globalCompositeOperation = 'destination-out';
+
+        ctx.beginPath();
+        ctx.moveTo(0, 20);
+        ctx.lineTo(5, 20);
+        ctx.lineTo(7, 20 - (1 / 100) * life);
+        ctx.lineTo(10, 20 + (2 / 100) * life);
+        ctx.lineTo(17, 20 - (2 / 100) * life);
+        ctx.lineTo(23, 20 + (14 / 100) * life);
+        ctx.lineTo(29, 20 - (14 / 100) * life);
+        ctx.lineTo(34, 20 + (2 / 100) * life);
+        ctx.lineTo(40, 20 - (2 / 100) * life);
+        ctx.lineTo(47, 20);
+
+        ctx.lineTo(50, 20);
+        ctx.lineTo(52, 20 - (1 / 100) * life);
+        ctx.lineTo(55, 20 + (2 / 100) * life);
+        ctx.lineTo(62, 20 - (2 / 100) * life);
+        ctx.lineTo(68, 20 + (14 / 100) * life);
+        ctx.lineTo(74, 20 - (14 / 100) * life);
+        ctx.lineTo(79, 20 + (2 / 100) * life);
+        ctx.lineTo(85, 20 - (2 / 100) * life);
+        ctx.lineTo(92, 20);
+
+        ctx.lineTo(96, 20);
+        ctx.lineTo(98, 20 - (1 / 100) * life);
+        ctx.lineTo(101, 20 + (2 / 100) * life);
+        ctx.lineTo(108, 20 - (2 / 100) * life);
+        ctx.lineTo(114, 20 + (14 / 100) * life);
+        ctx.lineTo(120, 20 - (14 / 100) * life);
+        ctx.lineTo(125, 20 + (2 / 100) * life);
+        ctx.lineTo(131, 20 - (2 / 100) * life);
+        ctx.lineTo(138, 20);
+        ctx.lineTo(200, 20);
+        ctx.stroke();
+    }
+
+    var canvas = document.getElementById('c');
+    var ctx = canvas.getContext('2d');
+
+    var lines = 1;
+
+    for (var i = 0; i < lines; i++) {
+        drawLine(ctx, i * (canvas.height / lines), canvas.height / lines);
+    }
+
+    function ChangeColor(_life) {
+        if (_life > 74 && _life < 101) {
+            document.getElementById("c").style.background = "-webkit-linear-gradient(left, black 0%, green 100%)";
+        }
+        if (_life > 49 && _life < 75) {
+            document.getElementById("c").style.background = "-webkit-linear-gradient(left, black 0%, yellow 100%)";
+        }
+        if (_life > 24 && _life < 50) {
+            document.getElementById("c").style.background = "-webkit-linear-gradient(left, black 0%, orange 100%)";
+        }
+        if (_life >= 0 && _life < 25) {
+            document.getElementById("c").style.background = "-webkit-linear-gradient(left, black 0%, red 100%)";
+        }
+        ctx.clearRect(0, 0, 150, 40);
+        life = _life;
+        var lines = 1;
+        for (var i = 0; i < lines; i++) {
+            drawLine(ctx, i * (canvas.height / lines), canvas.height / lines);
+        }
+    }
+
+    function UpdateVital(...coucou) {
+        document.getElementById("editable1").style.width = coucou[0] + "%";
+        document.getElementById("editable2").style.width = coucou[1] + "%";
+    }
+</script>
