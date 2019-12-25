@@ -10,6 +10,7 @@
     height: 40px;
     border: 1px solid #212121;
     border-radius: 15%;
+    position: relative;
 }
 
 .item-image {
@@ -88,9 +89,24 @@ img {
     width: 40px;
     height: 40px;
     border-radius: 15%;
+    position: relative;
 }
 
-label {
+.item-label
+{
+    font-family: "Gill Sans", sans-serif;
+    font-size: smaller;
+    border-radius: 15%;
+    text-align: right;
+    background-color: #ffffff3a;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-width: 40px;
+}
+
+.title_label 
+{
     font-family: "Arial Black", Gadget, sans-serif;
     color: #f0fff0;
     width: 100%;

@@ -81,15 +81,6 @@ class Inventory {
         this.mouseUpHandler = (evt) => {
             evt.preventDefault();
 
-            let elements = document.getElementsByClassName("inventory-slot");
-            for (var i = 0; i < elements.length; i++) {
-                elements[i].style.backgroundColor= "rgba(240, 255, 240, 0.11)";
-            }
-            document.getElementById("player-inventory-stuff1").style.backgroundColor="rgba(240, 255, 240, 0.11)";
-            document.getElementById("player-inventory-stuff2").style.backgroundColor="rgba(240, 255, 240, 0.11)";
-            document.getElementById("player-inventory-stuff3").style.backgroundColor="rgba(240, 255, 240, 0.11)";
-            document.getElementById("player-inventory-stuff4").style.backgroundColor="rgba(240, 255, 240, 0.11)";
-
             let target = evt.target.parentNode;
             if (target && target.className === 'item' && this.dragging !== null) {
                 this.dropIntoTarget = target;
@@ -175,12 +166,11 @@ class Inventory {
         }, 1000 / 60)
     }
 
-    addItem(type, item, slot = false) {
-        if (slot === false) {
-            const itemSlot = this[type].items.push(item);
-            item.element.setAttribute("item-id", itemSlot);
-            this[type].element.appendChild(item.element);
-        }
+    addItem(type, item) {
+        const itemSlot = this[type].items.push(item);
+        item.element.setAttribute("item-id", itemSlot);
+
+        this[type].element.appendChild(item.element);
         return this;
     }
 
