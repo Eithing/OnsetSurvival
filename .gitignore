@@ -4,3 +4,4 @@ mariadb_log.txt
 server_log.txt
 
 logs/
+config/config.vdf
