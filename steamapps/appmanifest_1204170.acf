@@ -3,15 +3,15 @@
 	"appid"		"1204170"
 	"Universe"		"1"
 	"name"		"Onset Dedicated Server"
-	"StateFlags"		"4"
+	"StateFlags"		"1158"
 	"installdir"		"Onset Dedicated Server"
 	"LastUpdated"		"1576786844"
-	"UpdateResult"		"0"
+	"UpdateResult"		"13"
 	"SizeOnDisk"		"83695921"
 	"buildid"		"4509126"
-	"LastOwner"		"76561199849745582"
-	"BytesToDownload"		"3243904"
-	"BytesDownloaded"		"3243904"
+	"LastOwner"		"76561202011735235"
+	"BytesToDownload"		"2555136"
+	"BytesDownloaded"		"2555136"
 	"AutoUpdateBehavior"		"0"
 	"AllowOtherDownloadsWhileRunning"		"0"
 	"ScheduledAutoUpdate"		"0"
@@ -30,6 +30,15 @@
 	{
 		"1004"		"2144826912121883656"
 		"1204171"		"3772685258838016952"
+	}
+	"StagedDepots"
+	{
+		"1204171"
+		{
+			"manifest"		"3231579734638811967"
+			"size"		"49574704"
+			"dlcappid"		"0"
+		}
 	}
 	"UserConfig"
 	{

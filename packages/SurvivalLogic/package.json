@@ -1,0 +1,12 @@
+{
+    "author": "Eithing",
+    "version": "1.0",
+    "server_scripts": [
+        "Dto/init.lua",
+        "Dto/inventory.lua",
+        "Dto/item.lua",
+        "Dto/user.lua"
+    ],
+    "client_scripts": [],
+    "files": []
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<link rel="stylesheet" type="text/css" href="admin.css" />
+
+
+<body>
+    <div class="parent-container">
+        <div class="list-container"></div>
+    </div>
+</body>
+
+</html>
+<script>
+    const listContainer = document.querySelector('.list-container')
+
+    const buildList = function(type) {
+        while (listContainer.firstChild) {
+            listContainer.removeChild(listContainer.firstChild)
+        }
+
+        const {
+            spriteLignes,
+            spriteColonnes,
+            lignes,
+            colonnes,
+            space,
+            url
+        } = CONFIG[type]
+
+        let compteur = 0;
+        for (let i = 0; i < colonnes; i++) {
+            const myList = document.createElement('ul');
+            for (let j = 0; j < lignes; j++) {
+                const li = document.createElement('li');
+                if (compteur < spriteColonnes * spriteLignes) {
+                    const monImage = document.createElement('div');
+                    monImage.style.width = "43px";
+                    monImage.style.height = "43px";
+                    monImage.style.backgroundImage = url;
+                    monImage.id = compteur + 1;
+
+                    y = Math.floor(compteur / spriteColonnes) * space
+                    x = (compteur % spriteColonnes) * space
+                    monImage.style.backgroundPosition = "-" + x + "px -" + y + "px";
+
+                    li.appendChild(monImage);
+                    li.addEventListener('click', () => onPressItemList(monImage.id, type));
+                    myList.appendChild(li);
+                    compteur++;
+                }
+            }
+            listContainer.appendChild(myList)
+        }
+    }
+
+    function onPressItemList(item, type) {
+        ue.game.callevent("OnAdminClick", JSON.stringify([item, type]));
+    }
+
+    const CONFIG = {
+        'main': {
+            spriteLignes: 2,
+            spriteColonnes: 2,
+            lignes: 4,
+            colonnes: 1,
+            space: 48,
+            url: "url('./../Ressources/images/Admin.jpg')"
+        },
+        'cloth': {
+            spriteLignes: 6,
+            spriteColonnes: 5,
+            lignes: 10,
+            colonnes: 3,
+            space: 50,
+            url: "url('./../Ressources/images/Cloth.jpg')"
+        },
+        'weapons': {
+            spriteLignes: 5,
+            spriteColonnes: 4,
+            lignes: 10,
+            colonnes: 2,
+            space: 50,
+            url: "url('./../Ressources/images/Weapons.png')"
+        },
+        'cars': {
+            spriteLignes: 5,
+            spriteColonnes: 5,
+            lignes: 9,
+            colonnes: 3,
+            space: 64,
+            url: "url('./../Ressources/images/Cars.jpg')"
+        },
+    }
+</script>

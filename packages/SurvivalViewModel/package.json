@@ -1,0 +1,19 @@
+{
+    "author": "Eithing",
+    "version": "1.0",
+    "server_scripts": [
+        "dataExchanger_s.lua",
+        "Player/player_s.lua",
+        "Hud/vitalIndicator_s.lua",
+        "Admin/admin_s.lua",
+        "Inventory/inventory_s.lua"
+    ],
+    "client_scripts": [
+        "initView_c.lua",
+        "Player/player_c.lua",
+        "Hud/vitalIndicator_c.lua",
+        "Admin/admin_c.lua",
+        "Inventory/inventory_c.lua"
+    ],
+    "files": []
+}
