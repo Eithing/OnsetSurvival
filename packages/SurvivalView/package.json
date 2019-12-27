@@ -1,0 +1,30 @@
+{
+    "author": "Eithing",
+    "version": "1.0",
+    "server_scripts": [],
+    "client_scripts": [
+        "hud.lua",
+        "Admin/admin.lua",
+        "Inventory/inventory.lua"
+    ],
+    "files": [
+        "VitalIndicator/health.html",
+        "VitalIndicator/health.css",
+        "VitalIndicator/burger.png",
+        "VitalIndicator/water.png",
+
+        "Admin/admin.css",
+        "Admin/admin.html",
+
+        "Inventory/inventory.css",
+        "Inventory/inventory.html",
+
+        "Ressources/Js/item.js",
+        "Ressources/Js/inventory.js",
+
+        "Ressources/images/Admin.jpg",
+        "Ressources/images/Cars.jpg",
+        "Ressources/images/Cloth.jpg",
+        "Ressources/images/Weapons.png"
+    ]
+}
