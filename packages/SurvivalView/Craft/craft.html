@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<link rel="stylesheet" type="text/css" href="craft.css" />
+
+<body>
+    <div class="parent-container">
+        <div class="inventory-container-Global" id="player-inventory">
+            <label class="title_label">Craft</label>
+            <div class="inventory-container-SubGlobal">
+                <div class="inventory-container scroll" id="inventory-container"></div>
+                <div class="craft-container scroll" id="craft-container"></div>
+                <div class="receipts-container scroll" id="receipts-container"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript" src="./../Ressources/Js/craft.js"></script>
+<script type="text/javascript" src="./../Ressources/Js/item.js"></script>
+<script>
+    function newEl(tagType) {
+        return document.createElement(tagType);
+    }
+
+    class MouseTracker {
+        constructor() {
+            this.position = {
+                x: 0,
+                y: 0
+            }
+            this.targetElement = null;
+            this.leftClick = false;
+            this.rightClick = false;
+            this.middleClick = false;
+            this.moveHandler = (evt) => {
+                this.position.x = evt.pageX;
+                this.position.y = evt.pageY;
+                this.targetElement = evt.target;
+            }
+
+            let clickSwap = (button, bool) => {
+                if (button == 0)
+                    this.leftClick = bool;
+                if (button == 1)
+                    this.middleClick = bool;
+                if (button == 2)
+                    this.rightClick = bool;
+            }
+
+            this.mouseDownHandler = (evt) => {
+                clickSwap(evt.button, true);
+            }
+            this.mouseUpHandler = (evt) => {
+                clickSwap(evt.button, false);
+                let elements = document.getElementsByClassName("inventory-slot");
+                for (var i = 0; i < elements.length; i++) {
+                    elements[i].style.backgroundColor = "rgba(240, 255, 240, 0.11)";
+                }
+            }
+
+            document.addEventListener('mousemove', this.moveHandler);
+            document.addEventListener('mousedown', this.mouseDownHandler);
+            document.addEventListener('mouseup', this.mouseUpHandler);
+        }
+
+        disableContextMenu() {
+            document.oncontextmenu = function() {
+                return false;
+            }
+        }
+
+        enableContextMenu() {
+            document.oncontextmenu = null;
+        }
+
+        destroy() {
+            document.removeEventListener('mousemove', this.moveHandler);
+            document.removeEventListener('mousedown', this.mouseDownHandler);
+            document.removeEventListener('mouseup', this.mouseUpHandler);
+        }
+    }
+
+
+    /* EXEMPLE */
+    var mouse = new MouseTracker();
+
+    mouse.disableContextMenu()
+
+    var craftInventory = new Craft('craft-inventory')
+</script>

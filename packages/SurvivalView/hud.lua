@@ -1,5 +1,4 @@
 SViewModel = ImportPackage("SurvivalViewModel")
-inventoryHud = nil
 
 AddEvent("OnPackageStart", function()
 	ShowWeaponHUD(false)
@@ -7,19 +6,26 @@ AddEvent("OnPackageStart", function()
     mainHud = InstanciateHud("http://asset/SurvivalView/VitalIndicator/health.html", "HitInvisible")
     adminHud = InstanciateHud("http://asset/SurvivalView/Admin/admin.html", "Hidden")
     inventoryHud = InstanciateHud("http://asset/SurvivalView/Inventory/inventory.html", "Hidden")
+    CraftHud = InstanciateHud("http://asset/SurvivalView/Craft/craft.html", "Hidden")
 end)
 
 AddEvent("OnPackageStop", function() 
-	DestroyWebUI(mainHud)
+    DestroyWebUI(mainHud)
+	DestroyWebUI(adminHud)
+	DestroyWebUI(inventoryHud)
+	DestroyWebUI(CraftHud)
 end)
 
 function ExecuteJs(hud, js)
-    if(hud == "inventory")then
-        AddPlayerChat(js)
-        
+    if hud == "inventory" then
         ExecuteWebJS(inventoryHud, js)
+    elseif hud == "craft" then
+        ExecuteWebJS(CraftHud, js)
+    elseif hud == "vitalIndicator"then
+        ExecuteWebJS(mainHud, js)
+    else
+        ExecuteWebJS(hud, js)
     end
-    ExecuteWebJS(hud, js)
 end
 AddFunctionExport("ExecuteJs", ExecuteJs)
 

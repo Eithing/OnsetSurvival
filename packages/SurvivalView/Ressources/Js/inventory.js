@@ -81,7 +81,7 @@ class Inventory {
             let target = evt.target.parentNode;
             if (target && target.className === 'item' && this.dragging !== null) {
                 this.dropIntoTarget = target;
-                if (previousImageDiv.id == "weapons")
+                if (previousImageDiv.id == "weapons" && (target.id === 'player-inventory-slot1' || target.id === 'player-inventory-slot2' || target.id === 'player-inventory-slot3'))
                     onEquipWeapons(previousImage.id, 3, 999)
             }
             target = evt.target;

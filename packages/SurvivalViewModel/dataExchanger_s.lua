@@ -2,17 +2,17 @@ SLogic = ImportPackage("SurvivalLogic")
 
 UserData = {}
 ItemData = {}
+RecoltData = {}
 
-function PopulateDatas(datas, base, player) --Remplissage du cache au lancement
-    if base == "comptes"then
-        UserData = datas
-    elseif base == "items"then
-        ItemData = datas
-    elseif base == "inventory"then
-        UserData[player].inventoryItems = datas
-    end
-end
-AddFunctionExport("PopulateDatas", PopulateDatas)
+AddEvent("OnPackageStart", function()
+    UserData = SLogic.GetAllUsers()
+    ItemData = SLogic.GetAllItems()
+    RecoltData = SLogic.GetAllRecolts()
+end)
+
+AddEvent("OnPlayerSteamAuth", function(player)
+    UserData[tostring(GetPlayerSteamId(player))].inventoryItems = SLogic.GetUserInventory(player, UserData[tostring(GetPlayerSteamId(player))].id)
+end)
 
 CreateTimer(function(GlobalSave)
 	--TODO World Save

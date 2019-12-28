@@ -203,3 +203,21 @@
 
 
 [2019-12-26 17:06:18] [AppID 1105810] CAPIJobStoreUserStats::BInit() - no stats found, aborting
+
+
+[2019-12-27 18:39:03] [AppID 1105810] CAPIJobStoreUserStats::BInit() - no stats found, aborting
+
+
+[2019-12-27 20:30:07] [AppID 1105810] CAPIJobStoreUserStats::BInit() - no stats found, aborting
+
+
+[2019-12-27 23:30:42] [AppID 1105810] CAPIJobStoreUserStats::BInit() - no stats found, aborting
+
+
+[2019-12-27 23:32:53] [AppID 1105810] CAPIJobStoreUserStats::BInit() - no stats found, aborting
+
+
+[2019-12-27 23:38:06] [AppID 1105810] CAPIJobStoreUserStats::BInit() - no stats found, aborting
+
+
+[2019-12-28 04:25:54] [AppID 1105810] CAPIJobStoreUserStats::BInit() - no stats found, aborting

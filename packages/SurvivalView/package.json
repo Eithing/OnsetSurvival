@@ -5,7 +5,8 @@
     "client_scripts": [
         "hud.lua",
         "Admin/admin.lua",
-        "Inventory/inventory.lua"
+        "Inventory/inventory.lua",
+        "Craft/craft.lua"
     ],
     "files": [
         "VitalIndicator/health.html",
@@ -19,8 +20,12 @@
         "Inventory/inventory.css",
         "Inventory/inventory.html",
 
+        "Craft/craft.css",
+        "Craft/craft.html",
+
         "Ressources/Js/item.js",
         "Ressources/Js/inventory.js",
+        "Ressources/Js/craft.js",
 
         "Ressources/images/Admin.jpg",
         "Ressources/images/Cars.jpg",

@@ -5,7 +5,8 @@
         "Dto/init.lua",
         "Dto/inventory.lua",
         "Dto/item.lua",
-        "Dto/user.lua"
+        "Dto/user.lua",
+        "Dto/recolt.lua"
     ],
     "client_scripts": [],
     "files": []

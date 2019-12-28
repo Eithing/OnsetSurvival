@@ -17,25 +17,25 @@ CreateTimer(function(UpdateVital)
 			compteur[v].calculedTime = 0
 		end
 
-		if tonumber(UserData[v].eat) > 0 then
-			UserData[v].eat = UserData[v].eat - toRemove
+		if tonumber(UserData[tostring(GetPlayerSteamId(v))].eat) > 0 then
+			UserData[tostring(GetPlayerSteamId(v))].eat = UserData[tostring(GetPlayerSteamId(v))].eat - toRemove
 		end
-		if tonumber(UserData[v].drink) > 0 then
-			UserData[v].drink = UserData[v].drink - toRemove
+		if tonumber(UserData[tostring(GetPlayerSteamId(v))].drink) > 0 then
+			UserData[tostring(GetPlayerSteamId(v))].drink = UserData[tostring(GetPlayerSteamId(v))].drink - toRemove
 		end
-		if tonumber(UserData[v].eat) == 0 or tonumber(UserData[v].drink) == 0 then
-			UserData[v].health = UserData[v].health - 1
-			SetPlayerHealth(v, UserData[v].health)
+		if tonumber(UserData[tostring(GetPlayerSteamId(v))].eat) == 0 or tonumber(UserData[tostring(GetPlayerSteamId(v))].drink) == 0 then
+			UserData[tostring(GetPlayerSteamId(v))].health = UserData[tostring(GetPlayerSteamId(v))].health - 1
+			SetPlayerHealth(v, UserData[tostring(GetPlayerSteamId(v))].health)
 			CallRemoteEvent(v, "OnGetHealthUpdated")
 		end
-		CallRemoteEvent(v, "OnUpdateVitalIndicator", UserData[v].eat, UserData[v].drink)
+		CallRemoteEvent(v, "OnUpdateVitalIndicator", UserData[tostring(GetPlayerSteamId(v))].eat, UserData[tostring(GetPlayerSteamId(v))].drink)
 	end
 end, '30000' , UpdateVital)
 
 AddEvent("OnPlayerDeath", function(player, instigator)
-	UserData[player].eat = 100
-	UserData[player].drink = 100
-	UserData[player].health = 100
+	UserData[tostring(GetPlayerSteamId(player))].eat = 100
+	UserData[tostring(GetPlayerSteamId(player))].drink = 100
+	UserData[tostring(GetPlayerSteamId(player))].health = 100
 end)
 
 AddRemoteEvent("OnKeyPressed", function(player)

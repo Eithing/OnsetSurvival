@@ -17,8 +17,8 @@
         "default",
         "dialogui",
         "SurvivalView",
-        "SurvivalViewModel",
-        "SurvivalLogic"
+        "SurvivalLogic",
+        "SurvivalViewModel"
     ],
     "stream_distance": 12000.0,
     "stream_update_rate": 0.05,

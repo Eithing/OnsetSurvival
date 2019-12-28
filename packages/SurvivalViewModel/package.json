@@ -6,14 +6,18 @@
         "Player/player_s.lua",
         "Hud/vitalIndicator_s.lua",
         "Admin/admin_s.lua",
-        "Inventory/inventory_s.lua"
+        "Inventory/inventory_s.lua",
+        "Job/craft_s.lua",
+        "Job/recolt_s.lua"
     ],
     "client_scripts": [
         "initView_c.lua",
         "Player/player_c.lua",
         "Hud/vitalIndicator_c.lua",
         "Admin/admin_c.lua",
-        "Inventory/inventory_c.lua"
+        "Inventory/inventory_c.lua",
+        "Job/craft_c.lua",
+        "Job/recolt_c.lua"
     ],
     "files": []
 }

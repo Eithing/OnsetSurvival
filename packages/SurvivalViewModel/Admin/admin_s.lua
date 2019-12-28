@@ -1,11 +1,6 @@
 AddRemoteEvent("OpenAdminContext", function(player)
-	for i, user in ipairs(UserData) do
-		if user.steamId == tostring(GetPlayerSteamId(player)) then
-			if tonumber(user.admin) == 1 then
-				CallRemoteEvent(player, "AdminOpenMenu")
-			end
-			return
-		end
+	if UserData[tostring(GetPlayerSteamId(player))].admin then
+		CallRemoteEvent(player, "AdminOpenMenu")
 	end
 end)
 
@@ -20,3 +15,12 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
         SetPlayerInVehicle(player, vehicle)
 	end
 end)
+
+function cmd_commands(player)
+	local x, y, z = GetPlayerLocation(player)
+	AddPlayerChat(player, "x = "..x..",y = "..y..",z = "..z)
+	
+	print("x = "..x..",y = "..y..",z = "..z)
+	return
+end
+AddCommand("pos", cmd_commands)

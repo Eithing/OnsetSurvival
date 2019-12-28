@@ -16,9 +16,6 @@ end)
 
 function PopulateInventory(inventory)
     for i, itemInventory in ipairs(inventory) do
-        AddPlayerChat(itemInventory.imageId)
-        AddPlayerChat(itemInventory.type)
-        
         SView.ExecuteJs("inventory", "inventory.addItem('container', new Item('"..itemInventory.type.."','"..itemInventory.imageId.."','1'))")
     end
 end

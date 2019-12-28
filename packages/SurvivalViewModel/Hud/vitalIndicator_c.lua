@@ -7,12 +7,12 @@ AddEvent("OnKeyRelease", function(key)
 end)
 
 function OnGetHealthUpdated(player)
-	SView.ExecuteJs(SView.mainHud, "ChangeColor("..GetPlayerHealth()..")")
+	SView.ExecuteJs("vitalIndicator", "ChangeColor("..GetPlayerHealth()..")")
 end
 AddRemoteEvent("OnGetHealthUpdated",  OnGetHealthUpdated)
 
 function OnUpdateVitalIndicator(eat, drink)
-	SView.ExecuteJs(SView.mainHud, "UpdateVital("..eat..","..drink..")")
+	SView.ExecuteJs("vitalIndicator", "UpdateVital("..eat..","..drink..")")
 end
 AddRemoteEvent("OnUpdateVitalIndicator",  OnUpdateVitalIndicator)
 
