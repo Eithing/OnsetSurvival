@@ -2,7 +2,7 @@ local UserData = {}
 
 function UpdatePlayer(x, y, z, player)
 	print("update from dto")
-	local requette = mariadb_prepare(sql, "UPDATE comptes SET positionX = '?', positionY = '?', positionZ = '?',eat = '?',drink = '?', health = '?' WHERE SteamId = '?';",
+	local requette = mariadb_prepare(Sql, "UPDATE comptes SET positionX = '?', positionY = '?', positionZ = '?',eat = '?',drink = '?', health = '?' WHERE SteamId = '?';",
 										x, y, z,
 										UserData[tostring(GetPlayerSteamId(player))].eat, UserData[tostring(GetPlayerSteamId(player))].drink, GetPlayerHealth(player),
 										tostring(GetPlayerSteamId(player)))
@@ -10,7 +10,7 @@ function UpdatePlayer(x, y, z, player)
 	UserData[tostring(GetPlayerSteamId(player))].positionY = y
 	UserData[tostring(GetPlayerSteamId(player))].positionZ = z
 	UserData[tostring(GetPlayerSteamId(player))].health = GetPlayerHealth(player)
-	mariadb_query(sql, requette)
+	mariadb_query(Sql, requette)
 	print("update done !")
 end
 AddFunctionExport("UpdatePlayer", UpdatePlayer)
