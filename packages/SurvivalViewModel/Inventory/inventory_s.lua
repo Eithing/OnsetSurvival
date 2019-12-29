@@ -13,13 +13,6 @@ AddRemoteEvent("RemoveItem", function(player, idUnique)
 	for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
 		if item.idUnique == idUnique then
 			UserData[tostring(GetPlayerSteamId(player))].inventoryItems[i] = nil
-<<<<<<< HEAD
-<<<<<<< HEAD
-			return
-=======
->>>>>>> 56bd6fd... delete useless print
-=======
->>>>>>> linj
 		end
 	end
 	SLogic.RemoveItemInventory(idUnique)
