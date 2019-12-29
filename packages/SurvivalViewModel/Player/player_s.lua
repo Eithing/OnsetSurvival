@@ -2,7 +2,7 @@ local x,y,z
 AddEvent("OnPlayerSteamAuth",function (player)
 	UserData[tostring(GetPlayerSteamId(player))] = SLogic.GetUserBySteamId(tostring(GetPlayerSteamId(player))) or nil
 	if UserData[tostring(GetPlayerSteamId(player))] == nil then
-		SetPlayerLocation(player, 125773.000000, 80246.000000, 1645.000000)
+		SetPlayerLocation(player, 125773.000000, 80246.000000, 1655.000000)
 		print("new player "..GetPlayerSteamId(player))
 
 		-- On vien set les variables UserData du joueur
@@ -25,7 +25,7 @@ AddEvent("OnPlayerSteamAuth",function (player)
 end)
 
 AddEvent("OnPlayerDeath", function(player, instigator)
-	SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
+	SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1655.000000, 90.0)
 end)
 
 AddEvent("OnPlayerQuit", function(player)
@@ -33,7 +33,7 @@ AddEvent("OnPlayerQuit", function(player)
 	local x, y, z = GetPlayerLocation(player)
 	UserData[tostring(GetPlayerSteamId(player))].positionX = x
 	UserData[tostring(GetPlayerSteamId(player))].positionY = y
-	UserData[tostring(GetPlayerSteamId(player))].positionZ = z+200
+	UserData[tostring(GetPlayerSteamId(player))].positionZ = z+800
 
 	-- On update la base de données
 	SLogic.UpdateUser(UserData[tostring(GetPlayerSteamId(player))])
