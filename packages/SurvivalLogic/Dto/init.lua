@@ -3,8 +3,8 @@ Sql = nil
 AddEvent("OnPackageStart", function()
 	local SQL_HOST = "91.121.178.28"
 	local SQL_PORT = 3306
-	local SQL_USER = "kinj14"
-	local SQL_PASS = "kinj14"
+	local SQL_USER = "Eynwa"
+	local SQL_PASS = "eynwa5"
 	local SQL_DATA = "eynwa"
 	local SQL_CHAR = "utf8mb4"
 	local SQL_LOGL = "debug"
