@@ -91,11 +91,16 @@
                     this.rightClick = bool;
             }
 
+            let itemId;
             this.mouseDownHandler = (evt) => {
+                itemId = evt.target.parentNode.getAttribute("item-id");
                 clickSwap(evt.button, true);
             }
             this.mouseUpHandler = (evt) => {
                 clickSwap(evt.button, false);
+                if (evt.target.className == "parent-container") {
+                    inventory.removeItem(itemId);
+                }
                 let elements = document.getElementsByClassName("inventory-slot");
                 for (var i = 0; i < elements.length; i++) {
                     elements[i].style.backgroundColor = "rgba(240, 255, 240, 0.11)";

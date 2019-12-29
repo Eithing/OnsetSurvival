@@ -175,22 +175,45 @@ class Inventory {
         }, 1000 / 60)
     }
 
-    addItem(type, item) {
+    addItem(idUnique, type, item) {
         const itemSlot = this[type].items.push(item);
-        item.element.setAttribute("item-id", itemSlot);
+        item.element.setAttribute("item-id", idUnique);
 
         this[type].element.appendChild(item.element);
         return this;
     }
 
-    removeItem(itemId) {
-        var totalInventoryChild = inventory.stuff.items.concat(inventory.container.items).concat(inventory.slot.items);
+    removeItem(itemId, consume) { // TODO utiliser le consume dans le cas d'un aliment par exemple OnConsumeItem
+        let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
+        let find = false
+        for (const k of keys) {
+            for (let i = 0; i < inventory[k].items.length; i++) {
+                const inventoryItemChild = inventory[k].items[i]
+                if (inventoryItemChild.element.getAttribute("item-id") == itemId) {
+                    inventoryItemChild.element.parentNode.removeChild(inventoryItemChild.element);
+                    inventory[k].items.splice(i, 1)
+                    find = true
+                    ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
+                    break
+                }
+            }
+            if (find === true) {
+                break
+            }
+        }
 
-        totalInventoryChild.forEach(inventoryItemChild => {
-            if (inventoryItemChild.element.getAttribute("item-id") == itemId) {
+        return this;
+    }
+
+    removeAllItems() {
+        let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
+        for (const k of keys) {
+            for (let i = 0; i < inventory[k].items.length; i++) {
+                const inventoryItemChild = inventory[k].items[i]
                 inventoryItemChild.element.parentNode.removeChild(inventoryItemChild.element);
             }
-        });
+            inventory[k].items = []
+        }
         return this;
     }
 }

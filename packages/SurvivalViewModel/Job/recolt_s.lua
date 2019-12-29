@@ -12,12 +12,17 @@ AddRemoteEvent("recolt", function(player)
                     if count == 3 then
                         for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
                             if item.itemId == recoltPoint.itemId then
-                                --TODO uech t'es arriver ici fait lpas le con
-                                UserData[tostring(GetPlayerSteamId(player))].inventoryItems[i].itemCount = item.itemCount + 1
                                 SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, recoltPoint.itemId, item.itemCount + 1)
+                                UserData[tostring(GetPlayerSteamId(player))].inventoryItems[i].itemCount = math.floor(item.itemCount + 1)
+                                CallRemoteEvent(player, "ReloadInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
+                                SetPlayerPropertyValue(player, "harvesting", false)
                                 return
                             end
                         end
+                        local itemInventory = SLogic.SetUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, recoltPoint.itemId, 1)
+                        table.insert(UserData[tostring(GetPlayerSteamId(player))].inventoryItems, itemInventory)
+                        CallRemoteEvent(player, "ReloadInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
+                        SetPlayerPropertyValue(player, "harvesting", false)
                     end
                     SetPlayerAnimation(player, "PICKUP_LOWER")
                 end, '3000' , 3)

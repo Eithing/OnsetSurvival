@@ -5,3 +5,17 @@ end)
 AddRemoteEvent("equipWeapon", function(player, id, slot, ammo)
 	SetPlayerWeapon(player, id, ammo, true, slot, false)
 end)
+
+AddRemoteEvent("RemoveItem", function(player, idUnique)
+	local x,y,z = GetPlayerLocation(player)
+	local modelId = SLogic.GetModelFromItem(idUnique)
+
+	for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
+		if item.idUnique == idUnique then
+			UserData[tostring(GetPlayerSteamId(player))].inventoryItems[i] = nil
+			return
+		end
+	end
+	SLogic.RemoveItemInventory(idUnique)
+	CreatePickup(modelId, x, y, z - 88)
+end)

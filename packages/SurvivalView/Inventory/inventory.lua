@@ -10,3 +10,7 @@ AddFunctionExport("SetInventoryVisibility", SetInventoryVisibility)
 AddEvent("onEquipWeapon", function(id, slot, ammo)
     SViewModel.ExecuteFromServer("equipWeapon", id, slot, ammo)
 end)
+
+AddEvent("OnRemoveItem", function(idUnique)
+    SViewModel.ExecuteFromServer("RemoveItem", idUnique)
+end)

@@ -16,7 +16,17 @@ end)
 
 function PopulateInventory(inventory)
     for i, itemInventory in ipairs(inventory) do
-        SView.ExecuteJs("inventory", "inventory.addItem('container', new Item('"..itemInventory.type.."','"..itemInventory.imageId.."','1'))")
+        AddPlayerChat(itemInventory.imageId)
+        
+        SView.ExecuteJs("inventory", "inventory.addItem('"..itemInventory.idUnique.."', 'container', new Item('"..itemInventory.type.."','"..itemInventory.imageId.."','"..itemInventory.itemCount.."'))")
     end
 end
 AddRemoteEvent("PopulateInventory",  PopulateInventory)
+
+function ReloadInventory(inventory)
+    SView.ExecuteJs("inventory", "inventory.removeAllItems()")
+    for i, itemInventory in ipairs(inventory) do
+        SView.ExecuteJs("inventory", "inventory.addItem('"..itemInventory.idUnique.."', 'container', new Item('"..itemInventory.type.."','"..itemInventory.imageId.."','"..itemInventory.itemCount.."'))")
+    end
+end
+AddRemoteEvent("ReloadInventory",  ReloadInventory)
