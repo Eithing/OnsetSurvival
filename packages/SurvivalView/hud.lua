@@ -7,7 +7,7 @@ AddEvent("OnPackageStart", function()
     adminHud = InstanciateHud("http://asset/SurvivalView/Admin/admin.html", "Hidden")
     inventoryHud = InstanciateHud("http://asset/SurvivalView/Inventory/inventory.html", "Hidden")
     CraftHud = InstanciateHud("http://asset/SurvivalView/Craft/craft.html", "Hidden")
-    VehicleHud = InstanciateHud("http://asset/SurvivalView/Vehicle/vehicle.html", "HitInvisible")
+    VehicleHud = InstanciateHud("http://asset/SurvivalView/Vehicle/vehicle.html", "Hidden")
 end)
 
 AddEvent("OnPackageStop", function() 

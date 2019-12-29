@@ -1,16 +1,8 @@
-function SetInventoryVisibility()
-    if GetWebVisibility(inventoryHud) == WEB_VISIBLE then
-        SetVisibility(inventoryHud, "Hidden")
+function SetVehicleVisibility()
+    if GetWebVisibility(VehicleHud) == WEB_VISIBLE then
+        SetVisibility(VehicleHud, "Hidden")
     else
-        SetVisibility(inventoryHud, "VisibleStatic")
+        SetVisibility(VehicleHud, "VisibleStatic")
     end
 end
-AddFunctionExport("SetInventoryVisibility", SetInventoryVisibility)
-
-AddEvent("onEquipWeapon", function(id, slot, ammo)
-    SViewModel.ExecuteFromServer("equipWeapon", id, slot, ammo)
-end)
-
-AddEvent("OnRemoveItem", function(idUnique)
-    SViewModel.ExecuteFromServer("RemoveItem", idUnique)
-end)
+AddFunctionExport("SetVehicleVisibility", SetVehicleVisibility)
