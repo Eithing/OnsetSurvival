@@ -3,6 +3,7 @@ SLogic = ImportPackage("SurvivalLogic")
 UserData = {}
 ItemData = {}
 RecoltData = {}
+VehicleData = {}
 
 AddEvent("OnPackageStart", function()
     ItemData = SLogic.GetAllItems()

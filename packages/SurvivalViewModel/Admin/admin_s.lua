@@ -17,10 +17,21 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
 end)
 
 function cmd_commands(player)
-	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChat(player, "x = "..x..",y = "..y..",z = "..z)
-	
-	print("x = "..x..",y = "..y..",z = "..z)
+	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+		local x, y, z = GetPlayerLocation(player)
+		AddPlayerChat(player, "x = "..x..",y = "..y..",z = "..z)
+		
+		print("x = "..x..",y = "..y..",z = "..z)
+	end
 	return
 end
 AddCommand("pos", cmd_commands)
+
+function respawn_commands(player) -- Commande pour pouvoir ce re TP au niveau de la station service (Pour le bug de passage sous la map)
+	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+		SetPlayerLocation(player, 125773.000000, 80246.000000, 1645.000000)
+		print("Admin : Téléportation validé")
+	end
+	return
+end
+AddCommand("respawn", respawn_commands)

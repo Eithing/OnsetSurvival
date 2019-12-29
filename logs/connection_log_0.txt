@@ -1407,3 +1407,679 @@
 [2019-12-29 02:44:58] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm1-sto1.cm.steampowered.com:27020, WebSocket)
 [2019-12-29 02:44:58] [1,3] ConnectionCompleted() (162.254.198.130:27020, WebSocket)
 [2019-12-29 02:44:58] [1,3] RecvMsgClientLogOnResponse() : [A:1:1045180427:13856] 'OK'
+
+
+[2019-12-29 02:51:16] Log session started
+[2019-12-29 02:51:16] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:51:16] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:51:16] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:51:16] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:51:16] [0,0] Server says 50% of connections should be websockets, we rolled 38 - using WebSockets as default.
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 52.0000 (378 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm2-iad1.cm.steampowered.com:443) results: 148.0000ms + load 44.0000 (1559 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (409 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:27021) results: 49.0000ms + load 61.0000 (2796 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (CM03-FRA.cm.steampowered.com:443) results: 49.0000ms + load 57.0000 (409 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm2-par1.cm.steampowered.com:27021) results: 49.0000ms + load 55.0000 (378 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (378 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm2-par1.cm.steampowered.com:443) results: 49.0000ms + load 60.0000 (2796 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm1-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 62.0000 (2796 seconds ago)
+[2019-12-29 02:51:16] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (1987 seconds ago)
+[2019-12-29 02:51:16] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:443) starting...
+[2019-12-29 02:51:16] [0,0] PingWebSocketCM() (CM01-FRA.cm.steampowered.com:27020) starting...
+[2019-12-29 02:51:16] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:27021) starting...
+[2019-12-29 02:51:17] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:27021) results: 49.8337ms + load 53.0000
+[2019-12-29 02:51:17] [0,0] PingWebSocketCM() (CM01-FRA.cm.steampowered.com:27020) results: 49.8366ms + load 56.0000
+[2019-12-29 02:51:17] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:443) results: 49.8498ms + load 51.0000
+[2019-12-29 02:51:17] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm1-sto1.cm.steampowered.com:27020, WebSocket)
+[2019-12-29 02:51:17] [1,3] ConnectionCompleted() (162.254.198.130:27020, WebSocket)
+[2019-12-29 02:51:17] [1,3] RecvMsgClientLogOnResponse() : [A:1:1105179656:13856] 'OK'
+
+
+[2019-12-29 02:51:57] Log session started
+[2019-12-29 02:51:57] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:51:57] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:51:57] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:51:57] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:51:57] [0,0] Server says 50% of connections should be websockets, we rolled 30 - using WebSockets as default.
+[2019-12-29 02:51:57] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (40 seconds ago)
+[2019-12-29 02:51:57] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:443) results: 49.0000ms + load 59.0000 (2485 seconds ago)
+[2019-12-29 02:51:57] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 52.0000 (419 seconds ago)
+[2019-12-29 02:51:57] [0,0] Existing WebSocket ping data (CM03-LON.cm.steampowered.com:27021) results: 49.0000ms + load 55.0000 (2485 seconds ago)
+[2019-12-29 02:51:57] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:443) results: 49.0000ms + load 51.0000 (40 seconds ago)
+[2019-12-29 02:51:57] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:443) results: 49.0000ms + load 60.0000 (2837 seconds ago)
+[2019-12-29 02:51:57] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (450 seconds ago)
+[2019-12-29 02:51:57] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (2028 seconds ago)
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm-03-ams1.cm.steampowered.com:27021) starting...
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm2-mad1.cm.steampowered.com:443) starting...
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm4-fra1.cm.steampowered.com:27020) starting...
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm2-vie1.cm.steampowered.com:443) starting...
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm-03-ams1.cm.steampowered.com:27021) results: 49.8526ms + load 53.0000
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm2-mad1.cm.steampowered.com:443) results: 49.8458ms + load 58.0000
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm1-vie1.cm.steampowered.com:443) starting...
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm4-fra1.cm.steampowered.com:27020) results: 49.3835ms + load 58.0000
+[2019-12-29 02:51:57] [0,0] PingWebSocketCM() (cm2-vie1.cm.steampowered.com:443) results: 49.9336ms + load 54.0000
+[2019-12-29 02:51:58] [0,0] PingWebSocketCM() (cm1-vie1.cm.steampowered.com:443) results: 48.8665ms + load 56.0000
+[2019-12-29 02:51:58] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm4-lhr1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 02:51:58] [1,3] ConnectionCompleted() (162.254.196.84:443, WebSocket)
+[2019-12-29 02:51:58] [1,3] RecvMsgClientLogOnResponse() : [A:1:1105598468:13856] 'OK'
+
+
+[2019-12-29 02:52:38] Log session started
+[2019-12-29 02:52:38] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:52:38] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:52:38] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:52:38] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:52:38] [0,0] Server says 50% of connections should be websockets, we rolled 68 - using UDP as default.
+[2019-12-29 02:52:38] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27019, UDP)
+[2019-12-29 02:52:38] [1,2] ConnectionCompleted() (162.254.196.83:27019, UDP)
+[2019-12-29 02:52:39] [1,2] RecvMsgClientLogOnResponse() : [A:1:1105978376:13856] 'OK'
+
+
+[2019-12-29 02:53:06] Log session started
+[2019-12-29 02:53:06] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:53:06] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:53:06] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:53:06] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:53:06] [0,0] Server says 50% of connections should be websockets, we rolled 73 - using UDP as default.
+[2019-12-29 02:53:06] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27019, UDP)
+[2019-12-29 02:53:07] [1,2] ConnectionCompleted() (162.254.196.67:27018, UDP)
+[2019-12-29 02:53:07] [1,2] RecvMsgClientLogOnResponse() : [A:1:1106263040:13856] 'OK'
+
+
+[2019-12-29 02:54:01] Log session started
+[2019-12-29 02:54:01] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:54:01] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:54:01] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:54:01] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:54:01] [0,0] Server says 50% of connections should be websockets, we rolled 48 - using WebSockets as default.
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm3-sto1.cm.steampowered.com:27020) results: 50.0000ms + load 57.0000 (543 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm2-par1.cm.steampowered.com:443) results: 49.0000ms + load 60.0000 (2961 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (164 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 58.0000 (124 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:443) results: 49.0000ms + load 58.0000 (124 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:27021) results: 49.0000ms + load 61.0000 (2961 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:443) results: 49.0000ms + load 59.0000 (2609 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 52.0000 (543 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm-03-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (124 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (123 seconds ago)
+[2019-12-29 02:54:01] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (2152 seconds ago)
+[2019-12-29 02:54:01] [0,0] PingWebSocketCM() (cm1-vie1.cm.steampowered.com:27020) starting...
+[2019-12-29 02:54:01] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:27020) starting...
+[2019-12-29 02:54:01] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:27020) results: 49.8687ms + load 54.0000
+[2019-12-29 02:54:01] [0,0] PingWebSocketCM() (cm1-vie1.cm.steampowered.com:27020) results: 49.8158ms + load 56.0000
+[2019-12-29 02:54:01] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm1-sto1.cm.steampowered.com:27020, WebSocket)
+[2019-12-29 02:54:02] [1,3] ConnectionCompleted() (162.254.198.130:27020, WebSocket)
+[2019-12-29 02:54:02] [1,3] RecvMsgClientLogOnResponse() : [A:1:1106789384:13856] 'OK'
+
+
+[2019-12-29 02:54:18] Log session started
+[2019-12-29 02:54:18] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:54:18] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:54:18] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:54:18] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:54:18] [0,0] Server says 50% of connections should be websockets, we rolled 55 - using UDP as default.
+[2019-12-29 02:54:18] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27019, UDP)
+[2019-12-29 02:54:18] [1,2] ConnectionCompleted() (162.254.196.68:27019, UDP)
+[2019-12-29 02:54:19] [1,2] RecvMsgClientLogOnResponse() : [A:1:1106964488:13856] 'OK'
+
+
+[2019-12-29 02:55:00] Log session started
+[2019-12-29 02:55:00] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:55:00] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:55:00] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:55:00] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:55:00] [0,0] Server says 50% of connections should be websockets, we rolled 57 - using UDP as default.
+[2019-12-29 02:55:00] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27019, UDP)
+[2019-12-29 02:55:00] [1,2] ConnectionCompleted() (185.25.182.77:27018, UDP)
+[2019-12-29 02:55:01] [1,2] RecvMsgClientLogOnResponse() : [A:1:1107344384:13856] 'OK'
+
+
+[2019-12-29 02:57:05] Log session started
+[2019-12-29 02:57:05] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:57:05] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:05] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:05] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:05] [0,0] Server says 50% of connections should be websockets, we rolled 30 - using WebSockets as default.
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:443) results: 49.0000ms + load 51.0000 (348 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:27020) results: 49.0000ms + load 54.0000 (184 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (CM01-FRA.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (348 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (CM03-LON.cm.steampowered.com:27021) results: 49.0000ms + load 55.0000 (2793 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:443) results: 49.0000ms + load 59.0000 (1909 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (cm2-par1.cm.steampowered.com:443) results: 49.0000ms + load 60.0000 (3145 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (758 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:443) results: 49.0000ms + load 59.0000 (2793 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (307 seconds ago)
+[2019-12-29 02:57:05] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (2336 seconds ago)
+[2019-12-29 02:57:05] [0,0] PingWebSocketCM() (cm-01-ams1.cm.steampowered.com:27021) starting...
+[2019-12-29 02:57:05] [0,0] PingWebSocketCM() (cm1-par1.cm.steampowered.com:27020) starting...
+[2019-12-29 02:57:05] [0,0] PingWebSocketCM() (cm-02-ams1.cm.steampowered.com:443) starting...
+[2019-12-29 02:57:05] [0,0] PingWebSocketCM() (cm1-par1.cm.steampowered.com:27020) results: 29.8808ms + load 53.0000
+[2019-12-29 02:57:05] [0,0] PingWebSocketCM() (cm-02-ams1.cm.steampowered.com:443) results: 29.8582ms + load 52.0000
+[2019-12-29 02:57:05] [0,0] PingWebSocketCM() (cm-01-ams1.cm.steampowered.com:27021) results: 79.7353ms + load 52.0000
+[2019-12-29 02:57:05] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 02:57:06] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 02:57:06] [1,3] RecvMsgClientLogOnResponse() : [A:1:1175176196:13856] 'OK'
+
+
+[2019-12-29 02:57:42] Log session started
+[2019-12-29 02:57:42] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:57:42] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:42] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:42] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:43] [0,0] Server says 50% of connections should be websockets, we rolled 2 - using WebSockets as default.
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (796 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm1-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 62.0000 (3183 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (765 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (CM03-FRA.cm.steampowered.com:443) results: 49.0000ms + load 57.0000 (796 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:27021) results: 49.0000ms + load 61.0000 (2831 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (222 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (345 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (2374 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (38 seconds ago)
+[2019-12-29 02:57:43] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (38 seconds ago)
+[2019-12-29 02:57:43] [0,0] PingWebSocketCM() (CM03-LON.cm.steampowered.com:27020) starting...
+[2019-12-29 02:57:43] [0,0] PingWebSocketCM() (cm1-iad1.cm.steampowered.com:443) starting...
+[2019-12-29 02:57:43] [0,0] PingWebSocketCM() (CM01-LON.cm.steampowered.com:27021) starting...
+[2019-12-29 02:57:43] [0,0] PingWebSocketCM() (CM01-LON.cm.steampowered.com:27021) results: 49.7990ms + load 51.0000
+[2019-12-29 02:57:43] [0,0] PingWebSocketCM() (CM03-LON.cm.steampowered.com:27020) results: 49.8318ms + load 52.0000
+[2019-12-29 02:57:43] [0,0] PingWebSocketCM() (cm1-iad1.cm.steampowered.com:443) results: 149.1405ms + load 47.0000
+[2019-12-29 02:57:43] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 02:57:43] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 02:57:44] [1,3] RecvMsgClientLogOnResponse() : [A:1:1175573504:13856] 'OK'
+
+
+[2019-12-29 02:57:47] Log session started
+[2019-12-29 02:57:47] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:57:47] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:47] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:47] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:47] [0,0] Server says 50% of connections should be websockets, we rolled 8 - using WebSockets as default.
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:443) results: 49.0000ms + load 59.0000 (1951 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:443) results: 49.0000ms + load 60.0000 (3187 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:443) results: 49.0000ms + load 51.0000 (390 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (390 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (800 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm1-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 62.0000 (3187 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (349 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (2378 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (42 seconds ago)
+[2019-12-29 02:57:47] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (42 seconds ago)
+[2019-12-29 02:57:47] [0,0] PingWebSocketCM() (cm-02-ams1.cm.steampowered.com:27020) starting...
+[2019-12-29 02:57:47] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:27021) starting...
+[2019-12-29 02:57:47] [0,0] PingWebSocketCM() (cm-04-ams1.cm.steampowered.com:27020) starting...
+[2019-12-29 02:57:47] [0,0] PingWebSocketCM() (cm-02-ams1.cm.steampowered.com:27020) results: 50.3224ms + load 52.0000
+[2019-12-29 02:57:47] [0,0] PingWebSocketCM() (cm-04-ams1.cm.steampowered.com:27020) results: 50.3200ms + load 52.0000
+[2019-12-29 02:57:47] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:27021) results: 48.9708ms + load 57.0000
+[2019-12-29 02:57:47] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+
+
+[2019-12-29 02:57:50] Log session started
+[2019-12-29 02:57:50] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 02:57:50] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:50] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:50] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 02:57:50] [0,0] Server says 50% of connections should be websockets, we rolled 99 - using UDP as default.
+[2019-12-29 02:57:50] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27019, UDP)
+[2019-12-29 02:57:51] [1,2] ConnectionCompleted() (162.254.196.68:27018, UDP)
+[2019-12-29 02:57:51] [1,2] RecvMsgClientLogOnResponse() : [A:1:1175651336:13856] 'OK'
+
+
+[2019-12-29 03:10:56] Log session started
+[2019-12-29 03:10:56] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:10:56] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:10:56] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:10:56] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:10:56] [0,0] Server says 50% of connections should be websockets, we rolled 84 - using UDP as default.
+[2019-12-29 03:10:56] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27019, UDP)
+[2019-12-29 03:10:56] [1,2] ConnectionCompleted() (162.254.196.83:27019, UDP)
+[2019-12-29 03:10:57] [1,2] RecvMsgClientLogOnResponse() : [A:1:1255537664:13856] 'OK'
+
+
+[2019-12-29 03:11:08] Log session started
+[2019-12-29 03:11:08] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:11:08] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:08] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:08] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:08] [0,0] Server says 50% of connections should be websockets, we rolled 21 - using WebSockets as default.
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:443) results: 49.0000ms + load 51.0000 (1191 seconds ago)
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm-03-ams1.cm.steampowered.com:443) results: 49.0000ms + load 54.0000 (1601 seconds ago)
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:27020) results: 49.0000ms + load 54.0000 (1027 seconds ago)
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (1601 seconds ago)
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1150 seconds ago)
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (801 seconds ago)
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (3179 seconds ago)
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (843 seconds ago)
+[2019-12-29 03:11:08] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (843 seconds ago)
+[2019-12-29 03:11:08] [0,0] PingWebSocketCM() (cm1-mad1.cm.steampowered.com:27020) starting...
+[2019-12-29 03:11:08] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:27020) starting...
+[2019-12-29 03:11:08] [0,0] PingWebSocketCM() (CM02-LON.cm.steampowered.com:27020) starting...
+[2019-12-29 03:11:08] [0,0] PingWebSocketCM() (cm3-sto1.cm.steampowered.com:443) starting...
+[2019-12-29 03:11:09] [0,0] PingWebSocketCM() (CM02-LON.cm.steampowered.com:27020) results: 49.8701ms + load 51.0000
+[2019-12-29 03:11:09] [0,0] PingWebSocketCM() (cm1-mad1.cm.steampowered.com:27020) results: 49.9081ms + load 54.0000
+[2019-12-29 03:11:09] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:27020) results: 49.8933ms + load 56.0000
+[2019-12-29 03:11:09] [0,0] PingWebSocketCM() (cm3-sto1.cm.steampowered.com:443) results: 49.9237ms + load 53.0000
+[2019-12-29 03:11:09] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:11:09] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:11:09] [1,3] RecvMsgClientLogOnResponse() : [A:1:1255671812:13856] 'OK'
+
+
+[2019-12-29 03:11:32] Log session started
+[2019-12-29 03:11:32] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:11:32] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:32] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:32] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:32] [0,0] Server says 50% of connections should be websockets, we rolled 96 - using UDP as default.
+[2019-12-29 03:11:32] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.76:27018, UDP)
+[2019-12-29 03:11:33] [1,2] ConnectionCompleted() (162.254.196.84:27018, UDP)
+[2019-12-29 03:11:33] [1,2] RecvMsgClientLogOnResponse() : [A:1:1255909376:13856] 'OK'
+
+
+[2019-12-29 03:11:50] Log session started
+[2019-12-29 03:11:50] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:11:50] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:50] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:50] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:50] [0,0] Server says 50% of connections should be websockets, we rolled 66 - using UDP as default.
+[2019-12-29 03:11:50] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27017, UDP)
+[2019-12-29 03:11:50] [1,2] ConnectionCompleted() (162.254.196.67:27018, UDP)
+[2019-12-29 03:11:51] [1,2] RecvMsgClientLogOnResponse() : [A:1:1256101892:13856] 'OK'
+
+
+[2019-12-29 03:11:52] Log session started
+[2019-12-29 03:11:52] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:11:52] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:52] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:52] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:11:52] [0,0] Server says 50% of connections should be websockets, we rolled 41 - using WebSockets as default.
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm-01-ams1.cm.steampowered.com:27021) results: 79.0000ms + load 52.0000 (887 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm1-iad1.cm.steampowered.com:27021) results: 99.0000ms + load 43.0000 (2772 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (CM01-LON.cm.steampowered.com:27021) results: 49.0000ms + load 51.0000 (849 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:443) results: 49.0000ms + load 58.0000 (1195 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (43 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 58.0000 (1195 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1194 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (845 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (3223 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (887 seconds ago)
+[2019-12-29 03:11:52] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (887 seconds ago)
+[2019-12-29 03:11:52] [0,0] PingWebSocketCM() (cm1-sto1.cm.steampowered.com:443) starting...
+[2019-12-29 03:11:52] [0,0] PingWebSocketCM() (cm1-mad1.cm.steampowered.com:443) starting...
+[2019-12-29 03:11:53] [0,0] PingWebSocketCM() (cm1-mad1.cm.steampowered.com:443) results: 81.9067ms + load 54.0000
+[2019-12-29 03:11:53] [0,0] PingWebSocketCM() (cm1-sto1.cm.steampowered.com:443) results: 334.1979ms + load 56.0000
+[2019-12-29 03:11:53] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:11:54] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:11:54] [1,3] RecvMsgClientLogOnResponse() : [A:1:1256159240:13856] 'OK'
+
+
+[2019-12-29 03:12:49] Log session started
+[2019-12-29 03:12:49] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:12:49] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:12:49] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:12:49] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:12:49] [0,0] Server says 50% of connections should be websockets, we rolled 31 - using WebSockets as default.
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 58.0000 (1252 seconds ago)
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (100 seconds ago)
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:443) results: 49.0000ms + load 59.0000 (2853 seconds ago)
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:443) results: 49.0000ms + load 58.0000 (1252 seconds ago)
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1251 seconds ago)
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (902 seconds ago)
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (3280 seconds ago)
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (944 seconds ago)
+[2019-12-29 03:12:49] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (944 seconds ago)
+[2019-12-29 03:12:49] [0,0] PingWebSocketCM() (cm2-mad1.cm.steampowered.com:27021) starting...
+[2019-12-29 03:12:49] [0,0] PingWebSocketCM() (cm4-fra1.cm.steampowered.com:27021) starting...
+[2019-12-29 03:12:49] [0,0] PingWebSocketCM() (CM02-LON.cm.steampowered.com:443) starting...
+[2019-12-29 03:12:49] [0,0] PingWebSocketCM() (cm3-iad1.cm.steampowered.com:27021) starting...
+[2019-12-29 03:12:49] [0,0] PingWebSocketCM() (cm4-fra1.cm.steampowered.com:27021) results: 49.2444ms + load 54.0000
+[2019-12-29 03:12:49] [0,0] PingWebSocketCM() (CM02-LON.cm.steampowered.com:443) results: 49.2828ms + load 52.0000
+[2019-12-29 03:12:49] [0,0] PingWebSocketCM() (cm2-mad1.cm.steampowered.com:27021) results: 49.7953ms + load 53.0000
+[2019-12-29 03:12:50] [0,0] PingWebSocketCM() (cm3-iad1.cm.steampowered.com:27021) results: 150.5123ms + load 43.0000
+[2019-12-29 03:12:50] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:12:51] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:12:51] [1,3] RecvMsgClientLogOnResponse() : [A:1:1323309056:13856] 'OK'
+
+
+[2019-12-29 03:13:19] Log session started
+[2019-12-29 03:13:19] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:13:20] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:13:20] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:13:20] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:13:20] [0,0] Server says 50% of connections should be websockets, we rolled 96 - using UDP as default.
+[2019-12-29 03:13:20] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.76:27018, UDP)
+[2019-12-29 03:13:20] [1,2] ConnectionCompleted() (155.133.248.50:27019, UDP)
+[2019-12-29 03:13:20] [1,2] RecvMsgClientLogOnResponse() : [A:1:1323652100:13856] 'OK'
+
+
+[2019-12-29 03:15:52] Log session started
+[2019-12-29 03:15:52] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:15:52] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:15:52] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:15:52] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:15:52] [0,0] Server says 50% of connections should be websockets, we rolled 49 - using WebSockets as default.
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (283 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (1854 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (CM02-LON.cm.steampowered.com:27020) results: 49.0000ms + load 51.0000 (283 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm-03-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (1435 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:443) results: 49.0000ms + load 51.0000 (1475 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm1-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 54.0000 (283 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (1085 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1434 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (3463 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (1127 seconds ago)
+[2019-12-29 03:15:52] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (1127 seconds ago)
+[2019-12-29 03:15:52] [0,0] PingWebSocketCM() (cm2-fra1.cm.steampowered.com:443) starting...
+[2019-12-29 03:15:52] [0,0] PingWebSocketCM() (cm1-iad1.cm.steampowered.com:27020) starting...
+[2019-12-29 03:15:52] [0,0] PingWebSocketCM() (cm2-fra1.cm.steampowered.com:443) results: 49.7667ms + load 56.0000
+[2019-12-29 03:15:53] [0,0] PingWebSocketCM() (cm1-iad1.cm.steampowered.com:27020) results: 402.0405ms + load 42.0000
+[2019-12-29 03:15:53] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:15:54] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:15:54] [1,3] RecvMsgClientLogOnResponse() : [A:1:1325426696:13856] 'OK'
+
+
+[2019-12-29 03:16:17] Log session started
+[2019-12-29 03:16:17] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:16:17] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:16:17] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:16:17] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:16:17] [0,0] Server says 50% of connections should be websockets, we rolled 25 - using WebSockets as default.
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (CM02-LON.cm.steampowered.com:27020) results: 49.0000ms + load 51.0000 (308 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (CM01-LON.cm.steampowered.com:27021) results: 49.0000ms + load 51.0000 (1114 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 52.0000 (1879 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (cm3-sto1.cm.steampowered.com:443) results: 49.0000ms + load 53.0000 (308 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (CM02-LON.cm.steampowered.com:443) results: 49.0000ms + load 52.0000 (208 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1459 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (1110 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:27020) results: 41.0000ms + load 59.0000 (3488 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (1152 seconds ago)
+[2019-12-29 03:16:17] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (1152 seconds ago)
+[2019-12-29 03:16:17] [0,0] PingWebSocketCM() (cm1-par1.cm.steampowered.com:27021) starting...
+[2019-12-29 03:16:17] [0,0] PingWebSocketCM() (CM01-LON.cm.steampowered.com:27020) starting...
+[2019-12-29 03:16:17] [0,0] PingWebSocketCM() (cm03-ord.cm.steampowered.com:27020) starting...
+[2019-12-29 03:16:17] [0,0] PingWebSocketCM() (cm1-par1.cm.steampowered.com:27021) results: 49.8250ms + load 51.0000
+[2019-12-29 03:16:17] [0,0] PingWebSocketCM() (CM01-LON.cm.steampowered.com:27020) results: 49.8556ms + load 48.0000
+[2019-12-29 03:16:18] [0,0] PingWebSocketCM() (cm03-ord.cm.steampowered.com:27020) results: 148.0422ms + load 39.0000
+[2019-12-29 03:16:18] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:16:18] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:16:18] [1,3] RecvMsgClientLogOnResponse() : [A:1:1325686784:13856] 'OK'
+
+
+[2019-12-29 03:18:08] Log session started
+[2019-12-29 03:18:08] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:18:08] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:18:08] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:18:08] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:18:08] [0,0] Server says 50% of connections should be websockets, we rolled 78 - using UDP as default.
+[2019-12-29 03:18:08] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.76:27018, UDP)
+[2019-12-29 03:18:09] [1,2] ConnectionCompleted() (162.254.196.67:27017, UDP)
+[2019-12-29 03:18:09] [1,2] RecvMsgClientLogOnResponse() : [A:1:1326914564:13856] 'OK'
+
+
+[2019-12-29 03:19:22] Log session started
+[2019-12-29 03:19:22] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:19:22] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:19:22] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:19:22] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:19:22] [0,0] Server says 50% of connections should be websockets, we rolled 60 - using UDP as default.
+[2019-12-29 03:19:22] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27019, UDP)
+[2019-12-29 03:19:22] [1,2] ConnectionCompleted() (162.254.196.68:27017, UDP)
+[2019-12-29 03:19:23] [1,2] RecvMsgClientLogOnResponse() : [A:1:1327631360:13856] 'OK'
+
+
+[2019-12-29 03:20:05] Log session started
+[2019-12-29 03:20:05] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:20:05] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:20:05] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:20:05] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:20:05] [0,0] Server says 50% of connections should be websockets, we rolled 33 - using WebSockets as default.
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm1-mad1.cm.steampowered.com:443) results: 81.0000ms + load 54.0000 (492 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (CM01-FRA.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (1728 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (CM01-LON.cm.steampowered.com:27021) results: 49.0000ms + load 51.0000 (1342 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:27020) results: 49.0000ms + load 54.0000 (1564 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm2-par1.cm.steampowered.com:27021) results: 49.0000ms + load 55.0000 (2107 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 52.0000 (2107 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm-03-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (1688 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (436 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1687 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (1338 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (1380 seconds ago)
+[2019-12-29 03:20:05] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (1380 seconds ago)
+[2019-12-29 03:20:05] [0,0] PingWebSocketCM() (cm1-sto1.cm.steampowered.com:27020) starting...
+[2019-12-29 03:20:05] [0,0] PingWebSocketCM() (cm1-sto1.cm.steampowered.com:27020) results: 81.6477ms + load 56.0000
+[2019-12-29 03:20:05] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:20:06] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:20:06] [1,3] RecvMsgClientLogOnResponse() : [A:1:1328075780:13856] 'OK'
+
+
+[2019-12-29 03:21:57] Log session started
+[2019-12-29 03:21:57] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:21:57] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:21:57] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:21:57] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:21:57] [0,0] Server says 50% of connections should be websockets, we rolled 3 - using WebSockets as default.
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 52.0000 (2219 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (CM02-LON.cm.steampowered.com:27020) results: 49.0000ms + load 51.0000 (648 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (CM03-LON.cm.steampowered.com:27020) results: 49.0000ms + load 52.0000 (1454 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:443) results: 49.0000ms + load 58.0000 (1800 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (CM01-FRA.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (1840 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (2250 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1799 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (1450 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (1492 seconds ago)
+[2019-12-29 03:21:57] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (1492 seconds ago)
+[2019-12-29 03:21:57] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:443) starting...
+[2019-12-29 03:21:57] [0,0] PingWebSocketCM() (cm2-vie1.cm.steampowered.com:443) starting...
+[2019-12-29 03:21:57] [0,0] PingWebSocketCM() (cm1-par1.cm.steampowered.com:443) starting...
+[2019-12-29 03:21:58] [0,0] PingWebSocketCM() (cm1-par1.cm.steampowered.com:443) results: 251.5726ms + load 52.0000
+[2019-12-29 03:21:58] [0,0] PingWebSocketCM() (cm2-vie1.cm.steampowered.com:443) results: 48.7685ms + load 55.0000
+[2019-12-29 03:21:58] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:443) results: 99.8631ms + load 55.0000
+[2019-12-29 03:21:58] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:21:59] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:21:59] [1,3] RecvMsgClientLogOnResponse() : [A:1:1395866624:13856] 'OK'
+
+
+[2019-12-29 03:23:04] Log session started
+[2019-12-29 03:23:04] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:23:04] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:23:04] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:23:04] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:23:04] [0,0] Server says 50% of connections should be websockets, we rolled 9 - using WebSockets as default.
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (715 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm3-iad1.cm.steampowered.com:27021) results: 150.0000ms + load 43.0000 (614 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (1743 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (2286 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm-03-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (1867 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (CM02-LON.cm.steampowered.com:443) results: 49.0000ms + load 52.0000 (615 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm1-mad1.cm.steampowered.com:27020) results: 49.0000ms + load 54.0000 (715 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1866 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm2-vie1.cm.steampowered.com:443) results: 48.0000ms + load 55.0000 (66 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (1517 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (1559 seconds ago)
+[2019-12-29 03:23:04] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (1559 seconds ago)
+[2019-12-29 03:23:04] [0,0] PingWebSocketCM() (CM03-LON.cm.steampowered.com:443) starting...
+[2019-12-29 03:23:04] [0,0] PingWebSocketCM() (CM03-LON.cm.steampowered.com:443) results: 50.3770ms + load 50.0000
+[2019-12-29 03:23:04] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:23:05] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:23:06] [1,3] RecvMsgClientLogOnResponse() : [A:1:1396664324:13856] 'OK'
+
+
+[2019-12-29 03:24:02] Log session started
+[2019-12-29 03:24:02] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:24:02] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:24:02] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:24:02] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:24:02] [0,0] Server says 50% of connections should be websockets, we rolled 24 - using WebSockets as default.
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm1-iad1.cm.steampowered.com:27020) results: 402.0000ms + load 42.0000 (489 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 58.0000 (1925 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 52.0000 (2344 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 57.0000 (2375 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:443) results: 49.0000ms + load 51.0000 (1965 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm2-vie1.cm.steampowered.com:443) results: 48.0000ms + load 55.0000 (124 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (1575 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1924 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (1617 seconds ago)
+[2019-12-29 03:24:02] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (1617 seconds ago)
+[2019-12-29 03:24:02] [0,0] PingWebSocketCM() (CM03-LON.cm.steampowered.com:27021) starting...
+[2019-12-29 03:24:02] [0,0] PingWebSocketCM() (cm-04-ams1.cm.steampowered.com:27021) starting...
+[2019-12-29 03:24:02] [0,0] PingWebSocketCM() (cm3-sto1.cm.steampowered.com:27021) starting...
+[2019-12-29 03:24:02] [0,0] PingWebSocketCM() (CM03-LON.cm.steampowered.com:27021) results: 49.8743ms + load 49.0000
+[2019-12-29 03:24:02] [0,0] PingWebSocketCM() (cm-04-ams1.cm.steampowered.com:27021) results: 49.9054ms + load 52.0000
+[2019-12-29 03:24:03] [0,0] PingWebSocketCM() (cm3-sto1.cm.steampowered.com:27021) results: 501.5740ms + load 55.0000
+[2019-12-29 03:24:03] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:24:03] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:24:03] [1,3] RecvMsgClientLogOnResponse() : [A:1:1397361668:13856] 'OK'
+
+
+[2019-12-29 03:24:51] Log session started
+[2019-12-29 03:24:51] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:24:51] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:24:51] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:24:51] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:24:51] [0,0] Server says 50% of connections should be websockets, we rolled 28 - using WebSockets as default.
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:443) results: 99.0000ms + load 55.0000 (173 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (CM02-LON.cm.steampowered.com:443) results: 49.0000ms + load 52.0000 (722 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm1-sto1.cm.steampowered.com:443) results: 334.0000ms + load 56.0000 (778 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm3-sto1.cm.steampowered.com:443) results: 49.0000ms + load 53.0000 (822 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm2-fra1.cm.steampowered.com:443) results: 49.0000ms + load 56.0000 (539 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm-03-ams1.cm.steampowered.com:443) results: 49.0000ms + load 54.0000 (2424 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm4-fra1.cm.steampowered.com:27020) results: 49.0000ms + load 58.0000 (1974 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm2-mad1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (722 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm2-vie1.cm.steampowered.com:443) results: 48.0000ms + load 55.0000 (173 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (1624 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (1973 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (1666 seconds ago)
+[2019-12-29 03:24:51] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (1666 seconds ago)
+[2019-12-29 03:24:51] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:24:52] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:24:52] [1,3] RecvMsgClientLogOnResponse() : [A:1:1397891072:13856] 'OK'
+
+
+[2019-12-29 03:28:02] Log session started
+[2019-12-29 03:28:02] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:28:02] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:28:02] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:28:02] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:28:03] [0,0] Server says 50% of connections should be websockets, we rolled 42 - using WebSockets as default.
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27020) results: 49.0000ms + load 56.0000 (1014 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm-04-ams1.cm.steampowered.com:27020) results: 50.0000ms + load 52.0000 (1816 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:443) results: 49.0000ms + load 51.0000 (2206 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (CM03-LON.cm.steampowered.com:27020) results: 49.0000ms + load 52.0000 (1820 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (CM01-LON.cm.steampowered.com:27020) results: 49.0000ms + load 48.0000 (706 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm3-sto1.cm.steampowered.com:443) results: 49.0000ms + load 53.0000 (1014 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm-03-ams1.cm.steampowered.com:27021) results: 49.0000ms + load 53.0000 (2166 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm2-vie1.cm.steampowered.com:443) results: 48.0000ms + load 55.0000 (365 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 48.0000ms + load 56.0000 (2165 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm4-sto1.cm.steampowered.com:27021) results: 48.0000ms + load 57.0000 (1816 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm-02-ams1.cm.steampowered.com:443) results: 29.0000ms + load 52.0000 (1858 seconds ago)
+[2019-12-29 03:28:03] [0,0] Existing WebSocket ping data (cm1-par1.cm.steampowered.com:27020) results: 29.0000ms + load 53.0000 (1858 seconds ago)
+[2019-12-29 03:28:03] [0,0] PingWebSocketCM() (cm2-par1.cm.steampowered.com:443) starting...
+[2019-12-29 03:28:03] [0,0] PingWebSocketCM() (cm2-par1.cm.steampowered.com:443) results: 49.2047ms + load 52.0000
+[2019-12-29 03:28:03] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 03:28:03] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 03:28:03] [1,3] RecvMsgClientLogOnResponse() : [A:1:1461470216:13856] 'OK'
+
+
+[2019-12-29 03:28:56] Log session started
+[2019-12-29 03:28:56] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:28:56] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:28:56] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:28:56] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:28:56] [0,0] Server says 50% of connections should be websockets, we rolled 83 - using UDP as default.
+[2019-12-29 03:28:56] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27018, UDP)
+[2019-12-29 03:28:57] [1,2] ConnectionCompleted() (162.254.196.68:27018, UDP)
+[2019-12-29 03:28:57] [1,2] RecvMsgClientLogOnResponse() : [A:1:1462099976:13856] 'OK'
+
+
+[2019-12-29 03:29:30] Log session started
+[2019-12-29 03:29:30] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:29:30] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:29:30] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:29:30] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:29:30] [0,0] Server says 50% of connections should be websockets, we rolled 94 - using UDP as default.
+[2019-12-29 03:29:30] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27018, UDP)
+[2019-12-29 03:29:31] [1,2] ConnectionCompleted() (162.254.196.68:27019, UDP)
+[2019-12-29 03:29:31] [1,2] RecvMsgClientLogOnResponse() : [A:1:1462510592:13856] 'OK'
+
+
+[2019-12-29 03:30:00] Log session started
+[2019-12-29 03:30:00] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 03:30:00] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:30:00] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:30:00] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 03:30:00] [0,0] Server says 50% of connections should be websockets, we rolled 88 - using UDP as default.
+[2019-12-29 03:30:00] [1,2] Connect() starting connection (eNetQOSLevelMedium, 185.25.182.77:27018, UDP)
+[2019-12-29 03:30:01] [1,2] ConnectionCompleted() (162.254.196.84:27019, UDP)
+[2019-12-29 03:30:01] [1,2] RecvMsgClientLogOnResponse() : [A:1:1462845440:13856] 'OK'
+
+
+[2019-12-29 04:31:46] Log session started
+[2019-12-29 04:31:46] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 04:31:46] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:31:46] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:31:46] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:31:46] [0,0] Server says 50% of connections should be websockets, we rolled 5 - using WebSockets as default.
+[2019-12-29 04:31:46] [0,0] PingWebSocketCM() (cm-02-ams1.cm.steampowered.com:443) starting...
+[2019-12-29 04:31:46] [0,0] PingWebSocketCM() (cm1-par1.cm.steampowered.com:27020) starting...
+[2019-12-29 04:31:46] [0,0] PingWebSocketCM() (cm2-vie1.cm.steampowered.com:443) starting...
+[2019-12-29 04:31:46] [0,0] PingWebSocketCM() (cm1-vie1.cm.steampowered.com:443) starting...
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm1-par1.cm.steampowered.com:27020) results: 49.9113ms + load 47.0000
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm-02-ams1.cm.steampowered.com:443) results: 49.4266ms + load 46.0000
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:27021) starting...
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm-04-ams1.cm.steampowered.com:27021) starting...
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm2-vie1.cm.steampowered.com:443) results: 49.4833ms + load 51.0000
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm1-vie1.cm.steampowered.com:443) results: 49.6730ms + load 52.0000
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:27020) starting...
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (CM03-FRA.cm.steampowered.com:443) starting...
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm-04-ams1.cm.steampowered.com:27021) results: 48.9046ms + load 48.0000
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() stopping after 400.00ms timeout and using good enough host (cm-02-ams1.cm.steampowered.com:443)
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:27021) results: 98.7048ms + load 52.0000
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (CM03-FRA.cm.steampowered.com:443) results: 49.8769ms + load 54.0000
+[2019-12-29 04:31:47] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:27020) results: 49.8574ms + load 49.0000
+[2019-12-29 04:31:47] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-02-ams1.cm.steampowered.com:443, WebSocket)
+[2019-12-29 04:31:47] [1,3] ConnectionCompleted() (155.133.248.51:443, WebSocket)
+[2019-12-29 04:31:47] [1,3] RecvMsgClientLogOnResponse() : [A:1:2038528004:13856] 'OK'
+
+
+[2019-12-29 04:32:16] Log session started
+[2019-12-29 04:32:16] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 04:32:16] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:32:16] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:32:16] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:32:16] [0,0] Server says 50% of connections should be websockets, we rolled 27 - using WebSockets as default.
+[2019-12-29 04:32:16] [0,0] Existing WebSocket ping data (cm1-vie1.cm.steampowered.com:443) results: 49.0000ms + load 52.0000 (29 seconds ago)
+[2019-12-29 04:32:16] [0,0] Existing WebSocket ping data (cm-04-ams1.cm.steampowered.com:27021) results: 48.0000ms + load 48.0000 (29 seconds ago)
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:27020) starting...
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() (cm2-mad1.cm.steampowered.com:27021) starting...
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() (cm1-vie1.cm.steampowered.com:27020) starting...
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() (CM02-LON.cm.steampowered.com:27020) starting...
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() (cm2-mad1.cm.steampowered.com:27021) results: 50.0168ms + load 50.0000
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() stopping after 400.00ms timeout and using good enough host (cm-04-ams1.cm.steampowered.com:27021)
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() (CM02-LON.cm.steampowered.com:27020) results: 250.2449ms + load 47.0000
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() (cm1-vie1.cm.steampowered.com:27020) results: 250.1191ms + load 51.0000
+[2019-12-29 04:32:16] [0,0] PingWebSocketCM() (cm4-sto1.cm.steampowered.com:27020) results: 250.3650ms + load 56.0000
+[2019-12-29 04:32:16] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm-04-ams1.cm.steampowered.com:27021, WebSocket)
+[2019-12-29 04:32:17] [1,3] ConnectionCompleted() (155.133.248.53:27021, WebSocket)
+[2019-12-29 04:32:17] [1,3] RecvMsgClientLogOnResponse() : [A:1:2038867976:13856] 'OK'
+
+
+[2019-12-29 04:37:26] Log session started
+[2019-12-29 04:37:26] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-29 04:37:26] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:37:26] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:37:26] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-29 04:37:26] [0,0] Server says 50% of connections should be websockets, we rolled 41 - using WebSockets as default.
+[2019-12-29 04:37:26] [0,0] Existing WebSocket ping data (cm2-vie1.cm.steampowered.com:443) results: 49.0000ms + load 51.0000 (339 seconds ago)
+[2019-12-29 04:37:26] [0,0] Existing WebSocket ping data (cm4-lhr1.cm.steampowered.com:27020) results: 49.0000ms + load 49.0000 (339 seconds ago)
+[2019-12-29 04:37:26] [0,0] Existing WebSocket ping data (cm-04-ams1.cm.steampowered.com:27021) results: 48.0000ms + load 48.0000 (339 seconds ago)
+[2019-12-29 04:37:26] [0,0] PingWebSocketCM() (cm4-fra1.cm.steampowered.com:27021) starting...
+[2019-12-29 04:37:26] [0,0] PingWebSocketCM() (cm4-fra1.cm.steampowered.com:27020) starting...
+[2019-12-29 04:37:26] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:27021) starting...
+[2019-12-29 04:37:26] [0,0] PingWebSocketCM() (CM03-LON.cm.steampowered.com:27021) starting...
+[2019-12-29 04:37:27] [0,0] PingWebSocketCM() (cm4-fra1.cm.steampowered.com:27021) results: 249.8684ms + load 52.0000
+[2019-12-29 04:37:27] [0,0] PingWebSocketCM() stopping after 400.00ms timeout and using good enough host (cm-04-ams1.cm.steampowered.com:27021)
+[2019-12-29 04:37:27] [0,0] PingWebSocketCM() (cm4-fra1.cm.steampowered.com:27020) results: 299.6493ms + load 51.0000
+[2019-12-29 04:37:27] [0,0] PingWebSocketCM() (CM03-LON.cm.steampowered.com:27021) results: 49.7251ms + load 44.0000
+[2019-12-29 04:37:27] [0,0] PingWebSocketCM() (cm4-lhr1.cm.steampowered.com:27021) results: 49.8547ms + load 47.0000
+[2019-12-29 04:37:27] [1,3] Connect() starting connection (eNetQOSLevelMedium, CM03-LON.cm.steampowered.com:27021, WebSocket)
+[2019-12-29 04:37:27] [1,3] ConnectionCompleted() (162.254.196.68:27021, WebSocket)
+[2019-12-29 04:37:27] [1,3] RecvMsgClientLogOnResponse() : [A:1:2103925760:13856] 'OK'
