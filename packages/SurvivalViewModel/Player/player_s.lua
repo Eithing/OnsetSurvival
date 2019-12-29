@@ -7,8 +7,10 @@ AddEvent("OnPlayerSteamAuth",function (player)
 		print("new player "..GetPlayerSteamId(player))
 		CallRemoteEvent(player, "DisplayCreateCharacter")
 	else
+		
 		SetPlayerLocation(player, UserData[tostring(GetPlayerSteamId(player))].positionX, UserData[tostring(GetPlayerSteamId(player))].positionY, UserData[tostring(GetPlayerSteamId(player))].positionZ)
 		SetPlayerHealth(player, UserData[tostring(GetPlayerSteamId(player))].health)
+		
 	end
 	SetPlayerPropertyValue(player, "harvesting", false)
 end)
