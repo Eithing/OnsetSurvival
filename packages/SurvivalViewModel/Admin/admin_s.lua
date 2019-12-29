@@ -12,7 +12,10 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
 		local x, y, z = GetPlayerLocation(player)
         local h = GetPlayerHeading(player)
         local vehicle = CreateVehicle(actionId, x, y, z, h)
-        SetPlayerInVehicle(player, vehicle)
+		SetPlayerInVehicle(player, vehicle)
+		VehicleData[vehicle] = {}
+		VehicleData[vehicle].fuel = 100
+		SetVehicleHealth(vehicle, 1500)
 	end
 end)
 

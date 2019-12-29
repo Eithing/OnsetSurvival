@@ -1,8 +1,8 @@
 function SetVehicleVisibility()
-    if GetWebVisibility(VehicleHud) == WEB_VISIBLE then
+    if GetWebVisibility(VehicleHud) == WEB_HITINVISIBLE then
         SetVisibility(VehicleHud, "Hidden")
     else
-        SetVisibility(VehicleHud, "VisibleStatic")
+        SetVisibility(VehicleHud, "HitInvisible")
     end
 end
 AddFunctionExport("SetVehicleVisibility", SetVehicleVisibility)

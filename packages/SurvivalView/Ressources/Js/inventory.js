@@ -114,6 +114,14 @@ class Inventory {
                 this.dropIntoTarget = target;
                 onEquipWeapons(previousImage.id, 3, 999)
             }
+
+            if (target && target.id === 'parent-container' && this.dragging !== null && previousContainer.id != target.id && previousImageDiv.id == "weapons") {
+                this.dropIntoTarget = target;
+                if(previousContainer.id === "player-inventory-slot1"){
+                    onEquipWeapons(1, 1, 0);
+                    inventory.removeItem(previousImage.id);
+                }
+            }
         }
 
         function onEquipWeapons(id, slot, ammo) {

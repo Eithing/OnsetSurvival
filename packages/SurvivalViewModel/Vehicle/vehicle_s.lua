@@ -14,6 +14,7 @@ AddEvent("OnPackageStart", function()
                     ConsumeFuel(v, consomevalue)
                     --print(VehicleData[k].fuel) -- Print l'essence du véhicule
                 end
+                print("Vie du véhicule : "..GetVehicleHealth(v))
                 if VehicleData[k].fuel == 0 then
                     StopVehicleEngine(k)
                     VehicleData[k].fuel = 0

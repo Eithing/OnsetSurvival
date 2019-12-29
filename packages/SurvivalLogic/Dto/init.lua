@@ -20,3 +20,7 @@ AddEvent("OnPackageStart", function()  --DONT SHOW IN STREAM
 		ServerExit()
 	end
 end)
+
+AddEvent("OnPackageStop", function()
+	mariadb_close(Sql)
+end)
