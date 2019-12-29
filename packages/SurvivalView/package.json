@@ -6,7 +6,8 @@
         "hud.lua",
         "Admin/admin.lua",
         "Inventory/inventory.lua",
-        "Craft/craft.lua"
+        "Craft/craft.lua",
+        "Vehicle/vehicle.lua"
     ],
     "files": [
         "VitalIndicator/health.html",
@@ -23,9 +24,14 @@
         "Craft/craft.css",
         "Craft/craft.html",
 
+        "Vehicle/vehicle.css",
+        "Vehicle/vehicle.html",
+        "Vehicle/fuel.png",
+
         "Ressources/Js/item.js",
         "Ressources/Js/inventory.js",
         "Ressources/Js/craft.js",
+        "Ressources/Js/vehicle.js",
 
         "Ressources/images/Admin.jpg",
         "Ressources/images/Cars.jpg",

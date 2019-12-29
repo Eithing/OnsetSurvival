@@ -1,0 +1,110 @@
+body {
+    background-color: transparent;
+    border-radius: 50% 20% / 10% 40%;
+    position: absolute;
+    bottom: 0;
+}
+
+#c {
+    background: -webkit-linear-gradient(left, black 0%, green 100%);
+    float: left;
+    opacity: 0.7;
+    border-radius: 5% 5% 5% 5%;
+    background-size: 100% 100%;
+    background-position-x: 0;
+    background-position-y: 0, 50%, 100%, 100%;
+    background-repeat: repeat-x;
+    -webkit-animation-name: linemove;
+    -webkit-animation-duration: 20s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
+.container1 {
+    opacity: 0.70;
+    margin-top: 2px;
+    width: 150px;
+    margin-left: 17px;
+    text-align: center;
+}
+
+.progress1 {
+    padding: 3px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar1 {
+    height: 9px;
+    background-color: #ee303c;
+    border-radius: 4px;
+    transition: 0.4s linear;
+    transition-property: width, background-color;
+}
+
+.progress-striped1 .progress-bar1 {
+    background-color: rgb(195, 124, 58);
+    width: 100%;
+    background-image: linear-gradient( 45deg, rgb(202, 139, 35) 25%, transparent 25%, transparent 50%, rgba(202, 139, 35, 1) 50%, rgba(202, 139, 35, 1) 75%, transparent 75%, transparent);
+    animation: progressAnimationStrike 6s;
+}
+
+.container2 {
+    opacity: 0.70;
+    margin-top: 8px;
+    margin-left: 17px;
+    width: 150px;
+    text-align: center;
+}
+
+.progress2 {
+    padding: 3px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar2 {
+    height: 9px;
+    background-color: #ee303c;
+    border-radius: 4px;
+    transition: 0.4s linear;
+    transition-property: width, background-color;
+}
+
+.progress-striped2 .progress-bar2 {
+    background-color: #4b99b5;
+    width: 100%;
+    background-image: linear-gradient( 45deg, rgb(105, 130, 185) 25%, transparent 25%, transparent 50%, rgba(105, 130, 185, 1) 50%, rgba(105, 130, 185, 1) 75%, transparent 75%, transparent);
+    animation: progressAnimationStrike 6s;
+}
+
+.progress {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 7px;
+    margin-bottom: 7px;
+}
+
+.image {
+    float: left;
+    width: 16px;
+    height: 16px;
+}
+
+.image2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+@-webkit-keyframes linemove {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: 500px, 500px, 500px, 500px;
+    }
+}

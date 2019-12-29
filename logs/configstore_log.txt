@@ -3915,3 +3915,16 @@
 
 [2019-12-29 03:30:00] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
 [2019-12-29 03:30:01] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-29 04:31:46] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-29 04:31:48] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-29 04:32:16] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-29 04:32:17] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+[2019-12-29 04:32:18] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-29 04:37:26] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-29 04:37:27] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
