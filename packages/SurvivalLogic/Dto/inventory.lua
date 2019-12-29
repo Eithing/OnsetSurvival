@@ -23,7 +23,7 @@ AddFunctionExport("GetUserInventory", GetUserInventory)
 
 function SetUserInventory(playerId, itemId, count)
 	local query = mariadb_prepare(Sql, "INSERT INTO compte_item(itemCount, compteId, itemId) VALUES ('?','?','?')", count, playerId, itemId)
-	local result = mariadb_await_query(Sql, query)
+	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 
 	return GetLastUserItem(playerId)
@@ -54,14 +54,14 @@ AddFunctionExport("GetLastUserItem", GetLastUserItem)
 
 function UpdateUserInventory(playerId, itemId, count)
 	local query = mariadb_prepare(Sql, "UPDATE compte_item SET itemCount = '?' WHERE compteId='?' and itemId='?'", count, playerId, itemId)
-	local result = mariadb_await_query(Sql, query)
+	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 end
 AddFunctionExport("UpdateUserInventory", UpdateUserInventory)
 
 function RemoveItemInventory(id)
 	local query = mariadb_prepare(Sql, "DELETE FROM compte_item WHERE idUnique = '?';", id)
-	local result = mariadb_await_query(Sql, query)
+	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 end
 AddFunctionExport("RemoveItemInventory", RemoveItemInventory)
