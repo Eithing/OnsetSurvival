@@ -1,13 +1,13 @@
 local x,y,z
 AddEvent("OnPlayerSteamAuth",function (player)
-	
+	UserData[tostring(GetPlayerSteamId(player))] = SLogic.GetUserBySteamId(tostring(GetPlayerSteamId(player)))
+	UserData[tostring(GetPlayerSteamId(player))].inventoryItems = SLogic.GetUserInventory(player, UserData[tostring(GetPlayerSteamId(player))].id)
 	if UserData[tostring(GetPlayerSteamId(player))] == nil then
 		SetPlayerLocation(player, 125773.000000, 80246.000000, 1645.000000)
 		print("new player "..GetPlayerSteamId(player))
 		CallRemoteEvent(player, "DisplayCreateCharacter")
 	else
-		UserData[tostring(GetPlayerSteamId(player))] = SLogic.GetUserBySteamId(tostring(GetPlayerSteamId(player)))
-		UserData[tostring(GetPlayerSteamId(player))].inventoryItems = SLogic.GetUserInventory(player, UserData[tostring(GetPlayerSteamId(player))].id)
+		
 		SetPlayerLocation(player, UserData[tostring(GetPlayerSteamId(player))].positionX, UserData[tostring(GetPlayerSteamId(player))].positionY, UserData[tostring(GetPlayerSteamId(player))].positionZ)
 		SetPlayerHealth(player, UserData[tostring(GetPlayerSteamId(player))].health)
 		
