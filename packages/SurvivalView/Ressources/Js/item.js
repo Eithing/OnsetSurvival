@@ -61,4 +61,10 @@ const CONFIG = {
         space: 64,
         url: "url('./../../Ressources/images/Cars.jpg')"
     },
+    'consommable': {
+        spriteLignes: 3,
+        spriteColonnes: 1,
+        space: 40,
+        url: "url('./../Ressources/images/consommable.png')"
+    },
 }
