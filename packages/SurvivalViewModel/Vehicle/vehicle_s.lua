@@ -1,5 +1,5 @@
 local delayconsume = 1000 -- delai de la cosomation d'essence
-local consomevalue = 1 -- Nombre d'essence retirer a chaque verification
+local consomevalue = 10 -- Nombre d'essence retirer a chaque verification
 
 AddEvent("OnPackageStart", function()
     print("Vehicle ServerSide Loaded")
@@ -14,7 +14,6 @@ AddEvent("OnPackageStart", function()
                     ConsumeFuel(v, consomevalue)
                     --print(VehicleData[k].fuel) -- Print l'essence du véhicule
                 end
-                print("Vie du véhicule : "..GetVehicleHealth(v))
                 if VehicleData[k].fuel == 0 then
                     StopVehicleEngine(k)
                     VehicleData[k].fuel = 0
