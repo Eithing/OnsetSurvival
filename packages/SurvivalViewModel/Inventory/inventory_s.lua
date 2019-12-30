@@ -46,9 +46,7 @@ function PickupItem(player, itemid, Count)
 	end
 	if(found == false)then
 		SLogic.SetUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, itemid, Count)
-		table.insert(UserData[tostring(GetPlayerSteamId(player))].inventoryItems, CreateItemDataByItemID(player,itemid, count))
-		print(CreateItemDataByItemID(player,itemid, count))
-		CallRemoteEvent(player, "ReloadInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
+		CreateItemDataByItemID(player)
 	end
 end
 
@@ -65,22 +63,10 @@ function UseItem(player, itemId, type)
 end
 AddRemoteEvent("OnUseItem", UseItem)
 
-function CreateItemDataByItemID(player, itemID, count)
-	local inv = UserData[tostring(GetPlayerSteamId(player))].inventoryItems
-	local Id_Unique = inv[#inv].idUnique+1 or 1
-	local item
-	local data = GetItemDataByItemID(itemID)
-	item = {itemID,
-	nom = data.nom,
-	poids = data.poids,
-	type = data.type,
-	imageId = data.imageId,
-	itemCount = count,
-	compteId = UserData[tostring(GetPlayerSteamId(player))].id,
-	itemId = itemID,
-	modelId = data.modelId,
-	idUnique = inv[#inv].idUnique+1}
-	return item
+function CreateItemDataByItemID(player)
+	table.insert(UserData[tostring(GetPlayerSteamId(player))].inventoryItems, SLogic.GetLastUserItem(UserData[tostring(GetPlayerSteamId(player))].id))
+	print(UserData[tostring(GetPlayerSteamId(player))].inventoryItems[#UserData[tostring(GetPlayerSteamId(player))].inventoryItems].nom)
+	CallRemoteEvent(player, "PopulateInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
 end
 
 function GetItemDataByItemID(itemID)

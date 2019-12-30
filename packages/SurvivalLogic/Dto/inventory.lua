@@ -26,7 +26,6 @@ function SetUserInventory(playerId, itemId, count)
 	local query = mariadb_prepare(Sql, "INSERT INTO compte_item(itemCount, compteId, itemId) VALUES ('?','?','?')", count, playerId, itemId)
 	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
-
 	return GetLastUserItem(playerId)
 end
 AddFunctionExport("SetUserInventory", SetUserInventory)
