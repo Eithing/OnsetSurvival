@@ -64,9 +64,9 @@ end
 AddRemoteEvent("OnUseItem", UseItem)
 
 function CreateItemDataByItemID(player)
-	table.insert(UserData[tostring(GetPlayerSteamId(player))].inventoryItems, SLogic.GetLastUserItem(UserData[tostring(GetPlayerSteamId(player))].id))
-	print(UserData[tostring(GetPlayerSteamId(player))].inventoryItems[#UserData[tostring(GetPlayerSteamId(player))].inventoryItems].nom)
-	CallRemoteEvent(player, "PopulateInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
+	local newItem = SLogic.GetLastUserItem(UserData[tostring(GetPlayerSteamId(player))].id)
+	table.insert(UserData[tostring(GetPlayerSteamId(player))].inventoryItems, newItem)
+	CallRemoteEvent(player, "AddItemInventory", newItem)
 end
 
 function GetItemDataByItemID(itemID)
