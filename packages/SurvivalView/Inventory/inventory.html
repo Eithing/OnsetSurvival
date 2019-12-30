@@ -17,7 +17,7 @@
                 <div id="infos-title" style="text-align: center; color:rgb(114, 114, 114);"><b>Title</b></div>
                 <div id="infos-desc" style="text-align: center; color:rgb(114, 114, 114); font-size: 8.5px;"><b>description mdr c'est trop bien j'écrit de la merde et otus le monde le vois.</b></div>
                 <div style="text-align: center; text-align: center;position: absolute;bottom: 24%;">
-                    <div class="infos-button" id="infos-use"><b>Utiliser</b></div>
+                    <div class="infos-button" id="infos-use" style="visibility: hidden;"><b>Utiliser</b></div>
                 </div>
                 <div style="text-align: center;position: absolute;bottom: 2%;">
                     <div class="infos-button" id="infos-drop"><b>Jeter</b></div>
@@ -78,6 +78,16 @@
 <script type="text/javascript" src="./../Ressources/Js/inventory.js"></script>
 <script type="text/javascript" src="./../Ressources/Js/item.js"></script>
 <script>
+    try {
+        ue == null
+    } catch (err) {
+        window.ue = {
+            game: {
+                callevent: console.log
+            }
+        }
+    }
+
     function newEl(tagType) {
         return document.createElement(tagType);
     }
@@ -97,6 +107,7 @@
             this.leftClick = false;
             this.rightClick = false;
             this.middleClick = false;
+            this.currentIdShow = null
             this.moveHandler = (evt) => {
                 this.position.x = evt.pageX;
                 this.position.y = evt.pageY;
@@ -123,21 +134,18 @@
                 clickSwap(evt.button, false);
                 if (evt.target.className == "parent-container") {
                     inventory.removeItem(itemId);
-                    ue.game.callevent("onEquipWeapon", JSON.stringify([1, 1, 0]));
                 }
-                if (evt.target == downTarget) {
+                if (evt.target === downTarget && evt.target.className === "item-image") {
                     document.getElementById("item-info").style.visibility = "visible";
                     document.getElementById("infos-image").style.backgroundImage = evt.target.style.backgroundImage;
                     document.getElementById("infos-image").style.backgroundPosition = evt.target.style.backgroundPosition;
                     document.getElementById("infos-title").innerHTML = evt.target.getAttribute("name");
                     document.getElementById("infos-desc").innerHTML = evt.target.getAttribute("desc");
-                    document.getElementById("infos-drop").setAttribute("item-id", itemId);;
-                    document.getElementById("infos-drop").addEventListener("click", () => {
-                        document.getElementById("infos-use").style.visibility = "hidden";
-                        inventory.removeItem(document.getElementById("infos-drop").getAttribute("item-id"));
-                        ue.game.callevent("onEquipWeapon", JSON.stringify([1, 1, 0]));
-                    }, false);
-                    if (evt.target.id == "consommable") {
+                    let idToRemove = itemId;
+                    this.currentIdShow = idToRemove
+                        //document.getElementById("infos-drop").setAttribute("item-id", itemId);
+
+                    if (evt.target.parentNode.id === "consommable") {
                         document.getElementById("infos-use").style.visibility = "visible";
                     }
                 }
@@ -150,6 +158,10 @@
                 document.getElementById("player-inventory-stuff3").style.backgroundColor = "rgba(240, 255, 240, 0.11)";
                 document.getElementById("player-inventory-stuff4").style.backgroundColor = "rgba(240, 255, 240, 0.11)";
             }
+
+            this.onClickDropItem = this.onClickDropItem.bind(this)
+            document.querySelector('#infos-drop').addEventListener('click', this.onClickDropItem)
+
 
             document.addEventListener('mousemove', this.moveHandler);
             document.addEventListener('mousedown', this.mouseDownHandler);
@@ -164,6 +176,13 @@
 
         enableContextMenu() {
             document.oncontextmenu = null;
+        }
+
+        onClickDropItem() {
+            if (this.currentIdShow !== null) {
+                inventory.removeItem(this.currentIdShow)
+                this.currentIdShow = null
+            }
         }
 
         destroy() {
@@ -181,8 +200,4 @@
 
     //Instancie un nouvel inventaire
     var inventory = new Inventory('player-inventory')
-
-    function test() {
-        document.body.style.backgroundColor = 'red';
-    }
 </script>

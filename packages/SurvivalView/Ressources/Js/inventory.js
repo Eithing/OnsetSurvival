@@ -77,12 +77,15 @@ class Inventory {
         }
         this.mouseUpHandler = (evt) => {
             evt.preventDefault();
-
             let target = evt.target.parentNode;
+            if (this.elementToDrag === target) {
+                return
+            }
             if (target && target.className === 'item' && this.dragging !== null) {
-                this.dropIntoTarget = target;
+                this.dropIntoTarget = target; // C'est cette ligne qui BUG , je sais pas à quoi elle sert
                 if (previousImageDiv.id == "weapons" && (target.id === 'player-inventory-slot1' || target.id === 'player-inventory-slot2' || target.id === 'player-inventory-slot3'))
-                    onEquipWeapons(previousImage.id, 3, 999)
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([previousImage.id, 3, 999]));
+
             }
             target = evt.target;
             if (target && target.id === 'player-inventory-stuff1' && this.dragging !== null && previousContainer.id != target.id && previousImageDiv.id == "helmet") {
@@ -100,24 +103,21 @@ class Inventory {
             if (target && target.id === 'player-inventory-container' && this.dragging !== null && previousContainer.id != target.id) {
                 this.dropIntoTarget = target;
                 if (previousImageDiv.id == "weapons")
-                    onEquipWeapons(1, previousContainer.id.slice(-1), 0)
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([1, previousContainer.id.slice(-1), 0]));
+
             }
             if (target && target.id === 'player-inventory-slot1' && this.dragging !== null && previousContainer.id != target.id && previousImageDiv.id == "weapons") {
                 this.dropIntoTarget = target;
-                onEquipWeapons(previousImage.id, 1, 999)
+                ue.game.callevent("onEquipWeapon", JSON.stringify([previousImage.id, 1, 999]));
             }
             if (target && target.id === 'player-inventory-slot2' && this.dragging !== null && previousContainer.id != target.id && previousImageDiv.id == "weapons") {
                 this.dropIntoTarget = target;
-                onEquipWeapons(previousImage.id, 2, 999)
+                ue.game.callevent("onEquipWeapon", JSON.stringify([previousImage.id, 2, 999]));
             }
             if (target && target.id === 'player-inventory-slot3' && this.dragging !== null && previousContainer.id != target.id && previousImageDiv.id == "weapons") {
                 this.dropIntoTarget = target;
-                onEquipWeapons(previousImage.id, 3, 999)
+                ue.game.callevent("onEquipWeapon", JSON.stringify([previousImage.id, 3, 999]));
             }
-        }
-
-        function onEquipWeapons(id, slot, ammo) {
-            ue.game.callevent("onEquipWeapon", JSON.stringify([id, slot, ammo]));
         }
 
         this.stuff1.element.addEventListener('mousedown', this.mouseDownHandler);
@@ -184,21 +184,26 @@ class Inventory {
     }
 
     removeItem(itemId, removefromhand, consume) { // TODO utiliser le consume dans le cas d'un aliment par exemple OnConsumeItem
+        document.getElementById("infos-image").style.backgroundImage = null;
+        document.getElementById("infos-image").style.backgroundPosition = null;
+        document.getElementById("infos-title").innerHTML = null;
+        document.getElementById("infos-desc").innerHTML = null;
         let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
-        let find = false
         for (const k of keys) {
             for (let i = 0; i < inventory[k].items.length; i++) {
                 const inventoryItemChild = inventory[k].items[i]
                 if (inventoryItemChild.element.getAttribute("item-id") == itemId) {
-                    inventoryItemChild.element.parentNode.removeChild(inventoryItemChild.element);
+                    inventoryItemChild.element.remove(); //(inventoryItemChild.element);
                     inventory[k].items.splice(i, 1)
-                    find = true
                     ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
-                    break
+                    if (k === "slot1") {
+                        ue.game.callevent("onEquipWeapon", JSON.stringify([1, 1, 0]));
+                    } else if (k === "slot2") {
+                        ue.game.callevent("onEquipWeapon", JSON.stringify([1, 2, 0]));
+                    } else if (k === "slot3") {
+                        ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
+                    }
                 }
-            }
-            if (find === true) {
-                break
             }
         }
         return this;
