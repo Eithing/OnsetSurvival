@@ -177,10 +177,18 @@ p {
     position: relative;
 }
 
+.infos-button:hover {
+    cursor: pointer;
+}
+
 #infos-image {
     margin: 5px;
 }
 
 #infos-rest {
     height: 100px;
+}
+
+#close-info:hover {
+    cursor: pointer;
 }

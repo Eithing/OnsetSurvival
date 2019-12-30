@@ -157,7 +157,41 @@ class Inventory {
                     this.elementToDrag.style = null;
                     if (this.dropIntoTarget) {
                         if (this.dropIntoTarget.className != this.elementToDrag.className) {
-                            this.dropIntoTarget.appendChild(this.elementToDrag);
+                            let dropId = ""
+                            let ElementId = ""
+
+                            let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
+                            for (const k of keys) {
+                                for(const kd of (this.dropIntoTarget.id).split("-")){
+                                    if(k == kd){
+                                        dropId = kd
+                                        break
+                                    }
+                                }
+                            }
+
+                            for (const k of keys) {
+                                for(const kd of (this.elementToDrag.parentNode.id).split("-")){
+                                    if(k == kd){
+                                        ElementId = kd
+                                        break
+                                    }
+                                }
+                            }
+
+                            let Itemidh = this.elementToDrag.getAttribute("item-id")
+
+                            if (ElementId === "slot1") {
+                                ue.game.callevent("onEquipWeapon", JSON.stringify([1, 1, 0]));
+                            } else if (ElementId === "slot2") {
+                                ue.game.callevent("onEquipWeapon", JSON.stringify([1, 2, 0]));
+                            } else if (ElementId === "slot3") {
+                                ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
+                            }
+
+                            inventory[dropId].items[Itemidh] = inventory[ElementId].items[Itemidh]
+                            inventory[ElementId].items[Itemidh] = null
+                            this.dropIntoTarget.appendChild(this.elementToDrag)
                         } else {
                             this.dropIntoTarget.style = null;
                             let refElement = this.dropIntoTarget.cloneNode(true);
@@ -176,7 +210,7 @@ class Inventory {
     }
 
     addItem(idUnique, type, item) {
-        const itemSlot = this[type].items.push(item);
+        inventory[type].items[idUnique] = item
         item.element.setAttribute("item-id", idUnique);
 
         this[type].element.appendChild(item.element);
@@ -188,32 +222,26 @@ class Inventory {
         document.getElementById("infos-image").style.backgroundPosition = null;
         document.getElementById("infos-title").innerHTML = null;
         document.getElementById("infos-desc").innerHTML = null;
+        document.getElementById("item-info").style.visibility = "hidden";
+        document.getElementById("infos-use").style.visibility = "hidden";
         let find = false;
         let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
         for (const k of keys) {
-            for (let i = 0; i < inventory[k].items.length; i++) {
-                const inventoryItemChild = inventory[k].items[i]
-                if (inventoryItemChild.element.getAttribute("item-id") == itemId) {
-                    inventoryItemChild.element.remove(); //(inventoryItemChild.element);
-                    inventory[k].items.splice(i, 1)
-                    ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
-                    if (k === "slot1") {
-                        ue.game.callevent("onEquipWeapon", JSON.stringify([1, 1, 0]));
-                    } else if (k === "slot2") {
-                        ue.game.callevent("onEquipWeapon", JSON.stringify([1, 2, 0]));
-                    } else if (k === "slot3") {
-                        ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
-                    }
-                    if (consume == true) {
-                        ue.game.callevent("OnUseItem", JSON.stringify([itemId]));
-                    } else {
-                        ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
-                    }
-                    find = true
-                    break
+            if(inventory[k].items[itemId] != null){
+                inventory[k].items[itemId].element.remove()
+                inventory[k].items[itemId] = null
+                if (k === "slot1") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([1, 1, 0]));
+                } else if (k === "slot2") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([1, 2, 0]));
+                } else if (k === "slot3") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
                 }
-            }
-            if (find === true) {
+                if (consume == true) {
+                    ue.game.callevent("OnUseItem", JSON.stringify([itemId, inventoryItemChild.element.getAttribute("id")]));
+                } else {
+                    ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
+                }
                 break
             }
         }

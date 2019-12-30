@@ -94,7 +94,7 @@
 
     var el = document.getElementById("close-info");
     el.addEventListener("click", () => {
-        document.getElementById("item-info").style.visibility = "hidden";
+        CloseInfoBox();
     }, false);
 
     class MouseTracker {
@@ -143,7 +143,6 @@
                     document.getElementById("infos-desc").innerHTML = evt.target.getAttribute("desc");
                     let idToRemove = itemId;
                     this.currentIdShow = idToRemove
-                        //document.getElementById("infos-drop").setAttribute("item-id", itemId);
 
                     if (evt.target.parentNode.id === "consommable") {
                         document.getElementById("infos-use").style.visibility = "visible";
@@ -161,6 +160,9 @@
 
             this.onClickDropItem = this.onClickDropItem.bind(this)
             document.querySelector('#infos-drop').addEventListener('click', this.onClickDropItem)
+
+            this.onClickUseItem = this.onClickUseItem.bind(this)
+            document.querySelector('#infos-use').addEventListener('click', this.onClickUseItem)
 
 
             document.addEventListener('mousemove', this.moveHandler);
@@ -181,6 +183,15 @@
         onClickDropItem() {
             if (this.currentIdShow !== null) {
                 inventory.removeItem(this.currentIdShow)
+                CloseInfoBox();
+                this.currentIdShow = null
+            }
+        }
+
+        onClickUseItem() {
+            if (this.currentIdShow !== null) {
+                inventory.removeItem(this.currentIdShow, true)
+                CloseInfoBox();
                 this.currentIdShow = null
             }
         }
@@ -190,6 +201,11 @@
             document.removeEventListener('mousedown', this.mouseDownHandler);
             document.removeEventListener('mouseup', this.mouseUpHandler);
         }
+    }
+
+    function CloseInfoBox(){
+        document.getElementById("item-info").style.visibility = "hidden";
+        document.getElementById("infos-use").style.visibility = "hidden";
     }
 
 
