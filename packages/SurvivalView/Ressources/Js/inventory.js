@@ -114,14 +114,6 @@ class Inventory {
                 this.dropIntoTarget = target;
                 onEquipWeapons(previousImage.id, 3, 999)
             }
-
-            if (target && target.id === 'parent-container' && this.dragging !== null && previousContainer.id != target.id && previousImageDiv.id == "weapons") {
-                this.dropIntoTarget = target;
-                if(previousContainer.id === "player-inventory-slot1"){
-                    onEquipWeapons(1, 1, 0);
-                    inventory.removeItem(previousImage.id);
-                }
-            }
         }
 
         function onEquipWeapons(id, slot, ammo) {
@@ -191,7 +183,7 @@ class Inventory {
         return this;
     }
 
-    removeItem(itemId, consume) { // TODO utiliser le consume dans le cas d'un aliment par exemple OnConsumeItem
+    removeItem(itemId, removefromhand, consume) { // TODO utiliser le consume dans le cas d'un aliment par exemple OnConsumeItem
         let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
         let find = false
         for (const k of keys) {
@@ -209,7 +201,6 @@ class Inventory {
                 break
             }
         }
-
         return this;
     }
 
