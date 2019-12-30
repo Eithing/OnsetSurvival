@@ -259,4 +259,14 @@ class Inventory {
         }
         return this;
     }
+
+    updateitem(idUnique, Count){
+        let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
+        for (const k of keys) {
+            if(inventory[k].items[idUnique] != null){
+                inventory[k].items[idUnique].label.innerText = Count
+                break
+            }
+        }
+    }
 }

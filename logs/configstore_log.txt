@@ -4214,6 +4214,7 @@
 [2019-12-30 23:03:09] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
 
 
+<<<<<<< HEAD
 [2019-12-30 23:06:28] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
 [2019-12-30 23:06:30] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
 
@@ -4224,3 +4225,23 @@
 
 [2019-12-30 23:09:46] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
 [2019-12-30 23:09:48] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+=======
+[2019-12-30 23:08:14] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-30 23:08:16] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-30 23:26:40] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-30 23:26:41] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-30 23:39:43] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-30 23:39:45] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-30 23:40:33] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-30 23:40:35] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 00:05:57] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 00:05:58] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+>>>>>>> develop
