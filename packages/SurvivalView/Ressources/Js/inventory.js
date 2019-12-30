@@ -180,6 +180,15 @@ class Inventory {
                             }
 
                             let Itemidh = this.elementToDrag.getAttribute("item-id")
+
+                            if (ElementId === "slot1") {
+                                ue.game.callevent("onEquipWeapon", JSON.stringify([1, 1, 0]));
+                            } else if (ElementId === "slot2") {
+                                ue.game.callevent("onEquipWeapon", JSON.stringify([1, 2, 0]));
+                            } else if (ElementId === "slot3") {
+                                ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
+                            }
+
                             inventory[dropId].items[Itemidh] = inventory[ElementId].items[Itemidh]
                             inventory[ElementId].items[Itemidh] = null
                             this.dropIntoTarget.appendChild(this.elementToDrag)
