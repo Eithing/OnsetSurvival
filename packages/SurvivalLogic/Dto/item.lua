@@ -10,7 +10,8 @@ function GetAllItems()
 						nom = mariadb_get_value_name(i, "nom"),
 						poids = mariadb_get_value_name(i, "poids"),
 						type = mariadb_get_value_name(i, "type"),
-						imageId = mariadb_get_value_name(i, "imageId")}
+						imageId = mariadb_get_value_name(i, "imageId"),
+						modelId = mariadb_get_value_name(i, "modelId")}
 	end
 	mariadb_delete_result(result)
 	return ItemData

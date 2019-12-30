@@ -14,6 +14,7 @@ function GetUserInventory(player, id)
 							itemCount = mariadb_get_value_name(i, "itemCount"),
 							compteId = mariadb_get_value_name(i, "compteId"),
 							itemId = mariadb_get_value_name(i, "itemId"),
+							modelId = mariadb_get_value_name(i, "modelId"),
 							idUnique = mariadb_get_value_name(i, "idUnique")}
 	end
 	mariadb_delete_result(result)
@@ -45,6 +46,7 @@ function GetLastUserItem(playerId)
 							itemCount = mariadb_get_value_name(i, "itemCount"),
 							compteId = mariadb_get_value_name(i, "compteId"),
 							itemId = mariadb_get_value_name(i, "itemId"),
+							modelId = mariadb_get_value_name(i, "modelId"),
 							idUnique = mariadb_get_value_name(i, "idUnique")}
 	end
 	mariadb_delete_result(result)

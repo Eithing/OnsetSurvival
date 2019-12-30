@@ -14,7 +14,6 @@ function DisplayCreateCharacter(player)
     end
     if button == 1 then
         CallRemoteEvent("InsertPlayer", firstName, lastName)
-        AddPlayerChat("Gender = "..gender)
     else
         --todo on cancel
     end

@@ -4,6 +4,7 @@ UserData = {}
 ItemData = {}
 RecoltData = {}
 VehicleData = {}
+ItemPickups = {}
 
 AddEvent("OnPackageStart", function()
     ItemData = SLogic.GetAllItems()

@@ -1,5 +1,5 @@
 class Item {
-    constructor(type, imageId, ammout) {
+    constructor(type, imageId, ammout, itemId) {
         const {
             spriteLignes,
             spriteColonnes,
@@ -31,6 +31,13 @@ class Item {
         this.label.innerHTML = ammout.toString(); //set ammout in label
         this.label.classList.add('item-label')
         this.element.appendChild(this.label);
+
+        this.element.addEventListener("contextmenu", function(){
+            if(type == "consommable"){
+                console.log("test")
+                inventory.removeItem(itemId, true);
+            }
+        });
 
         return this;
     }

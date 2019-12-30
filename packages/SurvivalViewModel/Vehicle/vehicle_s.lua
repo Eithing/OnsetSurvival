@@ -45,8 +45,7 @@ AddEvent("OnPlayerLeaveVehicle", function( player, vehicle, seat)
     end
 end)
 
-function AddFuel(player, count)
-	local vehicle = GetPlayerVehicle(player)
+function AddFuel(vehicle, count)
     if vehicle > 0 then
         if VehicleData[vehicle] == nil then
             VehicleData[vehicle] = {}
@@ -54,8 +53,11 @@ function AddFuel(player, count)
         else
             VehicleData[vehicle].fuel = VehicleData[vehicle].fuel + count
         end
+        local driver = GetVehicleDriver(vehicle)
+        if(driver)then
+            CallRemoteEvent(driver, "OnUpdateFuel", VehicleData[vehicle].fuel)
+        end
     end
-    CallRemoteEvent(player, "OnUpdateFuel", VehicleData[vehicle].fuel)
 
     --print(VehicleData[vehicle].fuel) Pour verifier l'essence
 end

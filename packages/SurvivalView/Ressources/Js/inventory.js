@@ -183,7 +183,7 @@ class Inventory {
         return this;
     }
 
-    removeItem(itemId, consume) { // TODO utiliser le consume dans le cas d'un aliment par exemple OnConsumeItem
+    removeItem(itemId, consume) {
         let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
         let find = false
         for (const k of keys) {
@@ -193,7 +193,12 @@ class Inventory {
                     inventoryItemChild.element.parentNode.removeChild(inventoryItemChild.element);
                     inventory[k].items.splice(i, 1)
                     find = true
-                    ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
+                    console.log("test2")
+                    if(consume == true){
+                        ue.game.callevent("OnUseItem", JSON.stringify([itemId]));
+                    } else {
+                        ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
+                    }
                     break
                 }
             }
