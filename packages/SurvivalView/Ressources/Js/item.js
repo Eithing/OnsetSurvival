@@ -1,7 +1,6 @@
 class Item {
-    constructor(type, imageId, ammout, itemId) {
+    constructor(type, imageId, ammout, name, desc) {
         const {
-            spriteLignes,
             spriteColonnes,
             space,
             url
@@ -9,12 +8,16 @@ class Item {
 
         //info sur l'item
         this.element = newEl('div');
+
         this.element.id = type.toString();
 
         this.element.classList.add('item');
 
         this.image = newEl('div');
         this.image.classList.add('item-image')
+
+        this.image.setAttribute("name", name);
+        this.image.setAttribute("desc", desc);
 
         this.image.style.backgroundImage = url;
         this.image.id = imageId;
@@ -31,14 +34,6 @@ class Item {
         this.label.innerHTML = ammout.toString(); //set ammout in label
         this.label.classList.add('item-label')
         this.element.appendChild(this.label);
-
-        this.element.addEventListener("contextmenu", function(){
-            if(type == "consommable"){
-                console.log("test")
-                inventory.removeItem(itemId, true);
-            }
-        });
-
         return this;
     }
 }

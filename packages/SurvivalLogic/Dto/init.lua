@@ -1,6 +1,6 @@
 Sql = nil
 
-AddEvent("OnPackageStart", function()
+AddEvent("OnPackageStart", function()  --DONT SHOW IN STREAM
 	local SQL_HOST = "91.121.178.28"
 	local SQL_PORT = 3306
 	local SQL_USER = "Eynwa"
