@@ -31,6 +31,11 @@ function AddItemInventory(item)
 end
 AddRemoteEvent("AddItemInventory",  AddItemInventory)
 
+function UpdateItemInventory(item)
+    SView.ExecuteJs("inventory", "inventory.updateitem('"..item.idUnique.."', '"..item.itemCount.."')")
+end
+AddRemoteEvent("UpdateItemInventory",  UpdateItemInventory)
+
 function IsGettingMaxWeight(IsAlreadyHeavy)
     SetIgnoreMoveInput(true)
     if IsAlreadyHeavy == false then

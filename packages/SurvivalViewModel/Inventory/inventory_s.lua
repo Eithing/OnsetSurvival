@@ -42,7 +42,7 @@ function PickupItem(player, itemid, Count)
 		if item.itemId == itemid then
 			SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, item.itemId, item.itemCount + Count)
 			item.itemCount = math.floor(item.itemCount + Count)
-			CallRemoteEvent(player, "ReloadInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
+			CallRemoteEvent(player, "UpdateItemInventory", item)
 			found = true
 			break
 		end
