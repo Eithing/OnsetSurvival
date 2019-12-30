@@ -1,5 +1,7 @@
+local maxWeight = 100
 AddRemoteEvent("RequestPopulateInventory", function(player)
 	CallRemoteEvent(player, "PopulateInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
+	UpdateWeight(player)
 end)
 
 AddRemoteEvent("equipWeapon", function(player, id, slot, ammo)
@@ -20,6 +22,7 @@ AddRemoteEvent("RemoveItem", function(player, idUnique)
 			break
 		end
 	end
+	UpdateWeight(player)
 end)
 
 AddEvent("OnPlayerPickupHit", function(player, Pickup)
@@ -48,6 +51,7 @@ function PickupItem(player, itemid, Count)
 		SLogic.SetUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, itemid, Count)
 		CreateItemDataByItemID(player)
 	end
+	UpdateWeight(player)
 end
 
 function UseItem(player, itemId, type)
@@ -60,13 +64,14 @@ function UseItem(player, itemId, type)
 			end
 		end
 	end
+	UpdateWeight()
 end
 AddRemoteEvent("OnUseItem", UseItem)
 
 function CreateItemDataByItemID(player)
 	table.insert(UserData[tostring(GetPlayerSteamId(player))].inventoryItems, SLogic.GetLastUserItem(UserData[tostring(GetPlayerSteamId(player))].id))
-	print(UserData[tostring(GetPlayerSteamId(player))].inventoryItems[#UserData[tostring(GetPlayerSteamId(player))].inventoryItems].nom)
 	CallRemoteEvent(player, "PopulateInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
+	UpdateWeight(player)
 end
 
 function GetItemDataByItemID(itemID)
@@ -79,3 +84,25 @@ function GetItemDataByItemID(itemID)
 	end
 	return found
 end
+
+function UpdateWeight(player, visibility)
+	local weight = 0
+	for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
+		weight = weight + (item.poids * item.itemCount)
+	end
+
+	if weight > maxWeight then
+		if UserData[tostring(GetPlayerSteamId(player))].inventoryItems.IsInMaxWeight ~= true then
+			CallRemoteEvent(player, "IsGettingMaxWeight", false)
+			UserData[tostring(GetPlayerSteamId(player))].inventoryItems.IsInMaxWeight = true
+		end
+		CallRemoteEvent(player, "IsGettingMaxWeight", true)
+	else
+		if visibility ~= true then
+			CallRemoteEvent(player, "IsGettingCorrectWeight")
+		end
+		UserData[tostring(GetPlayerSteamId(player))].inventoryItems.IsInMaxWeight = false
+	end
+end
+AddRemoteEvent("UpdateWeight", UpdateWeight)
+

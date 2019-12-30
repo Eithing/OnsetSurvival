@@ -5,7 +5,7 @@ AddEvent("OnKeyRelease", function(key)
             CallRemoteEvent("RequestPopulateInventory")
             isInventoryLoaded = true
         end
-        SView.SetInventoryVisibility()
+        CallRemoteEvent("UpdateWeight", SView.SetInventoryVisibility())
     end
 end)
 
@@ -20,14 +20,7 @@ AddRemoteEvent("PopulateInventory",  PopulateInventory)
 
 function ReloadInventory(inventory)
     SView.ExecuteJs("inventory", "inventory.removeAllItems()")
-    for i, itemInventory in ipairs(inventory) do
-        AddPlayerChat(itemInventory.nom)
-        AddPlayerChat(itemInventory.itemCount)
-        AddPlayerChat(itemInventory.imageId)
-        AddPlayerChat(itemInventory.type)
-        AddPlayerChat(itemInventory.idUnique)
-
-        
+    for i, itemInventory in ipairs(inventory) do        
         SView.ExecuteJs("inventory", "inventory.addItem('"..itemInventory.idUnique.."', 'container', new Item('"..itemInventory.type.."','"..itemInventory.imageId.."','"..itemInventory.itemCount.."','"..itemInventory.nom.."'))")
     end
 end
@@ -37,3 +30,16 @@ function AddItemInventory(item)
         SView.ExecuteJs("inventory", "inventory.addItem('"..item.idUnique.."', 'container', new Item('"..item.type.."','"..item.imageId.."','"..item.itemCount.."','"..item.nom.."'))")
 end
 AddRemoteEvent("AddItemInventory",  AddItemInventory)
+
+function IsGettingMaxWeight(IsAlreadyHeavy)
+    SetIgnoreMoveInput(true)
+    if IsAlreadyHeavy == false then
+        AddPlayerChat('<span color="#ff0000">Vous êtes trop lourd vous ne pouvez plus bouger !</>')
+    end
+end
+AddRemoteEvent("IsGettingMaxWeight",  IsGettingMaxWeight)
+
+function IsGettingCorrectWeight()
+    SetIgnoreMoveInput(false)
+end
+AddRemoteEvent("IsGettingCorrectWeight",  IsGettingCorrectWeight)

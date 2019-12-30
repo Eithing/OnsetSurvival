@@ -1,5 +1,5 @@
 AddEvent("OnKeyRelease", function(key)
     if key == "F3" then
-        SView.SetCraftVisibility()
+        CallRemoteEvent("UpdateWeight", SView.SetCraftVisibility())
     end
 end)

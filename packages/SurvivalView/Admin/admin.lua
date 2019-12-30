@@ -21,9 +21,11 @@ end)
 function SetAdminVisibility(visibility)
     if GetWebVisibility(adminHud) == WEB_VISIBLE then
         SetVisibility(adminHud, "Hidden")
+        return false
     else
         SetVisibility(adminHud, "VisibleMove")
         ExecuteJs(adminHud, "buildList('main')")
+        return true
     end
 end
 AddFunctionExport("SetAdminVisibility", SetAdminVisibility)

@@ -1,20 +1,21 @@
 local delayconsume = 1000 -- delai de la cosomation d'essence
-local consomevalue = 10 -- Nombre d'essence retirer a chaque verification
+local consomevalue = 1 -- Nombre d'essence retirer a chaque verification
+local defaultFuel = 1000
 
 AddEvent("OnPackageStart", function()
     print("Vehicle ServerSide Loaded")
     CreateTimer(function()
         for k,v in pairs(GetAllVehicles()) do
-            if GetVehicleEngineState(k) then
+            if GetVehicleEngineState(v) then
                 if VehicleData[k] == nil then
                     VehicleData[k] = {}
-                    VehicleData[k].fuel = 100
+                    VehicleData[k].fuel = defaultFuel
                 end
                 if(GetVehicleVelocity(v) < 0 or GetVehicleVelocity(v) > 0)then
                     ConsumeFuel(v, consomevalue)
                     --print(VehicleData[k].fuel) -- Print l'essence du véhicule
                 end
-                if VehicleData[k].fuel == 0 then
+                if VehicleData[k].fuel <= 0 then
                     StopVehicleEngine(k)
                     VehicleData[k].fuel = 0
                 end
@@ -27,7 +28,7 @@ end)
 AddEvent("OnPlayerEnterVehicle", function( player, vehicle, seat )
     if VehicleData[vehicle] == nil then
         VehicleData[vehicle] = {}
-        VehicleData[vehicle].fuel = 100
+        VehicleData[vehicle].fuel = defaultFuel
     end
     if seat == 1 then
         CallRemoteEvent(player, "OnUpdateVehicleHud")
@@ -48,7 +49,7 @@ function AddFuel(vehicle, count)
     if vehicle > 0 then
         if VehicleData[vehicle] == nil then
             VehicleData[vehicle] = {}
-            VehicleData[vehicle].fuel = 100
+            VehicleData[vehicle].fuel = defaultFuel
         else
             VehicleData[vehicle].fuel = VehicleData[vehicle].fuel + count
         end
@@ -66,7 +67,7 @@ function ConsumeFuel(vehicle, count)
     if vehicle > 0 then
         if VehicleData[vehicle] == nil then
             VehicleData[vehicle] = {}
-            VehicleData[vehicle].fuel = 100
+            VehicleData[vehicle].fuel = defaultFuel
         else
             VehicleData[vehicle].fuel = VehicleData[vehicle].fuel - count
         end
