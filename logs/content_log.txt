@@ -3115,3 +3115,12 @@
 
 
 [2019-12-30 23:03:07] Loaded 1 apps from install folder "G:\Projects\EYNWA\GitProjects\OnsetSurvival\steamapps\appmanifest_*.acf".
+
+
+[2019-12-30 23:06:28] Loaded 1 apps from install folder "G:\Projects\EYNWA\GitProjects\OnsetSurvival\steamapps\appmanifest_*.acf".
+
+
+[2019-12-30 23:08:49] Loaded 1 apps from install folder "G:\Projects\EYNWA\GitProjects\OnsetSurvival\steamapps\appmanifest_*.acf".
+
+
+[2019-12-30 23:09:46] Loaded 1 apps from install folder "G:\Projects\EYNWA\GitProjects\OnsetSurvival\steamapps\appmanifest_*.acf".

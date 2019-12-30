@@ -8,6 +8,10 @@ AddRemoteEvent("equipWeapon", function(player, id, slot, ammo)
 	SetPlayerWeapon(player, id, ammo, true, slot, false)
 end)
 
+AddEvent("OnPlayerSteamAuth", function(player)
+	UpdateWeight(player, false)
+end)
+
 AddRemoteEvent("RemoveItem", function(player, idUnique)
 	local x,y,z = GetPlayerLocation(player)
 	local newitem
