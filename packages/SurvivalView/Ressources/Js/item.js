@@ -1,7 +1,6 @@
 class Item {
     constructor(type, imageId, ammout, name, desc) {
         const {
-            spriteLignes,
             spriteColonnes,
             space,
             url
@@ -63,5 +62,11 @@ const CONFIG = {
         spriteColonnes: 5,
         space: 64,
         url: "url('./../../Ressources/images/Cars.jpg')"
+    },
+    'consommable': {
+        spriteLignes: 3,
+        spriteColonnes: 1,
+        space: 40,
+        url: "url('./../Ressources/images/consommable.png')"
     },
 }

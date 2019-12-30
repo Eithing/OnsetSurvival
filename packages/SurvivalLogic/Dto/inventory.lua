@@ -14,6 +14,7 @@ function GetUserInventory(player, id)
 							itemCount = mariadb_get_value_name(i, "itemCount"),
 							compteId = mariadb_get_value_name(i, "compteId"),
 							itemId = mariadb_get_value_name(i, "itemId"),
+							modelId = mariadb_get_value_name(i, "modelId"),
 							idUnique = mariadb_get_value_name(i, "idUnique")}
 	end
 	mariadb_delete_result(result)
@@ -25,7 +26,6 @@ function SetUserInventory(playerId, itemId, count)
 	local query = mariadb_prepare(Sql, "INSERT INTO compte_item(itemCount, compteId, itemId) VALUES ('?','?','?')", count, playerId, itemId)
 	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
-
 	return GetLastUserItem(playerId)
 end
 AddFunctionExport("SetUserInventory", SetUserInventory)
@@ -45,6 +45,7 @@ function GetLastUserItem(playerId)
 							itemCount = mariadb_get_value_name(i, "itemCount"),
 							compteId = mariadb_get_value_name(i, "compteId"),
 							itemId = mariadb_get_value_name(i, "itemId"),
+							modelId = mariadb_get_value_name(i, "modelId"),
 							idUnique = mariadb_get_value_name(i, "idUnique")}
 	end
 	mariadb_delete_result(result)

@@ -133,7 +133,7 @@
             this.mouseUpHandler = (evt) => {
                 clickSwap(evt.button, false);
                 if (evt.target.className == "parent-container") {
-                    inventory.removeItem(itemId);
+                    inventory.removeItem(itemId, false);
                 }
                 if (evt.target === downTarget && evt.target.className === "item-image") {
                     document.getElementById("item-info").style.visibility = "visible";

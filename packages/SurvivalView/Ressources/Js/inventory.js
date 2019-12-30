@@ -183,11 +183,12 @@ class Inventory {
         return this;
     }
 
-    removeItem(itemId, removefromhand, consume) { // TODO utiliser le consume dans le cas d'un aliment par exemple OnConsumeItem
+    removeItem(itemId, consume) {
         document.getElementById("infos-image").style.backgroundImage = null;
         document.getElementById("infos-image").style.backgroundPosition = null;
         document.getElementById("infos-title").innerHTML = null;
         document.getElementById("infos-desc").innerHTML = null;
+        let find = false;
         let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
         for (const k of keys) {
             for (let i = 0; i < inventory[k].items.length; i++) {
@@ -203,7 +204,17 @@ class Inventory {
                     } else if (k === "slot3") {
                         ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
                     }
+                    if (consume == true) {
+                        ue.game.callevent("OnUseItem", JSON.stringify([itemId]));
+                    } else {
+                        ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
+                    }
+                    find = true
+                    break
                 }
+            }
+            if (find === true) {
+                break
             }
         }
         return this;
