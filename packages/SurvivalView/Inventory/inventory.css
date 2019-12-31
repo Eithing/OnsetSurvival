@@ -1,8 +1,41 @@
+.inventory-container-Main {
+    width: 520px;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.inventory-container-sub {
+    background-color: rgba(0, 0, 0, 0.847);
+    width: 520px;
+    height: 180px;
+    border-radius: 2%;
+    margin-top: 4px;
+}
+
+.inventory-subcontainer {
+    background-color: rgba(240, 255, 240, 0.11);
+    width: 500px;
+    height: 130px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 2%;
+    align-content: flex-start;
+    margin-top: 10px;
+    bottom: -10px;
+    position: relative;
+}
+
 .inventory-container-Global {
     background-color: rgba(0, 0, 0, 0.847);
     width: 520px;
     height: 300px;
     border-radius: 2%;
+    margin-top: 4px;
 }
 
 .item-information {
@@ -125,11 +158,11 @@ p {
     border-radius: 15%;
     text-align: right;
     background-color: #ffffff3a;
-    text-shadow: 1px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
     position: absolute;
     bottom: 0;
     right: 0;
     max-width: 40px;
+    text-shadow: 1px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
 }
 
 .title_label {
@@ -137,6 +170,8 @@ p {
     color: #f0fff0;
     width: 100%;
     margin-left: 210px;
+    bottom: -5px;
+    position: relative;
 }
 
 .scroll {
