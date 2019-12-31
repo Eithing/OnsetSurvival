@@ -25,7 +25,7 @@ AddEvent("OnPackageStart", function()
 end)
 
 
-AddEvent("OnPlayerEnterVehicle", function( player, vehicle, seat )
+AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat )
     if VehicleData[vehicle] == nil then
         VehicleData[vehicle] = {}
         VehicleData[vehicle].fuel = defaultFuel
@@ -39,11 +39,18 @@ AddEvent("OnPlayerEnterVehicle", function( player, vehicle, seat )
     end
 end)
 
-AddEvent("OnPlayerLeaveVehicle", function( player, vehicle, seat)
+AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
+    local x,y,z = GetVehicleVelocity(vehicle)
     if seat == 1 then
         CallRemoteEvent(player, "OnUpdateVehicleHud")
         StopVehicleEngine(vehicle)
     end
+    print("X : "..x,"Y : "..y,"Z : "..z)
+    --if(speed > 0)then
+    --    print(GetPlayerHealth(player))
+    --    SetPlayerHealth(player, math.clamp(GetPlayerHealth(player) - 4 * speed, 0, 100))
+    --    print(GetPlayerHealth(player))
+    --end
 end)
 
 function AddFuel(vehicle, count)

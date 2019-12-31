@@ -113,6 +113,9 @@ function UseItem(player, idUnique)
 	if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
 		local vehicle, Dist = GetNearestVehicle(player, 200)
 		if(IsValidVehicle(vehicle))then
+			for i=1, 8 do
+				SetVehicleDamage(vehicle, i, 0)
+			end
 			SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle)+200, 0, 1500))
 		end
 	end
