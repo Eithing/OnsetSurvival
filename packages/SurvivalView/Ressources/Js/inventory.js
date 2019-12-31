@@ -235,6 +235,7 @@ class Inventory {
                     ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
                 }
                 if (consume == true) {
+                    console.log(inventory[k].items[itemId])
                     if(inventory[k].items[itemId].itemId != 30){
                         if(parseInt(inventory[k].items[itemId].label.innerText) > 1){
                             inventory[k].items[itemId].label.innerText = parseInt(inventory[k].items[itemId].label.innerText) - 1
