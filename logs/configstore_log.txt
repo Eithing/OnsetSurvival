@@ -4245,3 +4245,98 @@
 [2019-12-31 00:05:57] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
 [2019-12-31 00:05:58] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
 >>>>>>> develop
+
+
+[2019-12-31 00:09:46] Failed to parse store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+[2019-12-31 00:09:47] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+[2019-12-31 00:09:48] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 00:14:02] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 00:14:04] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 00:16:09] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 00:16:11] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 00:17:04] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 00:17:06] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+[2019-12-31 00:47:06] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 01:26:39] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 01:26:41] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 01:27:40] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 01:27:42] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 01:28:09] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 01:28:11] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 01:29:12] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 01:29:15] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 01:32:06] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 01:32:08] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 01:37:04] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 01:37:06] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:25:33] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:25:34] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:25:47] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:25:49] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:29:42] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:29:44] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:32:00] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:32:01] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:33:54] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:33:56] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:36:28] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:36:30] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:39:53] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:39:55] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:42:41] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:42:43] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:43:46] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:43:48] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:45:11] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:45:12] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:56:00] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:56:01] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+[2019-12-31 02:56:02] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:57:20] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:57:22] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 02:57:50] Loaded store 'install' from 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 02:57:52] Flushed store 'install' to 'G:\Projects\EYNWA\GitProjects\OnsetSurvival\config\config.vdf'

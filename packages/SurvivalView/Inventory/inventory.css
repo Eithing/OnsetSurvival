@@ -1,8 +1,40 @@
+.inventory-container-Main {
+    width: 520px;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+}
+
+.inventory-container-sub {
+    background-color: rgba(0, 0, 0, 0.847);
+    width: 520px;
+    height: 180px;
+    border-radius: 2%;
+    margin-top: 4px;
+}
+
+.inventory-subcontainer {
+    background-color: rgba(240, 255, 240, 0.11);
+    width: 500px;
+    height: 130px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 2%;
+    align-content: flex-start;
+    margin-top: 10px;
+    bottom: -10px;
+    position: relative;
+}
+
 .inventory-container-Global {
     background-color: rgba(0, 0, 0, 0.847);
     width: 520px;
     height: 300px;
     border-radius: 2%;
+    margin-top: 4px;
 }
 
 .item-information {
@@ -136,6 +168,8 @@ p {
     color: #f0fff0;
     width: 100%;
     margin-left: 210px;
+    bottom: -5px;
+    position: relative;
 }
 
 .scroll {
