@@ -11,6 +11,7 @@ AddEvent("OnPlayerSteamAuth",function (player)
 		UserData[tostring(GetPlayerSteamId(player))].eat = 100
 		UserData[tostring(GetPlayerSteamId(player))].drink = 100
 		UserData[tostring(GetPlayerSteamId(player))].health = 100
+		UserData[tostring(GetPlayerSteamId(player))].PickupS = false
 
 		-- On affiche le menu de créaction de personnage
 		CallRemoteEvent(player, "DisplayCreateCharacter")

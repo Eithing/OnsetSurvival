@@ -1,6 +1,6 @@
 local delayconsume = 1000 -- delai de la cosomation d'essence
 local consomevalue = 1 -- Nombre d'essence retirer a chaque verification
-local defaultFuel = 1000
+local defaultFuel = 100
 
 AddEvent("OnPackageStart", function()
     print("Vehicle ServerSide Loaded")
@@ -32,6 +32,7 @@ AddEvent("OnPlayerEnterVehicle", function( player, vehicle, seat )
     end
     if seat == 1 then
         CallRemoteEvent(player, "OnUpdateVehicleHud")
+        CallRemoteEvent(player, "OnUpdateFuel", VehicleData[vehicle].fuel)
         if VehicleData[vehicle].fuel == 0 then
             StopVehicleEngine(vehicle)
         end
@@ -51,7 +52,7 @@ function AddFuel(vehicle, count)
             VehicleData[vehicle] = {}
             VehicleData[vehicle].fuel = defaultFuel
         else
-            VehicleData[vehicle].fuel = VehicleData[vehicle].fuel + count
+            VehicleData[vehicle].fuel = math.clamp(VehicleData[vehicle].fuel + count, 0, 100)
         end
         local driver = GetVehicleDriver(vehicle)
         if(driver)then
@@ -69,7 +70,7 @@ function ConsumeFuel(vehicle, count)
             VehicleData[vehicle] = {}
             VehicleData[vehicle].fuel = defaultFuel
         else
-            VehicleData[vehicle].fuel = VehicleData[vehicle].fuel - count
+            VehicleData[vehicle].fuel = math.clamp(VehicleData[vehicle].fuel - count, 0, 100)
         end
     end
     local driver = GetVehicleDriver(vehicle)
@@ -82,20 +83,37 @@ end
 AddRemoteEvent("ConsumeFuel", ConsumeFuel)
 
 -- Commande DEV
-function addfuel_commands(player)
+function addfuel_commands(player, count)
     if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
-	    AddFuel(player, 10)
+	    AddFuel(GetPlayerVehicle(player), count)
         print("Admin : Essence ajoutée")
     end
 	return
 end
 AddCommand("addfuel", addfuel_commands)
 
-function consumefuel_commands(player)
+function consumefuel_commands(player, count)
     if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
-	    ConsumeFuel(GetPlayerVehicle(player), 10)
+	    ConsumeFuel(GetPlayerVehicle(player), count)
         print("Admin : Essence consumée")
     end
 	return
 end
 AddCommand("consumefuel", consumefuel_commands)
+
+-- Find Car --
+function GetNearestVehicle(player, nearest_dist)
+	local vehicles = GetStreamedVehiclesForPlayer(player)
+	local found = 0
+	local x, y, z = GetPlayerLocation(player)
+
+	for _,v in pairs(vehicles) do
+		local x2, y2, z2 = GetVehicleLocation(v)
+		local dist = GetDistance3D(x, y, z, x2, y2, z2)
+		if dist < nearest_dist then
+			nearest_dist = dist
+			found = v
+		end
+	end
+	return found, nearest_dist
+end

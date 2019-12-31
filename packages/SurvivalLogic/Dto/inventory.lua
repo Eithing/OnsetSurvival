@@ -53,15 +53,15 @@ function GetLastUserItem(playerId)
 end
 AddFunctionExport("GetLastUserItem", GetLastUserItem)
 
-function UpdateUserInventory(playerId, itemId, count)
-	local query = mariadb_prepare(Sql, "UPDATE compte_item SET itemCount = '?' WHERE compteId='?' and itemId='?'", count, playerId, itemId)
+function UpdateUserInventory(playerId, idUnique, count)
+	local query = mariadb_prepare(Sql, "UPDATE compte_item SET itemCount = '?' WHERE compteId='?' and idUnique='?'", count, playerId, idUnique)
 	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 end
 AddFunctionExport("UpdateUserInventory", UpdateUserInventory)
 
-function RemoveItemInventory(id)
-	local query = mariadb_prepare(Sql, "DELETE FROM compte_item WHERE idUnique = '?';", id)
+function RemoveItemInventory(idUnique)
+	local query = mariadb_prepare(Sql, "DELETE FROM compte_item WHERE idUnique = '?';", idUnique)
 	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 end

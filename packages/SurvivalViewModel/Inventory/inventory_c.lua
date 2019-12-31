@@ -21,13 +21,13 @@ AddRemoteEvent("PopulateInventory",  PopulateInventory)
 function ReloadInventory(inventory)
     SView.ExecuteJs("inventory", "inventory.removeAllItems()")
     for i, itemInventory in ipairs(inventory) do        
-        SView.ExecuteJs("inventory", "inventory.addItem('"..itemInventory.idUnique.."', 'container', new Item('"..itemInventory.type.."','"..itemInventory.imageId.."','"..itemInventory.itemCount.."','"..itemInventory.nom.."'))")
+        AddItemInventory(itemInventory)
     end
 end
 AddRemoteEvent("ReloadInventory",  ReloadInventory)
 
 function AddItemInventory(item)
-        SView.ExecuteJs("inventory", "inventory.addItem('"..item.idUnique.."', 'container', new Item('"..item.type.."','"..item.imageId.."','"..item.itemCount.."','"..item.nom.."'))")
+    SView.ExecuteJs("inventory", "inventory.addItem('"..item.idUnique.."', 'container', new Item('"..item.itemId.."','"..item.type.."','"..item.imageId.."','"..item.itemCount.."','"..item.nom.."'))")
 end
 AddRemoteEvent("AddItemInventory",  AddItemInventory)
 

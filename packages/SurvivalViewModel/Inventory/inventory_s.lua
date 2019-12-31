@@ -1,4 +1,4 @@
-local maxWeight = 100
+local maxWeight = 10000
 AddRemoteEvent("RequestPopulateInventory", function(player)
 	CallRemoteEvent(player, "PopulateInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
 	UpdateWeight(player)
@@ -12,84 +12,119 @@ AddEvent("OnPlayerSteamAuth", function(player)
 	UpdateWeight(player, false)
 end)
 
-AddRemoteEvent("RemoveItem", function(player, idUnique)
+-- Remove --
+function RemoveItem(player, idUnique, count)
+	for i, item in pairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
+		if item.idUnique == idUnique then
+			item.itemCount = math.clamp(math.floor(item.itemCount - count), 0, 99)
+			if(item.itemCount > 1)then
+				SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, idUnique, item.itemCount)
+				--CallRemoteEvent(player, "UpdateItemInventory", item) Inutile mais au cas ou, on garde
+			else
+				SLogic.RemoveItemInventory(idUnique)
+				UserData[tostring(GetPlayerSteamId(player))].inventoryItems[i] = nil
+			end
+			UpdateWeight(player)
+			return
+		end
+	end
+end
+AddRemoteEvent("RemoveItem", RemoveItem)
+
+function DropItem(player, idUnique)
 	local x,y,z = GetPlayerLocation(player)
 	local newitem
-
-	for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
+	for i, item in pairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
 		if item.idUnique == idUnique then
-			UserData[tostring(GetPlayerSteamId(player))].inventoryItems[i] = nil
 			local newitem = CreatePickup(item.modelId, x, y, z - 88)
 			ItemPickups[newitem] = {}
 			ItemPickups[newitem].item = item
 			SLogic.RemoveItemInventory(idUnique)
+			UserData[tostring(GetPlayerSteamId(player))].inventoryItems[i] = nil
+			UpdateWeight(player)
 			break
 		end
 	end
-	UpdateWeight(player)
-end)
+end
+AddRemoteEvent("DropItem", DropItem)
 
+-- Pickup --
 AddEvent("OnPlayerPickupHit", function(player, Pickup)
-	if(ItemPickups[Pickup] ~= nil) then
-		PickupItem(player, ItemPickups[Pickup].item.itemId, ItemPickups[Pickup].item.itemCount)
+	if(ItemPickups[Pickup] ~= nil)then
+		if UserData[tostring(GetPlayerSteamId(player))].PickupS == true then
+			return
+		end
+		if GetPlayerVehicle(player) ~= 0 then
+			return
+		end
+		PickupItem(player, ItemPickups[Pickup].item)
 		DestroyPickup(Pickup)
-		table.remove(ItemPickups, Pickup)
+		ItemPickups[Pickup] = nil
+		UserData[tostring(GetPlayerSteamId(player))].PickupS = true
+		Delay(2000, function()
+			UserData[tostring(GetPlayerSteamId(player))].PickupS = false
+		end)
 	end
 end)
 
-function PickupItem(player, itemid, Count)
-	if GetPlayerVehicle(player) ~= 0 then
-        return
-    end
+function PickupItem(player, Pitem)
 	local found = false
 	for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
-		if item.itemId == itemid then
-			SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, item.itemId, item.itemCount + Count)
-			item.itemCount = math.floor(item.itemCount + Count)
+		if item.itemId == Pitem.itemId then
+			item.itemCount = math.floor(item.itemCount + Pitem.itemCount)
+			SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, item.idUnique, item.itemCount)
 			CallRemoteEvent(player, "UpdateItemInventory", item)
 			found = true
-			break
+			return
 		end
 	end
 	if(found == false)then
-		SLogic.SetUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, itemid, Count)
-		CreateItemDataByItemID(player)
+		SLogic.SetUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, Pitem.itemId, Pitem.itemCount)
+		Delay(500, function()
+			Player_CreateNewItem(player)
+		end)
 	end
 	UpdateWeight(player)
 end
 
-function UseItem(player, itemId, type)
-	print(player, itemId, type)
-	if(item.type == "consommable")then
-		if(item.itemId == 29)then -- Bidon d'essence
-			local vehicle = GetNearestVehicle(player)
-			if(IsValidVehicle(vehicle))then
-				AddFuel(vehicle, count)
-			end
-		end
-	end
-	UpdateWeight()
-end
-AddRemoteEvent("OnUseItem", UseItem)
-
-function CreateItemDataByItemID(player)
+function Player_CreateNewItem(player)
 	local newItem = SLogic.GetLastUserItem(UserData[tostring(GetPlayerSteamId(player))].id)
 	table.insert(UserData[tostring(GetPlayerSteamId(player))].inventoryItems, newItem)
 	CallRemoteEvent(player, "AddItemInventory", newItem)
 	UpdateWeight(player)
 end
 
-function GetItemDataByItemID(itemID)
-	local found
-	for i, item in ipairs(ItemData) do
-		if item.id == itemID then
-			found = item
-			break
+-- Use --
+function UseItem(player, idUnique)
+	local UsingItem = GetItemByIdUnique(player, idUnique) -- Informatio dans l'inventaire
+	local UsingItemData = GetItemDataByItemID(UsingItem.itemId) -- Information sur l'item
+	if(tonumber(UsingItem.itemId) == 29)then -- Bidon d'essence
+		local vehicle, Dist = GetNearestVehicle(player, 200)
+		if(IsValidVehicle(vehicle))then
+			if GetPlayerVehicle(player) == vehicle then
+				return
+			end
+			AddFuel(vehicle, 40)
 		end
 	end
-	return found
-end
+	if(tonumber(UsingItem.itemId) == 30)then --Clé
+		print("Clé")
+	end
+	if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
+		local vehicle, Dist = GetNearestVehicle(player, 200)
+		if(IsValidVehicle(vehicle))then
+			SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle)+200, 0, 1500))
+		end
+	end
+	if(tonumber(UsingItem.itemId) ~= 30)then
+		RemoveItem(player, idUnique, 1)
+	end
 
+	UpdateWeight(player)
+end
+AddRemoteEvent("UseItem", UseItem)
+
+-- Weight --
 function UpdateWeight(player, visibility)
 	local weight = 0
 	for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
@@ -111,3 +146,25 @@ function UpdateWeight(player, visibility)
 end
 AddRemoteEvent("UpdateWeight", UpdateWeight)
 
+-- Fonctions --
+function GetItemByIdUnique(player, idUnique)
+	local found
+	for i, item in pairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
+		if item.idUnique == idUnique then
+			found = item
+			break
+		end
+	end
+	return found
+end
+
+function GetItemDataByItemID(itemID)
+	local found
+	for i, item in ipairs(ItemData) do
+		if item.id == itemID then
+			found = item
+			break
+		end
+	end
+	return found
+end

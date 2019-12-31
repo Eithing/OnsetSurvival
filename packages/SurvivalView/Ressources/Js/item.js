@@ -1,5 +1,5 @@
 class Item {
-    constructor(type, imageId, ammout, name, desc) {
+    constructor(itemid, type, imageId, ammout, name, desc) {
         const {
             spriteColonnes,
             space,
@@ -31,6 +31,7 @@ class Item {
         if (ammout > 999) {
             ammout = "999+"
         }
+        this.itemId = itemid
         this.label.innerHTML = ammout.toString(); //set ammout in label
         this.label.classList.add('item-label')
         this.element.appendChild(this.label);
