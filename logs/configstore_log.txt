@@ -4245,3 +4245,61 @@
 [2019-12-31 00:05:57] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
 [2019-12-31 00:05:58] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
 >>>>>>> develop
+
+
+[2019-12-31 19:58:52] Failed to parse store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+[2019-12-31 19:58:53] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+[2019-12-31 19:58:54] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+[2019-12-31 20:28:54] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 22:10:56] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 22:10:58] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 22:13:52] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 22:13:54] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+[2019-12-31 22:13:55] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2019-12-31 22:26:41] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2019-12-31 22:26:43] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 00:43:49] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 00:43:51] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 00:58:35] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 00:58:36] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 00:58:44] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 00:58:46] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+[2020-01-01 00:58:47] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 00:58:55] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 00:58:56] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+[2020-01-01 00:58:57] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 01:02:15] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 01:02:17] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 01:06:48] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 01:06:49] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+[2020-01-01 01:06:50] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 01:08:23] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 01:08:24] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 01:09:10] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 01:09:11] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'
+
+
+[2020-01-01 01:09:25] Loaded store 'install' from 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf' successfully
+[2020-01-01 01:09:27] Flushed store 'install' to 'D:\OnsetServer\steamapps\common\OnsetServer\OnsetSurvival\config\config.vdf'

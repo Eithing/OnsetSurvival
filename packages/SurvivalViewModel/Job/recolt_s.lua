@@ -7,10 +7,14 @@ AddRemoteEvent("recolt", function(player)
                 SetPlayerPropertyValue(player, "harvesting", true)
                 SetPlayerAnimation(player, "PICKUP_LOWER")
                 local count = 0
+                local RecoltItem = {}
+                RecoltItem.itemId = recoltPoint.itemId
+                RecoltItem.itemCount = recoltPoint.count
+                RecoltItem.var = {}
                 CreateCountTimer(function()
                     count = count + 1
                     if count == 3 then
-                        PickupItem(player, recoltPoint.itemId, 1)
+                        PickupItem(player, RecoltItem)
                         SetPlayerPropertyValue(player, "harvesting", false)
                     end
                     SetPlayerAnimation(player, "PICKUP_LOWER")

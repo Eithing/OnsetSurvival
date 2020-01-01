@@ -33,9 +33,10 @@ CreateTimer(function(UpdateVital)
 end, '30000' , UpdateVital)
 
 AddEvent("OnPlayerDeath", function(player, instigator)
-	UserData[tostring(GetPlayerSteamId(player))].eat = 100
-	UserData[tostring(GetPlayerSteamId(player))].drink = 100
-	UserData[tostring(GetPlayerSteamId(player))].health = 100
+	UserData[tostring(GetPlayerSteamId(player))].eat = p_defaulthunger
+	UserData[tostring(GetPlayerSteamId(player))].drink = p_defaultthirst
+	UserData[tostring(GetPlayerSteamId(player))].health = p_defaulthealth
+	UserData[tostring(GetPlayerSteamId(player))].argent = 0
 end)
 
 AddRemoteEvent("OnKeyPressed", function(player)

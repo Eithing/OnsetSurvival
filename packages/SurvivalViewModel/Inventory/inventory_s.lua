@@ -1,4 +1,3 @@
-local maxWeight = 10000
 AddRemoteEvent("RequestPopulateInventory", function(player)
 	CallRemoteEvent(player, "PopulateInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
 	UpdateWeight(player)
@@ -72,14 +71,17 @@ function PickupItem(player, Pitem)
 	for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
 		if item.itemId == Pitem.itemId then
 			item.itemCount = math.floor(item.itemCount + Pitem.itemCount)
-			SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, item.idUnique, item.itemCount)
+			for vi, ivar in pairs(Pitem.var) do
+				table.insert(item.var, ivar)
+			end
+			SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, item.idUnique, item.itemCount, item.var)
 			CallRemoteEvent(player, "UpdateItemInventory", item)
 			found = true
 			return
 		end
 	end
 	if(found == false)then
-		SLogic.SetUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, Pitem.itemId, Pitem.itemCount)
+		SLogic.SetUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, Pitem.itemId, Pitem.itemCount, Pitem.var)
 		Delay(500, function()
 			Player_CreateNewItem(player)
 		end)
@@ -134,7 +136,7 @@ function UpdateWeight(player, visibility)
 		weight = weight + (item.poids * item.itemCount)
 	end
 
-	if weight > maxWeight then
+	if weight > i_maxWeight then
 		if UserData[tostring(GetPlayerSteamId(player))].inventoryItems.IsInMaxWeight ~= true then
 			CallRemoteEvent(player, "IsGettingMaxWeight", false)
 			UserData[tostring(GetPlayerSteamId(player))].inventoryItems.IsInMaxWeight = true

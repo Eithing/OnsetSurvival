@@ -21,6 +21,7 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
 	end
 end)
 
+-- Position
 function pos_commands(player)
 	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
 		local x, y, z = GetPlayerLocation(player)
@@ -32,12 +33,15 @@ function pos_commands(player)
 end
 AddCommand("pos", pos_commands)
 
+-- Spawn un npc
 --[[ function cmd_commandsNPC(player)
 	local x, y, z = GetPlayerLocation(player)
 	CreateNPC(x+100, y, z, 84.066261291504)
 end
 AddCommand("npc", cmd_commandsNPC) ]]
 
+
+-- Teleportation --
 function spawn_commands(player) -- Commande pour pouvoir ce re TP au niveau de la station service (Pour le bug de passage sous la map)
 	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
 		SetPlayerLocation(player, 125773.000000, 80246.000000, 1645.000000)
@@ -76,3 +80,22 @@ function bring(player, player2)
 	end
 end
 AddRemoteEvent("bring", bring)
+
+-- Essence --
+function addfuel_commands(player, count)
+    if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+	    AddFuel(GetPlayerVehicle(player), count)
+        print("Admin : Essence ajoutée")
+    end
+	return
+end
+AddCommand("addfuel", addfuel_commands)
+
+function consumefuel_commands(player, count)
+    if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+	    ConsumeFuel(GetPlayerVehicle(player), count)
+        print("Admin : Essence consumée")
+    end
+	return
+end
+AddCommand("consumefuel", consumefuel_commands)

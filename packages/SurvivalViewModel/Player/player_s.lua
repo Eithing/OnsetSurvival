@@ -2,15 +2,16 @@ local x,y,z
 AddEvent("OnPlayerSteamAuth",function (player)
 	UserData[tostring(GetPlayerSteamId(player))] = SLogic.GetUserBySteamId(tostring(GetPlayerSteamId(player))) or nil
 	if UserData[tostring(GetPlayerSteamId(player))] == nil then
-		SetPlayerLocation(player, 125773.000000, 80246.000000, 1755.000000)
+		SetPlayerLocation(player, p_spawn)
 		print("new player "..GetPlayerSteamId(player))
 
 		-- On vien set les variables UserData du joueur
 		UserData[tostring(GetPlayerSteamId(player))] = {}
 		UserData[tostring(GetPlayerSteamId(player))].inventoryItems = {}
-		UserData[tostring(GetPlayerSteamId(player))].eat = 100
-		UserData[tostring(GetPlayerSteamId(player))].drink = 100
-		UserData[tostring(GetPlayerSteamId(player))].health = 100
+		UserData[tostring(GetPlayerSteamId(player))].eat = p_defaulthunger
+		UserData[tostring(GetPlayerSteamId(player))].drink = p_defaultthirst
+		UserData[tostring(GetPlayerSteamId(player))].health = p_defaulthealth
+		UserData[tostring(GetPlayerSteamId(player))].argent = p_defaultargent
 		UserData[tostring(GetPlayerSteamId(player))].PickupS = false
 
 		-- On affiche le menu de créaction de personnage
@@ -24,7 +25,7 @@ AddEvent("OnPlayerSteamAuth",function (player)
 end)
 
 AddEvent("OnPlayerDeath", function(player, instigator)
-	SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1755.000000, 90.0)
+	SetPlayerSpawnLocation(player, p_spawn, 90.0)
 end)
 
 AddEvent("OnPlayerQuit", function(player)

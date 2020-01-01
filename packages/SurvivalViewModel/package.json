@@ -2,8 +2,8 @@
     "author": "Eithing",
     "version": "1.0",
     "server_scripts": [
+        "config.lua",
         "dataExchanger_s.lua",
-        "json.lua",
         "Player/player_s.lua",
         "Hud/vitalIndicator_s.lua",
         "Admin/admin_s.lua",
