@@ -118,6 +118,34 @@ class Inventory {
                 this.dropIntoTarget = target;
                 ue.game.callevent("onEquipWeapon", JSON.stringify([previousImage.id, 3, 999]));
             }
+
+            if (target && target.parentNode.parentNode.id === 'player-inventory-slot1' && this.dragging !== null && previousContainer.id != target.parentNode.parentNode.id && previousImageDiv.id == "weapons") {
+                this.dropIntoTarget = target.parentNode;
+                ue.game.callevent("onEquipWeapon", JSON.stringify([previousImage.id, 1, 999]));
+                if (previousContainer.id === "player-inventory-slot2") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([target.parentNode.firstElementChild.id, 2, 999]));
+                } else if (previousContainer.id === "player-inventory-slot3") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([target.parentNode.firstElementChild.id, 3, 999]));
+                }
+            }
+            if (target && target.parentNode.parentNode.id === 'player-inventory-slot2' && this.dragging !== null && previousContainer.id != target.parentNode.parentNode.id && previousImageDiv.id == "weapons") {
+                this.dropIntoTarget = target.parentNode;
+                ue.game.callevent("onEquipWeapon", JSON.stringify([previousImage.id, 2, 999]));
+                if (previousContainer.id === "player-inventory-slot1") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([target.parentNode.firstElementChild.id, 1, 999]));
+                } else if (previousContainer.id === "player-inventory-slot3") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([target.parentNode.firstElementChild.id, 3, 999]));
+                }
+            }
+            if (target && target.parentNode.parentNode.id === 'player-inventory-slot3' && this.dragging !== null && previousContainer.id != target.parentNode.parentNode.id && previousImageDiv.id == "weapons") {
+                this.dropIntoTarget = target.parentNode;
+                ue.game.callevent("onEquipWeapon", JSON.stringify([previousImage.id, 3, 999]));
+                if (previousContainer.id === "player-inventory-slot1") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([target.parentNode.firstElementChild.id, 1, 999]));
+                } else if (previousContainer.id === "player-inventory-slot2") {
+                    ue.game.callevent("onEquipWeapon", JSON.stringify([target.parentNode.firstElementChild.id, 2, 999]));
+                }
+            }
         }
 
         this.stuff1.element.addEventListener('mousedown', this.mouseDownHandler);
