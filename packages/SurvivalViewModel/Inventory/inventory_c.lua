@@ -1,30 +1,28 @@
 local isInventoryLoaded
-AddEvent("OnKeyRelease", function(key)
-    if key == "F1" then
-        if isInventoryLoaded == false then
-            CallRemoteEvent("RequestPopulateInventory")
-            isInventoryLoaded = true
-        end
-        CallRemoteEvent("UpdateWeight", SView.SetInventoryVisibility())
-    end
-end)
 
 AddEvent("OnPackageStart", function()
     isInventoryLoaded = false
 end)
 
-function PopulateInventory(inventory)
-    ReloadInventory(inventory)
-end
-AddRemoteEvent("PopulateInventory",  PopulateInventory)
+AddEvent("OnKeyRelease", function(key)
+    if key == "F1" then
+        if(GetPlayerPropertyValue(GetPlayerId(), "PlayerIsCharged") == true)then
+            if isInventoryLoaded == false then
+                CallRemoteEvent("RequestPopulateInventory")
+                isInventoryLoaded = true
+            end
+            CallRemoteEvent("UpdateWeight", SView.SetInventoryVisibility())
+        end
+    end
+end)
 
-function ReloadInventory(inventory)
+AddRemoteEvent("ReloadInventory", function(inventory)
     SView.ExecuteJs("inventory", "inventory.removeAllItems()")
-    for i, itemInventory in ipairs(inventory) do        
+    for i, itemInventory in pairs(inventory) do 
         AddItemInventory(itemInventory)
     end
-end
-AddRemoteEvent("ReloadInventory",  ReloadInventory)
+end)
+
 
 function AddItemInventory(item)
     SView.ExecuteJs("inventory", "inventory.addItem('"..item.idUnique.."', 'container', new Item('"..item.itemId.."','"..item.type.."','"..item.imageId.."','"..item.itemCount.."','"..item.nom.."'))")

@@ -3,7 +3,8 @@ p_defaulthealth = 100 -- Vie par défaut
 p_defaultargent = 0 -- Argent par défaut lors de la premier connexion
 p_defaulthunger = 100 -- Faim par défaut lors de la premier connexion
 p_defaultthirst = 100 -- Soif par défaut lors de la premier connexion
-p_spawn = 125773.000000, 80246.000000, 1755.000000 -- Position du spawn
+p_defaultclothing = 7 -- Vétement par défaut lors de la premier connexion
+p_spawn = {x=125773.000000, y=80246.000000, z=1755.000000+800} -- Position du spawn
 
 -- INVENTORY CONFIG --
 i_maxWeight = 10000

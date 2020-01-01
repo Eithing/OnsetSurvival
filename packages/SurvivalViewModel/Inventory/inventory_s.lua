@@ -1,6 +1,9 @@
 AddRemoteEvent("RequestPopulateInventory", function(player)
-	CallRemoteEvent(player, "PopulateInventory", UserData[tostring(GetPlayerSteamId(player))].inventoryItems)
-	UpdateWeight(player)
+	print("RequestPopulateInventory")
+	if(UserData[tostring(GetPlayerSteamId(player))].inventoryItems ~= nil)then
+		local RequestInventory = UserData[tostring(GetPlayerSteamId(player))].inventoryItems
+		print("ReloadInventory", CallRemoteEvent(player, "ReloadInventory", RequestInventory))
+	end
 end)
 
 AddRemoteEvent("equipWeapon", function(player, id, slot, ammo)
@@ -137,16 +140,16 @@ function UpdateWeight(player, visibility)
 	end
 
 	if weight > i_maxWeight then
-		if UserData[tostring(GetPlayerSteamId(player))].inventoryItems.IsInMaxWeight ~= true then
+		if UserData[tostring(GetPlayerSteamId(player))].IsInMaxWeight ~= true then
 			CallRemoteEvent(player, "IsGettingMaxWeight", false)
-			UserData[tostring(GetPlayerSteamId(player))].inventoryItems.IsInMaxWeight = true
+			UserData[tostring(GetPlayerSteamId(player))].IsInMaxWeight = true
 		end
 		CallRemoteEvent(player, "IsGettingMaxWeight", true)
 	else
 		if visibility ~= true then
 			CallRemoteEvent(player, "IsGettingCorrectWeight")
 		end
-		UserData[tostring(GetPlayerSteamId(player))].inventoryItems.IsInMaxWeight = false
+		UserData[tostring(GetPlayerSteamId(player))].IsInMaxWeight = false
 	end
 end
 AddRemoteEvent("UpdateWeight", UpdateWeight)

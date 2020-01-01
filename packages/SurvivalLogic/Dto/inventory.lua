@@ -15,7 +15,7 @@ function GetUserInventory(player, id)
 							compteId = mariadb_get_value_name(i, "compteId"),
 							itemId = mariadb_get_value_name(i, "itemId"),
 							modelId = mariadb_get_value_name(i, "modelId"),
-							var = json_decode(mariadb_get_value_name(i, "var")),
+							var = mariadb_get_value_name(i, "var"),
 							idUnique = mariadb_get_value_name(i, "idUnique")}
 	end
 	mariadb_delete_result(result)
@@ -47,7 +47,7 @@ function GetLastUserItem(playerId)
 							compteId = mariadb_get_value_name(i, "compteId"),
 							itemId = mariadb_get_value_name(i, "itemId"),
 							modelId = mariadb_get_value_name(i, "modelId"),
-							var = json_decode(mariadb_get_value_name(i, "var")),
+							var = mariadb_get_value_name(i, "var"),
 							idUnique = mariadb_get_value_name(i, "idUnique")}
 	end
 	mariadb_delete_result(result)
@@ -68,3 +68,8 @@ function RemoveItemInventory(idUnique)
 	mariadb_delete_result(result)
 end
 AddFunctionExport("RemoveItemInventory", RemoveItemInventory)
+
+function JsonDecode(var)
+	return json_decode(var)
+end
+AddFunctionExport("JsonDecode", JsonDecode)

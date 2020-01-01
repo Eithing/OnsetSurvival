@@ -14,6 +14,7 @@ function GetAllUsers()
 						positionX = mariadb_get_value_name(i, "positionX"),
 						positionY = mariadb_get_value_name(i, "positionY"),
 						positionZ = mariadb_get_value_name(i, "positionZ"),
+						clothing = mariadb_get_value_name(i, "clothing"),
 						argent = mariadb_get_value_name(i, "argent"),
 						eat = mariadb_get_value_name(i, "eat"),
 						drink = mariadb_get_value_name(i, "drink"),
@@ -39,6 +40,7 @@ function GetUserBySteamId(steamId)
 						positionX = mariadb_get_value_name(i, "positionX"),
 						positionY = mariadb_get_value_name(i, "positionY"),
 						positionZ = mariadb_get_value_name(i, "positionZ"),
+						clothing = mariadb_get_value_name(i, "clothing"),
 						argent = mariadb_get_value_name(i, "argent"),
 						eat = mariadb_get_value_name(i, "eat"),
 						drink = mariadb_get_value_name(i, "drink"),
@@ -50,20 +52,18 @@ end
 AddFunctionExport("GetUserBySteamId", GetUserBySteamId)
 
 function UpdateUser(user)
-	-- print pour verifier toutes les informations
-	print(user.nom, user.prenom, user.admin, user.SteamId, user.positionX, user.positionY, user.positionZ, user.argent, user.eat, user.drink, user.health)
-	local query = mariadb_prepare(Sql, "UPDATE comptes SET nom='?',prenom='?',admin='?',positionX='?',positionY='?',positionZ='?',argent='?',eat='?',drink='?',health='?' WHERE SteamId = '?'",
-											user.nom, user.prenom, user.admin, user.positionX, user.positionY, user.positionZ, user.argent, user.eat, user.drink, user.health, user.SteamId)
-	mariadb_query(Sql, query)
+	print(user.nom, user.prenom, user.admin, user.positionX, user.positionY, user.positionZ, user.clothing, user.argent, user.eat, user.drink, user.health, user.SteamId)
+	local query = mariadb_prepare(Sql, "UPDATE comptes SET nom='?',prenom='?',admin='?',positionX='?',positionY='?',positionZ='?',clothing='?',argent='?',eat='?',drink='?',health='?' WHERE SteamId = '?'",
+											user.nom, user.prenom, user.admin, user.positionX, user.positionY, user.positionZ, user.clothing, user.argent, user.eat, user.drink, user.health, user.SteamId)
+	local result = mariadb_query(Sql, query)
+	mariadb_delete_result(result)
 end
 AddFunctionExport("UpdateUser", UpdateUser)
 
 function InsertNewUser(user)
-	-- print pour verifier toutes les informations
-	print(user.nom, user.prenom, 0, user.SteamId, user.positionX, user.positionY, user.positionZ, user.eat, user.drink, user.health)
-	local query = mariadb_prepare(Sql, "INSERT INTO comptes(nom, prenom, admin, SteamId, positionX, positionY, positionZ, eat, drink, health) VALUES ('?','?','?','?','?','?','?','?','?','?')",
-											user.nom, user.prenom, 0, user.SteamId, user.positionX, user.positionY, user.positionZ, user.eat, user.drink, user.health)
-	local result = mariadb_await_query(Sql, query)
+	local query = mariadb_prepare(Sql, "INSERT INTO comptes(nom, prenom, clothing, argent, SteamId, positionX, positionY, positionZ, eat, drink, health) VALUES ('?','?','?','?','?','?','?','?','?','?','?')",
+											user.nom, user.prenom, user.clothing, user.argent, user.SteamId, user.positionX, user.positionY, user.positionZ, user.eat, user.drink, user.health)
+	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 end
 AddFunctionExport("InsertNewUser", InsertNewUser)
