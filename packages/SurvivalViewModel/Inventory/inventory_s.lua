@@ -1,8 +1,7 @@
 AddRemoteEvent("RequestPopulateInventory", function(player)
-	print("RequestPopulateInventory")
 	if(UserData[tostring(GetPlayerSteamId(player))].inventoryItems ~= nil)then
 		local RequestInventory = UserData[tostring(GetPlayerSteamId(player))].inventoryItems
-		print("ReloadInventory", CallRemoteEvent(player, "ReloadInventory", RequestInventory))
+		CallRemoteEvent(player, "ReloadInventory", RequestInventory)
 	end
 end)
 
@@ -19,8 +18,10 @@ function RemoveItem(player, idUnique, count)
 	for i, item in pairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
 		if item.idUnique == idUnique then
 			item.itemCount = math.clamp(math.floor(item.itemCount - count), 0, 99)
-			if(item.itemCount > 1)then
-				SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, idUnique, item.itemCount)
+			if(item.itemCount >= 1)then
+				item.var = SLogic.JsonDecode(item.var)
+				SLogic.UpdateUserInventory(UserData[tostring(GetPlayerSteamId(player))].id, idUnique, item.itemCount, item.var)
+				item.var = SLogic.JsonEncode(item.var)
 				--CallRemoteEvent(player, "UpdateItemInventory", item) Inutile mais au cas ou, on garde
 			else
 				SLogic.RemoveItemInventory(idUnique)
@@ -71,9 +72,11 @@ end)
 
 function PickupItem(player, Pitem)
 	local found = false
+	Pitem.var = SLogic.JsonDecode(Pitem.var)
 	for i, item in ipairs(UserData[tostring(GetPlayerSteamId(player))].inventoryItems) do
 		if item.itemId == Pitem.itemId then
 			item.itemCount = math.floor(item.itemCount + Pitem.itemCount)
+			item.var = SLogic.JsonDecode(item.var)
 			for vi, ivar in pairs(Pitem.var) do
 				table.insert(item.var, ivar)
 			end

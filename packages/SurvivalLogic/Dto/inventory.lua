@@ -73,3 +73,8 @@ function JsonDecode(var)
 	return json_decode(var)
 end
 AddFunctionExport("JsonDecode", JsonDecode)
+
+function JsonEncode(var)
+	return json_encode(var)
+end
+AddFunctionExport("JsonEncode", JsonEncode)

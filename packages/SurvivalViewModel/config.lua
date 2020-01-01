@@ -13,3 +13,15 @@ i_maxWeight = 10000
 v_delayconsume = 1000 -- delai de la cosomation d'essence
 v_consomevalue = 1 -- Nombre d'essence retirer a chaque verification
 v_defaultFuel = 100 -- Essence par défaut d'un véhicule
+
+-- Fonction Global --
+
+function math.clamp(num, min, max)
+	if num < min then
+		num = min
+	elseif num > max then
+		num = max    
+	end
+	
+	return num
+end

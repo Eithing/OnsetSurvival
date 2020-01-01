@@ -10,7 +10,7 @@ AddRemoteEvent("recolt", function(player)
                 local RecoltItem = {}
                 RecoltItem.itemId = recoltPoint.itemId
                 RecoltItem.itemCount = recoltPoint.count
-                RecoltItem.var = {}
+                RecoltItem.var = SLogic.JsonEncode({})
                 CreateCountTimer(function()
                     count = count + 1
                     if count == 3 then
