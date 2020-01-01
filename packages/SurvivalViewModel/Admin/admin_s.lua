@@ -17,6 +17,7 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
 			VehicleData[vehicle] = {}
 			VehicleData[vehicle].fuel = 100
 			SetVehicleHealth(vehicle, 1500)
+			SetVehicleRespawnParams(vehicle, false)
 		end
 	end
 end)
