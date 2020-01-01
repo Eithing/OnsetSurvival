@@ -1,0 +1,70 @@
+body {
+    margin:0;
+    padding: 0;
+}
+
+.parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+.displaycharacter {
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 500px;
+    height: 605px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+}
+
+.displaycharacter hr {
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.displaycharacter p {
+    text-align: left;
+    margin-left: 12px;
+}
+
+.displaycharacter input, select, button{
+    transition-duration: 0.2s;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 475px;
+    margin-left: 12px;
+    margin-right: 12px;
+    padding: 7px;
+    color: white;
+    text-decoration: none;
+    outline: none;
+}
+
+.displaycharacter button:hover{
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid white;
+}
+
+.displaycharacter .selectclothing{
+    margin-left: 205px;
+}
+
+.displaycharacter .selectclothing #clothing {
+    background: url('./../Ressources/images/Cloth.jpg') no-repeat;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    transform:scale(2);
+}
+
+button:active {
+    transform: translateY(4px);
+    border: 1px solid black;
+}
+
+button:hover, select:hover{
+    cursor: pointer;
+}

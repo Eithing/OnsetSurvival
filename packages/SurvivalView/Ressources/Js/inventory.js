@@ -217,19 +217,16 @@ class Inventory {
         return this;
     }
 
-    removeItem(itemId, consume) {
+    removeItem(itemId, consume, drop) {
         document.getElementById("infos-image").style.backgroundImage = null;
         document.getElementById("infos-image").style.backgroundPosition = null;
         document.getElementById("infos-title").innerHTML = null;
         document.getElementById("infos-desc").innerHTML = null;
         document.getElementById("item-info").style.visibility = "hidden";
         document.getElementById("infos-use").style.visibility = "hidden";
-        let find = false;
         let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
         for (const k of keys) {
             if(inventory[k].items[itemId] != null){
-                inventory[k].items[itemId].element.remove()
-                inventory[k].items[itemId] = null
                 if (k === "slot1") {
                     ue.game.callevent("onEquipWeapon", JSON.stringify([1, 1, 0]));
                 } else if (k === "slot2") {
@@ -238,9 +235,24 @@ class Inventory {
                     ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
                 }
                 if (consume == true) {
-                    ue.game.callevent("OnUseItem", JSON.stringify([itemId, inventoryItemChild.element.getAttribute("id")]));
+                    console.log(inventory[k].items[itemId])
+                    if(inventory[k].items[itemId].itemId != 30){
+                        if(parseInt(inventory[k].items[itemId].label.innerText) > 1){
+                            inventory[k].items[itemId].label.innerText = parseInt(inventory[k].items[itemId].label.innerText) - 1
+                        } else {
+                            inventory[k].items[itemId].element.remove()
+                            inventory[k].items[itemId] = null
+                        }
+                    }
+                    ue.game.callevent("OnUseItem", JSON.stringify([itemId]));
                 } else {
-                    ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
+                    if(drop == true){
+                        ue.game.callevent("OnDropItem", JSON.stringify([itemId]));
+                    } else {
+                        ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
+                    }
+                    inventory[k].items[itemId].element.remove()
+                    inventory[k].items[itemId] = null
                 }
                 break
             }
@@ -251,10 +263,7 @@ class Inventory {
     removeAllItems() {
         let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
         for (const k of keys) {
-            for (let i = 0; i < inventory[k].items.length; i++) {
-                const inventoryItemChild = inventory[k].items[i]
-                inventoryItemChild.element.parentNode.removeChild(inventoryItemChild.element);
-            }
+            document.getElementById("player-inventory-"+k).innerHTML = ""
             inventory[k].items = []
         }
         return this;

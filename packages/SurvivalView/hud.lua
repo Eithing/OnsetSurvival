@@ -8,6 +8,7 @@ AddEvent("OnPackageStart", function()
     inventoryHud = InstanciateHud("http://asset/SurvivalView/Inventory/inventory.html", "Hidden")
     CraftHud = InstanciateHud("http://asset/SurvivalView/Craft/craft.html", "Hidden")
     VehicleHud = InstanciateHud("http://asset/SurvivalView/Vehicle/vehicle.html", "Hidden")
+    characterHud = InstanciateHud("http://asset/SurvivalView/Character/character.html", "Hidden")
 end)
 
 AddEvent("OnPackageStop", function() 
@@ -16,6 +17,7 @@ AddEvent("OnPackageStop", function()
 	DestroyWebUI(inventoryHud)
     DestroyWebUI(CraftHud)
     DestroyWebUI(VehicleHud)
+    DestroyWebUI(characterHud)
 end)
 
 function ExecuteJs(hud, js)
@@ -27,6 +29,8 @@ function ExecuteJs(hud, js)
         ExecuteWebJS(mainHud, js)
     elseif hud == "vehicle" then
         ExecuteWebJS(VehicleHud, js)
+    elseif hud == "character" then
+        ExecuteWebJS(characterHud, js)
     else
         ExecuteWebJS(hud, js)
     end

@@ -155,7 +155,7 @@
             this.mouseUpHandler = (evt) => {
                 clickSwap(evt.button, false);
                 if (evt.target.className == "parent-container") {
-                    inventory.removeItem(itemId, false);
+                    inventory.removeItem(itemId, false, true);
                 }
                 if (evt.target === downTarget && evt.target.className === "item-image") {
                     document.getElementById("item-info").style.visibility = "visible";
@@ -204,7 +204,7 @@
 
         onClickDropItem() {
             if (this.currentIdShow !== null) {
-                inventory.removeItem(this.currentIdShow)
+                inventory.removeItem(this.currentIdShow, false, true)
                 CloseInfoBox();
                 this.currentIdShow = null
             }
@@ -212,7 +212,7 @@
 
         onClickUseItem() {
             if (this.currentIdShow !== null) {
-                inventory.removeItem(this.currentIdShow, true)
+                inventory.removeItem(this.currentIdShow, true, false)
                 CloseInfoBox();
                 this.currentIdShow = null
             }

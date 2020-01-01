@@ -13,6 +13,14 @@ AddEvent("onEquipWeapon", function(id, slot, ammo)
     SViewModel.ExecuteFromServer("equipWeapon", id, slot, ammo)
 end)
 
+AddEvent("OnUseItem", function(idUnique)
+    SViewModel.ExecuteFromServer("UseItem", idUnique)
+end)
+
 AddEvent("OnRemoveItem", function(idUnique)
     SViewModel.ExecuteFromServer("RemoveItem", idUnique)
+end)
+
+AddEvent("OnDropItem", function(idUnique)
+    SViewModel.ExecuteFromServer("DropItem", idUnique)
 end)

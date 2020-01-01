@@ -15,6 +15,7 @@ function GetUserInventory(player, id)
 							compteId = mariadb_get_value_name(i, "compteId"),
 							itemId = mariadb_get_value_name(i, "itemId"),
 							modelId = mariadb_get_value_name(i, "modelId"),
+							var = mariadb_get_value_name(i, "var"),
 							idUnique = mariadb_get_value_name(i, "idUnique")}
 	end
 	mariadb_delete_result(result)
@@ -22,8 +23,8 @@ function GetUserInventory(player, id)
 end
 AddFunctionExport("GetUserInventory", GetUserInventory)
 
-function SetUserInventory(playerId, itemId, count)
-	local query = mariadb_prepare(Sql, "INSERT INTO compte_item(itemCount, compteId, itemId) VALUES ('?','?','?')", count, playerId, itemId)
+function SetUserInventory(playerId, itemId, count, var)
+	local query = mariadb_prepare(Sql, "INSERT INTO compte_item(itemCount, compteId, itemId, var) VALUES ('?','?','?','?')", count, playerId, itemId, json_encode(var))
 	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 	return GetLastUserItem(playerId)
@@ -46,6 +47,7 @@ function GetLastUserItem(playerId)
 							compteId = mariadb_get_value_name(i, "compteId"),
 							itemId = mariadb_get_value_name(i, "itemId"),
 							modelId = mariadb_get_value_name(i, "modelId"),
+							var = mariadb_get_value_name(i, "var"),
 							idUnique = mariadb_get_value_name(i, "idUnique")}
 	end
 	mariadb_delete_result(result)
@@ -53,16 +55,26 @@ function GetLastUserItem(playerId)
 end
 AddFunctionExport("GetLastUserItem", GetLastUserItem)
 
-function UpdateUserInventory(playerId, itemId, count)
-	local query = mariadb_prepare(Sql, "UPDATE compte_item SET itemCount = '?' WHERE compteId='?' and itemId='?'", count, playerId, itemId)
+function UpdateUserInventory(playerId, idUnique, count, var)
+	local query = mariadb_prepare(Sql, "UPDATE compte_item SET itemCount = '?', var= '?' WHERE compteId='?' and idUnique='?'", count, json_encode(var), playerId, idUnique)
 	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 end
 AddFunctionExport("UpdateUserInventory", UpdateUserInventory)
 
-function RemoveItemInventory(id)
-	local query = mariadb_prepare(Sql, "DELETE FROM compte_item WHERE idUnique = '?';", id)
+function RemoveItemInventory(idUnique)
+	local query = mariadb_prepare(Sql, "DELETE FROM compte_item WHERE idUnique = '?';", idUnique)
 	local result = mariadb_query(Sql, query)
 	mariadb_delete_result(result)
 end
 AddFunctionExport("RemoveItemInventory", RemoveItemInventory)
+
+function JsonDecode(var)
+	return json_decode(var)
+end
+AddFunctionExport("JsonDecode", JsonDecode)
+
+function JsonEncode(var)
+	return json_encode(var)
+end
+AddFunctionExport("JsonEncode", JsonEncode)

@@ -11,6 +11,7 @@ function GetAllRecolts()
 						radius = mariadb_get_value_name(i, "radius"),
 						nom = mariadb_get_value_name(i, "nom"),
 						itemId = mariadb_get_value_name(i, "itemId"),
+						count = mariadb_get_value_name(i, "count"),
 						id = mariadb_get_value_name(i, "id")}
 	end
 	mariadb_delete_result(result)

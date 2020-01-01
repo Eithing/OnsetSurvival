@@ -1,0 +1,97 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="character.css" />
+</head>
+<body>
+    <div class="parent-container">
+        <div class="displaycharacter">
+            <h1>Nouveau personnage</h1>
+            <hr>
+            <p id="errormsg">Choisissez les options</p>
+            <hr>
+            <p>Nom :</p>
+            <input id="nom" type="text" placeholder="Entrer un nom...">
+            <br>
+            <p>Prenom :</p>
+            <input id="prenom" type="text" placeholder="Entrer un prenom...">
+            <br>
+            <p>Genre :</p>
+            <select id="genre" disabled>
+                <option value="homme" selected>Homme</option>
+            </select>
+            <p>Personnage :</p>
+            <div class="selectclothing">
+                <div id="clothing" value="7">
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 40px;">
+                <button class="changeclothing" id="previous"><</button>
+                <button class="changeclothing" id="next">></button>
+            </div>
+            <div class="allbuttons">
+                <hr>
+                <button id="create">Créer</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        try {
+            ue == null
+        } catch (err) {
+            window.ue = {
+                game: {
+                    callevent: console.log
+                }
+            }
+        }
+
+        let theclothing = 6
+        document.getElementById("previous").addEventListener("click", function(event){
+            event.preventDefault()
+            changeclothing(false)
+        })
+
+        document.getElementById("next").addEventListener("click", function(event){
+            event.preventDefault()
+            changeclothing(true)
+        })
+
+        document.getElementById("create").addEventListener("click", function(event){
+            event.preventDefault()
+            if(document.getElementById("prenom").value != "" || document.getElementById("nom").value != ""){
+                ue.game.callevent("OnInsertPlayer", JSON.stringify([document.getElementById("prenom").value,document.getElementById("nom").value,theclothing]));
+            } else {
+                document.getElementById("errormsg").innerHTML = "Choisissez les options <strong style='color:#ec0000;'>(Merci de remplir tous les champs!)</strong>"
+            }
+        })
+        
+        changeclothing(true)
+
+        function changeclothing(next){
+            if(next){
+                theclothing = theclothing + 1
+                if(theclothing > 20){
+                    theclothing = 1
+                }
+            } else {
+                theclothing = theclothing - 1
+                if(theclothing < 1){
+                    theclothing = 20
+                }
+            }
+
+            console.log(theclothing)
+            let imgdoc =  document.getElementById("clothing")
+            let spriteLignes = 6
+            let spriteColonnes = 5
+            let space = 50
+
+            let y = Math.floor((theclothing - 1) / spriteColonnes) * space
+            let x = ((theclothing - 1) % spriteColonnes) * space
+            imgdoc.style.backgroundPosition = "-" + x + "px -" + y + "px";
+            imgdoc.setAttribute('value', theclothing)
+        }
+    </script>
+</body>
+</html>

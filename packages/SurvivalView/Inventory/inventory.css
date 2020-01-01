@@ -157,6 +157,7 @@ p {
     border-radius: 15%;
     text-align: right;
     background-color: #ffffff3a;
+    text-shadow: 1px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
     position: absolute;
     bottom: 0;
     right: 0;
