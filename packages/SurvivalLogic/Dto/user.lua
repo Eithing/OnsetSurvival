@@ -1,17 +1,29 @@
-function GetUserBySteamId(steamId)
-    print(steamId)
-	local query = mariadb_prepare(Sql, "SELECT * FROM comptes WHERE steamid = '?';", tostring(steamId))
-	local result = mariadb_await_query(Sql, query)
-
-	local User = false
+function GetUserBySteamId(player)
+    local query = mariadb_prepare(sql, "SELECT * FROM comptes WHERE steamid = '?' LIMIT 1;", tostring(GetPlayerSteamId(player)))
+    local result = mariadb_await_query(sql, query)
+    local User
     local rows = mariadb_get_row_count()
-    local resulting = mariadb_get_assoc(1)
+	for i=1, rows do
+		User = {	id = mariadb_get_value_name(i, "id"),
+						name = mariadb_get_value_name(i, "nom"),
+						admin = mariadb_get_value_name(i, "admin"),
+						steamid = mariadb_get_value_name(i, "steamid"),
+						position = mariadb_get_value_name(i, "position"),
+						armor = mariadb_get_value_name(i, "armor"),
+						created = mariadb_get_value_name(i, "created"),
+                        clothing = mariadb_get_value_name(i, "clothing"),
+                        inventory = mariadb_get_value_name(i, "inventory"),
+						argent = mariadb_get_value_name(i, "argent"),
+						hunger = mariadb_get_value_name(i, "hunger"),
+						thirst = mariadb_get_value_name(i, "thirst"),
+						health = mariadb_get_value_name(i, "health")}
+	end
 	mariadb_delete_result(result)
-	return rows, resulting
+	return rows, User
 end
 AddFunctionExport("GetUserBySteamId", GetUserBySteamId)
 
-function UpdateUser(user)
+function UpdateUser(player, user)
 	local query = mariadb_prepare(sql, "UPDATE comptes SET admin = ?, argent = ?, health = ?,  armor = ?, hunger = ?, thirst = ?, nom = '?', clothing = '?', inventory = '?', created = '?', position = '?', steamid = '?' WHERE id = ? LIMIT 1;",
         user.admin,
         user.argent,
@@ -31,10 +43,10 @@ function UpdateUser(user)
 end
 AddFunctionExport("UpdateUser", UpdateUser)
 
-function InsertNewUser(steamid)
+function InsertNewUser(player)
     local query = mariadb_prepare(sql, "INSERT INTO comptes (id, admin, argent, health,  armor, hunger, thirst, nom, clothing, inventory, created, position, steamid) VALUES (NULL, 0, 0, 100, 0, 100, 100, '', '[]', '[]', 0, '[]', '?');",
-		tostring(steamid))
-    mariadb_query(sql, query)
+		tostring(GetPlayerSteamId(player)))
+    mariadb_await_query(sql, query)
     return mariadb_get_insert_id()
 end
 AddFunctionExport("InsertNewUser", InsertNewUser)

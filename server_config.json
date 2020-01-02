@@ -15,8 +15,8 @@
     ],
     "packages": [
         "default",
-        "SurvivalView",
         "SurvivalLogic",
+        "SurvivalView",
         "SurvivalViewModel"
     ],
     "stream_distance": 12000.0,

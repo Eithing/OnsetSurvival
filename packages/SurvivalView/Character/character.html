@@ -60,7 +60,7 @@
         document.getElementById("create").addEventListener("click", function(event){
             event.preventDefault()
             if(document.getElementById("prenom").value != "" || document.getElementById("nom").value != ""){
-                ue.game.callevent("OnInsertPlayer", JSON.stringify([document.getElementById("prenom").value,document.getElementById("nom").value,theclothing]));
+                ue.game.callevent("OnInsertPlayer", JSON.stringify([document.getElementById("prenom").value,document.getElementById("nom").value]));
             } else {
                 document.getElementById("errormsg").innerHTML = "Choisissez les options <strong style='color:#ec0000;'>(Merci de remplir tous les champs!)</strong>"
             }

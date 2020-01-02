@@ -25,3 +25,4 @@ function math.clamp(num, min, max)
 	
 	return num
 end
+

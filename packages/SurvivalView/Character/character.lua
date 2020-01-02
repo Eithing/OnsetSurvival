@@ -9,7 +9,7 @@ function SetCharacterVisibility()
 end
 AddFunctionExport("SetCharacterVisibility", SetCharacterVisibility)
 
-AddEvent("OnInsertPlayer", function(firstname, lastname, clothing)
+AddEvent("OnInsertPlayer", function(firstname, lastname)
     SViewModel.ExecuteFromServer("InsertPlayer", firstname.." "..lastname)
     SetCharacterVisibility()
 end)

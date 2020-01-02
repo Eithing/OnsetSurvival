@@ -1,7 +1,7 @@
 SViewModel = ImportPackage("SurvivalViewModel")
 
-local PlayerHud
-local characterHud
+--local PlayerHud
+--local characterHud
 
 AddEvent("OnPackageStart", function()
 	ShowWeaponHUD(false)
@@ -31,12 +31,46 @@ AddEvent( "OnGameTick", function()
     updateHud()
 end )
 
-function hideRPHud()
-    SetWebVisibility(PlayerHud, WEB_HIDDEN)
+function ExecuteJs(hud, js)
+    if hud == "inventory" then
+        ExecuteWebJS(inventoryHud, js)
+    elseif hud == "craft" then
+        ExecuteWebJS(CraftHud, js)
+    elseif hud == "vitalIndicator"then
+        ExecuteWebJS(mainHud, js)
+    elseif hud == "vehicle" then
+        ExecuteWebJS(VehicleHud, js)
+    elseif hud == "character" then
+        ExecuteWebJS(characterHud, js)
+    else
+        ExecuteWebJS(hud, js)
+    end
+end
+AddFunctionExport("ExecuteJs", ExecuteJs)
+
+function SetVisibility(hud, visibility)
+    if visibility == "HitInvisible" then
+        SetWebVisibility(hud, WEB_HITINVISIBLE)
+    elseif visibility == "Hidden" then
+        QuitCloseHud(hud)
+    elseif visibility == "VisibleMove" then
+        SetWebVisibility(hud, WEB_VISIBLE)
+        SetIgnoreLookInput(true)
+        ShowMouseCursor(true)
+        SetInputMode(INPUT_GAMEANDUI)
+    elseif visibility == "VisibleStatic" then
+        SetWebVisibility(hud, WEB_VISIBLE)
+        SetIgnoreLookInput(true)
+        SetIgnoreMoveInput(true)
+        ShowMouseCursor(true)
+        SetInputMode(INPUT_GAMEANDUI)
+    end
 end
 
-function showRPHud()
-    SetWebVisibility(PlayerHud, WEB_HITINVISIBLE)
+function QuitCloseHud(hud)
+    SetIgnoreLookInput(false)
+    ShowMouseCursor(false)
+    SetIgnoreMoveInput(false)
+    SetInputMode(INPUT_GAME)
+    SetWebVisibility(hud, WEB_HIDDEN)
 end
-AddFunctionExport("hideRPHud", hideRPHud)
-AddFunctionExport("showRPHud", showRPHud)

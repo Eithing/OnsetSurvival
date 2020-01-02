@@ -55,14 +55,15 @@ function CreatePlayerData(player)
 end
 
 function OnLoadPlayer(player, steamid)
-    local rows, result = SLogic.GetUserBySteamId(tostring(steamid))
-    if (rows ~= 0) then
-        PlayerData[player].id = result['id']
+    local rows, result = SLogic.GetUserBySteamId(player)
+    print(rows, result.id)
+    if rows > 0 then
+        PlayerData[player].id = result.id
     end
     if (PlayerData[player].id == 0) then
         CreatePlayerAccount(player)
     else
-        LoadPlayerAccount(player)
+        LoadPlayerAccount(player, rows, result)
     end
 end
 
@@ -89,7 +90,7 @@ function CheckForIPBan(player)
 end
 
 function CreatePlayerAccount(player)
-    PlayerData[player].id = SLogic.InsertNewUser(GetPlayerSteamId(player))
+    PlayerData[player].id = SLogic.InsertNewUser(player)
 
 	CallRemoteEvent(player, "DisplayCreateCharacter")
 
@@ -98,23 +99,22 @@ function CreatePlayerAccount(player)
 	print("Player ID "..PlayerData[player].id.." created for "..player)
 end
 
-function LoadPlayerAccount(player)
-    local rows, result = SLogic.GetUserBySteamId(tostring(GetPlayerSteamId(player)))
+function LoadPlayerAccount(player, rows, result)
 	if (rows == 0) then
 		--This case should not happen but still handle it
 		KickPlayer(player, "An error occured while loading your account 😨")
 	else
-        PlayerData[player].steamid = tostring(result['steamid'])
-		PlayerData[player].name = tostring(result['nom'])
-        PlayerData[player].position = json_decode(result['position'])
-        PlayerData[player].health = math.tointeger(result['health'])
-        PlayerData[player].armor = math.tointeger(result['armor'])
-        PlayerData[player].hunger = math.tointeger(result['hunger'])
-		PlayerData[player].thirst = math.tointeger(result['thirst'])
-		PlayerData[player].clothing = json_decode(result['clothing'])
-		PlayerData[player].inventory = json_decode(result['inventory'])
-		PlayerData[player].admin = math.tointeger(result['admin'])
-		PlayerData[player].created = math.tointeger(result['created'])
+        PlayerData[player].steamid = tostring(result.steamid)
+		PlayerData[player].name = tostring(result.nom)
+        PlayerData[player].position = SLogic.json_decode(result.position)
+        PlayerData[player].health = math.tointeger(result.health)
+        PlayerData[player].armor = math.tointeger(result.armor)
+        PlayerData[player].hunger = math.tointeger(result.hunger)
+		PlayerData[player].thirst = math.tointeger(result.thirst)
+		PlayerData[player].clothing = SLogic.json_decode(result.clothing)
+		PlayerData[player].inventory = SLogic.json_decode(result.inventory)
+		PlayerData[player].admin = math.tointeger(result.admin)
+		PlayerData[player].created = math.tointeger(result.created)
 
 		SetPlayerHealth(player, tonumber(result['health']))
 		SetPlayerArmor(player, tonumber(result['armor']))
@@ -127,11 +127,10 @@ function LoadPlayerAccount(player)
 		else
 			SetPlayerName(player, PlayerData[player].name)
 		
-			playerhairscolor = getHairsColor(PlayerData[player].clothing[2])
-			CallRemoteEvent(player, "ClientChangeClothing", player, 0, PlayerData[player].clothing[1], playerhairscolor[1], playerhairscolor[2], playerhairscolor[3], playerhairscolor[4])
+			CallRemoteEvent(player, "ClientChangeClothing", player, 0, PlayerData[player].clothing[1], 0, 0, 0, 0)
 			CallRemoteEvent(player, "ClientChangeClothing", player, 1, PlayerData[player].clothing[3], 0, 0, 0, 0)
 			CallRemoteEvent(player, "ClientChangeClothing", player, 4, PlayerData[player].clothing[4], 0, 0, 0, 0)
-			CallRemoteEvent(player, "ClientChangeClothing", player, 5, PlayerData[player].clothing[5], 0, 0, 0, 0)
+            CallRemoteEvent(player, "ClientChangeClothing", player, 5, PlayerData[player].clothing[5], 0, 0, 0, 0)
 		end
 
 		print("Player ID "..PlayerData[player].id.." loaded for "..GetPlayerIP(player))
@@ -170,7 +169,7 @@ function SavePlayer(player)
 	local x, y, z = GetPlayerLocation(player)
 	PlayerData[player].position = {x= x, y= y, z= z}
 
-	SLogic.UpdateUser(PlayerData[player])
+	SLogic.UpdateUser(player, PlayerData[player])
     
     print("Data saved for : "..player)
 end
