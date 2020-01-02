@@ -1,11 +1,11 @@
 AddRemoteEvent("OpenAdminContext", function(player)
-	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+	if IsAdmin(player) then
 		CallRemoteEvent(player, "AdminOpenMenu")
 	end
 end)
 
 AddRemoteEvent("OnAdminAction", function(player, context, actionId)
-	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+	if IsAdmin(player) then
 		if(context == "weapons")then
 			SetPlayerWeapon(player, actionId, 999, true, 1)
 
@@ -14,8 +14,6 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
 			local h = GetPlayerHeading(player)
 			local vehicle = CreateVehicle(actionId, x, y, z, h)
 			SetPlayerInVehicle(player, vehicle)
-			VehicleData[vehicle] = {}
-			VehicleData[vehicle].fuel = 100
 			SetVehicleHealth(vehicle, 1500)
 			SetVehicleRespawnParams(vehicle, false)
 		end
@@ -24,7 +22,7 @@ end)
 
 -- Position
 function pos_commands(player)
-	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+	if IsAdmin(player) then
 		local x, y, z = GetPlayerLocation(player)
 		AddPlayerChat(player, "x = "..x..",y = "..y..",z = "..z)
 		
@@ -44,7 +42,7 @@ AddCommand("npc", cmd_commandsNPC) ]]
 
 -- Teleportation --
 function spawn_commands(player) -- Commande pour pouvoir ce re TP au niveau de la station service (Pour le bug de passage sous la map)
-	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+	if IsAdmin(player) then
 		SetPlayerLocation(player, 125773.000000, 80246.000000, 1645.000000)
 		print("Admin : Téléportation validé")
 	end
@@ -54,7 +52,7 @@ AddCommand("spawn", spawn_commands)
 
 -- Se teleporter a un joueur
 function goTo(player, player2)
-	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+	if IsAdmin(player) then
 		if IsValidPlayer(player2) then
 			local x, y, z = GetPlayerLocation(player2)
 			z = z + 30
@@ -68,7 +66,7 @@ AddCommand("goto", goTo)
 
 -- Teleporter un joueur a sois
 function bring(player, player2)
-	if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+	if IsAdmin(player) then
 		if IsValidPlayer(player2) then
 			local x, y, z = GetPlayerLocation(player)
 			x = x + 25
@@ -84,7 +82,7 @@ AddRemoteEvent("bring", bring)
 
 -- Essence --
 function addfuel_commands(player, count)
-    if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+    if IsAdmin(player) then
 	    AddFuel(GetPlayerVehicle(player), count)
         print("Admin : Essence ajoutée")
     end
@@ -93,7 +91,7 @@ end
 AddCommand("addfuel", addfuel_commands)
 
 function consumefuel_commands(player, count)
-    if tonumber(UserData[tostring(GetPlayerSteamId(player))].admin) == 1 then
+    if IsAdmin(player) then
 	    ConsumeFuel(GetPlayerVehicle(player), count)
         print("Admin : Essence consumée")
     end

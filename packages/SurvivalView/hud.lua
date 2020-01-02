@@ -18,6 +18,12 @@ AddEvent("OnPackageStart", function()
     SetWebAnchors(characterHud, 0.0, 0.0, 1.0, 1.0)
     LoadWebFile(characterHud, "http://asset/SurvivalView/Character/character.html")
     SetWebVisibility(characterHud, WEB_HIDDEN)
+
+    adminHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    SetWebAlignment(adminHud, 1.0, 0.0)
+    SetWebAnchors(adminHud, 0.0, 0.0, 1.0, 1.0)
+    LoadWebFile(adminHud, "http://asset/SurvivalView/Admin/admin.html")
+    SetWebVisibility(adminHud, WEB_HIDDEN)
 end)
 
 function updateHud()    
