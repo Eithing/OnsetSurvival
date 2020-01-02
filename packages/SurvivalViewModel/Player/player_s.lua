@@ -105,7 +105,7 @@ function LoadPlayerAccount(player, rows, result)
 		KickPlayer(player, "An error occured while loading your account 😨")
 	else
         PlayerData[player].steamid = tostring(result.steamid)
-		PlayerData[player].name = tostring(result.nom)
+		PlayerData[player].name = tostring(result.name)
         PlayerData[player].position = SLogic.json_decode(result.position)
         PlayerData[player].health = math.tointeger(result.health)
         PlayerData[player].armor = math.tointeger(result.armor)
@@ -201,6 +201,7 @@ AddRemoteEvent("ServerChangeOtherPlayerClothes", ChangeOtherPlayerClothes)
 AddRemoteEvent("InsertPlayer", function(player, name)
     PlayerData[player].created = 1
     PlayerData[player].name = tostring(name)
+    PlayerData[player].steamid = tostring(GetPlayerSteamId(player))
     SavePlayer(player, PlayerData[player])
 end)
 
