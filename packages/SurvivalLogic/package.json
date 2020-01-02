@@ -7,6 +7,7 @@
         "Dto/item.lua",
         "Dto/user.lua",
         "Dto/recolt.lua",
+        "Dto/garage.lua",
         "json.lua"
     ],
     "client_scripts": [],

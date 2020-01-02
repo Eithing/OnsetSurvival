@@ -9,6 +9,7 @@ AddEvent("OnPackageStart", function()
     CraftHud = InstanciateHud("http://asset/SurvivalView/Craft/craft.html", "Hidden")
     VehicleHud = InstanciateHud("http://asset/SurvivalView/Vehicle/vehicle.html", "Hidden")
     characterHud = InstanciateHud("http://asset/SurvivalView/Character/character.html", "Hidden")
+    garageHud = InstanciateHud("http://asset/SurvivalView/Garage/garage.html", "Hidden")
 end)
 
 AddEvent("OnPackageStop", function() 
@@ -18,6 +19,7 @@ AddEvent("OnPackageStop", function()
     DestroyWebUI(CraftHud)
     DestroyWebUI(VehicleHud)
     DestroyWebUI(characterHud)
+    DestroyWebUI(garageHud)
 end)
 
 function ExecuteJs(hud, js)
@@ -31,6 +33,8 @@ function ExecuteJs(hud, js)
         ExecuteWebJS(VehicleHud, js)
     elseif hud == "character" then
         ExecuteWebJS(characterHud, js)
+    elseif hud == "garage" then
+        ExecuteWebJS(garageHud, js)
     else
         ExecuteWebJS(hud, js)
     end

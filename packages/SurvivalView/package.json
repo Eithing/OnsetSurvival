@@ -8,7 +8,8 @@
         "Inventory/inventory.lua",
         "Craft/craft.lua",
         "Vehicle/vehicle.lua",
-        "Character/character.lua"
+        "Character/character.lua",
+        "Garage/garage.lua"
     ],
     "files": [
         "VitalIndicator/health.html",
@@ -32,10 +33,14 @@
         "Character/character.css",
         "Character/character.html",
 
+        "Garage/garage.css",
+        "Garage/garage.html",
+
         "Ressources/Js/item.js",
         "Ressources/Js/inventory.js",
         "Ressources/Js/craft.js",
         "Ressources/Js/vehicle.js",
+        "Ressources/Js/garage.js",
 
         "Ressources/images/Admin.jpg",
         "Ressources/images/Cars.jpg",

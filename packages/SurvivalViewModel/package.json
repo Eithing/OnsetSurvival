@@ -10,7 +10,8 @@
         "Inventory/inventory_s.lua",
         "Job/craft_s.lua",
         "Job/recolt_s.lua",
-        "Vehicle/vehicle_s.lua"
+        "Vehicle/vehicle_s.lua",
+        "Vehicle/garage_s.lua"
     ],
     "client_scripts": [
         "initView_c.lua",
@@ -20,7 +21,8 @@
         "Inventory/inventory_c.lua",
         "Job/craft_c.lua",
         "Job/recolt_c.lua",
-        "Vehicle/vehicle_c.lua"
+        "Vehicle/vehicle_c.lua",
+        "Vehicle/garage_c.lua"
     ],
     "files": []
 }

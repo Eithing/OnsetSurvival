@@ -9,6 +9,7 @@ AddEvent("OnPlayerSteamAuth",function (player)
 		-- On vien set les variables UserData du joueur
 		UserData[tostring(GetPlayerSteamId(player))] = {}
 		UserData[tostring(GetPlayerSteamId(player))].inventoryItems = {}
+		UserData[tostring(GetPlayerSteamId(player))].Vehicles = {}
 		UserData[tostring(GetPlayerSteamId(player))].eat = p_defaulthunger
 		UserData[tostring(GetPlayerSteamId(player))].drink = p_defaultthirst
 		UserData[tostring(GetPlayerSteamId(player))].health = p_defaulthealth
@@ -24,6 +25,7 @@ AddEvent("OnPlayerSteamAuth",function (player)
 		SetPlayerLocation(player, UserData[tostring(GetPlayerSteamId(player))].positionX, UserData[tostring(GetPlayerSteamId(player))].positionY, UserData[tostring(GetPlayerSteamId(player))].positionZ)
 		SetPlayerHealth(player, UserData[tostring(GetPlayerSteamId(player))].health)
 		UserData[tostring(GetPlayerSteamId(player))].inventoryItems = SLogic.GetUserInventory(player, UserData[tostring(GetPlayerSteamId(player))].id)
+		UserData[tostring(GetPlayerSteamId(player))].Vehicles = SLogic.GetUserVehicle(player, UserData[tostring(GetPlayerSteamId(player))].id)
 		CallRemoteEvent(player, "SetPlayerClothing", UserData[tostring(GetPlayerSteamId(player))].clothing)
 		UpdateWeight(player)
 		SetPlayerPropertyValue(player, "PlayerIsCharged", true, true)	

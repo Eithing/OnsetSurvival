@@ -1,0 +1,146 @@
+body {
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+    margin: 0;
+    user-select: none;
+}
+
+.img {
+	position: relative;
+	z-index: 1;
+	margin-left: 85px;
+	margin-top: 75px;
+	font-size: 10px;
+    border-radius: 50%;
+    height: 64px;
+    width: 74px;
+    transform: scale(1.8);
+}
+
+.tittle {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.596);
+	color: #fff;
+	border: 0;
+	padding: 1%;
+	width: 100%;
+    font-family: 'Raleway', sans-serif;
+    opacity: 0.7;
+}
+
+.button {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 4%;
+	border: 0;
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.596);
+    font-family: 'Raleway', sans-serif;
+    opacity: 0.7;
+}
+
+.button:hover {
+	border: 0;
+	background-color: #fff;
+	color: #252525;
+	cursor: pointer;
+}
+
+.container {
+	position: relative;
+	white-space: nowrap;
+	overflow-x: hidden;
+	height: 22.1em;
+	width: 80em;
+	top: 40vh;
+	margin: auto;
+	-webkit-transform: translateY(-7.2em);
+    transform: translateY(-7.2em);
+    background: rgba(0, 0, 0, 0.847);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+.inner {
+	position: absolute;
+	transition: -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 1260px;
+    height: 280px;
+    border: 1px dashed rgba(0, 0, 0, 0.847);
+}
+
+.vehicle {
+	font-family: sans-serif;
+	line-height: 12em;
+	width: 15em;
+    height: 15em;
+    background-color: rgba(240, 255, 240, 0.05);
+	border-radius: 2px;
+	display: inline-block;
+	position: relative;
+	bottom: -2em;
+	transition: background 0.2s ease, box-shadow 0.2s ease, -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease;
+	transition: transform 0.3s ease, background 0.2s ease, box-shadow 0.2s ease, -webkit-transform 0.3s ease;
+	color: #fff;
+	margin-right: 20px;
+}
+
+.vehicle:hover {
+    cursor: default;
+	background: rgba(240, 255, 240, 0.21);
+	box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.4);
+}
+
+.scroll {
+    margin: 0 10px;
+}
+
+.scroll:hover{
+    cursor: move;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 7px;
+    height: 5px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background: #4d4d4d;
+    border-radius: 7px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: rgb(44, 44, 44);
+    border-radius: 7px;
+}
+
+.sbutton {
+    position: absolute;
+    right: 0;
+    opacity: 0.7;
+    border: 0;
+	color: #fff;
+	background-color: rgba(240, 255, 240, 0.05);
+    font-family: 'Raleway', sans-serif;
+    padding: 8px;
+    margin-right: 8px;
+    border-radius: 10px;
+    border: 1px solid green;
+}
+
+.sbutton:hover {
+	background-color: rgba(240, 255, 240, 0.21);
+	color: white;
+	cursor: pointer;
+}

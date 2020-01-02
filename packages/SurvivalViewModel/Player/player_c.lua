@@ -1,5 +1,3 @@
-local Dialog = ImportPackage("dialogui")
-
 function DisplayCreateCharacter(clothing)
     CallRemoteEvent("UpdateWeight", SView.SetCharacterVisibility())
     Player_SetPlayerClothing(clothing)

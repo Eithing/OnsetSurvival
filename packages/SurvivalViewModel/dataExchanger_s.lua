@@ -5,10 +5,12 @@ ItemData = {}
 RecoltData = {}
 VehicleData = {}
 ItemPickups = {}
+GarageData = {}
 
 AddEvent("OnPackageStart", function()
     ItemData = SLogic.GetAllItems()
     RecoltData = SLogic.GetAllRecolts()
+    GarageData = SLogic.GetAllGarages()
 end)
 
 CreateTimer(function(GlobalSave)
