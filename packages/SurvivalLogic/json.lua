@@ -149,6 +149,7 @@ end
 function json_encode(val)
   return ( encode(val) )
 end
+AddFunctionExport("json_encode", json_encode)
 
 
 -------------------------------------------------------------------------------
@@ -410,5 +411,7 @@ function json_decode(str)
   end
   return res
 end
+AddFunctionExport("json_decode", json_decode)
+
 
 return json

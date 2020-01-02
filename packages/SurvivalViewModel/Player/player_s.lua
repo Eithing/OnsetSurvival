@@ -1,76 +1,205 @@
-local x,y,z
-AddEvent("OnPlayerSteamAuth",function (player)
-	SetPlayerPropertyValue(player, "PlayerIsCharged", false, true)
-	UserData[tostring(GetPlayerSteamId(player))] = SLogic.GetUserBySteamId(tostring(GetPlayerSteamId(player))) or nil
-	if UserData[tostring(GetPlayerSteamId(player))] == nil then
-		SetPlayerLocation(player, p_spawn.x, p_spawn.y, p_spawn.z)
-		print("new player "..GetPlayerSteamId(player))
+function OnPackageStart()
+    -- Save all player data automatically 
+    CreateTimer(function()
+		for k, v in pairs(GetAllPlayers()) do
+            SavePlayer(v)
+		end
+		print("All players have been saved !")
+    end, 30000)
+end
+AddEvent("OnPackageStart", OnPackageStart)
 
-		-- On vien set les variables UserData du joueur
-		UserData[tostring(GetPlayerSteamId(player))] = {}
-		UserData[tostring(GetPlayerSteamId(player))].inventoryItems = {}
-		UserData[tostring(GetPlayerSteamId(player))].Vehicles = {}
-		UserData[tostring(GetPlayerSteamId(player))].eat = p_defaulthunger
-		UserData[tostring(GetPlayerSteamId(player))].drink = p_defaultthirst
-		UserData[tostring(GetPlayerSteamId(player))].health = p_defaulthealth
-		UserData[tostring(GetPlayerSteamId(player))].argent = p_defaultargent
-		UserData[tostring(GetPlayerSteamId(player))].clothing = p_defaultclothing
-		UserData[tostring(GetPlayerSteamId(player))].SteamId = tostring(GetPlayerSteamId(player))
-		UserData[tostring(GetPlayerSteamId(player))].admin = 0
-		UserData[tostring(GetPlayerSteamId(player))].PickupS = false
+function OnPlayerSteamAuth(player)
+    CreatePlayerData(player)
 
-		-- On affiche le menu de créaction de personnage
-		CallRemoteEvent(player, "DisplayCreateCharacter", p_defaultclothing)
+    OnLoadPlayer(player, GetPlayerSteamId(player))
+end
+AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
+
+function OnPlayerQuit(player)
+    SavePlayer(player)
+    DestroyPlayerData(player)
+end
+AddEvent("OnPlayerQuit", OnPlayerQuit)
+
+function CreatePlayerData(player)
+    if PlayerData[player] == nil then
+        PlayerData[player] = {}
+
+        PlayerData[player].id = 0
+        PlayerData[player].steamid = GetPlayerSteamId(player)
+        PlayerData[player].name = GetPlayerName(player)
+        PlayerData[player].admin = 0
+        PlayerData[player].health = 100
+        PlayerData[player].armor = 100
+        PlayerData[player].hunger = 100
+        PlayerData[player].thirst = 100
+        PlayerData[player].inventory = {}
+        PlayerData[player].clothing = {}
+        PlayerData[player].onAction = false
+        PlayerData[player].isActioned = false
+        PlayerData[player].position = {}
+        PlayerData[player].created = 0
+        print("Data created for : "..player)
+
+        table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR")
+        table.insert(PlayerData[player].clothing, { 250, 240, 190, 1 })
+        table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalShirt_LPR")
+        table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_CargoPants_LPR")
+        table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_NormalShoes_LPR")
+
+        for k,v in pairs(GetStreamedPlayersForPlayer(player)) do
+            ChangeOtherPlayerClothes(k, player)
+        end
+    end
+end
+
+function OnLoadPlayer(player, steamid)
+    local rows, result = SLogic.GetUserBySteamId(tostring(steamid))
+    if (rows ~= 0) then
+        PlayerData[player].id = result['id']
+    end
+    if (PlayerData[player].id == 0) then
+        CreatePlayerAccount(player)
+    else
+        LoadPlayerAccount(player)
+    end
+end
+
+function CheckForIPBan(player)
+	local query = mariadb_prepare(sql, "SELECT ipbans.reason FROM ipbans WHERE ipbans.ip = '?' LIMIT 1;",
+		GetPlayerIP(player))
+
+    mariadb_query(sql, query)
+    
+    if (mariadb_get_row_count() == 0) then
+		--No IP ban found for this account
+		if (PlayerData[player].id == 0) then
+			CreatePlayerAccount(player)
+		else
+			LoadPlayerAccount(player)
+		end
 	else
-		SetPlayerLocation(player, UserData[tostring(GetPlayerSteamId(player))].positionX, UserData[tostring(GetPlayerSteamId(player))].positionY, UserData[tostring(GetPlayerSteamId(player))].positionZ)
-		SetPlayerHealth(player, UserData[tostring(GetPlayerSteamId(player))].health)
-		UserData[tostring(GetPlayerSteamId(player))].inventoryItems = SLogic.GetUserInventory(player, UserData[tostring(GetPlayerSteamId(player))].id)
-		UserData[tostring(GetPlayerSteamId(player))].Vehicles = SLogic.GetUserVehicle(player, UserData[tostring(GetPlayerSteamId(player))].id)
-		CallRemoteEvent(player, "SetPlayerClothing", UserData[tostring(GetPlayerSteamId(player))].clothing)
-		UpdateWeight(player)
-		SetPlayerPropertyValue(player, "PlayerIsCharged", true, true)	
+		print("Kicking "..GetPlayerName(player).." because their IP was banned")
+
+		local result = mariadb_get_assoc(1)
+        
+        KickPlayer(player, "🚨 You have been banned from the server.")
 	end
-	SetPlayerPropertyValue(player, "harvesting", false)
-end)
+end
 
-AddEvent("OnPlayerDeath", function(player, instigator)
-	SetPlayerSpawnLocation(player, p_spawn.x, p_spawn.y, p_spawn.z, 90.0)
-end)
+function CreatePlayerAccount(player)
+    PlayerData[player].id = SLogic.InsertNewUser(GetPlayerSteamId(player))
 
-AddEvent("OnPlayerQuit", function(player)
-	-- On vient update les info en cache
+	CallRemoteEvent(player, "DisplayCreateCharacter")
+
+	setPositionAndSpawn(player, nil)
+
+	print("Player ID "..PlayerData[player].id.." created for "..player)
+end
+
+function LoadPlayerAccount(player)
+    local rows, result = SLogic.GetUserBySteamId(tostring(GetPlayerSteamId(player)))
+	if (rows == 0) then
+		--This case should not happen but still handle it
+		KickPlayer(player, "An error occured while loading your account 😨")
+	else
+        PlayerData[player].steamid = tostring(result['steamid'])
+		PlayerData[player].name = tostring(result['nom'])
+        PlayerData[player].position = json_decode(result['position'])
+        PlayerData[player].health = math.tointeger(result['health'])
+        PlayerData[player].armor = math.tointeger(result['armor'])
+        PlayerData[player].hunger = math.tointeger(result['hunger'])
+		PlayerData[player].thirst = math.tointeger(result['thirst'])
+		PlayerData[player].clothing = json_decode(result['clothing'])
+		PlayerData[player].inventory = json_decode(result['inventory'])
+		PlayerData[player].admin = math.tointeger(result['admin'])
+		PlayerData[player].created = math.tointeger(result['created'])
+
+		SetPlayerHealth(player, tonumber(result['health']))
+		SetPlayerArmor(player, tonumber(result['armor']))
+		--setPlayerThirst(player, tonumber(result['thirst']))
+		--setPlayerHunger(player, tonumber(result['hunger']))
+		setPositionAndSpawn(player, PlayerData[player].position)
+
+		if PlayerData[player].created == 0 then
+			CallRemoteEvent(player, "DisplayCreateCharacter")
+		else
+			SetPlayerName(player, PlayerData[player].name)
+		
+			playerhairscolor = getHairsColor(PlayerData[player].clothing[2])
+			CallRemoteEvent(player, "ClientChangeClothing", player, 0, PlayerData[player].clothing[1], playerhairscolor[1], playerhairscolor[2], playerhairscolor[3], playerhairscolor[4])
+			CallRemoteEvent(player, "ClientChangeClothing", player, 1, PlayerData[player].clothing[3], 0, 0, 0, 0)
+			CallRemoteEvent(player, "ClientChangeClothing", player, 4, PlayerData[player].clothing[4], 0, 0, 0, 0)
+			CallRemoteEvent(player, "ClientChangeClothing", player, 5, PlayerData[player].clothing[5], 0, 0, 0, 0)
+		end
+
+		print("Player ID "..PlayerData[player].id.." loaded for "..GetPlayerIP(player))
+	end
+end
+
+function setPositionAndSpawn(player, position) 
+	SetPlayerSpawnLocation(player, 227603, -65590, 400, 0 )
+	if position ~= nil and position.x ~= nil and position.y ~= nil and position.z ~= nil then
+		SetPlayerLocation(player, PlayerData[player].position.x, PlayerData[player].position.y, PlayerData[player].position.z + 250) -- Pour empêcher de se retrouver sous la map
+	else
+		SetPlayerLocation(player, 227603, -65590, 400)
+	end
+end
+
+function DestroyPlayerData(player)
+	if (PlayerData[player] == nil) then
+		return
+	end
+
+	PlayerData[player] = nil
+	print("Data destroyed for : "..player)
+end
+
+function SavePlayer(player)
+	if (PlayerData[player] == nil) then
+		return
+	end
+
+	if (PlayerData[player].id == 0) then
+		return
+	end
+
+
+	-- Sauvegarde de la position du joueur
 	local x, y, z = GetPlayerLocation(player)
-	UserData[tostring(GetPlayerSteamId(player))].positionX = x
-	UserData[tostring(GetPlayerSteamId(player))].positionY = y
-	UserData[tostring(GetPlayerSteamId(player))].positionZ = z+800
+	PlayerData[player].position = {x= x, y= y, z= z}
 
-	-- On update la base de données
-	SLogic.UpdateUser(UserData[tostring(GetPlayerSteamId(player))])
+	SLogic.UpdateUser(PlayerData[player])
+    
+    print("Data saved for : "..player)
+end
 
-	-- On l'enleve du cache
-	UserData[tostring(GetPlayerSteamId(player))] = nil
+function IsAdmin(player)
+	return PlayerData[player].admin == 1
+end
+AddFunctionExport("isAdmin", IsAdmin)
+
+function ChangeOtherPlayerClothes(player, otherplayer)
+    if PlayerData[otherplayer] == nil then
+        return
+    end
+    if PlayerData[otherplayer].clothing == nil then
+        return
+    end
+    if PlayerData[otherplayer].clothing[1] == nil then
+        return
+    end
+
+    CallRemoteEvent(player, "ClientChangeClothing", otherplayer, 0, PlayerData[otherplayer].clothing[1], 0, 0, 0, 0)
+    CallRemoteEvent(player, "ClientChangeClothing", otherplayer, 1, PlayerData[otherplayer].clothing[3], 0, 0, 0, 0)
+    CallRemoteEvent(player, "ClientChangeClothing", otherplayer, 4, PlayerData[otherplayer].clothing[4], 0, 0, 0, 0)
+    CallRemoteEvent(player, "ClientChangeClothing", otherplayer, 5, PlayerData[otherplayer].clothing[5], 0, 0, 0, 0)
+end
+AddRemoteEvent("ServerChangeOtherPlayerClothes", ChangeOtherPlayerClothes)
+
+AddRemoteEvent("InsertPlayer", function(player, name)
+
 end)
 
-AddRemoteEvent("InsertPlayer", function(player, firstName, lastName, clothing)
-	-- Changement des variables require
-	UserData[tostring(GetPlayerSteamId(player))].prenom = firstName
-	UserData[tostring(GetPlayerSteamId(player))].nom = lastName
-	UserData[tostring(GetPlayerSteamId(player))].clothing = math.floor(clothing)
 
-	CallRemoteEvent(player, "SetPlayerClothing", math.floor(clothing))
-
-	-- Set de la position du joueur
-	local x, y, z = GetPlayerLocation(player)
-	UserData[tostring(GetPlayerSteamId(player))].positionX = x
-	UserData[tostring(GetPlayerSteamId(player))].positionY = y
-	UserData[tostring(GetPlayerSteamId(player))].positionZ = z+800
-
-	-- Insert dans la base de donnée
-	SLogic.InsertNewUser(UserData[tostring(GetPlayerSteamId(player))])
-	Delay(500, function()
-		UserData[tostring(GetPlayerSteamId(player))] = SLogic.GetUserBySteamId(UserData[tostring(GetPlayerSteamId(player))].SteamId)
-		UserData[tostring(GetPlayerSteamId(player))].inventoryItems = {}
-		SetPlayerPropertyValue(player, "PlayerIsCharged", true, true)
-	end)
-	
-end)

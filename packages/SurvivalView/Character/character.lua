@@ -10,6 +10,6 @@ end
 AddFunctionExport("SetCharacterVisibility", SetCharacterVisibility)
 
 AddEvent("OnInsertPlayer", function(firstname, lastname, clothing)
-    SViewModel.ExecuteFromServer("InsertPlayer", firstname, lastname, clothing)
-    CallRemoteEvent("UpdateWeight", SetCharacterVisibility())
+    SViewModel.ExecuteFromServer("InsertPlayer", firstname.." "..lastname)
+    SetCharacterVisibility()
 end)

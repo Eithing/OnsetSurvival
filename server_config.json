@@ -1,10 +1,10 @@
 {
-    "servername": "Horizon Prototype Labs",
-    "gamemode": "do what you want",
+    "servername": "Eynwa",
+    "gamemode": "Survival",
     "website_url": "https://bluemountains.io",
     "ipaddress": "127.0.0.1",
     "port": 7777,
-    "maxplayers": 100,
+    "maxplayers": 4,
     "password": "",
     "timeout": 15000,
     "iplimit": 5,

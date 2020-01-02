@@ -11,7 +11,8 @@
         "Job/craft_s.lua",
         "Job/recolt_s.lua",
         "Vehicle/vehicle_s.lua",
-        "Vehicle/garage_s.lua"
+        "Vehicle/garage_s.lua",
+        "Chat/chat_s.lua"
     ],
     "client_scripts": [
         "initView_c.lua",

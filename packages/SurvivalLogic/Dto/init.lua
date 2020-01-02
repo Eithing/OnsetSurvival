@@ -1,26 +1,35 @@
-Sql = nil
+sql = false
 
-AddEvent("OnPackageStart", function()  --DONT SHOW IN STREAM
-	local SQL_HOST = "91.121.178.28"
-	local SQL_PORT = 3306
-	local SQL_USER = "Eynwa"
-	local SQL_PASS = "eynwa5"
-	local SQL_DATA = "eynwa"
-	local SQL_CHAR = "utf8mb4"
-	local SQL_LOGL = "debug"
+local SQL_HOST = "91.121.178.28"
+local SQL_PORT = 3306
+local SQL_USER = "Eynwa"
+local SQL_PASS = "eynwa5"
+local SQL_DATA = "eynwa"
+local SQL_CHAR = "utf8mb4"
+local SQL_LOGL = "debug"
 
+-- Setup a MariaDB connection when the package/server starts
+local function OnPackageStart()
 	mariadb_log(SQL_LOGL)
 
-	Sql = mariadb_connect(SQL_HOST .. ':' .. SQL_PORT, SQL_USER, SQL_PASS, SQL_DATA)
-	if (Sql ~= false) then
+	sql = mariadb_connect(SQL_HOST .. ':' .. SQL_PORT, SQL_USER, SQL_PASS, SQL_DATA)
+
+	if (sql ~= false) then
 		print("MariaDB: Connected to " .. SQL_HOST)
-		mariadb_set_charset(Sql, SQL_CHAR)
+		mariadb_set_charset(sql, SQL_CHAR)
 	else
 		print("MariaDB: Connection failed to " .. SQL_HOST .. ", see mariadb_log file")
+
+		-- Immediately stop the server if we cannot connect
 		ServerExit()
 	end
-end)
 
-AddEvent("OnPackageStop", function()
-	mariadb_close(Sql)
-end)
+	CallEvent("database:connected")
+end
+AddEvent("OnPackageStart", OnPackageStart)
+
+-- Cleanup the MariaDB connection when the package/server stops
+local function OnPackageStop()
+	mariadb_close(sql)
+end
+AddEvent("OnPackageStop", OnPackageStop)

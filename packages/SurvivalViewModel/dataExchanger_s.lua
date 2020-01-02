@@ -1,16 +1,8 @@
 SLogic = ImportPackage("SurvivalLogic")
 
-UserData = {}
-ItemData = {}
-RecoltData = {}
-VehicleData = {}
-ItemPickups = {}
-GarageData = {}
+PlayerData = {}
 
 AddEvent("OnPackageStart", function()
-    ItemData = SLogic.GetAllItems()
-    RecoltData = SLogic.GetAllRecolts()
-    GarageData = SLogic.GetAllGarages()
 end)
 
 CreateTimer(function(GlobalSave)

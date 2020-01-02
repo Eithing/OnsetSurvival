@@ -1,78 +1,42 @@
 SViewModel = ImportPackage("SurvivalViewModel")
 
+local PlayerHud
+local characterHud
+
 AddEvent("OnPackageStart", function()
 	ShowWeaponHUD(false)
     ShowHealthHUD(false)
-    mainHud = InstanciateHud("http://asset/SurvivalView/VitalIndicator/health.html", "HitInvisible")
-    adminHud = InstanciateHud("http://asset/SurvivalView/Admin/admin.html", "Hidden")
-    inventoryHud = InstanciateHud("http://asset/SurvivalView/Inventory/inventory.html", "Hidden")
-    CraftHud = InstanciateHud("http://asset/SurvivalView/Craft/craft.html", "Hidden")
-    VehicleHud = InstanciateHud("http://asset/SurvivalView/Vehicle/vehicle.html", "Hidden")
-    characterHud = InstanciateHud("http://asset/SurvivalView/Character/character.html", "Hidden")
-    garageHud = InstanciateHud("http://asset/SurvivalView/Garage/garage.html", "Hidden")
+
+    PlayerHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    SetWebAlignment(PlayerHud, 1.0, 0.0)
+    SetWebAnchors(PlayerHud, 0.0, 0.0, 1.0, 1.0)
+    LoadWebFile(PlayerHud, "http://asset/SurvivalView/VitalIndicator/health.html")
+    SetWebVisibility(PlayerHud, WEB_HITINVISIBLE)
+
+    characterHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    SetWebAlignment(characterHud, 1.0, 0.0)
+    SetWebAnchors(characterHud, 0.0, 0.0, 1.0, 1.0)
+    LoadWebFile(characterHud, "http://asset/SurvivalView/Character/character.html")
+    SetWebVisibility(characterHud, WEB_HIDDEN)
 end)
 
-AddEvent("OnPackageStop", function() 
-    DestroyWebUI(mainHud)
-	DestroyWebUI(adminHud)
-	DestroyWebUI(inventoryHud)
-    DestroyWebUI(CraftHud)
-    DestroyWebUI(VehicleHud)
-    DestroyWebUI(characterHud)
-    DestroyWebUI(garageHud)
-end)
-
-function ExecuteJs(hud, js)
-    if hud == "inventory" then
-        ExecuteWebJS(inventoryHud, js)
-    elseif hud == "craft" then
-        ExecuteWebJS(CraftHud, js)
-    elseif hud == "vitalIndicator"then
-        ExecuteWebJS(mainHud, js)
-    elseif hud == "vehicle" then
-        ExecuteWebJS(VehicleHud, js)
-    elseif hud == "character" then
-        ExecuteWebJS(characterHud, js)
-    elseif hud == "garage" then
-        ExecuteWebJS(garageHud, js)
-    else
-        ExecuteWebJS(hud, js)
-    end
-end
-AddFunctionExport("ExecuteJs", ExecuteJs)
-
-function InstanciateHud(url, visibility)
-    local hud = CreateWebUI(0, 0, 0, 0, 1, 16)
-    SetWebAlignment(hud, 0, 0)
-    SetWebAnchors(hud, 0, 0, 1, 1)
-    LoadWebFile(hud, url)
-    SetVisibility(hud, visibility)
-    return hud
+function updateHud()    
+    ExecuteWebJS(PlayerHud, "SetHealth("..GetPlayerHealth()..");")
+    ExecuteWebJS(PlayerHud, "SetThirst("..GetPlayerPropertyValue(GetPlayerId(), "thirst")..");")
+    ExecuteWebJS(PlayerHud, "SetHunger("..GetPlayerPropertyValue(GetPlayerId(), "hunger")..");")
 end
 
-function SetVisibility(hud, visibility)
-    if visibility == "HitInvisible" then
-        SetWebVisibility(hud, WEB_HITINVISIBLE)
-    elseif visibility == "Hidden" then
-        QuitCloseHud(hud)
-    elseif visibility == "VisibleMove" then
-        SetWebVisibility(hud, WEB_VISIBLE)
-        SetIgnoreLookInput(true)
-        ShowMouseCursor(true)
-        SetInputMode(INPUT_GAMEANDUI)
-    elseif visibility == "VisibleStatic" then
-        SetWebVisibility(hud, WEB_VISIBLE)
-        SetIgnoreLookInput(true)
-        SetIgnoreMoveInput(true)
-        ShowMouseCursor(true)
-        SetInputMode(INPUT_GAMEANDUI)
-    end
+AddEvent( "OnGameTick", function()
+    -- Hud refresh
+    updateHud()
+end )
+
+function hideRPHud()
+    SetWebVisibility(PlayerHud, WEB_HIDDEN)
 end
 
-function QuitCloseHud(hud)
-    SetIgnoreLookInput(false)
-    ShowMouseCursor(false)
-    SetIgnoreMoveInput(false)
-    SetInputMode(INPUT_GAME)
-    SetWebVisibility(hud, WEB_HIDDEN)
+function showRPHud()
+    SetWebVisibility(PlayerHud, WEB_HITINVISIBLE)
 end
+AddFunctionExport("hideRPHud", hideRPHud)
+AddFunctionExport("showRPHud", showRPHud)
