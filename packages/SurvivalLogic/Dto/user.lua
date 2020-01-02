@@ -1,5 +1,5 @@
 function GetUserBySteamId(player)
-    local query = mariadb_prepare(sql, "SELECT * FROM comptes WHERE steamid = '?' LIMIT 1;", GetPlayerSteamId(player))
+    local query = mariadb_prepare(sql, "SELECT * FROM comptes WHERE steamid = '?' LIMIT 1;", tostring(GetPlayerSteamId(player)))
     local result = mariadb_await_query(sql, query)
     local User
     local rows = mariadb_get_row_count()
@@ -35,7 +35,7 @@ function UpdateUser(player, user)
     json_encode(user.inventory),
     user.created,
     json_encode(user.position),
-    user.steamid,
+    tostring(user.steamid),
     user.id)
 	local query = mariadb_prepare(sql, "UPDATE comptes SET admin = ?, argent = ?, health = ?,  armor = ?, hunger = ?, thirst = ?, nom = '?', clothing = '?', inventory = '?', created = '?', position = '?', steamid = '?' WHERE id = ? LIMIT 1;",
         user.admin,
@@ -49,7 +49,7 @@ function UpdateUser(player, user)
 		json_encode(user.inventory),
 		user.created,
         json_encode(user.position),
-        user.steamid,
+        tostring(user.steamid),
 		user.id
 	)
     mariadb_query(sql, query)
@@ -58,7 +58,7 @@ AddFunctionExport("UpdateUser", UpdateUser)
 
 function InsertNewUser(player)
     local query = mariadb_prepare(sql, "INSERT INTO comptes (id, admin, argent, health,  armor, hunger, thirst, nom, clothing, inventory, created, position, steamid) VALUES (NULL, 0, 0, 100, 0, 100, 100, '', '[]', '[]', 0, '[]', '?');",
-		GetPlayerSteamId(player))
+    tostring(GetPlayerSteamId(player)))
     mariadb_await_query(sql, query)
     return mariadb_get_insert_id()
 end
