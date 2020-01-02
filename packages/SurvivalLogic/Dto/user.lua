@@ -24,6 +24,19 @@ end
 AddFunctionExport("GetUserBySteamId", GetUserBySteamId)
 
 function UpdateUser(player, user)
+    print(user.admin,
+    user.argent,
+    100,
+    GetPlayerArmor(player),
+    user.hunger,
+    user.thirst,
+    user.name,
+    json_encode(user.clothing),
+    json_encode(user.inventory),
+    user.created,
+    json_encode(user.position),
+    user.steamid,
+    user.id)
 	local query = mariadb_prepare(sql, "UPDATE comptes SET admin = ?, argent = ?, health = ?,  armor = ?, hunger = ?, thirst = ?, nom = '?', clothing = '?', inventory = '?', created = '?', position = '?', steamid = '?' WHERE id = ? LIMIT 1;",
         user.admin,
         user.argent,

@@ -34,6 +34,7 @@ function CreatePlayerData(player)
         PlayerData[player].armor = 100
         PlayerData[player].hunger = 100
         PlayerData[player].thirst = 100
+        PlayerData[player].argent = 0
         PlayerData[player].inventory = {}
         PlayerData[player].clothing = {}
         PlayerData[player].onAction = false
@@ -56,7 +57,6 @@ end
 
 function OnLoadPlayer(player, steamid)
     local rows, result = SLogic.GetUserBySteamId(player)
-    print(rows, result.id)
     if rows > 0 then
         PlayerData[player].id = result.id
     end
@@ -110,7 +110,8 @@ function LoadPlayerAccount(player, rows, result)
         PlayerData[player].health = math.tointeger(result.health)
         PlayerData[player].armor = math.tointeger(result.armor)
         PlayerData[player].hunger = math.tointeger(result.hunger)
-		PlayerData[player].thirst = math.tointeger(result.thirst)
+        PlayerData[player].thirst = math.tointeger(result.thirst)
+        PlayerData[player].argent = math.tointeger(result.argent)
 		PlayerData[player].clothing = SLogic.json_decode(result.clothing)
 		PlayerData[player].inventory = SLogic.json_decode(result.inventory)
 		PlayerData[player].admin = math.tointeger(result.admin)
@@ -198,7 +199,9 @@ end
 AddRemoteEvent("ServerChangeOtherPlayerClothes", ChangeOtherPlayerClothes)
 
 AddRemoteEvent("InsertPlayer", function(player, name)
-
+    PlayerData[player].created = 1
+    PlayerData[player].name = tostring(name)
+    SavePlayer(player, PlayerData[player])
 end)
 
 
