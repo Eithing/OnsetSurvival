@@ -22,6 +22,12 @@ function OnPlayerQuit(player)
 end
 AddEvent("OnPlayerQuit", OnPlayerQuit)
 
+AddEvent("OnPlayerSpawn", function(player)
+    ChangeOtherPlayerClothes(player, player)
+end)
+
+
+-- Player Data --
 function CreatePlayerData(player)
     if PlayerData[player] == nil then
         PlayerData[player] = {}
@@ -62,11 +68,7 @@ function OnLoadPlayer(player, steamid)
     if rows > 0 then
         PlayerData[player].id = result.id
     end
-    if (PlayerData[player].id == 0) then
-        CreatePlayerAccount(player)
-    else
-        LoadPlayerAccount(player, rows, result)
-    end
+    CheckForIPBan(player)
 end
 
 function CheckForIPBan(player)
