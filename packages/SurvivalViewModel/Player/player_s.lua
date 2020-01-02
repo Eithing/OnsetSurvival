@@ -197,7 +197,7 @@ AddRemoteEvent("ServerChangeOtherPlayerClothes", ChangeOtherPlayerClothes)
 AddRemoteEvent("InsertPlayer", function(player, name)
     PlayerData[player].created = 1
     PlayerData[player].name = tostring(name)
-    PlayerData[player].steamid = tostring(GetPlayerSteamId(player))
+    PlayerData[player].steamid = GetPlayerSteamId(player)
     SavePlayer(player, PlayerData[player])
 end)
 
