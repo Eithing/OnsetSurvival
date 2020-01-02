@@ -63,3 +63,19 @@ function InsertNewUser(player)
     return mariadb_get_insert_id()
 end
 AddFunctionExport("InsertNewUser", InsertNewUser)
+
+function GetBanIp(ip)
+    local query = mariadb_prepare(sql, "SELECT * FROM ipbans WHERE ipbans.ip = '?' LIMIT 1;", ip)
+    local result = mariadb_await_query(sql, query)
+    local User
+    local rows = mariadb_get_row_count()
+	for i=1, rows do
+		User = {	id = mariadb_get_value_name(i, "id"),
+						ip = mariadb_get_value_name(i, "ip"),
+						reason = mariadb_get_value_name(i, "reason"),
+						date = mariadb_get_value_name(i, "date")}
+	end
+	mariadb_delete_result(result)
+	return rows, User
+end
+AddFunctionExport("GetBanIp", GetBanIp)

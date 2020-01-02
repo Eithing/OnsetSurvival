@@ -72,12 +72,9 @@ function OnLoadPlayer(player, steamid)
 end
 
 function CheckForIPBan(player)
-	local query = mariadb_prepare(sql, "SELECT ipbans.reason FROM ipbans WHERE ipbans.ip = '?' LIMIT 1;",
-		GetPlayerIP(player))
-
-    mariadb_query(sql, query)
+	local rows, result = SLogic.GetBanIp(GetPlayerIP(player))
     
-    if (mariadb_get_row_count() == 0) then
+    if (rows == 0) then
 		--No IP ban found for this account
 		if (PlayerData[player].id == 0) then
 			CreatePlayerAccount(player)
@@ -85,11 +82,9 @@ function CheckForIPBan(player)
 			LoadPlayerAccount(player)
 		end
 	else
-		print("Kicking "..GetPlayerName(player).." because their IP was banned")
-
-		local result = mariadb_get_assoc(1)
+		print("Kicking "..GetPlayerName(player).." because their IP was banned ("..result.reason..")")
         
-        KickPlayer(player, "🚨 You have been banned from the server.")
+        KickPlayer(player, "🚨 You have been banned from the server. (raison : "..result.reason..")")
 	end
 end
 
