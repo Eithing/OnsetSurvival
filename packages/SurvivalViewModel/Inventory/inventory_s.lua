@@ -157,6 +157,23 @@ function UpdateWeight(player, visibility)
 end
 AddRemoteEvent("UpdateWeight", UpdateWeight)
 
+-- SearchProximityInventory --
+function SearchProximityInventory(player, visibility)
+	if visibility then
+		local x,y,z = GetPlayerLocation(player)
+		for i, inventory in pairs(DeadPlayerBags) do
+			if GetDistance3D(x, y, z, inventory.x, inventory.y, inventory.z) < 100 then
+				SetPlayerAnimation(player, 'SIT06')
+				break
+			end
+		end
+	else
+		SetPlayerAnimation(player, 'STOP')
+	end
+	
+end
+AddRemoteEvent("SearchProximityInventory", SearchProximityInventory)
+
 -- Fonctions --
 function GetItemByIdUnique(player, idUnique)
 	local found
@@ -179,3 +196,7 @@ function GetItemDataByItemID(itemID)
 	end
 	return found
 end
+
+AddCommand("emot", function(player, anim)
+	SetPlayerAnimation(player, anim)
+end)

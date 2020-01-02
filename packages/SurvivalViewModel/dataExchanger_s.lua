@@ -1,10 +1,11 @@
 SLogic = ImportPackage("SurvivalLogic")
 
-UserData = {}
-ItemData = {}
-RecoltData = {}
+UserData = {} -- données du joueur
+ItemData = {} -- liste des items
+RecoltData = {} -- liste des point de récoltes
 VehicleData = {}
 ItemPickups = {}
+DeadPlayerBags = {} -- liste des inventaires de joueurs mort (sacs au sol)
 
 AddEvent("OnPackageStart", function()
     ItemData = SLogic.GetAllItems()

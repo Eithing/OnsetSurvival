@@ -11,7 +11,9 @@ AddEvent("OnKeyRelease", function(key)
                 CallRemoteEvent("RequestPopulateInventory")
                 isInventoryLoaded = true
             end
-            CallRemoteEvent("UpdateWeight", SView.SetInventoryVisibility())
+            local visibility = SView.SetInventoryVisibility()
+            CallRemoteEvent("UpdateWeight", visibility)
+            CallRemoteEvent("SearchProximityInventory", visibility)
         end
     end
 end)
@@ -22,7 +24,6 @@ AddRemoteEvent("ReloadInventory", function(inventory)
         AddItemInventory(itemInventory)
     end
 end)
-
 
 function AddItemInventory(item)
     SView.ExecuteJs("inventory", "inventory.addItem('"..item.idUnique.."', 'container', new Item('"..item.itemId.."','"..item.type.."','"..item.imageId.."','"..item.itemCount.."','"..item.nom.."'))")

@@ -29,14 +29,42 @@ AddEvent("OnPlayerSteamAuth",function (player)
 		SetPlayerPropertyValue(player, "PlayerIsCharged", true, true)	
 	end
 	SetPlayerPropertyValue(player, "harvesting", false)
+
+	local x, y, z = GetPlayerLocation(player)
+	UserData[tostring(GetPlayerSteamId(player))].bag = CreateObject(1282, x, y, z) --sac orange 1282 // sac rando 1448 // 
+	SetObjectAttached(UserData[tostring(GetPlayerSteamId(player))].bag, ATTACH_PLAYER, player, -2, -18, 0 , 180, 80, -90, "spine_01")
 end)
 
 AddEvent("OnPlayerDeath", function(player, instigator)
 	SetPlayerSpawnLocation(player, p_spawn.x, p_spawn.y, p_spawn.z, 90.0)
+
+	-- supression suivit sac + apparition au sol
+	if (UserData[tostring(GetPlayerSteamId(player))].bag ~= 0) then
+		DestroyObject(UserData[tostring(GetPlayerSteamId(player))].bag)
+		UserData[tostring(GetPlayerSteamId(player))].bag = 0
+	end
+	local x, y, z = GetPlayerLocation(player)
+	local deadPlayerBag = CreateObject(1282, x, y, z-100, 0, -90, 0)
+	print(deadPlayerBag)
+	DeadPlayerBags[deadPlayerBag] = {}
+	DeadPlayerBags[deadPlayerBag].inventory = UserData[tostring(GetPlayerSteamId(player))].inventoryItems
+	DeadPlayerBags[deadPlayerBag].x = x
+	DeadPlayerBags[deadPlayerBag].y = y
+	DeadPlayerBags[deadPlayerBag].z = z
+
+	Delay(p_bagDisappearTime, function()
+		DestroyObject(deadPlayerBag)
+		DeadPlayerBags[deadPlayerBag] = nil
+	end)
 end)
 
+AddEvent("OnPlayerSpawn", function(player)
+	CallRemoteEvent(player, "SetPlayerClothing", UserData[tostring(GetPlayerSteamId(player))].clothing)
+end)
+
+
 AddEvent("OnPlayerQuit", function(player)
-	-- On vient update les info en cache
+	-- On vient update les info en cach\e
 	local x, y, z = GetPlayerLocation(player)
 	UserData[tostring(GetPlayerSteamId(player))].positionX = x
 	UserData[tostring(GetPlayerSteamId(player))].positionY = y
@@ -70,5 +98,4 @@ AddRemoteEvent("InsertPlayer", function(player, firstName, lastName, clothing)
 		UserData[tostring(GetPlayerSteamId(player))].inventoryItems = {}
 		SetPlayerPropertyValue(player, "PlayerIsCharged", true, true)
 	end)
-	
 end)
