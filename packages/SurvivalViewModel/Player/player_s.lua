@@ -68,10 +68,10 @@ function OnLoadPlayer(player, steamid)
     if rows > 0 then
         PlayerData[player].id = result.id
     end
-    CheckForIPBan(player)
+    CheckForIPBan(player, rows, result)
 end
 
-function CheckForIPBan(player)
+function CheckForIPBan(player, lrowns, lresult)
 	local rows, result = SLogic.GetBanIp(GetPlayerIP(player))
     
     if (rows == 0) then
@@ -79,7 +79,7 @@ function CheckForIPBan(player)
 		if (PlayerData[player].id == 0) then
 			CreatePlayerAccount(player)
 		else
-			LoadPlayerAccount(player)
+			LoadPlayerAccount(player, lrowns, lresult)
 		end
 	else
 		print("Kicking "..GetPlayerName(player).." because their IP was banned ("..result.reason..")")
