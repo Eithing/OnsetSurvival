@@ -49,6 +49,8 @@ function CreatePlayerData(player)
         table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_CargoPants_LPR")
         table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_NormalShoes_LPR")
 
+        ChangeOtherPlayerClothes(player, player)
+
         for k,v in pairs(GetStreamedPlayersForPlayer(player)) do
             ChangeOtherPlayerClothes(k, player)
         end
@@ -128,10 +130,7 @@ function LoadPlayerAccount(player, rows, result)
 		else
 			SetPlayerName(player, PlayerData[player].name)
 		
-			CallRemoteEvent(player, "ClientChangeClothing", player, 0, PlayerData[player].clothing[1], 0, 0, 0, 0)
-			CallRemoteEvent(player, "ClientChangeClothing", player, 1, PlayerData[player].clothing[3], 0, 0, 0, 0)
-			CallRemoteEvent(player, "ClientChangeClothing", player, 4, PlayerData[player].clothing[4], 0, 0, 0, 0)
-            CallRemoteEvent(player, "ClientChangeClothing", player, 5, PlayerData[player].clothing[5], 0, 0, 0, 0)
+			ChangeOtherPlayerClothes(player, player)
 		end
 
 		print("Player ID "..PlayerData[player].id.." loaded for "..GetPlayerIP(player))
