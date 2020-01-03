@@ -105,7 +105,7 @@ AddCommand("npc", npc_commands)
 -- Teleportation --
 function spawn_commands(player) -- Commande pour pouvoir ce re TP au niveau de la station service (Pour le bug de passage sous la map)
 	if IsAdmin(player) then
-		SetPlayerLocation(player, 125773.000000, 80246.000000, 1645.000000+250)
+		PlayerTeleport(player, p_spawn.x, p_spawn.y, p_spawn.z)
 		print("Admin : Téléportation validé")
 	end
 	return
@@ -117,8 +117,7 @@ function goto_command(player, player2)
 	if IsAdmin(player) then
 		if IsValidPlayer(player2) then
 			local x, y, z = GetPlayerLocation(player2)
-			z = z + 30
-			SetPlayerLocation(player, x, y, z)
+			PlayerTeleport(player, x, y, z)
 			print("Admin : "..player.." goto "..player2)
 		else
 			print("Admin : Aucun joueur trouvée")

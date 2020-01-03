@@ -7,7 +7,7 @@ p_defaultargent = 0 -- Argent par défaut lors de la premier connexion
 p_defaulthunger = 100 -- Faim par défaut lors de la premier connexion
 p_defaultthirst = 100 -- Soif par défaut lors de la premier connexion
 p_defaultclothing = 7 -- Vétement par défaut lors de la premier connexion
-p_spawn = {x=125773.000000, y=80246.000000, z=1755.000000} -- Position du spawn
+p_spawn = {x=125773.000000, y=80246.000000, z=1567.000000} -- Position du spawn
 p_delayvitalnotif = 30 -- Envoie une notif pour la faim et la soif (en secondes)
 
 -- INVENTORY CONFIG --

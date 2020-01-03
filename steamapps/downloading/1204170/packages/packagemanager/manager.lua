@@ -15,14 +15,12 @@ function Package_Manager.FindPackage(package)
 end
 
 function Package_Manager.Output(player,message)
-	print(message)
 	AddPlayerChat(player, message)
 end
 
 function Package_Manager.Debugger(message)
 	if not Package_Manager.debug then return end
 
-	print(message)
 	AddPlayerChatAll(message)
 end
 AddEvent("OnScriptError",Package_Manager.Debugger)
