@@ -68,7 +68,7 @@ end
 
 function OnLoadPlayer(player, steamid)
     local rows, result = SLogic.GetUserBySteamId(player)
-    if rows == 0 then
+    if rows ~= 0 then
         PlayerData[player].id = result.id
     end
     CheckForIPBan(player, rows, result)
