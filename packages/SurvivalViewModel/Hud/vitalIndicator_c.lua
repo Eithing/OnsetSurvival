@@ -11,3 +11,4 @@ function OnUpdateVitalIndicator(health, eat, drink)
 	SView.ExecuteJs("vitalIndicator", "UpdateVital("..health..","..eat..","..drink..")")
 end
 AddRemoteEvent("OnUpdateVitalIndicator",  OnUpdateVitalIndicator)
+

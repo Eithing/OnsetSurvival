@@ -77,3 +77,9 @@ function QuitCloseHud(hud)
     SetInputMode(INPUT_GAME)
     SetWebVisibility(hud, WEB_HIDDEN)
 end
+
+AddEvent("OnWebLoadComplete", function(web)
+    if web == PlayerHud then
+        SViewModel.ExecuteFromServer("OnPlayerHudLoadComplete")
+    end
+end)
