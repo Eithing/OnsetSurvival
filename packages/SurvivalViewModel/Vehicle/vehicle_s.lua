@@ -83,10 +83,10 @@ function ConsumeFuel(vehicle, count)
         else
             VehicleData[vehicle].fuel = math.clamp(VehicleData[vehicle].fuel - count, 0, 100)
         end
-    end
-    local driver = GetVehicleDriver(vehicle)
-    if IsValidPlayer(driver) then
-        CallRemoteEvent(driver, "OnUpdateFuel", VehicleData[vehicle].fuel)
+        local driver = GetVehicleDriver(vehicle)
+        if IsValidPlayer(driver) then
+            CallRemoteEvent(driver, "OnUpdateFuel", VehicleData[vehicle].fuel)
+        end
     end
 end
 AddRemoteEvent("ConsumeFuel", ConsumeFuel)
@@ -100,13 +100,27 @@ function SetFuel(vehicle, count)
         else
             VehicleData[vehicle].fuel = math.clamp(count, 0, 100)
         end
-    end
-    local driver = GetVehicleDriver(vehicle)
-    if IsValidPlayer(driver) then
-        CallRemoteEvent(driver, "OnUpdateFuel", VehicleData[vehicle].fuel)
+
+        local driver = GetVehicleDriver(vehicle)
+        if IsValidPlayer(driver) then
+            CallRemoteEvent(driver, "OnUpdateFuel", VehicleData[vehicle].fuel)
+        end
     end
 end
 AddRemoteEvent("SetFuel", SetFuel)
+
+function Repair(vehicle, count)
+    count = tonumber(count)
+    if IsValidVehicle(vehicle) then
+        SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle) + count, 0, v_health))
+
+        local driver = GetVehicleDriver(vehicle)
+        if IsValidPlayer(driver) then
+            CallRemoteEvent(driver, "OnUpdateFuel", VehicleData[vehicle].fuel)
+        end
+    end
+end
+AddRemoteEvent("Repair", Repair)
 
 -- Fonction --
 function GetNearestVehicle(player, nearest_dist) -- Trouvée le véhicule le plus proche

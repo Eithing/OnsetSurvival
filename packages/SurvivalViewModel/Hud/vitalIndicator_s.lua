@@ -50,7 +50,7 @@ AddEvent("OnPlayerDeath", function(player, instigator)
 	PlayerData[player].hunger = p_defaulthunger
 	PlayerData[player].thirst = p_defaultthirst
 	PlayerData[player].health = p_defaulthealth
-	PlayerData[v].vitalnotif = false
+	PlayerData[player].vitalnotif = false
     CallRemoteEvent(player, "OnUpdateVitalIndicator", 0, PlayerData[player].hunger, PlayerData[player].thirst)
     compteur[player] = nil
 end)
@@ -65,8 +65,7 @@ AddRemoteEvent("OnKeyPressed", function(player)
             else
                 compteur[player] = {time = GetTimeSeconds(),
                                     isRunning = 1,
-									calculedTime = 0,
-									notif = false}
+									calculedTime = 0}
             end
         end
     end)

@@ -14,6 +14,7 @@ p_delayvitalnotif = 30 -- Envoie une notif pour la faim et la soif (en secondes)
 i_maxWeight = 10000
 
 -- VEHICLE CONFIG --
+v_health = 1500 -- Vie max d'un véhicule
 v_delayconsume = 1000 -- delai de la cosomation d'essence
 v_consomevalue = 1 -- Nombre d'essence retirer a chaque verification
 v_defaultFuel = 100 -- Essence par défaut d'un véhicule

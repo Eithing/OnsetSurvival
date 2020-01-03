@@ -157,3 +157,13 @@ function setfuel_commands(player, count)
 	return
 end
 AddCommand("setfuel", setfuel_commands)
+
+-- Repair
+function repair_commands(player)
+    if IsAdmin(player) then
+	    Repair(GetPlayerVehicle(player), v_health)
+        print("Admin : Véhicule réparer")
+    end
+	return
+end
+AddCommand("repair", repair_commands)
