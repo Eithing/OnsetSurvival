@@ -21,7 +21,7 @@ CreateTimer(function(UpdateVital)
 				compteur[v].calculedTime = compteur[v].calculedTime + (GetTimeSeconds() - compteur[v].time)
 				compteur[v].time = GetTimeSeconds()
 			end
-			local percent = (compteur[v].calculedTime * 100) / 3
+			local percent = (compteur[v].calculedTime * 100) / 30
 			toRemove = ((percent * 1.3) / 100) + 0.4
 			compteur[v].calculedTime = 0
         end
@@ -36,7 +36,7 @@ CreateTimer(function(UpdateVital)
         end
 		CallRemoteEvent(v, "OnUpdateVitalIndicator", GetPlayerHealth(v), PlayerData[v].hunger, PlayerData[v].thirst)
 	end
-end, '3000' , UpdateVital)
+end, '30000' , UpdateVital)
 
 AddEvent("OnPlayerDeath", function(player, instigator)
 	PlayerData[player].hunger = p_defaulthunger
@@ -50,9 +50,9 @@ AddRemoteEvent("OnKeyPressed", function(player)
     Delay(200, function()
         if GetPlayerMovementMode(player) == 3 then
             if compteur[player] ~= nil then
-                compteur[player].isRunning = 1
-                compteur[player].time = GetTimeSeconds()
-                compteur[player].calculedTime = 0
+                compteur[player].isRunning = 0
+				compteur[player].calculedTime =  compteur[player].calculedTime + (GetTimeSeconds() - compteur[player].time)
+				compteur[player].time = GetTimeSeconds()
             else
                 compteur[player] = {time = GetTimeSeconds(),
                                     isRunning = 1,
