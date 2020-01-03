@@ -32,3 +32,16 @@ AddRemoteEvent("ClientChangeClothing", function(player, part, piece, r, g, b, a)
         DynamicMaterialInstance:SetColorParameter("Hair Color", FLinearColor(r, g, b, a))
     end
 end)
+
+-- Notification --
+function AddNotification(msg, type)
+    if msg == "" then
+        return
+    end
+    if type == "" then
+        type = "default"
+    end
+    AddPlayerChat(msg.." - "..type)
+    SView.ExecuteJs("vitalIndicator", 'AddNotification("'..msg..'","'..type..'")')
+end
+AddRemoteEvent("ClientAddNotification",  AddNotification)

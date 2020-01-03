@@ -1,11 +1,12 @@
 <html>
 
 <head>
-    <script src="jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="health.css" />
 </head>
 
 <body>
     <div>
+        <ul class="list-notifications" id="list-notifications"></ul>
         <canvas id="c" width="150" height="40"></canvas>
         <div class="progress">
             <img src="burger.png" class="image">
@@ -28,9 +29,9 @@
 </body>
 
 </html>
-<link rel="stylesheet" type="text/css" href="health.css" />
 
 <script>
+    var delaynotif = 20000; // en secondes, Default : 20s
     var life = 100;
 
     function drawLine(ctx, y, h) {
@@ -107,5 +108,29 @@
         UpdateVie(vie);
         document.getElementById("faim").style.width = faim + "%";
         document.getElementById("soif").style.width = soif + "%";
+    }
+
+    function newEl(tagType) {
+        return document.createElement(tagType);
+    }
+
+    function AddNotification(msg, type="default"){
+        let element = newEl('li');
+        element.id = "notification";
+        element.classList.add(type.toString());
+        element.innerHTML = msg.toString();
+
+        let error = newEl('div');
+        error.classList.add(type.toString());
+        element.appendChild(error);
+
+        document.getElementById("list-notifications").appendChild(element);
+
+        setTimeout(function() {
+            if(element !== "undefined"){
+                element.remove();
+            }
+        }, delaynotif); 
+        return element
     }
 </script>
