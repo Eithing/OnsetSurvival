@@ -34,30 +34,51 @@ AddRemoteEvent("ClientChangeClothing", function(player, part, piece, r, g, b, a)
 end)
 
 -- Notification --
-function AddNotification(msg, type)
-    if msg == "" then
+function AddNotification(msg, type, delay)
+    local id = Random(1,99999)
+    if msg == nil or msg == "" then
         return
     end
-    if type == "" then
+    if type == nil or type == "" then
         type = "default"
     end
-    SView.ExecuteJs("vitalIndicator", 'AddNotification("'..msg..'","'..type..'")')
+    if delay == nil or delay == 0 then
+        delay = 20
+    end
+    delay = math.Seconds(delay)
+    SView.ExecuteJs("vitalIndicator", 'AddNotification("'..id..'","'..msg..'","'..type..'","'..delay..'")')
+    return id
 end
 AddRemoteEvent("ClientAddNotification",  AddNotification)
 
+-- All Notif
+local notifid = {}
 
-local notif = false
+local function InitNotif(index, zone, msg)
+    notifid[index] = {}
+    notifid[index].id = 0
+    notifid[index].notif = false
+    notifid[index].zone = zone
+    notifid[index].msg = msg
+end
+
+InitNotif("garage", g_Points, "Appuyer sur E pour ouvrir le garage")
+InitNotif("recolte", r_Points, "Appuyer sur E pour recolter")
+
 CreateTimer(function()
     local x, y, z = GetPlayerLocation()
-    local NearestGarageDealer = GetNearestGarageDealer(x, y, z)
-    if NearestGarageDealer ~= 0 then 
-        if notif == false then
-            AddPlayerChat("OnGameTick")
-            AddNotification("Appuyer sur E pour ouvrir le garage", "default")
-            notif = true
-            Delay(math.Seconds(20), function()
-                notif = false
-            end)
+    for k, v in pairs(notifid) do
+        if GetNearestZone(v.zone, x, y, z) ~= 0 then
+            if v.notif == false then
+                v.id = AddNotification(v.msg, "default", 999)
+                v.notif = true
+            end
+        else
+            if v.notif == true then
+                SView.ExecuteJs("vitalIndicator", 'RemoveNotification("'..v.id..'")')
+                v.id = 0
+                v.notif = false
+            end
         end
     end
-end, math.Seconds(10))
+end, 500)

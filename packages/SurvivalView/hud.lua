@@ -4,6 +4,7 @@ SViewModel = ImportPackage("SurvivalViewModel")
 --local characterHud
 --local adminHud
 --local VehicleHud
+--local garageHud
 
 AddEvent("OnPackageStart", function()
 	ShowWeaponHUD(false)
@@ -32,6 +33,12 @@ AddEvent("OnPackageStart", function()
     SetWebAnchors(VehicleHud, 0.0, 0.0, 1.0, 1.0)
     LoadWebFile(VehicleHud, "http://asset/SurvivalView/Vehicle/vehicle.html")
     SetWebVisibility(VehicleHud, WEB_HIDDEN)
+
+    garageHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    SetWebAlignment(garageHud, 1.0, 0.0)
+    SetWebAnchors(garageHud, 0.0, 0.0, 1.0, 1.0)
+    LoadWebFile(garageHud, "http://asset/SurvivalView/Garage/garage.html")
+    SetWebVisibility(garageHud, WEB_HIDDEN)
 end)
 
 function ExecuteJs(hud, js)
@@ -45,6 +52,8 @@ function ExecuteJs(hud, js)
         ExecuteWebJS(VehicleHud, js)
     elseif hud == "character" then
         ExecuteWebJS(characterHud, js)
+    elseif hud == "garage" then
+        ExecuteWebJS(garageHud, js)
     else
         ExecuteWebJS(hud, js)
     end

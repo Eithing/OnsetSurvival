@@ -1,7 +1,6 @@
 local compteur = {}
 
 AddEvent("OnPlayerDamage", function(player, damagetype, amount)
-	print(PlayerData[player].hunger)
 	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 end)
 
@@ -46,7 +45,6 @@ CreateTimer(function(UpdateVital)
 			end
 			SetPlayerHealth(v, GetPlayerHealth(v) - 1)
 		end
-		print(PlayerData[v].hunger)
 		CallRemoteEvent(v, "OnUpdateVitalIndicator", GetPlayerHealth(v), PlayerData[v].hunger, PlayerData[v].thirst)
 	end
 end, '30000' , UpdateVital)
@@ -56,7 +54,6 @@ AddEvent("OnPlayerDeath", function(player, instigator)
 	PlayerData[player].thirst = p_defaultthirst
 	PlayerData[player].health = p_defaulthealth
 	PlayerData[player].vitalnotif = false
-	print(PlayerData[v].hunger)
 
     CallRemoteEvent(player, "OnUpdateVitalIndicator", 0, PlayerData[player].hunger, PlayerData[player].thirst)
     compteur[player] = nil

@@ -183,7 +183,7 @@ function SavePlayer(player)
     
     print("Data saved for : "..player)
 
-    AddNotification(player, "Votre personnage a bien été sauvegarder !", "success")
+    print(AddNotification(player, "Votre personnage a bien été sauvegarder !", "success"))
 end
 
 function IsAdmin(player)
@@ -222,7 +222,7 @@ function PlayerTeleport(player, x, y, z)
 end
 
 -- Notification --
-function AddNotification(player, msg, type)
+function AddNotification(player, msg, type, delay)
     if msg == "" or msg == nil then
         print("Notification : Message Invalide")
         return
@@ -230,5 +230,8 @@ function AddNotification(player, msg, type)
     if type == "" or type == nil then
         type = "default"
     end
-    CallRemoteEvent(player, "ClientAddNotification", msg, type)
+    if delay == nil or delay == 0 then
+        delay = 20
+    end
+    return CallRemoteEvent(player, "ClientAddNotification", msg, type, delay)
 end

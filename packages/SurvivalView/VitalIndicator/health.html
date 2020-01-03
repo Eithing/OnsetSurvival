@@ -31,7 +31,6 @@
 </html>
 
 <script>
-    var delaynotif = 20000; // en secondes, Default : 20s
     var life = 100;
 
     function drawLine(ctx, y, h) {
@@ -114,9 +113,9 @@
         return document.createElement(tagType);
     }
 
-    function AddNotification(msg, type="default"){
+    function AddNotification(id, msg, type="default", delay=20){
         let element = newEl('li');
-        element.id = "notification";
+        element.id = id.toString();
         element.classList.add(type.toString());
         element.innerHTML = msg.toString();
 
@@ -130,7 +129,11 @@
             if(element !== "undefined"){
                 element.remove();
             }
-        }, delaynotif); 
+        }, delay); 
         return element
+    }
+
+    function RemoveNotification(id){
+        document.getElementById(id.toString()).remove()
     }
 </script>

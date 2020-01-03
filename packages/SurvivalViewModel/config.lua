@@ -21,7 +21,11 @@ v_defaultFuel = 100 -- Essence par défaut d'un véhicule
 
 -- GARAGE CONFIG --
 g_Points = {}
-table.insert(g_Points, {id = 1, nom = "Spawn", x = 126176, y = 80357, radius = 150})
+table.insert(g_Points, {id = 1, nom = "Spawn", x = 126034, y = 80416, radius = 150.0})
+
+-- RECOLTE CONFIG --
+r_Points = {}
+table.insert(r_Points, {id = 1, nom = "Mine dawp", itemId = 26, count = 1, x = 132512, y = 77888, radius = 150.0})
 
 -- Fonction Global --
 
@@ -35,17 +39,20 @@ function math.clamp(num, min, max)
 	return num
 end
 
-function GetNearestGarageDealer(x, y, z)
-	for k,v in pairs(g_Points) do
-        local x2, y2, z2 = v.x, v.y, z
-        local dist = GetDistance3D(x, y, z, x2, y2, z2)
-        if dist < 150.0 then
-            return v
+function GetNearestZone(zone, x, y, z)
+	local found = 0
+	for k, v in pairs(zone) do
+        local x2, y2 = v.x, v.y
+		local dist = GetDistance3D(x, y, z, x2, y2, z)
+		if dist < tonumber(v.radius) then
+			found = v
+			break
 		end
 	end
 
-	return 0
+	return found
 end
+
 
 function math.Seconds(num) -- Secondes en Ms
 	return num * 1000
