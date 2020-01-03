@@ -10,7 +10,6 @@ function GetPlayerInventory(id)
 						itemId = mariadb_get_value_name(i, "itemId"),
 						itemCount = mariadb_get_value_name(i, "itemCount"),
                         var = mariadb_get_value_name(i, "var")}
-        Player_Inventory[i].var = json_decode(Player_Inventory.var)
 	end
 	mariadb_delete_result(result)
 	return rows, Player_Inventory
@@ -29,7 +28,6 @@ function GetLastPlayerItem(id)
 						itemCount = mariadb_get_value_name(1, "itemCount"),
 						var = mariadb_get_value_name(1, "var")}
     mariadb_delete_result(result)
-    Player_Inventory.var = json_decode(Player_Inventory.var)
 	return rows, Player_Inventory
 end
 AddFunctionExport("GetPlayerInventory", GetPlayerInventory)
