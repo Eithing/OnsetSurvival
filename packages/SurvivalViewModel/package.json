@@ -15,6 +15,7 @@
         "Chat/chat_s.lua"
     ],
     "client_scripts": [
+        "config.lua",
         "initView_c.lua",
         "Player/player_c.lua",
         "Hud/vitalIndicator_c.lua",

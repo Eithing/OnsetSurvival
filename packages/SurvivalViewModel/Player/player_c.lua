@@ -41,7 +41,6 @@ function AddNotification(msg, type)
     if type == "" then
         type = "default"
     end
-    AddPlayerChat(msg.." - "..type)
     SView.ExecuteJs("vitalIndicator", 'AddNotification("'..msg..'","'..type..'")')
 end
 AddRemoteEvent("ClientAddNotification",  AddNotification)

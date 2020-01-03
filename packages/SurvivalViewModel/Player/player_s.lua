@@ -115,9 +115,11 @@ function LoadPlayerAccount(player, rows, result)
         PlayerData[player].thirst = math.tointeger(result.thirst)
         PlayerData[player].argent = math.tointeger(result.argent)
 		PlayerData[player].clothing = SLogic.json_decode(result.clothing)
-		PlayerData[player].inventory = SLogic.json_decode(result.inventory)
+		PlayerData[player].inventory = SLogic.GetPlayerInventory(PlayerData[player].id)
 		PlayerData[player].admin = math.tointeger(result.admin)
-		PlayerData[player].created = math.tointeger(result.created)
+        PlayerData[player].created = math.tointeger(result.created)
+        local playervehicles_rows, playervehicles_r = SLogic.GetVehiclesBySteamId(player)
+        PlayerData[player].vehicles = playervehicles_r
 
 		SetPlayerHealth(player, tonumber(result['health']))
 		SetPlayerArmor(player, tonumber(result['armor']))
@@ -220,6 +222,5 @@ function AddNotification(player, msg, type)
     if type == "" or type == nil then
         type = "default"
     end
-    print(player, msg, type)
     CallRemoteEvent(player, "ClientAddNotification", msg, type)
 end

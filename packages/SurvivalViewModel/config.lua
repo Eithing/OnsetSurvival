@@ -19,6 +19,10 @@ v_delayconsume = 1000 -- delai de la cosomation d'essence
 v_consomevalue = 1 -- Nombre d'essence retirer a chaque verification
 v_defaultFuel = 100 -- Essence par défaut d'un véhicule
 
+-- GARAGE CONFIG --
+g_Points = {}
+table.insert(g_Points, {id = 1, nom = "Spawn", x = 126176, y = 80357, radius = 150})
+
 -- Fonction Global --
 
 function math.clamp(num, min, max)
@@ -31,3 +35,27 @@ function math.clamp(num, min, max)
 	return num
 end
 
+function GetNearestGarageDealer(location)
+    local x, y, z = location
+	for k,v in pairs(g_Points) do
+        local x2, y2, z2 = v.x, v.y, z
+        local dist = GetDistance3D(x, y, z, x2, y2, z2)
+        if dist < 150.0 then
+            return v
+		end
+	end
+
+	return 0
+end
+
+function math.Seconds(num) -- Secondes en Ms
+	return num * 1000
+end
+
+function math.Minutes(num) -- Minutes en MS
+	return num * 60000
+end
+
+function math.Hours(num) -- Heures en Ms
+	return num * 3,6e+6
+end
