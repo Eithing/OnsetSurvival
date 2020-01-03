@@ -6,4 +6,6 @@ server_log.txt
 logs/
 config/config.vdf
 
+.vdf
 *.vdf
+config.vdf
