@@ -4,8 +4,12 @@ AddEvent("OnPlayerDamage", function(player, damagetype, amount)
 	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 end)
 
-AddEvent("OnPlayerSteamAuth", function(player)
-	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
+AddEvent("OnPlayerSpawn", function(player)
+	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), 100, 100)
+end)
+
+AddEvent("OnPlayerQuit", function(player)
+    compteur[player] = nil
 end)
 
 
@@ -17,7 +21,7 @@ CreateTimer(function(UpdateVital)
 				compteur[v].calculedTime = compteur[v].calculedTime + (GetTimeSeconds() - compteur[v].time)
 				compteur[v].time = GetTimeSeconds()
 			end
-			local percent = (compteur[v].calculedTime * 100) / 30
+			local percent = (compteur[v].calculedTime * 100) / 3
 			toRemove = ((percent * 1.3) / 100) + 0.4
 			compteur[v].calculedTime = 0
         end
@@ -28,16 +32,18 @@ CreateTimer(function(UpdateVital)
 			PlayerData[v].thirst = math.clamp((PlayerData[v].thirst - toRemove), 0, 100) 
 		end
 		if tonumber(PlayerData[v].hunger) <= 0 or tonumber(PlayerData[v].thirst) <= 0 then
-			SetPlayerHealth(v, GetPlayerHealth(player) - 1)
-		end
-		CallRemoteEvent(v, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[v].hunger, PlayerData[v].thirst)
+			SetPlayerHealth(v, GetPlayerHealth(v) - 1)
+        end
+		CallRemoteEvent(v, "OnUpdateVitalIndicator", GetPlayerHealth(v), PlayerData[v].hunger, PlayerData[v].thirst)
 	end
-end, '30000' , UpdateVital)
+end, '3000' , UpdateVital)
 
 AddEvent("OnPlayerDeath", function(player, instigator)
 	PlayerData[player].hunger = p_defaulthunger
 	PlayerData[player].thirst = p_defaultthirst
-	PlayerData[player].health = p_defaulthealth
+    PlayerData[player].health = p_defaulthealth
+    CallRemoteEvent(player, "OnUpdateVitalIndicator", 0, PlayerData[player].hunger, PlayerData[player].thirst)
+    compteur[player] = nil
 end)
 
 AddRemoteEvent("OnKeyPressed", function(player)
@@ -45,6 +51,8 @@ AddRemoteEvent("OnKeyPressed", function(player)
         if GetPlayerMovementMode(player) == 3 then
             if compteur[player] ~= nil then
                 compteur[player].isRunning = 1
+                compteur[player].time = GetTimeSeconds()
+                compteur[player].calculedTime = 0
             else
                 compteur[player] = {time = GetTimeSeconds(),
                                     isRunning = 1,

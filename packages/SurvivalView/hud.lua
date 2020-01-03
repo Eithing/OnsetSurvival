@@ -40,7 +40,7 @@ function ExecuteJs(hud, js)
     elseif hud == "craft" then
         ExecuteWebJS(CraftHud, js)
     elseif hud == "vitalIndicator"then
-        ExecuteWebJS(mainHud, js)
+        ExecuteWebJS(PlayerHud, js)
     elseif hud == "vehicle" then
         ExecuteWebJS(VehicleHud, js)
     elseif hud == "character" then

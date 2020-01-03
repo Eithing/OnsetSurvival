@@ -131,7 +131,8 @@ function LoadPlayerAccount(player, rows, result)
 			ChangeOtherPlayerClothes(player, player)
 		end
 
-		print("Player ID "..PlayerData[player].id.." loaded for "..GetPlayerIP(player))
+        print("Player ID "..PlayerData[player].id.." loaded for "..GetPlayerIP(player))
+	    CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 	end
 end
 

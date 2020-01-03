@@ -7,6 +7,8 @@ AddEvent("OnKeyRelease", function(key)
 end)
 
 function OnUpdateVitalIndicator(health, eat, drink)
+    AddPlayerChat("message")
+    AddPlayerChat(health..eat..drink)
 	SView.ExecuteJs("vitalIndicator", "UpdateVital("..health..","..eat..","..drink..")")
 end
 AddRemoteEvent("OnUpdateVitalIndicator",  OnUpdateVitalIndicator)
