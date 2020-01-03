@@ -164,7 +164,11 @@ function SavePlayer(player)
 
 	-- Sauvegarde de la position du joueur
 	local x, y, z = GetPlayerLocation(player)
-	PlayerData[player].position = {x= x, y= y, z= z}
+    PlayerData[player].position = {x= x, y= y, z= z}
+    
+    PlayerData[player].health = GetPlayerHealth(player)
+    
+    PlayerData[player].armor = GetPlayerArmor(player)
 
 	SLogic.UpdateUser(player, PlayerData[player])
     
@@ -200,5 +204,3 @@ AddRemoteEvent("InsertPlayer", function(player, name)
     PlayerData[player].steamid = tostring(GetPlayerSteamId(player))
     SavePlayer(player, PlayerData[player])
 end)
-
-

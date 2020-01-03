@@ -26,17 +26,6 @@ AddEvent("OnPackageStart", function()
     SetWebVisibility(adminHud, WEB_HIDDEN)
 end)
 
-function updateHud()    
-    ExecuteWebJS(PlayerHud, "SetHealth("..GetPlayerHealth()..");")
-    ExecuteWebJS(PlayerHud, "SetThirst("..GetPlayerPropertyValue(GetPlayerId(), "thirst")..");")
-    ExecuteWebJS(PlayerHud, "SetHunger("..GetPlayerPropertyValue(GetPlayerId(), "hunger")..");")
-end
-
-AddEvent( "OnGameTick", function()
-    -- Hud refresh
-    updateHud()
-end )
-
 function ExecuteJs(hud, js)
     if hud == "inventory" then
         ExecuteWebJS(inventoryHud, js)

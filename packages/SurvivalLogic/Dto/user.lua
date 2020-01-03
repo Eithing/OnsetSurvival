@@ -40,7 +40,7 @@ function UpdateUser(player, user)
 	local query = mariadb_prepare(sql, "UPDATE comptes SET admin = ?, argent = ?, health = ?,  armor = ?, hunger = ?, thirst = ?, nom = '?', clothing = '?', inventory = '?', created = '?', position = '?', steamid = '?' WHERE id = ? LIMIT 1;",
         user.admin,
         user.argent,
-		100,
+		user.health,
 		GetPlayerArmor(player),
 		user.hunger,
 		user.thirst,
