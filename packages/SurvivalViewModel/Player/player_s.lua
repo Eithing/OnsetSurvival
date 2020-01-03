@@ -1,11 +1,12 @@
 function OnPackageStart()
+    print("Player ServerSide Loaded (Save All toutes les "..s_SaveAll.."m)")
     -- Save all player data automatically 
     CreateTimer(function()
 		for k, v in pairs(GetAllPlayers()) do
             SavePlayer(v)
 		end
 		print("All players have been saved !")
-    end, 30000)
+    end, s_SaveAll*60000)
 end
 AddEvent("OnPackageStart", OnPackageStart)
 
@@ -48,6 +49,7 @@ function CreatePlayerData(player)
         PlayerData[player].isActioned = false
         PlayerData[player].position = {}
         PlayerData[player].created = 0
+        PlayerData[player].vitalnotif = false
         print("Data created for : "..player)
 
         table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR")
@@ -132,7 +134,7 @@ function LoadPlayerAccount(player, rows, result)
 		end
 
         print("Player ID "..PlayerData[player].id.." loaded for "..GetPlayerIP(player))
-	    CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
+        CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 	end
 end
 
@@ -175,6 +177,8 @@ function SavePlayer(player)
 	SLogic.UpdateUser(player, PlayerData[player])
     
     print("Data saved for : "..player)
+
+    AddNotification(player, "Votre personnage a bien été sauvegarder !", "success")
 end
 
 function IsAdmin(player)
@@ -206,3 +210,16 @@ AddRemoteEvent("InsertPlayer", function(player, name)
     PlayerData[player].steamid = tostring(GetPlayerSteamId(player))
     SavePlayer(player, PlayerData[player])
 end)
+
+-- Notification --
+function AddNotification(player, msg, type)
+    if msg == "" or msg == nil then
+        print("Notification : Message Invalide")
+        return
+    end
+    if type == "" or type == nil then
+        type = "default"
+    end
+    print(player, msg, type)
+    CallRemoteEvent(player, "ClientAddNotification", msg, type)
+end

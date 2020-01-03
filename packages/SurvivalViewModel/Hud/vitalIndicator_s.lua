@@ -32,6 +32,14 @@ CreateTimer(function(UpdateVital)
 			PlayerData[v].thirst = math.clamp((PlayerData[v].thirst - toRemove), 0, 100) 
 		end
 		if tonumber(PlayerData[v].hunger) <= 0 or tonumber(PlayerData[v].thirst) <= 0 then
+			if PlayerData[v].vitalnotif == false then
+				PlayerData[v].vitalnotif = true
+				AddNotification(v, "Vous avez besoin de boire ou manger !", "error")
+
+				Delay((p_delayvitalnotif*1000), function()
+					PlayerData[v].vitalnotif = false
+				end)
+			end
 			SetPlayerHealth(v, GetPlayerHealth(v) - 1)
         end
 		CallRemoteEvent(v, "OnUpdateVitalIndicator", GetPlayerHealth(v), PlayerData[v].hunger, PlayerData[v].thirst)
@@ -41,7 +49,8 @@ end, '3000' , UpdateVital)
 AddEvent("OnPlayerDeath", function(player, instigator)
 	PlayerData[player].hunger = p_defaulthunger
 	PlayerData[player].thirst = p_defaultthirst
-    PlayerData[player].health = p_defaulthealth
+	PlayerData[player].health = p_defaulthealth
+	PlayerData[v].vitalnotif = false
     CallRemoteEvent(player, "OnUpdateVitalIndicator", 0, PlayerData[player].hunger, PlayerData[player].thirst)
     compteur[player] = nil
 end)
@@ -56,7 +65,8 @@ AddRemoteEvent("OnKeyPressed", function(player)
             else
                 compteur[player] = {time = GetTimeSeconds(),
                                     isRunning = 1,
-                                    calculedTime = 0}
+									calculedTime = 0,
+									notif = false}
             end
         end
     end)
@@ -73,3 +83,11 @@ AddRemoteEvent("OnKeyReleased", function(player)
 		end
     end)
 end)
+
+function sethunger(player, count)
+	PlayerData[player].hunger = math.clamp(count,0,p_defaulthunger)
+end
+
+function setthirst(player, count)
+	PlayerData[player].thirst = math.clamp(count,0,p_defaultthirst)
+end

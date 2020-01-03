@@ -14,6 +14,11 @@ AddEvent("OnPackageStart", function()
                 if VehicleData[v].fuel <= 0 then
                     StopVehicleEngine(v)
                     VehicleData[v].fuel = 0
+
+                    local driver = GetVehicleDriver(v)
+                    if IsValidPlayer(driver) then
+                        AddNotification(driver, "La voiture a plus d'essence !", "error")
+                    end
                 end
             end
         end
@@ -29,8 +34,9 @@ AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat )
     if seat == 1 then
         CallRemoteEvent(player, "OnUpdateVehicleHud")
         CallRemoteEvent(player, "OnUpdateFuel", VehicleData[vehicle].fuel)
-        if VehicleData[vehicle].fuel == 0 then
+        if VehicleData[vehicle].fuel <= 0 then
             StopVehicleEngine(vehicle)
+            AddNotification(player, "La voiture a plus d'essence !", "error")
         end
     end
 end)

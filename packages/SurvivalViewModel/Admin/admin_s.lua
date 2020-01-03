@@ -44,6 +44,7 @@ AddCommand("kill", kill_commands)
 
 -- Health
 function health_commands(player, health)
+	count = tonumber(health)
 	if IsAdmin(player) then
 		SetPlayerHealth(player, health)
 		print("Admin : Vie set = "..health)
@@ -54,6 +55,7 @@ AddCommand("health", health_commands)
 
 -- Armor
 function armor_commands(player, armor)
+	count = tonumber(armor)
 	if IsAdmin(player) then
 		SetPlayerArmor(player, armor)
 		print("Admin : Armure set = "..armor)
@@ -62,12 +64,42 @@ function armor_commands(player, armor)
 end
 AddCommand("armor", armor_commands)
 
--- Spawn un npc
---[[ function cmd_commandsNPC(player)
-	local x, y, z = GetPlayerLocation(player)
-	CreateNPC(x+100, y, z, 84.066261291504)
+-- Faim
+function sethunger_commands(player, count)
+	count = tonumber(count)
+    if IsAdmin(player) then
+	    sethunger(player, count)
+        print("Admin : Faim set = "..count)
+    end
+	return
 end
-AddCommand("npc", cmd_commandsNPC) ]]
+AddCommand("sethunger", sethunger_commands)
+
+-- Soif
+function setthirst_commands(player, count)
+	count = tonumber(count)
+    if IsAdmin(player) then
+	    setthirst(player, count)
+        print("Admin : Soif set = "..count)
+    end
+	return
+end
+AddCommand("setthirst", setthirst_commands)
+
+-- Spawn un npc
+function npc_commands(player)
+	if IsAdmin(player) then
+		local x, y, z = GetPlayerLocation(player)
+		local npc = CreateNPC(x+100, y, z, 84.066261291504)
+		Delay(180000, function()
+			if IsValidNPC(npc) then
+				DestroyNPC(npc)
+			end
+		end)
+		
+	end
+end
+AddCommand("npc", npc_commands)
 
 
 -- Teleportation --
@@ -97,6 +129,7 @@ AddCommand("goto", goto_command)
 
 -- Essence --
 function addfuel_commands(player, count)
+	count = tonumber(count)
     if IsAdmin(player) then
 	    AddFuel(GetPlayerVehicle(player), count)
         print("Admin : Essence ajoutée")
@@ -106,6 +139,7 @@ end
 AddCommand("addfuel", addfuel_commands)
 
 function consumefuel_commands(player, count)
+	count = tonumber(count)
     if IsAdmin(player) then
 	    ConsumeFuel(GetPlayerVehicle(player), count)
         print("Admin : Essence consumée")
@@ -115,6 +149,7 @@ end
 AddCommand("consumefuel", consumefuel_commands)
 
 function setfuel_commands(player, count)
+	count = tonumber(count)
     if IsAdmin(player) then
 	    SetFuel(GetPlayerVehicle(player), count)
         print("Admin : Essence set = "..count)
