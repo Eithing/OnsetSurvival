@@ -6,17 +6,12 @@ AddEvent("OnPlayerDamage", function(player, damagetype, amount)
 end)
 
 AddEvent("OnPlayerSpawn", function(player)
-	print("1")
 	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), 100, 100)
 end)
 
-AddEvent("OnPlayerSteamAuth", function(player)
-	print(PlayerData[player].hunger)
-	Delay(500, function()
-		CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
-	end)
+AddRemoteEvent("OnPlayerHudLoadComplete", function(player)
+	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 end)
-
 
 AddEvent("OnPlayerQuit", function(player)
     compteur[player] = nil
