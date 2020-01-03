@@ -35,8 +35,7 @@ function math.clamp(num, min, max)
 	return num
 end
 
-function GetNearestGarageDealer(location)
-    local x, y, z = location
+function GetNearestGarageDealer(x, y, z)
 	for k,v in pairs(g_Points) do
         local x2, y2, z2 = v.x, v.y, z
         local dist = GetDistance3D(x, y, z, x2, y2, z2)

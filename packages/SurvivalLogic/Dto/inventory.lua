@@ -3,7 +3,7 @@ function GetPlayerInventory(id)
     local query = mariadb_prepare(sql, "SELECT * FROM inventory WHERE compteId = '?';", id)
     local result = mariadb_await_query(sql, query)
     local Player_Inventory = {}
-    local rows = mariadb_get_row_count()
+    local rows = mariadb_get_row_count() or 0
 	for i=1, rows do
         Player_Inventory[i] = {	id = mariadb_get_value_name(i, "id"),
                         compteId = mariadb_get_value_name(i, "compteId"),
@@ -22,7 +22,7 @@ function GetLastPlayerItem(id)
     local query = mariadb_prepare(sql, "SELECT * FROM inventory WHERE compteId = '?' ORDER BY DESC LIMIT 1;", id)
     local result = mariadb_await_query(sql, query)
     local Player_Inventory = {}
-    local rows = mariadb_get_row_count()
+    local rows = mariadb_get_row_count() or 0
 	Player_Inventory = {	id = mariadb_get_value_name(1, "id"),
                         compteId = mariadb_get_value_name(1, "compteId"),
 						itemId = mariadb_get_value_name(1, "itemId"),

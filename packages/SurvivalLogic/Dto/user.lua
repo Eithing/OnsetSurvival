@@ -2,7 +2,7 @@ function GetUserBySteamId(player)
     local query = mariadb_prepare(sql, "SELECT * FROM comptes WHERE steamid = '?' LIMIT 1;", tostring(GetPlayerSteamId(player)))
     local result = mariadb_await_query(sql, query)
     local User
-    local rows = mariadb_get_row_count()
+    local rows = mariadb_get_row_count() or 0
 	for i=1, rows do
 		User = {	id = mariadb_get_value_name(i, "id"),
 						name = mariadb_get_value_name(i, "nom"),

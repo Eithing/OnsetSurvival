@@ -68,7 +68,7 @@ end
 
 function OnLoadPlayer(player, steamid)
     local rows, result = SLogic.GetUserBySteamId(player)
-    if rows > 0 then
+    if rows == 0 then
         PlayerData[player].id = result.id
     end
     CheckForIPBan(player, rows, result)
@@ -118,7 +118,7 @@ function LoadPlayerAccount(player, rows, result)
 		PlayerData[player].inventory = SLogic.GetPlayerInventory(PlayerData[player].id)
 		PlayerData[player].admin = math.tointeger(result.admin)
         PlayerData[player].created = math.tointeger(result.created)
-        local playervehicles_rows, playervehicles_r = SLogic.GetVehiclesBySteamId(player)
+        local playervehicles_rows, playervehicles_r = SLogic.GetVehiclesBySteamId(PlayerData[player].id)
         PlayerData[player].vehicles = playervehicles_r
 
 		SetPlayerHealth(player, tonumber(result['health']))

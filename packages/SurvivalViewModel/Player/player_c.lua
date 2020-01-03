@@ -44,3 +44,20 @@ function AddNotification(msg, type)
     SView.ExecuteJs("vitalIndicator", 'AddNotification("'..msg..'","'..type..'")')
 end
 AddRemoteEvent("ClientAddNotification",  AddNotification)
+
+
+local notif = false
+CreateTimer(function()
+    local x, y, z = GetPlayerLocation()
+    local NearestGarageDealer = GetNearestGarageDealer(x, y, z)
+    if NearestGarageDealer ~= 0 then 
+        if notif == false then
+            AddPlayerChat("OnGameTick")
+            AddNotification("Appuyer sur E pour ouvrir le garage", "default")
+            notif = true
+            Delay(math.Seconds(20), function()
+                notif = false
+            end)
+        end
+    end
+end, math.Seconds(10))
