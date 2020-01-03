@@ -11,14 +11,14 @@
             <img src="burger.png" class="image">
             <div class="container1">
                 <div class="progress1 progress-striped1">
-                    <div class="progress-bar1" id="editable1">
+                    <div class="progress-bar1" id="faim">
                     </div>
                 </div>
             </div>
             <img src="water.png" class="image2">
             <div class="container2">
                 <div class="progress2 progress-striped2">
-                    <div class="progress-bar2" id="editable2">
+                    <div class="progress-bar2" id="soif">
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
         drawLine(ctx, i * (canvas.height / lines), canvas.height / lines);
     }
 
-    function ChangeColor(_life) {
+    function UpdateVie(_life) {
         if (_life > 74 && _life < 101) {
             document.getElementById("c").style.background = "-webkit-linear-gradient(left, black 0%, green 100%)";
         }
@@ -103,8 +103,9 @@
         }
     }
 
-    function UpdateVital(...coucou) {
-        document.getElementById("editable1").style.width = coucou[0] + "%";
-        document.getElementById("editable2").style.width = coucou[1] + "%";
+    function UpdateVital(vie, faim, soif) {
+        UpdateVie(vie);
+        document.getElementById("faim").style.width = faim + "%";
+        document.getElementById("soif").style.width = soif + "%";
     }
 </script>
