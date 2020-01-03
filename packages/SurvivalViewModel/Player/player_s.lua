@@ -13,7 +13,7 @@ AddEvent("OnPackageStart", OnPackageStart)
 function OnPlayerSteamAuth(player)
     CreatePlayerData(player)
 
-    OnLoadPlayer(player, GetPlayerSteamId(player))
+    OnLoadPlayer(player)
 end
 AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
 
@@ -24,7 +24,6 @@ end
 AddEvent("OnPlayerQuit", OnPlayerQuit)
 
 AddEvent("OnPlayerSpawn", function(player)
-    
     ChangeOtherPlayerClothes(player, player)
 end)
 
@@ -50,6 +49,7 @@ function CreatePlayerData(player)
         PlayerData[player].position = {}
         PlayerData[player].created = 0
         PlayerData[player].vitalnotif = false
+        PlayerData[player].vehicles = {}
         print("Data created for : "..player)
 
         table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR")
@@ -66,9 +66,9 @@ function CreatePlayerData(player)
     end
 end
 
-function OnLoadPlayer(player, steamid)
+function OnLoadPlayer(player)
     local rows, result = SLogic.GetUserBySteamId(player)
-    if rows ~= 0 then
+    if rows > 0 then
         PlayerData[player].id = result.id
     end
     CheckForIPBan(player, rows, result)
@@ -84,7 +84,7 @@ function CheckForIPBan(player, lrowns, lresult)
 		else
 			LoadPlayerAccount(player, lrowns, lresult)
 		end
-	else
+	elseif rows == 1 then
 		print("Kicking "..GetPlayerName(player).." because their IP was banned ("..result.reason..")")
         
         KickPlayer(player, "🚨 You have been banned from the server. (raison : "..result.reason..")")
