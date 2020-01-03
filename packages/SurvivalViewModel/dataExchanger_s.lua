@@ -1,6 +1,7 @@
 SLogic = ImportPackage("SurvivalLogic")
 
 PlayerData = {}
+VehicleData = {}
 
 AddEvent("OnPackageStart", function()
 end)

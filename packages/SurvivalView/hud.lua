@@ -2,6 +2,8 @@ SViewModel = ImportPackage("SurvivalViewModel")
 
 --local PlayerHud
 --local characterHud
+--local adminHud
+--local VehicleHud
 
 AddEvent("OnPackageStart", function()
 	ShowWeaponHUD(false)
@@ -24,6 +26,12 @@ AddEvent("OnPackageStart", function()
     SetWebAnchors(adminHud, 0.0, 0.0, 1.0, 1.0)
     LoadWebFile(adminHud, "http://asset/SurvivalView/Admin/admin.html")
     SetWebVisibility(adminHud, WEB_HIDDEN)
+
+    VehicleHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    SetWebAlignment(VehicleHud, 1.0, 0.0)
+    SetWebAnchors(VehicleHud, 0.0, 0.0, 1.0, 1.0)
+    LoadWebFile(VehicleHud, "http://asset/SurvivalView/Vehicle/vehicle.html")
+    SetWebVisibility(VehicleHud, WEB_HIDDEN)
 end)
 
 function ExecuteJs(hud, js)

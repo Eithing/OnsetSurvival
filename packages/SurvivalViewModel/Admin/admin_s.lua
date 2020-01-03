@@ -32,6 +32,36 @@ function pos_commands(player)
 end
 AddCommand("pos", pos_commands)
 
+-- Kill
+function kill_commands(player)
+	if IsAdmin(player) then
+		SetPlayerHealth(player, 0)
+		print("Admin : Player kill "..player)
+	end
+	return
+end
+AddCommand("kill", kill_commands)
+
+-- Health
+function health_commands(player, health)
+	if IsAdmin(player) then
+		SetPlayerHealth(player, health)
+		print("Admin : Vie set = "..health)
+	end
+	return
+end
+AddCommand("health", health_commands)
+
+-- Armor
+function armor_commands(player, armor)
+	if IsAdmin(player) then
+		SetPlayerArmor(player, armor)
+		print("Admin : Armure set = "..armor)
+	end
+	return
+end
+AddCommand("armor", armor_commands)
+
 -- Spawn un npc
 --[[ function cmd_commandsNPC(player)
 	local x, y, z = GetPlayerLocation(player)
@@ -43,7 +73,7 @@ AddCommand("npc", cmd_commandsNPC) ]]
 -- Teleportation --
 function spawn_commands(player) -- Commande pour pouvoir ce re TP au niveau de la station service (Pour le bug de passage sous la map)
 	if IsAdmin(player) then
-		SetPlayerLocation(player, 125773.000000, 80246.000000, 1645.000000)
+		SetPlayerLocation(player, 125773.000000, 80246.000000, 1645.000000+250)
 		print("Admin : Téléportation validé")
 	end
 	return
@@ -51,34 +81,19 @@ end
 AddCommand("spawn", spawn_commands)
 
 -- Se teleporter a un joueur
-function goTo(player, player2)
+function goto_command(player, player2)
 	if IsAdmin(player) then
 		if IsValidPlayer(player2) then
 			local x, y, z = GetPlayerLocation(player2)
 			z = z + 30
 			SetPlayerLocation(player, x, y, z)
+			print("Admin : "..player.." goto "..player2)
 		else
-			AddPlayerChat(player, "Admin : Aucun joueur trouvée")
+			print("Admin : Aucun joueur trouvée")
 		end
 	end
 end
-AddCommand("goto", goTo)
-
--- Teleporter un joueur a sois
-function bring(player, player2)
-	if IsAdmin(player) then
-		if IsValidPlayer(player2) then
-			local x, y, z = GetPlayerLocation(player)
-			x = x + 25
-			y = y + 25
-			SetPlayerLocation(player2, x, y, z)
-			AddPlayerChat(player2, GetPlayerName(player).." vous a téléporter.")
-		else
-			AddPlayerChat(player, "Admin : Aucun joueur trouvée")
-		end
-	end
-end
-AddRemoteEvent("bring", bring)
+AddCommand("goto", goto_command)
 
 -- Essence --
 function addfuel_commands(player, count)
@@ -98,3 +113,12 @@ function consumefuel_commands(player, count)
 	return
 end
 AddCommand("consumefuel", consumefuel_commands)
+
+function setfuel_commands(player, count)
+    if IsAdmin(player) then
+	    SetFuel(GetPlayerVehicle(player), count)
+        print("Admin : Essence set = "..count)
+    end
+	return
+end
+AddCommand("setfuel", setfuel_commands)
