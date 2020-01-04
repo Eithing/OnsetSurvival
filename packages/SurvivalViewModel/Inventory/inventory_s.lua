@@ -1,29 +1,22 @@
 AddRemoteEvent("RequestPopulateInventory", function(player)
 	CallRemoteEvent(player, "PopulateInventory", PlayerData[player].inventory)
-	--UpdateWeight(player)
 end)
 
 AddRemoteEvent("equipWeapon", function(player, id, slot, ammo)
 	SetPlayerWeapon(player, id, ammo, true, slot, false)
 end)
 
---[[ AddEvent("OnPlayerSteamAuth", function(player)
-	UpdateWeight(player, false)
-end) ]]
-
 -- Remove --
 function RemoveItem(player, idUnique, count)
 	for i, item in pairs(PlayerData[player].inventory) do
-		if item.idUnique == idUnique then
+		if item.id == idUnique then
 			item.itemCount = math.clamp(math.floor(item.itemCount - count), 0, 99)
 			if(item.itemCount > 1)then
-				SLogic.UpdateUserInventory(PlayerData[player].id, idUnique, item.itemCount)
-				--CallRemoteEvent(player, "UpdateItemInventory", item) Inutile mais au cas ou, on garde
+				SLogic.UpdatePlayerItem(item)
 			else
-				SLogic.RemoveItemInventory(idUnique)
+				SLogic.RemovePlayerItem(idUnique)
 				PlayerData[player].inventory[i] = nil
 			end
-			UpdateWeight(player)
 			return
 		end
 	end
@@ -34,13 +27,12 @@ function DropItem(player, idUnique)
 	local x,y,z = GetPlayerLocation(player)
 	local newitem
 	for i, item in pairs(PlayerData[player].inventory) do
-		if item.idUnique == idUnique then
+		if item.id == idUnique then
 			local newitem = CreatePickup(item.modelId, x, y, z - 88)
 			ItemPickups[newitem] = {}
 			ItemPickups[newitem].item = item
-			SLogic.RemoveItemInventory(idUnique)
+			SLogic.RemovePlayerItem(idUnique)
 			PlayerData[player].inventory[i] = nil
-			UpdateWeight(player)
 			break
 		end
 	end
@@ -68,13 +60,15 @@ end)
 
 function PickupItem(player, Pitem)
 	local found = false
-	for i, item in ipairs(PlayerData[player].inventory) do
+	for i, item in pairs(PlayerData[player].inventory) do
 		if item.itemId == Pitem.itemId then
+			item.var = SLogic.json_decode(item.var)
 			item.itemCount = math.floor(item.itemCount + Pitem.itemCount)
-			for vi, ivar in pairs(Pitem.var) do
+			for vi, ivar in pairs(SLogic.json_decode(Pitem.var)) do
 				table.insert(item.var, ivar)
 			end
-			SLogic.UpdateUserInventory(PlayerData[player].id, item.idUnique, item.itemCount, item.var)
+			item.var = SLogic.json_encode(item.var)
+			SLogic.UpdatePlayerItem(item)
 			CallRemoteEvent(player, "UpdateItemInventory", item)
 			found = true
 			return
@@ -86,22 +80,19 @@ function PickupItem(player, Pitem)
 			Player_CreateNewItem(player)
 		end)
 	end
-	UpdateWeight(player)
 end
 
 function Player_CreateNewItem(player)
-	local newItem = SLogic.GetLastUserItem(PlayerData[player].id)
+	local newItem = SLogic.GetLastPlayerItem(PlayerData[player].id)
 	table.insert(PlayerData[player].inventory, newItem)
 	CallRemoteEvent(player, "AddItemInventory", newItem)
-	UpdateWeight(player)
 end
 
 -- Use --
 function UseItem(player, idUnique)
-	local UsingItem = GetItemByIdUnique(player, idUnique) -- Informatio dans l'inventaire
-	local UsingItemData = GetItemDataByItemID(UsingItem.itemId) -- Information sur l'item
+	local UsingItem = GetItemByIdUnique(player, idUnique) -- Information dans l'inventaire
 	if(tonumber(UsingItem.itemId) == 29)then -- Bidon d'essence
-		local vehicle, Dist = GetNearestVehicle(player, 200)
+		local vehicle, Dist = VGetNearestVehicle(player, 200)
 		if(IsValidVehicle(vehicle))then
 			if GetPlayerVehicle(player) == vehicle then
 				return
@@ -113,7 +104,7 @@ function UseItem(player, idUnique)
 		--print("Clé")
 	end
 	if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
-		local vehicle, Dist = GetNearestVehicle(player, 200)
+		local vehicle, Dist = VGetNearestVehicle(player, 200)
 		if(IsValidVehicle(vehicle))then
 			for i=1, 8 do
 				SetVehicleDamage(vehicle, i, 0)
@@ -124,38 +115,14 @@ function UseItem(player, idUnique)
 	if(tonumber(UsingItem.itemId) ~= 30)then
 		RemoveItem(player, idUnique, 1)
 	end
-
-	UpdateWeight(player)
 end
 AddRemoteEvent("UseItem", UseItem)
-
--- Weight --
---[[ function UpdateWeight(player, visibility)
-	local weight = 0
-	for i, item in ipairs(PlayerData[player].inventory) do
-		weight = weight + (item.poids * item.itemCount)
-	end
-
-	if weight > i_maxWeight then
-		if PlayerData[player].inventory.IsInMaxWeight ~= true then
-			CallRemoteEvent(player, "IsGettingMaxWeight", false)
-			PlayerData[player].inventory.IsInMaxWeight = true
-		end
-		CallRemoteEvent(player, "IsGettingMaxWeight", true)
-	else
-		if visibility ~= true then
-			CallRemoteEvent(player, "IsGettingCorrectWeight")
-		end
-		PlayerData[player].inventory.IsInMaxWeight = false
-	end
-end
-AddRemoteEvent("UpdateWeight", UpdateWeight) ]]
 
 -- Fonctions --
 function GetItemByIdUnique(player, idUnique)
 	local found
 	for i, item in pairs(PlayerData[player].inventory) do
-		if item.idUnique == idUnique then
+		if item.id == idUnique then
 			found = item
 			break
 		end
@@ -164,7 +131,7 @@ function GetItemByIdUnique(player, idUnique)
 end
 
 function GetItemDataByItemID(itemID)
-	local found
+	local found = 0
 	for i, item in ipairs(ItemData) do
 		if item.id == itemID then
 			found = item

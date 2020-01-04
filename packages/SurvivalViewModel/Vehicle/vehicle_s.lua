@@ -123,7 +123,7 @@ end
 AddRemoteEvent("Repair", Repair)
 
 -- Fonction --
-function GetNearestVehicle(player, nearest_dist) -- Trouvée le véhicule le plus proche
+function VGetNearestVehicle(player, nearest_dist) -- Trouvée le véhicule le plus proche
 	local vehicles = GetStreamedVehiclesForPlayer(player)
 	local found = 0
 	local x, y, z = GetPlayerLocation(player)

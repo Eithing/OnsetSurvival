@@ -2,8 +2,11 @@ SLogic = ImportPackage("SurvivalLogic")
 
 PlayerData = {}
 VehicleData = {}
+ItemData = {}
+ItemPickups = {}
 
 AddEvent("OnPackageStart", function()
+	ItemData = SLogic.GetAllItems()
 end)
 
 CreateTimer(function(GlobalSave)
