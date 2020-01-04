@@ -169,22 +169,19 @@ function UpdateOrInsertVehicle(player, vehicle)
             end
         else
             print("UpdateOrInsertVehicle VOLEUR")
-            local vehicleowner = GetPlayerByCompteId(cvehicledata.compteId)
+            local vehicleowner = GetPlayerByCompteId(tonumber(cvehicledata.compteId))
             if vehicleowner ~= 0 then
                 if PlayerData[vehicleowner] ~= nil then
                     for k,v in pairs(PlayerData[vehicleowner].vehicles) do
                         if tonumber(v.id) == tonumber(cvehicledata.id) then
-                            table.remove(PlayerData[vehicleowner].vehicles, k)
+                            PlayerData[vehicleowner].vehicles[k] = nil
                             break
                         end
                     end
                 end
             end
             SLogic.DeleteVehicleById(cvehicledata.id)
-            cvehicledata.id = SLogic.InsertVehicle(tonumber(PlayerData[player].id), cvehicledata)
-            cvehicledata.compteId = tonumber(PlayerData[player].id)
-            cvehicledata.state = 0
-            table.insert(PlayerData[player].vehicles, cvehicledata)
+            table.insert(PlayerData[player].vehicles, SLogic.InsertVehicle(tonumber(PlayerData[player].id), cvehicledata))
         end
     end
 end
