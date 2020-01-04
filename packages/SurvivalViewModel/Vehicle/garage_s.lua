@@ -12,6 +12,7 @@ AddRemoteEvent("StoreVehicleToGarage", function(player)
     if NearestGarageStore ~= 0 then
         local vehicle = GetPlayerVehicle(player)
         if vehicle ~= 0 and VehicleData[vehicle] ~= nil then
+            print("CC")
             -- On vien set les variables du véhicule en cache
             if SaveVehicule(player, vehicle, NearestGarageStore.id) ~= 0 then
                 -- On enleve le véhicule du cache et on le considère rentrer puis on le delete
@@ -149,7 +150,7 @@ end
 function UpdateOrInsertVehicle(player, vehicledata)
     if vehicledata ~= nil then
         if vehicledata.compteId == PlayerData[player].id then
-            local vehcache = Garage_GetVehicleById(player, vehicledata.id)
+            local vehcache, vehid = Garage_GetVehicleById(player, vehicledata.id)
             vehcache = vehicledata
             SLogic.UpdateVehicleById(vehicledata)
         else
@@ -161,8 +162,9 @@ function UpdateOrInsertVehicle(player, vehicledata)
                 end
             end
             SLogic.DeleteVehicleById(vehicledata.id)
-            SLogic.InsertVehicle(PlayerData[player].id, vehicledata)
-
+            local vehid = SLogic.InsertVehicle(PlayerData[player].id, vehicledata)
+            vehicledata.id = vehid
+            vehicledata.compteId = PlayerData[player].id
             table.insert(PlayerData[player].vehicles, vehicledata)
         end
     end
