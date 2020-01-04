@@ -137,20 +137,31 @@ function DestroyVehicule(player, vehicle)
     local vehicledata = VehicleData[vehicle]
     if vehicledata ~= nil then
         vehicledata.state = 0
-        UpdateOrInsertVehicle(vehicledata, PlayerData[player].id)
+        UpdateOrInsertVehicle(player, vehicledata)
         print("Vehicule destroy for "..tostring(vehicledata.id))
         DestroyVehicle(vehicle)
         VehicleData[vehicle] = nil
     end
 end
 
-function UpdateOrInsertVehicle(vehicledata, compteid)
+function UpdateOrInsertVehicle(player, vehicledata)
     if vehicledata ~= nil then
-        if vehicledata.compteId == compteid then
+        if vehicledata.compteId == PlayerData[player].id then
+            local vehcache = Garage_GetVehicleById(player, vehicledata.id)
+            vehcache = vehicledata
             SLogic.UpdateVehicleById(vehicledata)
         else
-            SLogic.InsertVehicle(compteid, vehicledata)
+            local vehicleowner = GetPlayerByCompteId(vehicledata.compteId)
+            if vehicleowner ~= 0 then
+                local vehcache = Garage_GetVehicleById(vehicleowner, vehicledata.id)
+                if vehcache ~= 0 then
+                    vehcache = nil
+                end
+            end
             SLogic.DeleteVehicleById(vehicledata.id)
+            SLogic.InsertVehicle(compteid, vehicledata)
+
+            table.insert(PlayerData[player].vehicles, vehicledata)
         end
     end
 end
