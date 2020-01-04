@@ -16,7 +16,7 @@ function GetVehiclesBySteamId(compteId)
 						class = mariadb_get_value_name(i, "class"),
 						poids = mariadb_get_value_name(i, "poids"),
 						imageid = mariadb_get_value_name(i, "imageId"),
-						state = mariadb_get_value_name(i, "state")}
+						state = tonumber(mariadb_get_value_name(i, "state"))}
 	end
 	mariadb_delete_result(result)
 	return rows, Player_Vehicles
