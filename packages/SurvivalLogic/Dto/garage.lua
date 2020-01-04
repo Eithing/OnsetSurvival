@@ -24,17 +24,9 @@ end
 AddFunctionExport("GetVehiclesBySteamId", GetVehiclesBySteamId)
 
 function InsertVehicle(playerid, veh)
-	print(playerid,
-	veh.modelId,
-	veh.fuel,
-	veh.health,
-	veh.cles,
-	veh.garageid,
-	veh.degats,
-	veh.state)
 	local query = mariadb_prepare(sql, "INSERT INTO player_vehicles (compteId, modelId, fuel, health, cles, garageid, degats, state) VALUES ('?', '?', '?', '?', '?', '?', '?', '?');",
 		playerid,
-		veh.modelId,
+		veh.modelid,
         veh.fuel,
         veh.health,
 		veh.cles,
