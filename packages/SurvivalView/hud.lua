@@ -1,11 +1,5 @@
 SViewModel = ImportPackage("SurvivalViewModel")
 
---local PlayerHud
---local characterHud
---local adminHud
---local VehicleHud
---local garageHud
-
 AddEvent("OnPackageStart", function()
 	ShowWeaponHUD(false)
     ShowHealthHUD(false)
@@ -39,13 +33,20 @@ AddEvent("OnPackageStart", function()
     SetWebAnchors(garageHud, 0.0, 0.0, 1.0, 1.0)
     LoadWebFile(garageHud, "http://asset/SurvivalView/Garage/garage.html")
     SetWebVisibility(garageHud, WEB_HIDDEN)
+
+    inventoryHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    SetWebAlignment(inventoryHud, 1.0, 0.0)
+    SetWebAnchors(inventoryHud, 0.0, 0.0, 1.0, 1.0)
+    LoadWebFile(inventoryHud, "http://asset/SurvivalView/Inventory/inventory.html")
+    SetWebVisibility(inventoryHud, WEB_HIDDEN)
 end)
 
 function ExecuteJs(hud, js)
     if hud == "inventory" then
+        AddPlayerChat(js)
         ExecuteWebJS(inventoryHud, js)
-    elseif hud == "craft" then
-        ExecuteWebJS(CraftHud, js)
+   --[[  elseif hud == "craft" then
+        ExecuteWebJS(CraftHud, js) ]]
     elseif hud == "vitalIndicator"then
         ExecuteWebJS(PlayerHud, js)
     elseif hud == "vehicle" then

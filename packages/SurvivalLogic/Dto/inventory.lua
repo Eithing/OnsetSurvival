@@ -12,7 +12,7 @@ function GetPlayerInventory(id)
                         var = mariadb_get_value_name(i, "var")}
 	end
 	mariadb_delete_result(result)
-	return rows, Player_Inventory
+	return Player_Inventory
 end
 AddFunctionExport("GetPlayerInventory", GetPlayerInventory)
 
@@ -30,7 +30,7 @@ function GetLastPlayerItem(id)
     mariadb_delete_result(result)
 	return rows, Player_Inventory
 end
-AddFunctionExport("GetPlayerInventory", GetPlayerInventory)
+AddFunctionExport("GetLastPlayerItem", GetLastPlayerItem)
 
 -- Insert Item --
 function SetUserInventory(compteId, itemId, count, var)
