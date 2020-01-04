@@ -24,7 +24,7 @@ end
 AddFunctionExport("GetVehiclesBySteamId", GetVehiclesBySteamId)
 
 function GetLastVehicleByCompteId(compteId)
-    local query = mariadb_prepare(sql, "SELECT player_vehicles.id, player_vehicles.compteId, player_vehicles.fuel, player_vehicles.state, player_vehicles.health, player_vehicles.cles, player_vehicles.garageid, player_vehicles.degats, vehicles.nom, vehicles.modelId, vehicles.imageId, vehicles.class, vehicles.poids FROM player_vehicles INNER JOIN vehicles ON vehicles.modelId = player_vehicles.modelId WHERE compteId = '?' ORDER BY DESC LIMIT 1;", compteId)
+    local query = mariadb_prepare(sql, "SELECT player_vehicles.id, player_vehicles.compteId, player_vehicles.fuel, player_vehicles.state, player_vehicles.health, player_vehicles.cles, player_vehicles.garageid, player_vehicles.degats, vehicles.nom, vehicles.modelId, vehicles.imageId, vehicles.class, vehicles.poids FROM player_vehicles INNER JOIN vehicles ON vehicles.modelId = player_vehicles.modelId WHERE compteId = '?' ORDER BY player_vehicles.id DESC LIMIT 1;", compteId)
     local result = mariadb_await_query(sql, query)
     local Player_Vehicles = {}
     local rows = mariadb_get_row_count() or 0
