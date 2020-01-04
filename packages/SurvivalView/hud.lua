@@ -43,7 +43,6 @@ end)
 
 function ExecuteJs(hud, js)
     if hud == "inventory" then
-        AddPlayerChat(js)
         ExecuteWebJS(inventoryHud, js)
    --[[  elseif hud == "craft" then
         ExecuteWebJS(CraftHud, js) ]]
