@@ -110,7 +110,7 @@ function UseItem(player, idUnique)
 		end
 	end
 	if(tonumber(UsingItem.itemId) == 30)then --Clé
-		print("Clé")
+		--print("Clé")
 	end
 	if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
 		local vehicle, Dist = GetNearestVehicle(player, 200)

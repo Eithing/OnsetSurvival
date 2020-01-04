@@ -21,18 +21,23 @@ v_defaultFuel = 100 -- Essence par défaut d'un véhicule
 
 -- GARAGE CONFIG --
 g_Points = {}
-table.insert(g_Points, {id = 1, nom = "Spawn", x = 126034, y = 80416, z = 1568, radius = 150.0,
+table.insert(g_Points, {id = 1, nom = "Spawn", x = 127564, y = 75447, z = 1566, radius = 150.0,
 	spawnPoints = {
 		[1] = {x = 128002, y = 75453, z = 1566, rotationz = 90},
 		[2] = {x = 126399, y = 74585, z = 1566, rotationz = 90},
 		[3] = {x = 125523, y = 75202, z = 1566, rotationz = 90}
 	}
 })
-table.insert(g_Points, {id = 2, nom = "Spawn", x = 126478, y = 79203, z = 1568, radius = 150.0,
+table.insert(g_Points, {id = 2, nom = "Spawn", x = 126031, y = 80424, z = 1566, radius = 150.0,
 	spawnPoints = {
 		[1] = {x = 124694, y = 80626, z = 1581, rotationz = 90}
 	}
 })
+
+--Store Vehicle
+gstore_Points = {}
+table.insert(gstore_Points, {id = 1, x = 128817, y = 76898,  z = 1566, radius = 200.0})
+table.insert(gstore_Points, {id = 2, x = 128115, y = 77886,  z = 1568, radius = 200.0})
 
 -- RECOLTE CONFIG --
 r_Points = {}

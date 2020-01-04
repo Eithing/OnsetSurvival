@@ -40,7 +40,7 @@ class Vehicle {
         this.button.setAttribute("id", "vehbutton")
 
         this.button.addEventListener('click', (event) => {
-            ue.game.callevent("OnSpawnVehicle", id);
+            ue.game.callevent("OnSpawnVehicle", JSON.stringify([id]));
         }, false);
 
         this.element.appendChild(this.button);
@@ -52,7 +52,7 @@ const CONFIG = {
     'cars': {
         spriteLignes: 5,
         spriteColonnes: 5,
-        space: 48,
+        space: 128,
         url: "url('./../Ressources/images/Cars.jpg')"
     },
 }

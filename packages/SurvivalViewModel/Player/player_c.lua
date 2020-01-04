@@ -54,26 +54,33 @@ AddRemoteEvent("ClientAddNotification",  AddNotification)
 -- All Notif
 local notifid = {}
 
-local function InitNotif(index, zone, msg, callremote)
+local function InitNotif(index, zone, msg, callremote, incar)
     notifid[index] = {}
     notifid[index].id = 0
     notifid[index].notif = false
     notifid[index].zone = zone
     notifid[index].msg = msg
     notifid[index].CallRemonte = callremote
+    notifid[index].incar = math.clamp(incar, 0, 1) -- 1 est dans la voiture
 end
 
-InitNotif("garage", g_Points, "Appuyer sur E pour ouvrir le garage", "OnOpenGarage")
-InitNotif("recolte", r_Points, "Appuyer sur E pour recolter", "OnOpenGarage")
+InitNotif("garage", g_Points, "Appuyer sur E pour ouvrir le garage", "OnOpenGarage", 0)
+InitNotif("garagestore", gstore_Points, "Appuyer sur E pour stocker votre véhicule", "StoreVehicleToGarage", 1)
+InitNotif("recolte", r_Points, "Appuyer sur E pour recolter", "OnOpenGarage", 0)
 
 function OnKeyPress(key)
     if key == "E" then
         local x, y, z = GetPlayerLocation()
         for k, v in pairs(notifid) do
-            local zone = GetNearestZone(v.zone, x, y, z)
-            if zone ~= 0 then
-                CallRemoteEvent(v.CallRemonte)
+            if v.CallRemonte == "" then
                 break
+            end
+            if GetPlayerVehicle() == v.incar then
+                local zone = GetNearestZone(v.zone, x, y, z)
+                if zone ~= 0 then
+                    CallRemoteEvent(v.CallRemonte)
+                    break
+                end
             end
         end
 	end
@@ -85,8 +92,10 @@ CreateTimer(function()
     for k, v in pairs(notifid) do
         if GetNearestZone(v.zone, x, y, z) ~= 0 then
             if v.notif == false then
-                v.id = AddNotification(v.msg, "default", 999)
-                v.notif = true
+                if GetPlayerVehicle() == v.incar then
+                    v.id = AddNotification(v.msg, "default", 999)
+                    v.notif = true
+                end
             end
         else
             if v.notif == true then

@@ -14,7 +14,7 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
 			local h = GetPlayerHeading(player)
 			local vehicle = CreateVehicle(actionId, x, y, z, h)
 			SetPlayerInVehicle(player, vehicle)
-			SetVehicleHealth(vehicle, 1500)
+			SetVehicleHealth(vehicle, v_health)
 			SetVehicleRespawnParams(vehicle, false)
 		end
 	end

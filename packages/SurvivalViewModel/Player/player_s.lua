@@ -5,7 +5,17 @@ function OnPackageStart()
 		for k, v in pairs(GetAllPlayers()) do
             SavePlayer(v)
 		end
-		print("All players have been saved !")
+        print("All players have been saved !")
+        
+        for k, v in pairs(GetAllVehicles()) do
+            if VehicleData[v] ~= nil then
+                local playerveh = GetPlayerByCompteId(VehicleData[v].compteId)
+                if playerveh ~= 0 then
+                    SaveVehicule(v, playerveh, VehicleData[v].garageid)
+                end
+            end
+		end
+		print("All Vehicules have been saved !")
     end, s_SaveAll*60000)
 end
 AddEvent("OnPackageStart", OnPackageStart)
@@ -50,7 +60,7 @@ function CreatePlayerData(player)
         PlayerData[player].created = 0
         PlayerData[player].vitalnotif = false
         PlayerData[player].vehicles = {}
-        print("Data created for : "..player)
+        print("PlayerData created for : "..player)
 
         table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR")
         table.insert(PlayerData[player].clothing, { 250, 240, 190, 1 })
@@ -98,7 +108,7 @@ function CreatePlayerAccount(player)
 
 	setPositionAndSpawn(player, nil)
 
-	print("Player ID "..PlayerData[player].id.." created for "..player)
+	print("PlayerID "..PlayerData[player].id.." a crée un compte ("..player..")")
 end
 
 function LoadPlayerAccount(player, rows, result)
@@ -135,7 +145,7 @@ function LoadPlayerAccount(player, rows, result)
 			ChangeOtherPlayerClothes(player, player)
 		end
 
-        print("Player ID "..PlayerData[player].id.." loaded for "..GetPlayerIP(player))
+        print("PlayerID "..PlayerData[player].id.." à charger son compte ("..GetPlayerIP(player)..")")
         CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 	end
 end
@@ -158,7 +168,7 @@ function DestroyPlayerData(player)
 	end
 
 	PlayerData[player] = nil
-	print("Data destroyed for : "..player)
+	print("PlayerData destroyed for : "..player)
 end
 
 function SavePlayer(player)
@@ -181,9 +191,9 @@ function SavePlayer(player)
 
 	SLogic.UpdateUser(player, PlayerData[player])
     
-    print("Data saved for : "..player)
+    print("PlayerData saved for : "..player)
 
-    print(AddNotification(player, "Votre personnage a bien été sauvegarder !", "success"))
+    AddNotification(player, "Votre personnage a bien été sauvegarder !", "success")
 end
 
 function IsAdmin(player)
@@ -219,6 +229,19 @@ end)
 -- Teleport --
 function PlayerTeleport(player, x, y, z)
     SetPlayerLocation(player, x, y, z+250)
+end
+
+-- GetPlayerByCompteId --
+function GetPlayerByCompteId(compteid)
+    local found = 0
+    for k,v in pairs(GetAllPlayers()) do
+        if tonumber(PlayerData[v].id) == tonumber(compteid) then
+            found = v
+            break
+        end
+    end
+
+    return found
 end
 
 -- Notification --

@@ -10,7 +10,7 @@ function ReloadVehicles(garageid, vehicles)
 end
 
 function AddVehicle(v)
-    SView.ExecuteJs("garage", 'garage.addVehicle('..v.id..', new Vehicle('..v.id..', "Voiture", '..v.modelid..','..v.modelid..'))')
+    SView.ExecuteJs("garage", 'garage.addVehicle('..v.id..', new Vehicle('..v.id..', "'..v.nom..'", '..v.modelid..','..v.imageid..'))')
 end
 
 function RemoveVehicle(v)

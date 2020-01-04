@@ -9,8 +9,10 @@ AddEvent("OnPlayerSpawn", function(player)
 end)
 
 local function PlayerChargeHud(player)
-	if PlayerData[player].hunger == nil or PlayerData[player].thirst == nil then
-		PlayerChargeHud(player)
+	if PlayerData[player] == nil or PlayerData[player].hunger == nil or PlayerData[player].thirst == nil then
+		Delay(500, function()
+			PlayerChargeHud(player)
+		end)
 	else
 		CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 		return
