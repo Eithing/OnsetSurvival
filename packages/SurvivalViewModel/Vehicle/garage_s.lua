@@ -69,10 +69,12 @@ end)
 -- FONCTIONS --
 function Garage_GetVehicleById(player, id)
     local found = 0
-    for k,v in pairs(PlayerData[player].vehicles) do
-        if tonumber(v.id) == tonumber(id) then
-            found = v
-            break
+    if PlayerData[player] ~= nil then
+        for k,v in pairs(PlayerData[player].vehicles) do
+            if tonumber(v.id) == tonumber(id) then
+                found = v
+                break
+            end
         end
     end
 
