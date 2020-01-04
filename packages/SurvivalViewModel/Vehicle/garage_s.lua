@@ -72,16 +72,18 @@ end)
 -- FONCTIONS --
 function Garage_GetVehicleById(player, id)
     local found = 0
+    local foundid = 0
     if PlayerData[player] ~= nil then
         for k,v in pairs(PlayerData[player].vehicles) do
             if tonumber(v.id) == tonumber(id) then
                 found = v
+                foundid = k
                 break
             end
         end
     end
 
-    return found
+    return found, foundid
 end
 
 function Garage_GetGoodSpawnPoint(player, garage)
@@ -153,9 +155,9 @@ function UpdateOrInsertVehicle(player, vehicledata)
         else
             local vehicleowner = GetPlayerByCompteId(vehicledata.compteId)
             if vehicleowner ~= 0 then
-                local vehcache = Garage_GetVehicleById(vehicleowner, vehicledata.id)
+                local vehcache, vehid = Garage_GetVehicleById(vehicleowner, vehicledata.id)
                 if vehcache ~= 0 then
-                    vehcache = nil
+                    table.remove(PlayerData[vehicleowner].vehicles, vehid)
                 end
             end
             SLogic.DeleteVehicleById(vehicledata.id)
