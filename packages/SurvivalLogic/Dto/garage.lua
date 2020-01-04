@@ -36,11 +36,7 @@ function InsertVehicle(playerid, veh)
 	)
 	mariadb_await_query(sql, query)
 	
-	local lastid = mariadb_get_insert_id()
-	if(lastid == false)then
-		lastid = 0
-	end
-    return lastid
+    return mariadb_get_insert_id()
 end
 AddFunctionExport("InsertVehicle", InsertVehicle)
 

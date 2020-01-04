@@ -73,18 +73,16 @@ end)
 -- FONCTIONS --
 function Garage_GetVehicleById(player, id)
     local found = 0
-    local foundid = 0
     if PlayerData[player] ~= nil then
         for k,v in pairs(PlayerData[player].vehicles) do
             if tonumber(v.id) == tonumber(id) then
                 found = v
-                foundid = k
                 break
             end
         end
     end
 
-    return found, foundid
+    return found
 end
 
 function Garage_GetGoodSpawnPoint(player, garage)
@@ -140,32 +138,53 @@ function DestroyVehicule(player, vehicle)
     local vehicledata = VehicleData[vehicle]
     if vehicledata ~= nil then
         vehicledata.state = 0
-        UpdateOrInsertVehicle(player, vehicledata)
+        UpdateOrInsertVehicle(player, vehicle)
         print("Vehicule destroy for "..tostring(vehicledata.id))
         DestroyVehicle(vehicle)
         VehicleData[vehicle] = nil
     end
 end
 
-function UpdateOrInsertVehicle(player, vehicledata)
-    if vehicledata ~= nil then
-        if vehicledata.compteId == PlayerData[player].id then
-            local vehcache, vehid = Garage_GetVehicleById(player, vehicledata.id)
-            vehcache = vehicledata
-            SLogic.UpdateVehicleById(vehicledata)
-        else
-            local vehicleowner = GetPlayerByCompteId(vehicledata.compteId)
-            if vehicleowner ~= 0 then
-                local vehcache, vehid = Garage_GetVehicleById(vehicleowner, vehicledata.id)
-                if vehcache ~= 0 then
-                    table.remove(PlayerData[vehicleowner].vehicles, vehid)
+function UpdateOrInsertVehicle(player, vehicle)
+    local cvehicledata = VehicleData[vehicle]
+    if cvehicledata ~= nil then
+        if tonumber(cvehicledata.compteId) == tonumber(PlayerData[player].id) then
+            print("UpdateOrInsertVehicle OWNER")
+            if PlayerData[player] ~= nil then
+                local pvehicledata = Garage_GetVehicleById(player, cvehicledata.id)
+                if pvehicledata ~= 0 then
+                    pvehicledata.garageid = tonumber(cvehicledata.garageid)
+                    pvehicledata.fuel = math.clamp(cvehicledata.fuel, 0, 100)
+                    pvehicledata.health = math.clamp(cvehicledata.health, 0, v_health)
+                    local alldamages = {}
+                    for i=1, 8 do
+                        table.insert(alldamages, GetVehicleDamage(vehicle, i))
+                    end
+                    pvehicledata.degats = cvehicledata.degats
+                    pvehicledata.state = 0
+
+                    SLogic.UpdateVehicleById(pvehicledata)
+                    print("Vehicule Saved for "..tostring(pvehicledata.id))
                 end
             end
-            SLogic.DeleteVehicleById(vehicledata.id)
-            local vehid = SLogic.InsertVehicle(PlayerData[player].id, vehicledata)
-            vehicledata.id = vehid
-            vehicledata.compteId = PlayerData[player].id
-            table.insert(PlayerData[player].vehicles, vehicledata)
+        else
+            print("UpdateOrInsertVehicle VOLEUR")
+            local vehicleowner = GetPlayerByCompteId(cvehicledata.compteId)
+            if vehicleowner ~= 0 then
+                if PlayerData[vehicleowner] ~= nil then
+                    for k,v in pairs(PlayerData[vehicleowner].vehicles) do
+                        if tonumber(v.id) == tonumber(cvehicledata.id) then
+                            table.remove(PlayerData[vehicleowner].vehicles, k)
+                            break
+                        end
+                    end
+                end
+            end
+            SLogic.DeleteVehicleById(cvehicledata.id)
+            cvehicledata.id = SLogic.InsertVehicle(tonumber(PlayerData[player].id), cvehicledata)
+            cvehicledata.compteId = tonumber(PlayerData[player].id)
+            cvehicledata.state = 0
+            table.insert(PlayerData[player].vehicles, cvehicledata)
         end
     end
 end
