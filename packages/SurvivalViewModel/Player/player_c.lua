@@ -61,12 +61,12 @@ local function InitNotif(index, zone, msg, callremote, incar)
     notifid[index].zone = zone
     notifid[index].msg = msg
     notifid[index].CallRemonte = callremote
-    notifid[index].incar = math.clamp(incar, 0, 1) -- 1 est dans la voiture
+    notifid[index].incar = incar -- true est dans la voiture
 end
 
-InitNotif("garage", g_Points, "Appuyer sur E pour ouvrir le garage", "OnOpenGarage", 0)
-InitNotif("garagestore", gstore_Points, "Appuyer sur E pour stocker votre véhicule", "StoreVehicleToGarage", 1)
-InitNotif("recolte", r_Points, "Appuyer sur E pour recolter", "OnOpenGarage", 0)
+InitNotif("garage", g_Points, "Appuyer sur E pour ouvrir le garage", "OnOpenGarage", false)
+InitNotif("garagestore", gstore_Points, "Appuyer sur E pour stocker votre véhicule", "StoreVehicleToGarage", true)
+InitNotif("recolte", r_Points, "Appuyer sur E pour recolter", "OnOpenGarage", false)
 
 function OnKeyPress(key)
     if key == "E" then
@@ -75,7 +75,7 @@ function OnKeyPress(key)
             if v.CallRemonte == "" then
                 break
             end
-            if GetPlayerVehicle() == v.incar then
+            if PlayerIsInVehicle() == v.incar then
                 local zone = GetNearestZone(v.zone, x, y, z)
                 if zone ~= 0 then
                     CallRemoteEvent(v.CallRemonte)
@@ -92,7 +92,7 @@ CreateTimer(function()
     for k, v in pairs(notifid) do
         if GetNearestZone(v.zone, x, y, z) ~= 0 then
             if v.notif == false then
-                if GetPlayerVehicle() == v.incar then
+                if PlayerIsInVehicle() == v.incar then
                     v.id = AddNotification(v.msg, "default", 999)
                     v.notif = true
                 end
@@ -106,3 +106,7 @@ CreateTimer(function()
         end
     end
 end, 500)
+
+function PlayerIsInVehicle()
+    return IsPlayerInVehicle() or false
+end
