@@ -1,7 +1,8 @@
 local ItemData = {}
 
 function GetAllItems()
-	local result = mariadb_await_query(Sql, "SELECT * FROM items")
+	local query = mariadb_prepare(sql, "SELECT * FROM items")
+	local result = mariadb_await_query(sql, query)
 
     local rows = mariadb_get_row_count()
 	for i=1, rows do
@@ -18,8 +19,8 @@ end
 AddFunctionExport("GetAllItems", GetAllItems)
 
 function GetModelFromItem(id)
-	local query = mariadb_prepare(Sql, "SELECT modelId FROM items INNER JOIN compte_item ON items.id = compte_item.itemid WHERE compte_item.idUnique = '?';", id)
-	local result = mariadb_await_query(Sql, query)
+	local query = mariadb_prepare(sql, "SELECT modelId FROM items INNER JOIN compte_item ON items.id = compte_item.itemid WHERE compte_item.idUnique = '?';", id)
+	local result = mariadb_await_query(sql, query)
 
 	local rows = mariadb_get_row_count()
 	local modelId
