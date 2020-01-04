@@ -8,8 +8,17 @@ AddEvent("OnPlayerSpawn", function(player)
 	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), 100, 100)
 end)
 
+local function PlayerChargeHud(player)
+	if PlayerData[player].hunger == nil or PlayerData[player].thirst == nil then
+		PlayerChargeHud(player)
+	else
+		CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
+		return
+	end
+end
+
 AddRemoteEvent("OnPlayerHudLoadComplete", function(player)
-	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
+	PlayerChargeHud(player)
 end)
 
 AddEvent("OnPlayerQuit", function(player)

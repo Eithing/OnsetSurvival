@@ -2,7 +2,9 @@ function ReloadVehicles(garageid, vehicles)
     SView.ExecuteJs("garage", 'garage.removeAllVehicles()')
     for k, v in pairs(vehicles) do
         if tonumber(garageid) == tonumber(v.garageid) then
-            AddVehicle(v)
+            if v.state == 0 then
+                AddVehicle(v)
+            end
         end
     end
 end

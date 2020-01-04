@@ -11,7 +11,8 @@ function GetVehiclesBySteamId(compteId)
 						health = mariadb_get_value_name(i, "health"),
 						cles = mariadb_get_value_name(i, "cles"),
 						garageid = mariadb_get_value_name(i, "garageid"),
-						degats = mariadb_get_value_name(i, "degats")}
+						degats = mariadb_get_value_name(i, "degats"),
+						state = 0}
 	end
 	mariadb_delete_result(result)
 	return rows, Player_Vehicles
