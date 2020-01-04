@@ -159,7 +159,7 @@ function UpdateOrInsertVehicle(player, vehicledata)
                 end
             end
             SLogic.DeleteVehicleById(vehicledata.id)
-            SLogic.InsertVehicle(compteid, vehicledata)
+            SLogic.InsertVehicle(PlayerData[player].id, vehicledata)
 
             table.insert(PlayerData[player].vehicles, vehicledata)
         end
