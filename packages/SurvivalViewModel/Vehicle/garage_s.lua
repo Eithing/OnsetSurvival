@@ -11,13 +11,14 @@ AddRemoteEvent("StoreVehicleToGarage", function(player)
     local NearestGarageStore = GetNearestZone(gstore_Points, x, y, z)
     if NearestGarageStore ~= 0 then
         local vehicle = GetPlayerVehicle(player)
-        if vehicle ~= 0 then
+        if vehicle ~= 0 and VehicleData[vehicle] ~= nil then
             -- On vien set les variables du véhicule en cache
-            SaveVehicule(player, vehicle, NearestGarageStore.id)
-            -- On enleve le véhicule du cache et on le considère rentrer puis on le delete
-            DestroyVehicule(player, vehicle)
+            if SaveVehicule(player, vehicle, NearestGarageStore.id) ~= 0 then
+                -- On enleve le véhicule du cache et on le considère rentrer puis on le delete
+                DestroyVehicule(player, vehicle)
 
-            AddNotification(player, "Votre véhicule à bien été stocker !", "success")
+                AddNotification(player, "Votre véhicule à bien été stocker !", "success")
+            end
             return
         end
     end
@@ -107,23 +108,32 @@ function GetNearestVehicle(x, y, z)
 end
 
 function SaveVehicule(player, vehicle, garageid)
-    local cvehicledata = Garage_GetVehicleById(player, VehicleData[vehicle].id)
-    cvehicledata.garageid = tonumber(garageid)
-    cvehicledata.fuel = math.clamp(VehicleData[vehicle].fuel, 0, 100)
-    cvehicledata.health = math.clamp(GetVehicleHealth(vehicle), 0, v_health)
-    local alldamages = {}
-    for i=1, 8 do
-        table.insert(alldamages, GetVehicleDamage(vehicle, i))
-    end
-    cvehicledata.degats = SLogic.json_encode(alldamages)
+    local found = 0
+    if VehicleData[vehicle].id ~= nil then
+        local cvehicledata = Garage_GetVehicleById(player, VehicleData[vehicle].id)
+        if cvehicledata ~= 0 then
+            cvehicledata.garageid = tonumber(garageid)
+            cvehicledata.fuel = math.clamp(VehicleData[vehicle].fuel, 0, 100)
+            cvehicledata.health = math.clamp(GetVehicleHealth(vehicle), 0, v_health)
+            local alldamages = {}
+            for i=1, 8 do
+                table.insert(alldamages, GetVehicleDamage(vehicle, i))
+            end
+            cvehicledata.degats = SLogic.json_encode(alldamages)
 
-    SLogic.UpdateVehicleById(cvehicledata)
-    print("Vehicule Saved for "..tostring(cvehicledata.id))
+            SLogic.UpdateVehicleById(cvehicledata)
+            print("Vehicule Saved for "..tostring(cvehicledata.id))
+            found = cvehicledata
+        end
+    end
+    return found
 end
 
 function DestroyVehicule(player, vehicle)
     local vehicledata = Garage_GetVehicleById(player, VehicleData[vehicle].id)
-    vehicledata.state = 0
-    DestroyVehicle(vehicle)
-    VehicleData[vehicle] = nil
+    if vehicledata ~= 0 then
+        vehicledata.state = 0
+        DestroyVehicle(vehicle)
+        VehicleData[vehicle] = nil
+    end
 end
