@@ -50,6 +50,9 @@ AddRemoteEvent("SpawnVehicleFromGarage", function(player, vehicleid)
                         end
 
                         vehicle.state = 1
+
+                        SLogic.UpdateVehicleById(vehicle)
+                        print("Vehicule update for "..tostring(vehicle.id))
                         
                         AddNotification(player, "Votre véhicule à été sorti !", "success")
                         return
@@ -111,9 +114,9 @@ end
 
 function SaveVehicule(player, vehicle, garageid)
     local found = 0
-    if VehicleData[vehicle].id ~= nil then
-        local cvehicledata = Garage_GetVehicleById(player, VehicleData[vehicle].id)
-        if cvehicledata ~= 0 then
+    local cvehicledata = VehicleData[vehicle]
+    if cvehicledata ~= nil then
+        if cvehicledata.id ~= nil then
             cvehicledata.garageid = tonumber(garageid)
             cvehicledata.fuel = math.clamp(VehicleData[vehicle].fuel, 0, 100)
             cvehicledata.health = math.clamp(GetVehicleHealth(vehicle), 0, v_health)
@@ -123,7 +126,6 @@ function SaveVehicule(player, vehicle, garageid)
             end
             cvehicledata.degats = SLogic.json_encode(alldamages)
 
-            SLogic.UpdateVehicleById(cvehicledata)
             print("Vehicule Saved for "..tostring(cvehicledata.id))
             found = cvehicledata
         end
@@ -132,10 +134,23 @@ function SaveVehicule(player, vehicle, garageid)
 end
 
 function DestroyVehicule(player, vehicle)
-    local vehicledata = Garage_GetVehicleById(player, VehicleData[vehicle].id)
-    if vehicledata ~= 0 then
+    local vehicledata = VehicleData[vehicle]
+    if vehicledata ~= nil then
         vehicledata.state = 0
+        UpdateOrInsertVehicle(vehicledata, PlayerData[player].id)
+        print("Vehicule destroy for "..tostring(vehicledata.id))
         DestroyVehicle(vehicle)
         VehicleData[vehicle] = nil
+    end
+end
+
+function UpdateOrInsertVehicle(vehicledata, compteid)
+    if vehicledata ~= nil then
+        if vehicledata.compteId == compteid then
+            SLogic.UpdateVehicleById(vehicledata)
+        else
+            SLogic.InsertVehicle(compteid, vehicledata)
+            SLogic.DeleteVehicleById(vehicledata.id)
+        end
     end
 end

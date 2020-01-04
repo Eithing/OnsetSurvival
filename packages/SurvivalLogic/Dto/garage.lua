@@ -1,5 +1,5 @@
 function GetVehiclesBySteamId(compteId)
-    local query = mariadb_prepare(sql, "SELECT player_vehicles.id, player_vehicles.compteId, player_vehicles.fuel, player_vehicles.health, player_vehicles.cles, player_vehicles.garageid, player_vehicles.degats, vehicles.nom, vehicles.modelId, vehicles.imageId, vehicles.class, vehicles.poids FROM player_vehicles INNER JOIN vehicles ON vehicles.modelId = player_vehicles.modelId WHERE compteId = '?';", compteId)
+    local query = mariadb_prepare(sql, "SELECT player_vehicles.id, player_vehicles.compteId, player_vehicles.fuel, player_vehicles.state, player_vehicles.health, player_vehicles.cles, player_vehicles.garageid, player_vehicles.degats, vehicles.nom, vehicles.modelId, vehicles.imageId, vehicles.class, vehicles.poids FROM player_vehicles INNER JOIN vehicles ON vehicles.modelId = player_vehicles.modelId WHERE compteId = '?';", compteId)
     local result = mariadb_await_query(sql, query)
     local Player_Vehicles = {}
     local rows = mariadb_get_row_count() or 0
@@ -16,7 +16,7 @@ function GetVehiclesBySteamId(compteId)
 						class = mariadb_get_value_name(i, "class"),
 						poids = mariadb_get_value_name(i, "poids"),
 						imageid = mariadb_get_value_name(i, "imageId"),
-						state = 0}
+						state = mariadb_get_value_name(i, "state")}
 	end
 	mariadb_delete_result(result)
 	return rows, Player_Vehicles
@@ -24,13 +24,14 @@ end
 AddFunctionExport("GetVehiclesBySteamId", GetVehiclesBySteamId)
 
 function InsertVehicle(playerid, veh)
-	local query = mariadb_prepare(sql, "INSERT INTO player_vehicles (compteId, modelId, fuel, health, cles, garageid, degats) VALUES ('?', '?', '?', '?', '?', '?', '[0,0,0,0,0,0,0,0]');",
+	local query = mariadb_prepare(sql, "INSERT INTO player_vehicles (compteId, modelId, fuel, health, cles, garageid, degats, state) VALUES ('?', '?', '?', '?', '?', '?', '?', '0');",
 		playerid,
 		veh.modelId,
         veh.fuel,
         veh.health,
 		veh.cles,
-		veh.garageid
+		veh.garageid,
+		veh.degats
 	)
 	mariadb_await_query(sql, query)
 	
@@ -43,18 +44,13 @@ end
 AddFunctionExport("InsertVehicle", InsertVehicle)
 
 function UpdateVehicleById(veh)
-	print(veh.health,
-	veh.fuel,
-	veh.degats,
-	veh.cles,
-	veh.garageid,
-	veh.id)
-	local query = mariadb_prepare(sql, "UPDATE player_vehicles SET health = '?', fuel = '?', degats = '?', cles = '?', garageid = '?' WHERE id = '?' LIMIT 1;",
+	local query = mariadb_prepare(sql, "UPDATE player_vehicles SET health = '?', fuel = '?', degats = '?', cles = '?', garageid = '?', state = '?' WHERE id = '?' LIMIT 1;",
         veh.health,
         veh.fuel,
 		veh.degats,
 		veh.cles,
 		veh.garageid,
+		veh.state,
 		veh.id
 	)
     mariadb_query(sql, query)
