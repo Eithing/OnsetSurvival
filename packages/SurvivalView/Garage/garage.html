@@ -86,10 +86,22 @@
                 clearInterval(downinterval);
             }
 
+            this.mouseOverHandler = (evt) => {
+                clickSwap(evt.button, false);
+                if(evt.toElement.id == "allvehicles"){
+                    if (evt.toElement.children.length >= 3) {
+                        if(evt.toElement.className != "inner scroll mouving"){
+                            evt.toElement.classList.add("mouving");
+                        }
+                    }
+                }
+            }
+
 
             document.addEventListener('mousemove', this.moveHandler);
             document.addEventListener('mousedown', this.mouseDownHandler);
             document.addEventListener('mouseup', this.mouseUpHandler);
+            document.addEventListener('mouseover', this.mouseOverHandler);
         }
 
         disableContextMenu() {
@@ -106,6 +118,7 @@
             document.removeEventListener('mousemove', this.moveHandler);
             document.removeEventListener('mousedown', this.mouseDownHandler);
             document.removeEventListener('mouseup', this.mouseUpHandler);
+            document.addEventListener('mouseover', this.mouseOverHandler);
         }
     }
 

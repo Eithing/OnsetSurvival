@@ -8,6 +8,7 @@ function SetGarageVisibility()
     end
 end
 AddFunctionExport("SetGarageVisibility", SetGarageVisibility)
+AddEvent("SetGarageVisibility",  SetGarageVisibility)
 
 --AddEvent("OnInsertPlayer", function(firstname, lastname)
 --    SViewModel.ExecuteFromServer("InsertPlayer", firstname.." "..lastname)

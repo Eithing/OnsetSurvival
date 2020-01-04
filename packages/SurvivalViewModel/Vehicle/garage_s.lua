@@ -1,9 +1,5 @@
-AddRemoteEvent("OnOpenGarage", function(player, garage)
-    print("OnOpenGarage")
+AddRemoteEvent("OnOpenGarage", function(player)
     local x, y, z = GetPlayerLocation(player)
-    local NearestGarageDealer = GetNearestZone("g_Points", x, y, z)
-    if NearestGarageDealer.id == garage.id then 
-        CallRemoteEvent("OpenGarage", garage.id, PlayerData[player].vehicles)
-        return
-    end
+    local NearestGarage = GetNearestZone(g_Points, x, y, z)
+    CallRemoteEvent(player, "OpenGarage", NearestGarage.id, PlayerData[player].vehicles)
 end)

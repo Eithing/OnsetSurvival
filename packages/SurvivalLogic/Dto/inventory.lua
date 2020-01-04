@@ -1,11 +1,16 @@
 --GetPlayerInventory --
 function GetPlayerInventory(id)
-    local query = mariadb_prepare(sql, "SELECT * FROM inventory WHERE compteId = '?';", id)
+    local query = mariadb_prepare(sql, "SELECT inventory.id, items.nom, items.poids, items.type, items.imageId, items.modelId, inventory.compteId, inventory.itemId, inventory.itemCount, inventory.var FROM items INNER JOIN inventory ON items.id = inventory.itemId WHERE inventory.compteId = '?';", id)
     local result = mariadb_await_query(sql, query)
     local Player_Inventory = {}
     local rows = mariadb_get_row_count() or 0
 	for i=1, rows do
         Player_Inventory[i] = {	id = mariadb_get_value_name(i, "id"),
+                        nom = mariadb_get_value_name(i, "nom"),
+                        poids = mariadb_get_value_name(i, "poids"),
+                        type = mariadb_get_value_name(i, "type"),
+                        imageId = mariadb_get_value_name(i, "imageId"),
+                        modelId = mariadb_get_value_name(i, "modelId"),
                         compteId = mariadb_get_value_name(i, "compteId"),
 						itemId = mariadb_get_value_name(i, "itemId"),
 						itemCount = mariadb_get_value_name(i, "itemCount"),

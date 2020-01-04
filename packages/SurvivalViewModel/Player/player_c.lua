@@ -54,16 +54,31 @@ AddRemoteEvent("ClientAddNotification",  AddNotification)
 -- All Notif
 local notifid = {}
 
-local function InitNotif(index, zone, msg)
+local function InitNotif(index, zone, msg, callremote)
     notifid[index] = {}
     notifid[index].id = 0
     notifid[index].notif = false
     notifid[index].zone = zone
     notifid[index].msg = msg
+    notifid[index].CallRemonte = callremote
 end
 
-InitNotif("garage", g_Points, "Appuyer sur E pour ouvrir le garage")
-InitNotif("recolte", r_Points, "Appuyer sur E pour recolter")
+InitNotif("garage", g_Points, "Appuyer sur E pour ouvrir le garage", "OnOpenGarage")
+InitNotif("recolte", r_Points, "Appuyer sur E pour recolter", "OnOpenGarage")
+
+function OnKeyPress(key)
+    if key == "E" then
+        local x, y, z = GetPlayerLocation()
+        for k, v in pairs(notifid) do
+            local zone = GetNearestZone(v.zone, x, y, z)
+            if zone ~= 0 then
+                CallRemoteEvent(v.CallRemonte)
+                break
+            end
+        end
+	end
+end
+AddEvent("OnKeyPress", OnKeyPress)
 
 CreateTimer(function()
     local x, y, z = GetPlayerLocation()

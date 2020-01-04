@@ -21,11 +21,22 @@ v_defaultFuel = 100 -- Essence par défaut d'un véhicule
 
 -- GARAGE CONFIG --
 g_Points = {}
-table.insert(g_Points, {id = 1, nom = "Spawn", x = 126034, y = 80416, radius = 150.0})
+table.insert(g_Points, {id = 1, nom = "Spawn", x = 126034, y = 80416, z = 1568, radius = 150.0,
+	spawnPoints = {
+		[1] = {x = 128002, y = 75453, z = 1566, rotationz = 90},
+		[2] = {x = 126399, y = 74585, z = 1566, rotationz = 90},
+		[3] = {x = 125523, y = 75202, z = 1566, rotationz = 90}
+	}
+})
+table.insert(g_Points, {id = 2, nom = "Spawn", x = 126478, y = 79203, z = 1568, radius = 150.0,
+	spawnPoints = {
+		[1] = {x = 124694, y = 80626, z = 1581, rotationz = 90}
+	}
+})
 
 -- RECOLTE CONFIG --
 r_Points = {}
-table.insert(r_Points, {id = 1, nom = "Mine dawp", itemId = 26, count = 1, x = 132512, y = 77888, radius = 150.0})
+table.insert(r_Points, {id = 1, nom = "Mine dawp", itemId = 26, count = 1, x = 132512, y = 77888,  z = 1568, radius = 150.0})
 
 -- Fonction Global --
 
@@ -42,8 +53,8 @@ end
 function GetNearestZone(zone, x, y, z)
 	local found = 0
 	for k, v in pairs(zone) do
-        local x2, y2 = v.x, v.y
-		local dist = GetDistance3D(x, y, z, x2, y2, z)
+        local x2, y2, z2 = v.x, v.y, v.z
+		local dist = GetDistance3D(x, y, z, x2, y2, z2)
 		if dist < tonumber(v.radius) then
 			found = v
 			break
