@@ -4,5 +4,5 @@ end
 AddRemoteEvent("OnUpdateFuel",  OnUpdateFuel)
 
 AddRemoteEvent("OnUpdateVehicleHud", function()
-    SView.SetVehicleVisibility()
+    CallRemoteEvent("UpdateWeight", SView.SetVehicleVisibility())
 end)

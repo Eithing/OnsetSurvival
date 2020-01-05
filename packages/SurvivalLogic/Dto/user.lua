@@ -12,6 +12,7 @@ function GetUserBySteamId(player)
 					armor = mariadb_get_value_name(i, "armor"),
 					created = mariadb_get_value_name(i, "created"),
 					clothing = mariadb_get_value_name(i, "clothing"),
+					maxweight = mariadb_get_value_name(i, "maxweight"),
 					argent = mariadb_get_value_name(i, "argent"),
 					hunger = mariadb_get_value_name(i, "hunger"),
 					thirst = mariadb_get_value_name(i, "thirst"),
@@ -27,7 +28,7 @@ end
 AddFunctionExport("GetUserBySteamId", GetUserBySteamId)
 
 function UpdateUser(player, user)
-	local query = mariadb_prepare(sql, "UPDATE comptes SET admin = ?, argent = ?, health = ?,  armor = ?, hunger = ?, thirst = ?, nom = '?', clothing = '?', created = '?', position = '?', steamid = '?' WHERE id = ? LIMIT 1;",
+	local query = mariadb_prepare(sql, "UPDATE comptes SET admin = ?, argent = ?, health = ?,  armor = ?, hunger = ?, thirst = ?, nom = '?', maxweight = '?', clothing = '?', created = '?', position = '?', steamid = '?' WHERE id = ? LIMIT 1;",
         user.admin,
         user.argent,
 		user.health,
@@ -35,6 +36,7 @@ function UpdateUser(player, user)
 		user.hunger,
 		user.thirst,
 		user.name,
+		user.MaxWeight,
 		json_encode(user.clothing),
 		user.created,
         json_encode(user.position),
@@ -45,9 +47,9 @@ function UpdateUser(player, user)
 end
 AddFunctionExport("UpdateUser", UpdateUser)
 
-function InsertNewUser(player)
-    local query = mariadb_prepare(sql, "INSERT INTO comptes (id, admin, argent, health,  armor, hunger, thirst, nom, clothing, created, position, steamid) VALUES (NULL, 0, 0, 100, 0, 100, 100, '', '[]', 0, '[]', '?');",
-    tostring(GetPlayerSteamId(player)))
+function InsertNewUser(player, maxweight)
+    local query = mariadb_prepare(sql, "INSERT INTO comptes (id, admin, argent, health,  armor, hunger, thirst, nom, clothing, maxweight, created, position, steamid) VALUES (NULL, 0, 0, 100, 0, 100, 100, '', '[]', '?', 0, '[]', '?');",
+    maxweight, tostring(GetPlayerSteamId(player)))
 	mariadb_await_query(sql, query)
 	
 	local lastid = mariadb_get_insert_id()
@@ -57,6 +59,15 @@ function InsertNewUser(player)
     return lastid
 end
 AddFunctionExport("InsertNewUser", InsertNewUser)
+
+-- BANS --
+
+function NewBanIp(ip, reason)
+    local query = mariadb_prepare(sql, "INSERT INTO ipbans (ip, reason, date) VALUES ('?', '?', NOW());", steamid, reason)
+    local result = mariadb_query(sql, query)
+	mariadb_delete_result(result)
+end
+AddFunctionExport("NewBanIp", NewBanIp)
 
 function GetBanIp(ip)
     local query = mariadb_prepare(sql, "SELECT * FROM ipbans WHERE ipbans.ip = '?' LIMIT 1;", ip)
@@ -71,3 +82,24 @@ function GetBanIp(ip)
 	return rows, User
 end
 AddFunctionExport("GetBanIp", GetBanIp)
+
+function NewBanSteamID(steamid, reason)
+    local query = mariadb_prepare(sql, "INSERT INTO bans (steamid, reason, date) VALUES ('?', '?', NOW());", steamid, reason)
+    local result = mariadb_query(sql, query)
+	mariadb_delete_result(result)
+end
+AddFunctionExport("NewBanSteamID", NewBanSteamID)
+
+function GetBanSteamID(steamid)
+    local query = mariadb_prepare(sql, "SELECT * FROM bans WHERE bans.steamid = '?' LIMIT 1;", steamid)
+    local result = mariadb_await_query(sql, query)
+    local User
+    local rows = mariadb_get_row_count() or 0
+	User = {	id = mariadb_get_value_name(1, "id"),
+				steamid = mariadb_get_value_name(1, "steamid"),
+				reason = mariadb_get_value_name(1, "reason"),
+				date = mariadb_get_value_name(1, "date")}
+	mariadb_delete_result(result)
+	return rows, User
+end
+AddFunctionExport("GetBanSteamID", GetBanSteamID)

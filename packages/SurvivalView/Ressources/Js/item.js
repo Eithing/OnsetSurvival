@@ -1,5 +1,5 @@
 class Item {
-    constructor(itemid, type, imageId, ammout, name, desc) {
+    constructor(itemid, type, imageId, ammout, name, desc="") {
         const {
             spriteColonnes,
             space,

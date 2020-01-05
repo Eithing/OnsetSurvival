@@ -1,17 +1,14 @@
-local isInventoryLoaded
+local isInventoryLoaded = false
 AddEvent("OnKeyRelease", function(key)
     if key == "F1" then
+        CallRemoteEvent("UpdateWeight", SView.SetInventoryVisibility())
         if isInventoryLoaded == false then
-            CallRemoteEvent("RequestPopulateInventory")
-            isInventoryLoaded = true
+            Delay(800, function()
+                CallRemoteEvent("RequestPopulateInventory")
+                isInventoryLoaded = true
+            end)
         end
-        SView.SetInventoryVisibility()
-        --CallRemoteEvent("UpdateWeight", SView.SetInventoryVisibility())
     end
-end)
-
-AddEvent("OnPackageStart", function()
-    isInventoryLoaded = false
 end)
 
 function PopulateInventory(inventory)
@@ -21,7 +18,7 @@ AddRemoteEvent("PopulateInventory",  PopulateInventory)
 
 function ReloadInventory(inventory)
     SView.ExecuteJs("inventory", "inventory.removeAllItems()")
-    for i, itemInventory in ipairs(inventory) do
+    for i, itemInventory in pairs(inventory) do
         AddItemInventory(itemInventory)
     end
 end
@@ -37,15 +34,19 @@ function UpdateItemInventory(item)
 end
 AddRemoteEvent("UpdateItemInventory",  UpdateItemInventory)
 
-function IsGettingMaxWeight(IsAlreadyHeavy)
+function UpdateMaxWeightInventory(Weight, MaxWeight)
+    SView.ExecuteJs("inventory", "inventory.updateMaxWeight('"..Weight.."', '"..MaxWeight.."')")
+end
+AddRemoteEvent("UpdateMaxWeightInventory",  UpdateMaxWeightInventory)
+
+function IsGettingMaxWeight(Weight, MaxWeight)
+    UpdateMaxWeightInventory(Weight, MaxWeight)
     SetIgnoreMoveInput(true)
-    if IsAlreadyHeavy == false then
-        AddPlayerChat('<span color="#ff0000">Vous êtes trop lourd vous ne pouvez plus bouger !</>')
-    end
 end
 AddRemoteEvent("IsGettingMaxWeight",  IsGettingMaxWeight)
 
-function IsGettingCorrectWeight()
+function IsGettingCorrectWeight(Weight, MaxWeight)
+    UpdateMaxWeightInventory(Weight, MaxWeight)
     SetIgnoreMoveInput(false)
 end
 AddRemoteEvent("IsGettingCorrectWeight",  IsGettingCorrectWeight)

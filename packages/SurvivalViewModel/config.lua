@@ -8,10 +8,14 @@ p_defaulthunger = 100 -- Faim par défaut lors de la premier connexion
 p_defaultthirst = 100 -- Soif par défaut lors de la premier connexion
 p_defaultclothing = 7 -- Vétement par défaut lors de la premier connexion
 p_spawn = {x=125773.000000, y=80246.000000, z=1567.000000} -- Position du spawn
+p_delayNotif = 20 -- Delay de base pour une notif (en secondes)
 p_delayvitalnotif = 30 -- Envoie une notif pour la faim et la soif (en secondes)
 
 -- INVENTORY CONFIG --
-i_maxWeight = 10000
+i_maxWeight = 80 -- Valeur par défault
+i_maxStack = 99 -- Stack max d'un item
+i_item_repair = 200 -- Valeur qu'un repairKit redonne
+i_item_fuel = 40 -- Valeur qu'un bidon d'essence redonne
 
 -- VEHICLE CONFIG --
 v_health = 1500 -- Vie max d'un véhicule

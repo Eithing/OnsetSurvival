@@ -43,7 +43,7 @@ function AddNotification(msg, type, delay)
         type = "default"
     end
     if delay == nil or delay == 0 then
-        delay = 20
+        delay = p_delayNotif
     end
     delay = math.Seconds(delay)
     SView.ExecuteJs("vitalIndicator", 'AddNotification("'..id..'","'..msg..'","'..type..'","'..delay..'")')
@@ -56,11 +56,11 @@ local notifid = {}
 
 local function InitNotif(index, zone, msg, callremote, incar)
     notifid[index] = {}
-    notifid[index].id = 0
-    notifid[index].notif = false
-    notifid[index].zone = zone
-    notifid[index].msg = msg
-    notifid[index].CallRemonte = callremote
+    notifid[index].id = 0 -- id du champs
+    notifid[index].notif = false -- pour savoir si la notif a deja été envoyer
+    notifid[index].zone = zone -- la zone (Table avec tous les points)
+    notifid[index].msg = msg -- Message
+    notifid[index].CallRemonte = callremote -- Script Server
     notifid[index].incar = incar -- true est dans la voiture
 end
 
@@ -110,3 +110,10 @@ end, 500)
 function PlayerIsInVehicle()
     return IsPlayerInVehicle() or false
 end
+
+
+-- DEV NE PAS LANCER EN PRODUCTION --
+function OnScriptError(message)
+    AddPlayerChat('<span color="#ff0000bb" style="bold" size="10">'..message..'</>')
+end
+AddEvent("OnScriptError", OnScriptError)

@@ -2,19 +2,28 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="inventory.css" />
 </head>
 
 <body>
     <div class="parent-container">
+        <div class="ItemOption" id="ItemOption">
+            <label id="ItemOption_nom">Pompe</label>
+            <input type="number" id="ItemOption_input" placeholder="Entrer un nombre...">
+            <div class="ItemOption_Button" id="ItemOption_Min">Min</div>
+            <div class="ItemOption_Button" id="ItemOption_Middle">Moitié</div>
+            <div class="ItemOption_Button" id="ItemOption_Max">Max</div>
+            <div class="ItemOption_Button" id="ItemOption_Button">Jeter</div>
+        </div>
         <div class="item-information" id="item-info">
             <div class="item-image-infos" id="infos-image">
 
             </div>
             <p id="close-info">x</p>
             <div id="infos-rest" style="height: 100px;position: relative;">
-                <div id="infos-title" style="text-align: center; color:rgb(114, 114, 114);"><b>Title</b></div>
-                <div id="infos-desc" style="text-align: center; color:rgb(114, 114, 114); font-size: 8.5px;"><b>description mdr c'est trop bien j'écrit de la merde et otus le monde le vois.</b></div>
+                <div id="infos-title"><b>Title</b></div>
+                <div class="scroll" id="infos-desc"><b></b></div>
                 <div style="text-align: center; text-align: center;position: absolute;bottom: 24%;">
                     <div class="infos-button" id="infos-use" style="visibility: hidden;"><b>Utiliser</b></div>
                 </div>
@@ -25,6 +34,7 @@
         </div>
         <div class="inventory-container-Global" id="player-inventory">
             <label class="title_label">Inventaire</label>
+            <label id="weight_label" class="weight_label">0/<b style="font-size: 14px;">10</b></label>
             <div style="display: flex;">
                 <div class="icon">
                     <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 298.669 298.669" style="enable-background:new 0 0 298.669 298.669;" xml:space="preserve">
@@ -107,6 +117,7 @@
             this.rightClick = false;
             this.middleClick = false;
             this.currentIdShow = null
+            this.currentCountShow = null
             this.moveHandler = (evt) => {
                 this.position.x = evt.pageX;
                 this.position.y = evt.pageY;
@@ -123,18 +134,27 @@
             }
 
             let itemId;
+            let itemCount;
             let downTarget;
             this.mouseDownHandler = (evt) => {
                 downTarget = evt.target;
+                if(evt.target.parentNode.children[1] != null){
+                    itemCount = evt.target.parentNode.children[1].innerHTML;
+                } else {
+                    itemCount = 1
+                }
                 itemId = evt.target.parentNode.getAttribute("item-id");
                 clickSwap(evt.button, true);
             }
             this.mouseUpHandler = (evt) => {
                 clickSwap(evt.button, false);
                 if (evt.target.className == "parent-container") {
-                    inventory.removeItem(itemId, false, true);
+                    inventory.removeItem(parseInt(itemId), false, true, parseInt(itemCount));
                 }
                 if (evt.target === downTarget && evt.target.className === "item-image") {
+                    if(document.getElementById("ItemOption").style.visibility == "visible"){
+                        CloseInfoBox();
+                    }
                     document.getElementById("item-info").style.visibility = "visible";
                     document.getElementById("infos-image").style.backgroundImage = evt.target.style.backgroundImage;
                     document.getElementById("infos-image").style.backgroundPosition = evt.target.style.backgroundPosition;
@@ -142,6 +162,8 @@
                     document.getElementById("infos-desc").innerHTML = evt.target.getAttribute("desc");
                     let idToRemove = itemId;
                     this.currentIdShow = idToRemove
+                    let ItemCount = evt.target.parentNode.parentNode.innerText
+                    this.currentCountShow = ItemCount
 
                     if (evt.target.parentNode.id === "consommable") {
                         document.getElementById("infos-use").style.visibility = "visible";
@@ -163,6 +185,20 @@
             this.onClickUseItem = this.onClickUseItem.bind(this)
             document.querySelector('#infos-use').addEventListener('click', this.onClickUseItem)
 
+            this.onClickOptionItem = this.onClickOptionItem.bind(this)
+            document.querySelector('#ItemOption_Button').addEventListener('click', this.onClickOptionItem)
+
+            this.onClickOptionMin = this.onClickOptionMin.bind(this)
+            document.querySelector('#ItemOption_Min').addEventListener('click', this.onClickOptionMin)
+
+            this.onClickOptionMiddle = this.onClickOptionMiddle.bind(this)
+            document.querySelector('#ItemOption_Middle').addEventListener('click', this.onClickOptionMiddle)
+
+            this.onClickOptionMax = this.onClickOptionMax.bind(this)
+            document.querySelector('#ItemOption_Max').addEventListener('click', this.onClickOptionMax)
+
+            this.onClickOptionInput = this.onClickOptionInput.bind(this)
+            document.querySelector('#ItemOption_input').addEventListener('input', this.onClickOptionInput)
 
             document.addEventListener('mousemove', this.moveHandler);
             document.addEventListener('mousedown', this.mouseDownHandler);
@@ -179,19 +215,56 @@
             document.oncontextmenu = null;
         }
 
-        onClickDropItem() {
+        onClickDropItem(evt) {
             if (this.currentIdShow !== null) {
-                inventory.removeItem(this.currentIdShow, false, true)
                 CloseInfoBox();
+                document.getElementById("ItemOption").style.visibility = "visible"
+                document.getElementById("ItemOption_nom").innerHTML = document.getElementById("infos-title").innerHTML
+                document.getElementById("ItemOption_Button").innerHTML = "Jeter"
+                document.getElementById("ItemOption_input").setAttribute("item-using", false)
+                document.getElementById("ItemOption_input").setAttribute("item-drop", true)
+                document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
+                document.getElementById("ItemOption_input").setAttribute("item-Count", this.currentCountShow)
                 this.currentIdShow = null
             }
         }
 
-        onClickUseItem() {
+        onClickUseItem(evt) {
             if (this.currentIdShow !== null) {
-                inventory.removeItem(this.currentIdShow, true, false)
                 CloseInfoBox();
+                document.getElementById("ItemOption").style.visibility = "visible"
+                document.getElementById("ItemOption_nom").innerHTML = document.getElementById("infos-title").innerHTML
+                document.getElementById("ItemOption_Button").innerHTML = "Utiliser"
+                document.getElementById("ItemOption_input").setAttribute("item-using", true)
+                document.getElementById("ItemOption_input").setAttribute("item-drop", false)
+                document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
+                document.getElementById("ItemOption_input").setAttribute("item-Count", this.currentCountShow)
                 this.currentIdShow = null
+            }
+        }
+
+        onClickOptionInput(evt){
+            document.getElementById("ItemOption_input").value = parseInt(document.getElementById("ItemOption_input").value)
+        }
+
+        onClickOptionMin(evt){
+            document.getElementById("ItemOption_input").value = 1
+        }
+
+        onClickOptionMiddle(evt){
+            alert(Math.ceil(document.getElementById("ItemOption_input").getAttribute("item-Count") / 2))
+            document.getElementById("ItemOption_input").value = Math.ceil(document.getElementById("ItemOption_input").getAttribute("item-Count") / 2)
+        }
+
+        onClickOptionMax(evt){
+            alert(document.getElementById("ItemOption_input").getAttribute("item-Count"))
+            document.getElementById("ItemOption_input").value = document.getElementById("ItemOption_input").getAttribute("item-Count")
+        }
+
+        onClickOptionItem(evt) {
+            CloseInfoBox()
+            if(document.getElementById("ItemOption_input").value > 0){
+                inventory.removeItem(document.getElementById("ItemOption_input").getAttribute("item-id"), document.getElementById("ItemOption_input").getAttribute("item-using"), document.getElementById("ItemOption_input").getAttribute("item-drop"), parseInt(document.getElementById("ItemOption_input").value))
             }
         }
 
@@ -205,6 +278,7 @@
     function CloseInfoBox(){
         document.getElementById("item-info").style.visibility = "hidden";
         document.getElementById("infos-use").style.visibility = "hidden";
+        document.getElementById("ItemOption").style.visibility = "hidden";
     }
 
 

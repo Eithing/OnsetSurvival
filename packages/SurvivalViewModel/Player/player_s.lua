@@ -60,6 +60,9 @@ function CreatePlayerData(player)
         PlayerData[player].created = 0
         PlayerData[player].vitalnotif = false
         PlayerData[player].vehicles = {}
+        PlayerData[player].IsInMaxWeight = false
+        PlayerData[player].NotifWeight = false
+        PlayerData[player].MaxWeight = i_maxWeight
         print("PlayerData created for : "..player)
 
         table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR")
@@ -88,6 +91,17 @@ function CheckForIPBan(player, lrowns, lresult)
 	local rows, result = SLogic.GetBanIp(GetPlayerIP(player))
     
     if (rows == 0) then
+		CheckForSteamIDBan(player, lrowns, lresult)
+	elseif rows == 1 then
+		print("Kicking "..tostring(GetPlayerSteamId(player))..", banned by IP ("..result.reason..")")
+        
+        KickPlayer(player, "🚨 Vous avez été ban de ce serveur ! (raison : "..result.reason..")")
+	end
+end
+
+function CheckForSteamIDBan(player, lrowns, lresult)
+	local rows, result = SLogic.GetBanSteamID(tostring(GetPlayerSteamId(player)))
+    if (rows == 0) then
 		--No IP ban found for this account
 		if (PlayerData[player].id == 0) then
 			CreatePlayerAccount(player)
@@ -95,14 +109,14 @@ function CheckForIPBan(player, lrowns, lresult)
 			LoadPlayerAccount(player, lrowns, lresult)
 		end
 	elseif rows == 1 then
-		print("Kicking "..GetPlayerName(player).." because their IP was banned ("..result.reason..")")
+		print("Kicking "..tostring(GetPlayerSteamId(player))..", banned by SteamID ("..result.reason..")")
         
-        KickPlayer(player, "🚨 You have been banned from the server. (raison : "..result.reason..")")
+        KickPlayer(player, "🚨 Vous avez été ban de ce serveur ! (raison : "..result.reason..")")
 	end
 end
 
 function CreatePlayerAccount(player)
-    PlayerData[player].id = SLogic.InsertNewUser(player)
+    PlayerData[player].id = SLogic.InsertNewUser(player, i_maxWeight)
 
 	CallRemoteEvent(player, "DisplayCreateCharacter")
 
@@ -130,11 +144,12 @@ function LoadPlayerAccount(player, rows, result)
         PlayerData[player].created = math.tointeger(result.created)
         local playervehicles_rows, playervehicles_r = SLogic.GetVehiclesBySteamId(PlayerData[player].id)
         PlayerData[player].vehicles = playervehicles_r
+        PlayerData[player].IsInMaxWeight = false
+        PlayerData[player].NotifWeight = false
+        PlayerData[player].MaxWeight = math.tointeger(result.maxweight)
 
 		SetPlayerHealth(player, tonumber(result['health']))
 		SetPlayerArmor(player, tonumber(result['armor']))
-		--setPlayerThirst(player, tonumber(result['thirst']))
-		--setPlayerHunger(player, tonumber(result['hunger']))
 		setPositionAndSpawn(player, PlayerData[player].position)
 
 		if PlayerData[player].created == 0 then
@@ -145,8 +160,9 @@ function LoadPlayerAccount(player, rows, result)
 			ChangeOtherPlayerClothes(player, player)
 		end
 
-        print("PlayerID "..PlayerData[player].id.." à charger son compte ("..GetPlayerIP(player)..")")
+        UpdateWeight(player, false)
         CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
+        print("PlayerID "..PlayerData[player].id.." à charger son compte ("..GetPlayerIP(player)..")")
 	end
 end
 

@@ -245,7 +245,8 @@ class Inventory {
         return this;
     }
 
-    removeItem(itemId, consume, drop) {
+    removeItem(itemId, consume, drop, count=1) {
+        count = parseInt(count)
         document.getElementById("infos-image").style.backgroundImage = null;
         document.getElementById("infos-image").style.backgroundPosition = null;
         document.getElementById("infos-title").innerHTML = null;
@@ -262,25 +263,36 @@ class Inventory {
                 } else if (k === "slot3") {
                     ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
                 }
-                if (consume == true) {
-                    console.log(inventory[k].items[itemId])
+                if (consume == true || consume == "true") {
+                    ue.game.callevent("OnUseItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
                     if(inventory[k].items[itemId].itemId != 30){
-                        if(parseInt(inventory[k].items[itemId].label.innerText) > 1){
-                            inventory[k].items[itemId].label.innerText = parseInt(inventory[k].items[itemId].label.innerText) - 1
+                        if(parseInt(inventory[k].items[itemId].label.innerText) > 1 && count > 1){
+                            inventory[k].items[itemId].label.innerText = this.mathclamp(parseInt(inventory[k].items[itemId].label.innerText) - count, 0, parseInt(inventory[k].items[itemId].label.innerText))
+                            if(parseInt(inventory[k].items[itemId].label.innerText) <= 0){
+                                inventory[k].items[itemId].element.remove()
+                                inventory[k].items[itemId] = null
+                            }
                         } else {
                             inventory[k].items[itemId].element.remove()
                             inventory[k].items[itemId] = null
                         }
                     }
-                    ue.game.callevent("OnUseItem", JSON.stringify([itemId]));
                 } else {
-                    if(drop == true){
-                        ue.game.callevent("OnDropItem", JSON.stringify([itemId]));
+                    if(drop == true || drop == "true"){
+                        ue.game.callevent("OnDropItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
                     } else {
-                        ue.game.callevent("OnRemoveItem", JSON.stringify([itemId]));
+                        ue.game.callevent("OnRemoveItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
                     }
-                    inventory[k].items[itemId].element.remove()
-                    inventory[k].items[itemId] = null
+                    if(parseInt(inventory[k].items[itemId].label.innerText) > 1 || count > 1){
+                        inventory[k].items[itemId].label.innerText = this.mathclamp(parseInt(inventory[k].items[itemId].label.innerText) - count, 0, parseInt(inventory[k].items[itemId].label.innerText))
+                        if(parseInt(inventory[k].items[itemId].label.innerText) <= 0){
+                            inventory[k].items[itemId].element.remove()
+                            inventory[k].items[itemId] = null
+                        }
+                    } else {
+                        inventory[k].items[itemId].element.remove()
+                        inventory[k].items[itemId] = null
+                    }
                 }
                 break
             }
@@ -305,5 +317,19 @@ class Inventory {
                 break
             }
         }
+    }
+
+    updateMaxWeight(Weight, MaxWeight) {
+        return document.getElementById("weight_label").innerHTML = Weight+'/<b style="font-size: 14px;">'+MaxWeight+"</b>";
+    }
+
+    mathclamp(num, min, max){
+        if (num < min) {
+            return min;
+        }
+        if (num > max) {
+            return max;
+        }
+        return num;
     }
 }

@@ -1,18 +1,13 @@
+body{
+    overflow: hidden;
+    user-select: none;
+}
+
 .inventory-container-Global {
     background-color: rgba(0, 0, 0, 0.847);
     width: 520px;
     height: 300px;
     border-radius: 2%;
-}
-
-.item-information {
-    background-color: rgba(0, 0, 0, 0.847);
-    width: 100px;
-    height: 150px;
-    border-radius: 5%;
-    margin-right: 10px;
-    position: relative;
-    visibility: hidden;
 }
 
 .item {
@@ -24,13 +19,6 @@
 }
 
 .item-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 15%;
-    display: block;
-}
-
-.item-image-infos {
     width: 40px;
     height: 40px;
     border-radius: 15%;
@@ -139,6 +127,16 @@ p {
     margin-left: 210px;
 }
 
+.weight_label {
+    position: absolute;
+    float: right;
+    right: 0;
+    font-family: "Arial Black", Gadget, sans-serif;
+    color: #f0fff0;
+    margin-right: 12px;
+    margin-top: 58px;
+}
+
 .scroll {
     overflow: auto;
     margin: 0 10px;
@@ -165,6 +163,17 @@ p {
     width: 30px;
 }
 
+.item-information {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.847);
+    width: 100px;
+    height: 150px;
+    border-radius: 5%;
+    margin-right: 10px;
+    position: relative;
+    visibility: hidden;
+}
+
 .infos-button {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.596);
@@ -178,12 +187,41 @@ p {
     position: relative;
 }
 
+.item-image-infos {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 15%;
+    display: block;
+    margin: 5px;
+    margin-left: 31px;
+}
+
 .infos-button:hover {
     cursor: pointer;
 }
 
-#infos-image {
-    margin: 5px;
+#infos-title{
+    word-break: break-word;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 48px;
+    text-align: center;
+    color:rgb(114, 114, 114);
+}
+
+#infos-desc {
+    word-break: break-word;
+    margin-left: 2px;
+    margin-right: 2px;
+    text-align: center;
+    color:rgb(114, 114, 114);
+    font-size: 12.5px;
+    height: 35px;
+    max-height: 35px;
+    overflow: hidden;
+    overflow-y: auto;
+    border-bottom: dashed 1px black;
 }
 
 #infos-rest {
@@ -192,4 +230,83 @@ p {
 
 #close-info:hover {
     cursor: pointer;
+}
+
+.ItemOption {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.847);
+    width: 250px;
+    height: 170px;
+    border-radius: 5%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-right: 5px;
+    visibility: hidden;
+}
+
+#ItemOption_nom {
+    margin-top: 5px;
+    color: white;
+    font-size: 30px;
+}
+
+#ItemOption_input {
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.496);
+    color: white;
+    width: 200px;
+    height: 10px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.ItemOption_Button{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.596);
+    border: none;
+    border-radius: 15px;
+    border: solid 1px #4d4d4d;
+    width: 50px;
+    margin-left: 2px;
+    margin-right: 2px;
+    color: #4d4d4d;
+    text-align: center;
+    line-height: 20px;
+    padding: 5px;
+}
+
+.ItemOption_Button:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.796);
+}
+
+#ItemOption_Min {
+    left: 0;
+    bottom: 58px;
+    line-height: 10px;
+    margin-left: 5px;
+}
+
+#ItemOption_Middle {
+    left: 92px;
+    bottom: 58px;
+    line-height: 10px;
+}
+
+#ItemOption_Max {
+    right: 0;
+    bottom: 58px;
+    line-height: 10px;
+    margin-right: 5px;
+}
+
+#ItemOption_Button {
+    width: 200px;
+    bottom: 0;
+    margin-bottom: 5px;
 }
