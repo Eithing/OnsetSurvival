@@ -37,22 +37,30 @@ function DropItem(player, idUnique, count)
 	local x,y,z = GetPlayerLocation(player)
 	local newitem
 	for i, item in pairs(PlayerData[player].inventory) do
-		print("FOR")
 		if tonumber(item.id) == tonumber(idUnique) then
-			print("FOR DropItem")
-			if math.clamp(item.itemCount - count, 0, i_maxStack) <= 0 then
-				item.itemCount = count
-			else
-				item.itemCount = math.clamp(item.itemCount - count, 0, i_maxStack)
-			end
 			local newitem = CreatePickup(item.modelId, x, y, z - 88)
 			ItemPickups[newitem] = {}
-			ItemPickups[newitem].item = item
-			if item.itemCount > 1 then
-				SLogic.UpdatePlayerItem(item)
-			else
+			ItemPickups[newitem].item = {
+				id = item.id,
+				nom = item.nom,
+				poids = item.poids,
+				type = item.type,
+				imageId = item.imageId,
+				modelId = item.modelId,
+				compteId = item.compteId,
+				itemId = item.itemId,
+				itemCount = tonumber(count),
+				var = item.var
+			}
+
+			local itemc = math.floor(math.clamp(item.itemCount - count, 0, i_maxStack))
+			if itemc <= 0 then
+				item.itemCount = 0
 				SLogic.RemovePlayerItem(idUnique)
 				PlayerData[player].inventory[i] = nil
+			else
+				item.itemCount = itemc
+				SLogic.UpdatePlayerItem(item)
 			end
 			UpdateWeight(player, false)
 			break
@@ -82,15 +90,9 @@ end)
 
 function PickupItem(player, Pitem)
 	local found = false
-	-- Pitem.var = SLogic.json_decode(Pitem.var)
 	for i, item in pairs(PlayerData[player].inventory) do
 		if tonumber(item.itemId) == tonumber(Pitem.itemId) then
-			-- item.var = SLogic.json_decode(item.var)
 			item.itemCount = math.floor(math.clamp(item.itemCount + Pitem.itemCount, 0, i_maxStack))
-			-- for vi, ivar in pairs(Pitem.var) do
-			-- 	table.insert(item.var, ivar)
-			-- end
-			-- item.var = SLogic.json_encode(item.var)
 			SLogic.UpdatePlayerItem(item)
 			CallRemoteEvent(player, "UpdateItemInventory", item)
 			UpdateWeight(player, false)
@@ -98,7 +100,7 @@ function PickupItem(player, Pitem)
 			break
 		end
 	end
-	if(found == false)then
+	if found == false then
 		SLogic.SetUserInventory(PlayerData[player].id, Pitem.itemId, Pitem.itemCount, Pitem.var)
 		Delay(500, function()
 			Player_CreateNewItem(player)

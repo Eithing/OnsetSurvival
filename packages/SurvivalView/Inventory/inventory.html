@@ -224,8 +224,9 @@
                 document.getElementById("ItemOption_input").setAttribute("item-using", false)
                 document.getElementById("ItemOption_input").setAttribute("item-drop", true)
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
-                document.getElementById("ItemOption_input").setAttribute("item-Count", this.currentCountShow)
+                document.getElementById("ItemOption_input").id = this.currentCountShow
                 this.currentIdShow = null
+                this.currentCountShow = null
             }
         }
 
@@ -238,8 +239,9 @@
                 document.getElementById("ItemOption_input").setAttribute("item-using", true)
                 document.getElementById("ItemOption_input").setAttribute("item-drop", false)
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
-                document.getElementById("ItemOption_input").setAttribute("item-Count", this.currentCountShow)
+                document.getElementById("ItemOption_input").classList.add(this.currentCountShow)
                 this.currentIdShow = null
+                this.currentCountShow = null
             }
         }
 
@@ -252,13 +254,11 @@
         }
 
         onClickOptionMiddle(evt){
-            alert(Math.ceil(document.getElementById("ItemOption_input").getAttribute("item-Count") / 2))
-            document.getElementById("ItemOption_input").value = Math.ceil(document.getElementById("ItemOption_input").getAttribute("item-Count") / 2)
+            document.getElementById("ItemOption_input").value = Math.ceil(parseInt(document.getElementById("ItemOption_input").getAttribute("item-Count")) / 2).toString()
         }
 
         onClickOptionMax(evt){
-            alert(document.getElementById("ItemOption_input").getAttribute("item-Count"))
-            document.getElementById("ItemOption_input").value = document.getElementById("ItemOption_input").getAttribute("item-Count")
+            document.getElementById("ItemOption_input").value = parseInt(document.getElementById("ItemOption_input").getAttribute("item-Count")).toString()
         }
 
         onClickOptionItem(evt) {
