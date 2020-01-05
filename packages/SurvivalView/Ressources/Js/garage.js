@@ -2,7 +2,8 @@ class Vehicle {
     constructor(id, nom, modelId, imageId) {
         const {
             spriteColonnes,
-            space,
+            wspace,
+            hspace,
             url
         } = CONFIG["cars"]
 
@@ -28,8 +29,8 @@ class Vehicle {
 
         this.image.style.backgroundImage = url;
         this.image.id = imageId;
-        let y = Math.floor((imageId - 1) / spriteColonnes) * space
-        let x = ((imageId - 1) % spriteColonnes) * space
+        let y = Math.floor((imageId - 1) / spriteColonnes) * hspace
+        let x = ((imageId - 1) % spriteColonnes) * wspace
         this.image.style.backgroundPosition = "-" + x + "px -" + y + "px";
 
         this.element.appendChild(this.image);
@@ -52,7 +53,8 @@ const CONFIG = {
     'cars': {
         spriteLignes: 5,
         spriteColonnes: 5,
-        space: 128,
+        wspace: 128,
+        hspace: 104,
         url: "url('./../Ressources/images/Cars.jpg')"
     },
 }
@@ -84,5 +86,14 @@ class Garage {
         document.getElementById("allvehicles").innerHTML = ""
         this.garageinv.vehicles = []
         return this;
+    }
+
+    TestAllVehicles(){
+        let allelements = {}
+        for (let index = 0; index < 26; index++) {
+            let element = this.addVehicle(index, new Vehicle(index, "Voiture "+index, index, index))
+            allelements[index] = element;
+        }
+        return allelements
     }
 }

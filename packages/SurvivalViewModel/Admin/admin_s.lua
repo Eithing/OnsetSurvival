@@ -8,7 +8,6 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
 	if IsAdmin(player) then
 		if(context == "weapons")then
 			SetPlayerWeapon(player, actionId, 999, true, 1)
-
 		elseif(context == "cars")then
 			local x, y, z = GetPlayerLocation(player)
 			local h = GetPlayerHeading(player)
@@ -16,6 +15,18 @@ AddRemoteEvent("OnAdminAction", function(player, context, actionId)
 			SetPlayerInVehicle(player, vehicle)
 			SetVehicleHealth(vehicle, v_health)
 			SetVehicleRespawnParams(vehicle, false)
+		elseif(context == "health")then
+			sethealth(player, 100)
+		elseif(context == "hunger")then
+			sethunger(player, 100)
+		elseif(context == "thirst")then
+			setthirst(player, 100)
+		elseif(context == "repair")then
+			Repair(GetPlayerVehicle(player), v_health)
+		elseif(context == "fuel")then
+			SetFuel(GetPlayerVehicle(player), v_health)
+		elseif(context == "spawn")then
+			PlayerTeleport(player, p_spawn.x, p_spawn.y, p_spawn.z)
 		end
 	end
 end)
@@ -46,7 +57,7 @@ AddCommand("kill", kill_commands)
 function health_commands(player, health)
 	count = tonumber(health)
 	if IsAdmin(player) then
-		SetPlayerHealth(player, health)
+		sethealth(player, count)
 		print("Admin : Vie set = "..health)
 	end
 	return

@@ -8,90 +8,203 @@
 
 <body>
     <div class="parent-container">
-        <div class="list-container"></div>
+        <div class="list-container">
+            <ul id="mainHud">
+                <li id="mweapons">
+                    <div class="adminimg" style="background-position: -48px -0px;"></div>
+                </li>
+                <li id="allvehicle">
+                    <div class="adminimg" style="background-position: -0px -144px;"></div>
+                </li>
+                <li id="allneeds">
+                    <div class="adminimg" style="background-position: -96px -96px;"></div>
+                </li>
+                <li id="btnclose">
+                    <div class="adminimg" style="background-position: -0px -0px;"></div>
+                </li>
+            </ul>
+            <ul style="display: none;" id="weapons">
+                <li id="wclose">
+                    <div class="adminimg" style="background-position: -0px -0px;"></div>
+                </li>
+            </ul>
+            <ul style="display: none;" id="vehicle">
+                <li id="vclose">
+                    <div class="adminimg" style="background-position: -0px -0px;"></div>
+                </li>
+            </ul>
+            <ul style="display: none;" id="need">
+                <li id="nclose">
+                    <div class="adminimg" style="background-position: -0px -0px;"></div>
+                </li>
+                <li id="health">
+                    <div class="adminimg" style="background-position: -0px -96px;"></div>
+                </li>
+                <li id="hunger">
+                    <div class="adminimg" style="background-position: -48px -48px;"></div>
+                </li>
+                <li id="thirst">
+                    <div class="adminimg" style="background-position: -0px -48px;"></div>
+                </li>
+                <li id="repair">
+                    <div class="adminimg" style="background-position: -48px -96px;"></div>
+                </li>
+                <li id="fuel">
+                    <div class="adminimg" style="background-position: -96px -48px;"></div>
+                </li>
+                <li id="spawn">
+                    <div class="adminimg" style="background-position: -48px -144px;"></div>
+                </li>
+            </ul>
+        </div>
     </div>
 </body>
 
 </html>
 <script>
-    const listContainer = document.querySelector('.list-container')
-
-    const buildList = function(type) {
-        while (listContainer.firstChild) {
-            listContainer.removeChild(listContainer.firstChild)
-        }
-
-        const {
-            spriteLignes,
-            spriteColonnes,
-            lignes,
-            colonnes,
-            space,
-            url
-        } = CONFIG[type]
-
-        let compteur = 0;
-        for (let i = 0; i < colonnes; i++) {
-            const myList = document.createElement('ul');
-            for (let j = 0; j < lignes; j++) {
-                const li = document.createElement('li');
-                if (compteur < spriteColonnes * spriteLignes) {
-                    const monImage = document.createElement('div');
-                    monImage.style.width = "43px";
-                    monImage.style.height = "43px";
-                    monImage.style.backgroundImage = url;
-                    monImage.id = compteur + 1;
-
-                    y = Math.floor(compteur / spriteColonnes) * space
-                    x = (compteur % spriteColonnes) * space
-                    monImage.style.backgroundPosition = "-" + x + "px -" + y + "px";
-
-                    li.appendChild(monImage);
-                    li.addEventListener('click', () => onPressItemList(monImage.id, type));
-                    myList.appendChild(li);
-                    compteur++;
-                }
+    try {
+        ue == null
+    } catch (err) {
+        window.ue = {
+            game: {
+                callevent: console.log
             }
-            listContainer.appendChild(myList)
         }
     }
 
-    function onPressItemList(item, type) {
-        ue.game.callevent("OnAdminClick", JSON.stringify([item, type]));
+    let mainHud = document.getElementById("mainHud")
+    let WeaponsHud = document.getElementById("weapons")
+    let needHud = document.getElementById("need")
+    let VehicleHud = document.getElementById("vehicle")
+
+    // MainHud Boutons
+    document.getElementById("btnclose").addEventListener('click', () => {
+        ue.game.callevent("OnAdminClick", JSON.stringify(["2", "close"]));
+    }, false)
+
+    function HideAllMenu(){
+        mainHud.style = "display: none;"
+        VehicleHud.style = "display: none;"
+        needHud.style = "display: none;"
+        WeaponsHud.style = "display: none;"
+    }
+
+    //Weapons Boutons
+    document.getElementById("mweapons").addEventListener('click', () => {
+        HideAllMenu()
+        WeaponsHud.style = "display: visible;"
+    }, false)
+
+    document.getElementById("wclose").addEventListener('click', () => {
+        HideAllMenu()
+        mainHud.style = "display: visible;"
+    }, false)
+
+    // Vehicle Boutons
+    document.getElementById("allvehicle").addEventListener('click', () => {
+        HideAllMenu()
+        VehicleHud.style = "display: visible;"
+    }, false)
+
+    document.getElementById("vclose").addEventListener('click', () => {
+        HideAllMenu()
+        mainHud.style = "display: visible;"
+    }, false)
+
+    //Need Boutons
+    document.getElementById("allneeds").addEventListener('click', () => {
+        HideAllMenu()
+        needHud.style = "display: visible;"
+    }, false)
+
+    document.getElementById("nclose").addEventListener('click', () => {
+        HideAllMenu()
+        mainHud.style = "display: visible;"
+    }, false)
+
+    document.getElementById("health").addEventListener('click', () => {
+        ue.game.callevent("OnAdminClick", JSON.stringify(["health", "health"]));
+    }, false)
+
+    document.getElementById("hunger").addEventListener('click', () => {
+        ue.game.callevent("OnAdminClick", JSON.stringify(["hunger", "hunger"]));
+    }, false)
+
+    document.getElementById("thirst").addEventListener('click', () => {
+        ue.game.callevent("OnAdminClick", JSON.stringify(["thirst", "thirst"]));
+    }, false)
+
+    document.getElementById("repair").addEventListener('click', () => {
+        ue.game.callevent("OnAdminClick", JSON.stringify(["repair", "repair"]));
+    }, false)
+
+    document.getElementById("fuel").addEventListener('click', () => {
+        ue.game.callevent("OnAdminClick", JSON.stringify(["fuel", "fuel"]));
+    }, false)
+
+    document.getElementById("spawn").addEventListener('click', () => {
+        ue.game.callevent("OnAdminClick", JSON.stringify(["spawn", "spawn"]));
+    }, false)
+
+    // // // // // //
+    function newEl(tagType) {
+        return document.createElement(tagType);
     }
 
     const CONFIG = {
-        'main': {
-            spriteLignes: 2,
-            spriteColonnes: 2,
-            lignes: 4,
-            colonnes: 1,
-            space: 48,
-            url: "url('./../Ressources/images/Admin.jpg')"
-        },
-        'cloth': {
-            spriteLignes: 6,
+        'cars': {
+            spriteLignes: 5,
             spriteColonnes: 5,
-            lignes: 10,
-            colonnes: 3,
-            space: 50,
-            url: "url('./../Ressources/images/Cloth.jpg')"
+            wspace: 128,
+            hspace: 104,
+            url: "url('./../Ressources/images/Cars.jpg')"
         },
         'weapons': {
             spriteLignes: 5,
             spriteColonnes: 4,
-            lignes: 10,
-            colonnes: 2,
-            space: 50,
+            wspace: 50,
+            hspace: 50,
             url: "url('./../Ressources/images/Weapons.png')"
         },
-        'cars': {
-            spriteLignes: 5,
-            spriteColonnes: 5,
-            lignes: 9,
-            colonnes: 3,
-            space: 64,
-            url: "url('./../Ressources/images/Cars.jpg')"
-        },
     }
+
+    function addNewitem(type, listContainer, width, height, elementtotal, radius){
+        const {
+            spriteColonnes,
+            wspace,
+            hspace,
+            url
+        } = CONFIG[type]
+        let baseelement
+        
+        if(type == "cars"){
+            baseelement = newEl('div');
+            baseelement.classList.add("Contents")
+        } else {
+            baseelement = newEl('ul');
+        }
+        for (let index = 1; index < elementtotal; index++) {
+            let theelement = newEl('li');
+            
+            let element = newEl('div');
+            element.style = "width: "+width+"; height: "+height+"; border-radius: "+radius+";"
+            element.id = index.toString();
+            element.style.backgroundImage = url;
+
+            let y = Math.floor((index - 1) / spriteColonnes) * hspace
+            let x = ((index - 1) % spriteColonnes) * wspace
+            element.style.backgroundPosition = "-" + x + "px -" + y + "px";
+
+            theelement.addEventListener('click', (event) => {
+                ue.game.callevent("OnAdminClick", JSON.stringify([element.id, type]));
+            }, false);
+            theelement.appendChild(element)
+
+            baseelement.appendChild(theelement)
+        }
+        listContainer.appendChild(baseelement)
+    }
+
+    addNewitem('weapons', WeaponsHud, "48px", "48px", 21, "8px");
+    addNewitem('cars', VehicleHud, "120px", "100px", 26, "40px");
 </script>

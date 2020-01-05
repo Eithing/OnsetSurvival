@@ -98,10 +98,18 @@ AddRemoteEvent("OnKeyReleased", function(player)
     end)
 end)
 
+function sethealth(player, count)
+	PlayerData[player].health = math.clamp(count,0,100)
+	SetPlayerHealth(player, math.clamp(count,0,100))
+	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
+end
+
 function sethunger(player, count)
 	PlayerData[player].hunger = math.clamp(count,0,p_defaulthunger)
+	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 end
 
 function setthirst(player, count)
 	PlayerData[player].thirst = math.clamp(count,0,p_defaultthirst)
+	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 end

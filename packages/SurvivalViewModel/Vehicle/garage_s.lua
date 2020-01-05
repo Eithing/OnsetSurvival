@@ -12,7 +12,6 @@ AddRemoteEvent("StoreVehicleToGarage", function(player)
     if NearestGarageStore ~= 0 then
         local vehicle = GetPlayerVehicle(player)
         if vehicle ~= 0 and VehicleData[vehicle] ~= nil then
-            print("CC")
             -- On vien set les variables du véhicule en cache
             if SaveVehicule(player, vehicle, NearestGarageStore.id) ~= 0 then
                 -- On enleve le véhicule du cache et on le considère rentrer puis on le delete
@@ -149,7 +148,6 @@ function UpdateOrInsertVehicle(player, vehicle)
     local cvehicledata = VehicleData[vehicle]
     if cvehicledata ~= nil then
         if tonumber(cvehicledata.compteId) == tonumber(PlayerData[player].id) then
-            print("UpdateOrInsertVehicle OWNER")
             if PlayerData[player] ~= nil then
                 local pvehicledata = Garage_GetVehicleById(player, cvehicledata.id)
                 if pvehicledata ~= 0 then
@@ -168,7 +166,6 @@ function UpdateOrInsertVehicle(player, vehicle)
                 end
             end
         else
-            print("UpdateOrInsertVehicle VOLEUR")
             local vehicleowner = GetPlayerByCompteId(tonumber(cvehicledata.compteId))
             if vehicleowner ~= 0 then
                 if PlayerData[vehicleowner] ~= nil then

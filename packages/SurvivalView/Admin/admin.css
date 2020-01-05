@@ -1,55 +1,3 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 48px;
-    background-color: #535252b7;
-}
-
-img {
-    height: 40px;
-    width: 40px;
-    display: block;
-    margin: 0 auto;
-}
-
-li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
-}
-
-li {
-    font-weight: 700;
-    height: 48px;
-    line-height: 48px;
-    text-align: center;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
-
-li:last-child {
-    border-bottom: none;
-}
-
-li a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-li a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-}
-
-.list-container {
-    display: flex;
-    background-color: #f0fff01c;
-}
-
 .parent-container {
     margin-right: 20px;
     position: absolute;
@@ -63,5 +11,85 @@ li a:hover:not(.active) {
 }
 
 .list-container ul {
-    background-color: rgba(0, 0, 0, 0.849);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.adminimg {
+    background: url('./../Ressources/images/Admin.png') no-repeat;
+    width: 48px;
+    height: 48px;
+}
+
+.adminimg:hover {
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 48px;
+}
+
+.list-container li {
+    margin-left: 2px;
+    margin-bottom: 6px;
+}
+
+.list-container li:hover {
+    cursor: pointer;
+}
+
+.list-container {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+.list-container{
+    position: relative;
+}
+
+#weapons {
+    position: relative;
+    width: 260px;
+    height: 275px;
+    overflow: hidden;
+}
+
+#weapons ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 300px;
+}
+
+#weapons #wclose {
+    position: absolute;
+    right: 0;
+    margin-right: 6px;
+    margin-top: 5px;
+}
+
+#vehicle {
+    width: 610px;
+    max-height: 525px;
+    overflow: hidden;
+}
+
+#vehicle .Contents {
+    display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+}
+
+#vehicle .Contents li {
+    border-radius: 50%;
+}
+
+#vehicle #vclose {
+    position: absolute;
+    top: 3px;
+    right: 3px;
 }
