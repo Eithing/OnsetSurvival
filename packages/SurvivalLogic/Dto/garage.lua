@@ -86,3 +86,10 @@ function DeleteVehicleById(vehid)
     mariadb_query(sql, query)
 end
 AddFunctionExport("DeleteVehicleById", DeleteVehicleById)
+
+function ResetAllVehicles()
+	local query = mariadb_prepare(sql, "UPDATE player_vehicles SET state = 0 WHERE state = 1;")
+	mariadb_query(sql, query)
+	return true
+end
+AddFunctionExport("ResetAllVehicles", ResetAllVehicles)

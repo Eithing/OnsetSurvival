@@ -69,13 +69,9 @@ AddRemoteEvent("SpawnVehicleFromGarage", function(player, vehicleid)
     end
 end)
 
-AddEvent("OnPackageStop", function()
-    for k, vehicle in pairs(VehicleData) do
-        vehicle.state = 0
-        SLogic.UpdateVehicleById(vehicle)
-        DestroyVehicle(k)
-        VehicleData[k] = nil
-    end
+AddEvent("OnPackageStart", function()
+    SLogic.ResetAllVehicles()
+    print("Toutes les voitures on était reset au state = 0")
 end)
 
 

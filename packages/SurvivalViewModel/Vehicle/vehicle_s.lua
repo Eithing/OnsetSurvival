@@ -26,12 +26,7 @@ AddEvent("OnPackageStart", function()
 end)
 
 AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
-    if VehicleData[vehicle] ~= nil then
-        if VehicleData[vehicle].locked == true then
-            AddNotification(player, "Le véhicule est vérouillé !", "error")
-            return false
-        end
-    else
+    if VehicleData[vehicle] == nil then
         VehicleData[vehicle] = {}
         VehicleData[vehicle].fuel = v_defaultFuel
     end
@@ -48,14 +43,6 @@ AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
 end)
 
 AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
-
-    if VehicleData[vehicle] ~= nil then
-        if VehicleData[vehicle].locked == true then
-            AddNotification(player, "Le véhicule est vérouillé !", "error")
-            return false
-        end
-    end
-
     local x,y,z = GetVehicleVelocity(vehicle)
     if seat == 1 then
         CallRemoteEvent(player, "OnUpdateVehicleHud")
@@ -151,6 +138,7 @@ function LockVehicle(player, vehicle)
     if VehicleData[vehicle] ~= nil then
         local x, y, z = GetVehicleLocation(vehicle)
         VehicleData[vehicle].locked = true
+        SetVehiclePropertyValue(vehicle, "locked", true, true)
         AddNotification(player, "Véhicule verrouillé !", "success")
         CallRemoteEvent(player, "PlayAudioFile", "carUnlock.mp3", x, y, z, 100)
     end
@@ -160,6 +148,7 @@ function UnLockVehicle(player, vehicle)
     if VehicleData[vehicle] ~= nil then
         local x, y, z = GetVehicleLocation(vehicle)
         VehicleData[vehicle].locked = false
+        SetVehiclePropertyValue(vehicle, "locked", false, true)
         AddNotification(player, "Véhicule déverrouillé !", "success")
         CallRemoteEvent(player, "PlayAudioFile", "carLock.mp3", x, y, z, 100)
     end
