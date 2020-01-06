@@ -1,6 +1,6 @@
 --GetPlayerInventory --
 function GetPlayerInventory(id)
-    local query = mariadb_prepare(sql, "SELECT inventory.id, items.nom, items.poids, items.type, items.imageId, items.modelId, inventory.compteId, inventory.itemId, inventory.itemCount, inventory.var FROM items INNER JOIN inventory ON items.id = inventory.itemId WHERE inventory.compteId = '?';", id)
+    local query = mariadb_prepare(sql, "SELECT inventory.id, items.nom, items.value, items.poids, items.type, items.imageId, items.modelId, inventory.compteId, inventory.itemId, inventory.itemCount, inventory.var FROM items INNER JOIN inventory ON items.id = inventory.itemId WHERE inventory.compteId = '?';", id)
     local result = mariadb_await_query(sql, query)
     local Player_Inventory = {}
     local rows = mariadb_get_row_count() or 0
@@ -13,7 +13,8 @@ function GetPlayerInventory(id)
                         modelId = mariadb_get_value_name(i, "modelId"),
                         compteId = mariadb_get_value_name(i, "compteId"),
 						itemId = mariadb_get_value_name(i, "itemId"),
-						itemCount = mariadb_get_value_name(i, "itemCount"),
+                        itemCount = mariadb_get_value_name(i, "itemCount"),
+                        value = mariadb_get_value_name(i, "value"),
                         var = mariadb_get_value_name(i, "var")}
 	end
 	mariadb_delete_result(result)
@@ -23,7 +24,7 @@ AddFunctionExport("GetPlayerInventory", GetPlayerInventory)
 
 -- Get Last Player Item --
 function GetLastPlayerItem(id)
-    local query = mariadb_prepare(sql, "SELECT inventory.id, items.nom, items.poids, items.type, items.imageId, items.modelId, inventory.compteId, inventory.itemId, inventory.itemCount, inventory.var FROM items INNER JOIN inventory ON items.id = inventory.itemId WHERE inventory.compteId = '?' ORDER BY inventory.id DESC LIMIT 1;", tonumber(id))
+    local query = mariadb_prepare(sql, "SELECT inventory.id, items.nom, items.value, items.poids, items.type, items.imageId, items.modelId, inventory.compteId, inventory.itemId, inventory.itemCount, inventory.var FROM items INNER JOIN inventory ON items.id = inventory.itemId WHERE inventory.compteId = '?' ORDER BY inventory.id DESC LIMIT 1;", tonumber(id))
     local result = mariadb_await_query(sql, query)
     local Player_Inventory = {}
     local rows = mariadb_get_row_count() or 0
@@ -37,6 +38,7 @@ function GetLastPlayerItem(id)
             compteId = mariadb_get_value_name(i, "compteId"),
             itemId = mariadb_get_value_name(i, "itemId"),
             itemCount = mariadb_get_value_name(i, "itemCount"),
+            value = mariadb_get_value_name(i, "value"),
             var = mariadb_get_value_name(i, "var")}
     end
     mariadb_delete_result(result)

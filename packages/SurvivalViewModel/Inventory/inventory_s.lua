@@ -18,12 +18,14 @@ end)
 -- Remove --
 function RemoveItem(player, idUnique, count)
 	for i, item in pairs(PlayerData[player].inventory) do
-		if item.id == idUnique then
-			item.itemCount = math.clamp(item.itemCount - count, 0, i_maxStack)
+		if tonumber(item.id) == tonumber(idUnique) then
+			item.itemCount = math.clamp(item.itemCount - tonumber(count), 0, i_maxStack)
 			if(item.itemCount > 1)then
 				SLogic.UpdatePlayerItem(item)
+				CallRemoteEvent(player, "UpdateItemInventory", item)
 			else
-				SLogic.RemovePlayerItem(idUnique)
+				SLogic.RemovePlayerItem(tonumber(item.id))
+				CallRemoteEvent(player, "RemoveItemInventory", item)
 				PlayerData[player].inventory[i] = nil
 			end
 			UpdateWeight(player, false)
@@ -58,9 +60,11 @@ function DropItem(player, idUnique, count)
 				item.itemCount = 0
 				SLogic.RemovePlayerItem(idUnique)
 				PlayerData[player].inventory[i] = nil
+				CallRemoteEvent(player, "RemoveItemInventory", item)
 			else
 				item.itemCount = itemc
 				SLogic.UpdatePlayerItem(item)
+				CallRemoteEvent(player, "UpdateItemInventory", item)
 			end
 			UpdateWeight(player, false)
 			break
@@ -121,36 +125,59 @@ function UseItem(player, idUnique, count)
 		return
 	end
 	local UsingItem = GetItemByIdUnique(player, idUnique) -- Information dans l'inventaire
-	if(tonumber(UsingItem.itemId) == 29)then -- Bidon d'essence
-		local vehicle, Dist = VGetNearestVehicle(player, 200)
-		if(IsValidVehicle(vehicle))then
-			if GetPlayerVehicle(player) == vehicle then
-				return
-			end
-			for i=1, tonumber(count) do
-				AddFuel(vehicle, i_item_fuel)
-			end
-		end
-	end
-	if(tonumber(UsingItem.itemId) == 30)then --Clé
-		--print("Clé")
-	end
-	if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
-		local vehicle, Dist = VGetNearestVehicle(player, 200)
-		if(IsValidVehicle(vehicle))then
-			for i=1, 8 do
-				SetVehicleDamage(vehicle, i, 0)
-			end
-			for i=1, tonumber(count) do
-				SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle)+i_item_repair, 0, 1500))
+	if UsingItem ~= 0 then
+		if(tonumber(UsingItem.itemId) == 29)then -- Bidon d'essence
+			local vehicle, Dist = VGetNearestVehicle(player, 200)
+			if(IsValidVehicle(vehicle))then
+				if GetPlayerVehicle(player) == vehicle then
+					return
+				end
+				for i=1, tonumber(count) do
+					AddFuel(vehicle, UsingItem.value)
+				end
 			end
 		end
+		if(tonumber(UsingItem.itemId) == 30)then --Clé
+			local vehicle, Dist = VGetNearestVehicle(player, 200)
+			if(IsValidVehicle(vehicle))then
+				if VehicleData[vehicle] ~= nil then
+					for k, v in pairs(SLogic.json_decode(UsingItem.var)) do
+						if tonumber(v) == tonumber(VehicleData[vehicle].cles) then
+							LockUnLockVehicle(player, vehicle)
+							break
+						end
+					end
+				end
+			end
+		end
+		if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
+			local vehicle, Dist = VGetNearestVehicle(player, 200)
+			if(IsValidVehicle(vehicle))then
+				for i=1, 8 do
+					SetVehicleDamage(vehicle, i, 0)
+				end
+				for i=1, tonumber(count) do
+					SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle)+UsingItem.value, 0, 1500))
+				end
+			end
+		end
+		if(tonumber(UsingItem.itemId) == 32)then --Coca Cola
+			for i=1, tonumber(count) do
+				addthirst(player, UsingItem.value)
+			end
+		end
+		if(tonumber(UsingItem.itemId) == 33)then --Chips
+			for i=1, tonumber(count) do
+				addhunger(player, UsingItem.value)
+			end
+		end
+
+		if(tonumber(UsingItem.itemId) ~= 30)then
+			RemoveItem(player, tonumber(idUnique), tonumber(count))
+		end
+		
+		UpdateWeight(player, false)
 	end
-	if(tonumber(UsingItem.itemId) ~= 30)then
-		RemoveItem(player, idUnique, tonumber(count))
-	end
-	
-	UpdateWeight(player, false)
 end
 AddRemoteEvent("UseItem", UseItem)
 
@@ -187,9 +214,9 @@ AddRemoteEvent("UpdateWeight", UpdateWeight)
 
 -- Fonctions --
 function GetItemByIdUnique(player, idUnique)
-	local found
+	local found = 0
 	for i, item in pairs(PlayerData[player].inventory) do
-		if item.id == idUnique then
+		if tonumber(item.id) == tonumber(idUnique) then
 			found = item
 			break
 		end
@@ -199,8 +226,8 @@ end
 
 function GetItemDataByItemID(itemID)
 	local found = 0
-	for i, item in ipairs(ItemData) do
-		if item.id == itemID then
+	for i, item in pairs(ItemData) do
+		if tonumber(item.id) == tonumber(itemID) then
 			found = item
 			break
 		end

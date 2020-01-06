@@ -25,14 +25,19 @@ end
 AddRemoteEvent("ReloadInventory",  ReloadInventory)
 
 function AddItemInventory(item)
-   SView.ExecuteJs("inventory", "inventory.addItem('"..item.id.."', 'container', new Item('"..item.itemId.."','"..item.type.."','"..item.imageId.."','"..item.itemCount.."','"..item.nom.."'))")
+   SView.ExecuteJs("inventory", "inventory.addItem('"..item.id.."', 'container', new Item('"..item.itemId.."','"..item.type.."','"..item.imageId.."','"..math.floor(item.itemCount).."','"..item.nom.."'))")
 end
 AddRemoteEvent("AddItemInventory",  AddItemInventory)
 
 function UpdateItemInventory(item)
-    SView.ExecuteJs("inventory", "inventory.updateitem('"..item.id.."', '"..item.itemCount.."')")
+    SView.ExecuteJs("inventory", "inventory.updateitem('"..item.id.."', '"..math.floor(item.itemCount).."')")
 end
 AddRemoteEvent("UpdateItemInventory",  UpdateItemInventory)
+
+function RemoveItemInventory(item)
+    SView.ExecuteJs("inventory", "inventory.deleteitem('"..item.id.."')")
+end
+AddRemoteEvent("RemoveItemInventory",  RemoveItemInventory)
 
 function UpdateMaxWeightInventory(Weight, MaxWeight)
     SView.ExecuteJs("inventory", "inventory.updateMaxWeight('"..Weight.."', '"..MaxWeight.."')")

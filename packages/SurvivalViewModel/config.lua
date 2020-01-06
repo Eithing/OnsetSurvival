@@ -14,8 +14,6 @@ p_delayvitalnotif = 30 -- Envoie une notif pour la faim et la soif (en secondes)
 -- INVENTORY CONFIG --
 i_maxWeight = 80 -- Valeur par défault
 i_maxStack = 99 -- Stack max d'un item
-i_item_repair = 200 -- Valeur qu'un repairKit redonne
-i_item_fuel = 40 -- Valeur qu'un bidon d'essence redonne
 
 -- VEHICLE CONFIG --
 v_health = 1500 -- Vie max d'un véhicule

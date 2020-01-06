@@ -134,22 +134,29 @@
             }
 
             let itemId;
-            let itemCount;
+            this.itemCount = 1;
             let downTarget;
             this.mouseDownHandler = (evt) => {
                 downTarget = evt.target;
-                if(evt.target.parentNode.children[1] != null){
-                    itemCount = evt.target.parentNode.children[1].innerHTML;
-                } else {
-                    itemCount = 1
-                }
                 itemId = evt.target.parentNode.getAttribute("item-id");
+                if(evt.toElement.className == "item-label"){
+                    this.itemCount = parseInt(evt.target.innerHTML)
+                }
+                if(evt.toElement.className == "item-image"){
+                    this.itemCount = parseInt(evt.target.nextElementSibling.innerHTML)
+                }
                 clickSwap(evt.button, true);
             }
             this.mouseUpHandler = (evt) => {
                 clickSwap(evt.button, false);
+                if(evt.toElement.className == "item-label"){
+                    this.itemCount = parseInt(evt.toElement.innerHTML)
+                }
+                if(evt.toElement.className == "item-image"){
+                    this.itemCount = parseInt(evt.toElement.nextElementSibling.innerHTML)
+                }
                 if (evt.target.className == "parent-container") {
-                    inventory.removeItem(parseInt(itemId), false, true, parseInt(itemCount));
+                    inventory.removeItem(parseInt(itemId), false, true, parseInt(this.itemCount));
                 }
                 if (evt.target === downTarget && evt.target.className === "item-image") {
                     if(document.getElementById("ItemOption").style.visibility == "visible"){
@@ -160,10 +167,9 @@
                     document.getElementById("infos-image").style.backgroundPosition = evt.target.style.backgroundPosition;
                     document.getElementById("infos-title").innerHTML = evt.target.getAttribute("name");
                     document.getElementById("infos-desc").innerHTML = evt.target.getAttribute("desc");
+                    document.getElementById("infos-desc").setAttribute("itemcount", this.itemCount);
                     let idToRemove = itemId;
                     this.currentIdShow = idToRemove
-                    let ItemCount = evt.target.parentNode.parentNode.innerText
-                    this.currentCountShow = ItemCount
 
                     if (evt.target.parentNode.id === "consommable") {
                         document.getElementById("infos-use").style.visibility = "visible";
@@ -224,9 +230,7 @@
                 document.getElementById("ItemOption_input").setAttribute("item-using", false)
                 document.getElementById("ItemOption_input").setAttribute("item-drop", true)
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
-                document.getElementById("ItemOption_input").id = this.currentCountShow
                 this.currentIdShow = null
-                this.currentCountShow = null
             }
         }
 
@@ -239,14 +243,18 @@
                 document.getElementById("ItemOption_input").setAttribute("item-using", true)
                 document.getElementById("ItemOption_input").setAttribute("item-drop", false)
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
-                document.getElementById("ItemOption_input").classList.add(this.currentCountShow)
                 this.currentIdShow = null
-                this.currentCountShow = null
             }
         }
 
         onClickOptionInput(evt){
             document.getElementById("ItemOption_input").value = parseInt(document.getElementById("ItemOption_input").value)
+            if(parseInt(document.getElementById("ItemOption_input").value) <= 0){
+                document.getElementById("ItemOption_input").value = 1
+            }
+            if(parseInt(document.getElementById("ItemOption_input").value) >= this.itemCount){
+                document.getElementById("ItemOption_input").value = this.itemCount
+            }
         }
 
         onClickOptionMin(evt){
@@ -254,11 +262,11 @@
         }
 
         onClickOptionMiddle(evt){
-            document.getElementById("ItemOption_input").value = Math.ceil(parseInt(document.getElementById("ItemOption_input").getAttribute("item-Count")) / 2).toString()
+            document.getElementById("ItemOption_input").value = Math.ceil(this.itemCount / 2)
         }
 
         onClickOptionMax(evt){
-            document.getElementById("ItemOption_input").value = parseInt(document.getElementById("ItemOption_input").getAttribute("item-Count")).toString()
+            document.getElementById("ItemOption_input").value = this.itemCount
         }
 
         onClickOptionItem(evt) {

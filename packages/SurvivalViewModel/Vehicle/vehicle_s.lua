@@ -25,12 +25,17 @@ AddEvent("OnPackageStart", function()
     end, v_delayconsume)
 end)
 
-
-AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat )
-    if VehicleData[vehicle] == nil then
+AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
+    if VehicleData[vehicle] ~= nil then
+        if VehicleData[vehicle].locked == true then
+            AddNotification(player, "Le véhicule est vérouillé !", "error")
+            return false
+        end
+    else
         VehicleData[vehicle] = {}
         VehicleData[vehicle].fuel = v_defaultFuel
     end
+
     if seat == 1 then
         CallRemoteEvent(player, "OnUpdateVehicleHud")
         CallRemoteEvent(player, "OnUpdateFuel", VehicleData[vehicle].fuel)
@@ -39,9 +44,18 @@ AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat )
             AddNotification(player, "La voiture a plus d'essence !", "error")
         end
     end
+    return true
 end)
 
 AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
+
+    if VehicleData[vehicle] ~= nil then
+        if VehicleData[vehicle].locked == true then
+            AddNotification(player, "Le véhicule est vérouillé !", "error")
+            return false
+        end
+    end
+
     local x,y,z = GetVehicleVelocity(vehicle)
     if seat == 1 then
         CallRemoteEvent(player, "OnUpdateVehicleHud")
@@ -55,6 +69,7 @@ AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
     --    SetPlayerHealth(player, math.clamp(GetPlayerHealth(player) - 4 * speed, 0, 100))
     --    print(GetPlayerHealth(player))
     --end
+    return true
 end)
 
 function AddFuel(vehicle, count)
@@ -121,6 +136,43 @@ function Repair(vehicle, count)
     end
 end
 AddRemoteEvent("Repair", Repair)
+
+function LockUnLockVehicle(player, vehicle)
+    if VehicleData[vehicle] ~= nil then
+        if VehicleData[vehicle].locked == true then
+            UnLockVehicle(player, vehicle)
+        else
+            LockVehicle(player, vehicle)
+        end
+    end
+end
+
+function LockVehicle(player, vehicle)
+    if VehicleData[vehicle] ~= nil then
+        local x, y, z = GetVehicleLocation(vehicle)
+        VehicleData[vehicle].locked = true
+        AddNotification(player, "Véhicule verrouillé !", "success")
+        CallRemoteEvent(player, "PlayAudioFile", "carUnlock.mp3", x, y, z, 100)
+    end
+end
+
+function UnLockVehicle(player, vehicle)
+    if VehicleData[vehicle] ~= nil then
+        local x, y, z = GetVehicleLocation(vehicle)
+        VehicleData[vehicle].locked = false
+        AddNotification(player, "Véhicule déverrouillé !", "success")
+        CallRemoteEvent(player, "PlayAudioFile", "carLock.mp3", x, y, z, 100)
+    end
+end
+
+function UnflipVehicle(player) 
+    local vehicle = VGetNearestVehicle(player, 120)
+    if vehicle ~= 0 and IsValidVehicle(vehicle) then
+        local rx, ry, rz = GetVehicleRotation(vehicle)
+        SetVehicleRotation(vehicle, 0, ry, 0 )
+    end
+end
+AddRemoteEvent("UnflipVehicle", UnflipVehicle)
 
 -- Fonction --
 function VGetNearestVehicle(player, nearest_dist) -- Trouvée le véhicule le plus proche

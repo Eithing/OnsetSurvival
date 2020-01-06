@@ -14,16 +14,13 @@ AddEvent("onEquipWeapon", function(id, slot, ammo)
 end)
 
 AddEvent("OnUseItem", function(id, count)
-    AddPlayerChat("OnUseItem")
     SViewModel.ExecuteFromServer("UseItem", tonumber(id), math.floor(tonumber(count)))
 end)
 
 AddEvent("OnRemoveItem", function(id, count)
-    AddPlayerChat("OnRemoveItem")
     SViewModel.ExecuteFromServer("RemoveItem", tonumber(id), math.floor(tonumber(count)))
 end)
 
 AddEvent("OnDropItem", function(id, count)
-    AddPlayerChat("OnDropItem")
     SViewModel.ExecuteFromServer("DropItem", tonumber(id), math.floor(tonumber(count)))
 end)

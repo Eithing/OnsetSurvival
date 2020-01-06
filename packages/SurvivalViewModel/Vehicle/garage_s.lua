@@ -35,7 +35,7 @@ AddRemoteEvent("SpawnVehicleFromGarage", function(player, vehicleid)
                     local spawnPoint = Garage_GetGoodSpawnPoint(player, NearestGarage)
                     if spawnPoint ~= 0 then
                         local newvehicle = CreateVehicle(vehicle.modelid, spawnPoint.x, spawnPoint.y, spawnPoint.z, spawnPoint.rotationz)
-                        VehicleData[newvehicle] = {id = vehicle.id, garageid = vehicle.garageid, compteId = vehicle.compteId, modelid = vehicle.modelid, health = vehicle.health, degats = SLogic.json_decode(vehicle.degats), imageid = vehicle.imageid, nom = vehicle.nom, cles = vehicle.cles, poids = vehicle.poids, fuel = vehicle.fuel, inventory = {}}
+                        VehicleData[newvehicle] = {id = vehicle.id, garageid = vehicle.garageid, compteId = vehicle.compteId, modelid = vehicle.modelid, health = vehicle.health, degats = SLogic.json_decode(vehicle.degats), imageid = vehicle.imageid, nom = vehicle.nom, cles = vehicle.cles, poids = vehicle.poids, fuel = vehicle.fuel, inventory = {}, locked = false}
                         
                         SetPlayerInVehicle(player, newvehicle)
                         SetVehicleRespawnParams(newvehicle, false)
@@ -68,6 +68,16 @@ AddRemoteEvent("SpawnVehicleFromGarage", function(player, vehicleid)
         end
     end
 end)
+
+AddEvent("OnPackageStop", function()
+    for k, vehicle in pairs(VehicleData) do
+        vehicle.state = 0
+        SLogic.UpdateVehicleById(vehicle)
+        DestroyVehicle(k)
+        VehicleData[k] = nil
+    end
+end)
+
 
 -- FONCTIONS --
 function Garage_GetVehicleById(player, id)

@@ -66,7 +66,7 @@ const CONFIG = {
     },
     'consommable': {
         spriteLignes: 3,
-        spriteColonnes: 1,
+        spriteColonnes: 2,
         space: 40,
         url: "url('./../Ressources/images/consommable.png')"
     },

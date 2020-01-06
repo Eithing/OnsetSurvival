@@ -3,6 +3,16 @@ function DisplayCreateCharacter()
 end
 AddRemoteEvent("DisplayCreateCharacter",  DisplayCreateCharacter)
 
+local LastSoundPlayed = 0
+
+function PlayAudioFile(file, x, y, z, radius)
+	DestroySound(LastSoundPlayed)
+
+	LastSoundPlayed = CreateSound3D("../SurvivalView/Ressources/sounds/"..file, x, y, z, radius)
+	SetSoundVolume(LastSoundPlayed, 0.7)
+end
+AddRemoteEvent("PlayAudioFile", PlayAudioFile)
+
 AddEvent("OnPlayerStreamIn", function( player, otherplayer )
     CallRemoteEvent("ServerChangeOtherPlayerClothes", player, otherplayer)
 end)
@@ -112,7 +122,7 @@ function PlayerIsInVehicle()
 end
 
 
--- DEV NE PAS LANCER EN PRODUCTION --
+-- DEV NE PAS LAISSER EN PRODUCTION --
 function OnScriptError(message)
     AddPlayerChat('<span color="#ff0000bb" style="bold" size="10">'..message..'</>')
 end

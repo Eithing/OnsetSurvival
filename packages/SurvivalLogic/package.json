@@ -4,7 +4,6 @@
     "server_scripts": [
         "Dto/init.lua",
         "Dto/inventory.lua",
-        "Dto/item.lua",
         "Dto/user.lua",
         "Dto/recolt.lua",
         "Dto/garage.lua",

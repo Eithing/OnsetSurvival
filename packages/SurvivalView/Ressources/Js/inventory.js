@@ -265,35 +265,28 @@ class Inventory {
                 }
                 if (consume == true || consume == "true") {
                     ue.game.callevent("OnUseItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
-                    if(inventory[k].items[itemId].itemId != 30){
-                        if(parseInt(inventory[k].items[itemId].label.innerText) > 1 && count > 1){
-                            inventory[k].items[itemId].label.innerText = this.mathclamp(parseInt(inventory[k].items[itemId].label.innerText) - count, 0, parseInt(inventory[k].items[itemId].label.innerText))
-                            if(parseInt(inventory[k].items[itemId].label.innerText) <= 0){
-                                inventory[k].items[itemId].element.remove()
-                                inventory[k].items[itemId] = null
-                            }
-                        } else {
-                            inventory[k].items[itemId].element.remove()
-                            inventory[k].items[itemId] = null
-                        }
-                    }
                 } else {
                     if(drop == true || drop == "true"){
                         ue.game.callevent("OnDropItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
                     } else {
                         ue.game.callevent("OnRemoveItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
                     }
-                    if(parseInt(inventory[k].items[itemId].label.innerText) > 1 || count > 1){
-                        inventory[k].items[itemId].label.innerText = this.mathclamp(parseInt(inventory[k].items[itemId].label.innerText) - count, 0, parseInt(inventory[k].items[itemId].label.innerText))
-                        if(parseInt(inventory[k].items[itemId].label.innerText) <= 0){
-                            inventory[k].items[itemId].element.remove()
-                            inventory[k].items[itemId] = null
-                        }
-                    } else {
-                        inventory[k].items[itemId].element.remove()
-                        inventory[k].items[itemId] = null
-                    }
                 }
+
+                // GESTION DES ITEMS EN JS (JE PREFERE LE GERER EN LUA COMME SA SI IL PEUT PAS L'UTILISER SA LUI ENLEVE PAS)
+                // if(inventory[k].items[itemId].itemId != 30){
+                //     if(parseInt(inventory[k].items[itemId].label.innerText) > 1 || count > 1){
+                //         inventory[k].items[itemId].label.innerText = this.mathclamp(parseInt(inventory[k].items[itemId].label.innerText) - count, 0, parseInt(inventory[k].items[itemId].label.innerText))
+                //         if(parseInt(inventory[k].items[itemId].label.innerText) <= 0){
+                //             inventory[k].items[itemId].element.remove()
+                //             inventory[k].items[itemId] = null
+                //         }
+                //     } else {
+                //         inventory[k].items[itemId].element.remove()
+                //         inventory[k].items[itemId] = null
+                //     }
+                // }
+
                 break
             }
         }
@@ -314,6 +307,17 @@ class Inventory {
         for (const k of keys) {
             if(inventory[k].items[idUnique] != null){
                 inventory[k].items[idUnique].label.innerText = Count
+                break
+            }
+        }
+    }
+
+    deleteitem(idUnique){
+        let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
+        for (const k of keys) {
+            if(inventory[k].items[idUnique] != null){
+                inventory[k].items[idUnique].element.remove()
+                inventory[k].items[idUnique] = null
                 break
             }
         }

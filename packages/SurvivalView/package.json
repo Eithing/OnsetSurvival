@@ -46,6 +46,8 @@
         "Ressources/images/Cars.jpg",
         "Ressources/images/Cloth.jpg",
         "Ressources/images/Weapons.png",
-        "Ressources/images/consommable.png"
+        "Ressources/images/consommable.png",
+        "Ressources/sounds/carLock.mp3",
+        "Ressources/sounds/carUnlock.mp3"
     ]
 }
