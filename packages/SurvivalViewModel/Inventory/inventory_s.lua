@@ -19,7 +19,7 @@ end)
 function RemoveItem(player, idUnique, count)
 	for i, item in pairs(PlayerData[player].inventory) do
 		if tonumber(item.id) == tonumber(idUnique) then
-			item.itemCount = math.clamp(item.itemCount - tonumber(count), 0, i_maxStack)
+			item.itemCount = math.clamp(item.itemCount - tonumber(count), 0, tonumber(item.maxStack))
 			if(item.itemCount > 1)then
 				SLogic.UpdatePlayerItem(item)
 				CallRemoteEvent(player, "UpdateItemInventory", item)
@@ -55,7 +55,7 @@ function DropItem(player, idUnique, count)
 				var = item.var
 			}
 
-			local itemc = math.floor(math.clamp(item.itemCount - count, 0, i_maxStack))
+			local itemc = math.floor(math.clamp(item.itemCount - count, 0, tonumber(item.maxStack)))
 			if itemc <= 0 then
 				item.itemCount = 0
 				SLogic.RemovePlayerItem(idUnique)
@@ -96,12 +96,14 @@ function PickupItem(player, Pitem)
 	local found = false
 	for i, item in pairs(PlayerData[player].inventory) do
 		if tonumber(item.itemId) == tonumber(Pitem.itemId) then
-			item.itemCount = math.floor(math.clamp(item.itemCount + Pitem.itemCount, 0, i_maxStack))
-			SLogic.UpdatePlayerItem(item)
-			CallRemoteEvent(player, "UpdateItemInventory", item)
-			UpdateWeight(player, false)
-			found = true
-			break
+			if tonumber(item.isstackable) ~= 0 then
+				item.itemCount = math.floor(math.clamp(item.itemCount + Pitem.itemCount, 0, tonumber(item.maxStack)))
+				SLogic.UpdatePlayerItem(item)
+				CallRemoteEvent(player, "UpdateItemInventory", item)
+				UpdateWeight(player, false)
+				found = true
+				break
+			end
 		end
 	end
 	if found == false then

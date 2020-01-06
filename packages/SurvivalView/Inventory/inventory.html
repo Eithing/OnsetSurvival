@@ -230,6 +230,7 @@
                 document.getElementById("ItemOption_input").setAttribute("item-using", false)
                 document.getElementById("ItemOption_input").setAttribute("item-drop", true)
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
+                document.getElementById("ItemOption_input").value = 1
                 this.currentIdShow = null
             }
         }
@@ -243,6 +244,7 @@
                 document.getElementById("ItemOption_input").setAttribute("item-using", true)
                 document.getElementById("ItemOption_input").setAttribute("item-drop", false)
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
+                document.getElementById("ItemOption_input").value = 1
                 this.currentIdShow = null
             }
         }
@@ -273,6 +275,7 @@
             CloseInfoBox()
             if(document.getElementById("ItemOption_input").value > 0){
                 inventory.removeItem(document.getElementById("ItemOption_input").getAttribute("item-id"), document.getElementById("ItemOption_input").getAttribute("item-using"), document.getElementById("ItemOption_input").getAttribute("item-drop"), parseInt(document.getElementById("ItemOption_input").value))
+                document.getElementById("ItemOption_input").value = 1
             }
         }
 
