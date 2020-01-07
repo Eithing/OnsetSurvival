@@ -137,6 +137,19 @@ p {
     margin-top: 58px;
 }
 
+.money_label {
+    position: absolute;
+    float: right;
+    right: 0;
+    font-family: "Arial Black", Gadget, sans-serif;
+    color: #f0fff0;
+    margin-right: 10px;
+    margin-top: 235px;
+    max-width: 110px;
+    overflow-wrap: break-word;
+    font-size: 12px;
+}
+
 .scroll {
     overflow: auto;
     margin: 0 10px;

@@ -135,8 +135,19 @@ function UseItem(player, idUnique, count)
 					return
 				end
 				for i=1, tonumber(count) do
-					AddFuel(vehicle, UsingItem.value)
+					if VehicleData[vehicle].fuel ~= 100 then
+						AddFuel(vehicle, UsingItem.value)
+					else
+						if i == 1 then
+							count = 0
+						else
+							count = i
+						end
+						break
+					end
 				end
+			else
+				count = 0
 			end
 		end
 		if(tonumber(UsingItem.itemId) == 30)then --Clé
@@ -155,27 +166,60 @@ function UseItem(player, idUnique, count)
 		if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
 			local vehicle, Dist = VGetNearestVehicle(player, 200)
 			if(IsValidVehicle(vehicle))then
-				for i=1, 8 do
-					SetVehicleDamage(vehicle, i, 0)
-				end
 				for i=1, tonumber(count) do
-					SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle)+UsingItem.value, 0, 1500))
+					if GetVehicleHealth(vehicle) ~= v_health then
+						SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle)+UsingItem.value, 0, v_health))
+						if GetVehicleHealth(vehicle) > v_health/2 then
+							for i=1, 8 do
+								SetVehicleDamage(vehicle, i, 0)
+							end
+						end
+					else
+						if i == 1 then
+							count = 0
+						else
+							count = i
+						end
+						break
+					end
 				end
+			else
+				count = 0
 			end
 		end
 		if(tonumber(UsingItem.itemId) == 32)then --Coca Cola
 			for i=1, tonumber(count) do
-				addthirst(player, UsingItem.value)
+				if getthirst(player) ~= p_defaultthirst then
+					addthirst(player, UsingItem.value)
+				else
+					if i == 1 then
+						count = 0
+					else
+						count = i
+					end
+					break
+				end
 			end
 		end
 		if(tonumber(UsingItem.itemId) == 33)then --Chips
 			for i=1, tonumber(count) do
-				addhunger(player, UsingItem.value)
+				if gethunger(player) ~= p_defaulthunger then
+					addhunger(player, UsingItem.value)
+				else
+					if i == 1 then
+						count = 0
+					else
+						count = i
+					end
+					break
+				end
 			end
 		end
 
 		if(tonumber(UsingItem.itemId) ~= 30)then
-			RemoveItem(player, tonumber(idUnique), tonumber(count))
+			if count > 0 then
+				RemoveItem(player, tonumber(idUnique), tonumber(count))
+			end
 		end
 		
 		UpdateWeight(player, false)
@@ -193,10 +237,10 @@ function UpdateWeight(player, visibility)
 
 	if weight > PlayerData[player].MaxWeight then
 		if PlayerData[player].IsInMaxWeight ~= true then
-			CallRemoteEvent(player, "IsGettingMaxWeight", math.ceil(weight), PlayerData[player].MaxWeight)
+			CallRemoteEvent(player, "IsGettingMaxWeight", math.ceil(weight), PlayerData[player].MaxWeight, PlayerData[player].argent)
 			PlayerData[player].IsInMaxWeight = true
 		end
-		CallRemoteEvent(player, "IsGettingMaxWeight", math.ceil(weight), PlayerData[player].MaxWeight)
+		CallRemoteEvent(player, "IsGettingMaxWeight", math.ceil(weight), PlayerData[player].MaxWeight, PlayerData[player].argent)
 		if PlayerData[player].NotifWeight == false then
 			AddNotification(player, "Vous êtes trop lourd, vous ne pouvez plus bouger!", "error")
 			PlayerData[player].NotifWeight = true
@@ -206,7 +250,7 @@ function UpdateWeight(player, visibility)
 		end
 	else
 		if visibility ~= true then
-			CallRemoteEvent(player, "IsGettingCorrectWeight", math.ceil(weight), PlayerData[player].MaxWeight)
+			CallRemoteEvent(player, "IsGettingCorrectWeight", math.ceil(weight), PlayerData[player].MaxWeight, PlayerData[player].argent)
 		end
 		PlayerData[player].IsInMaxWeight = false
 	end

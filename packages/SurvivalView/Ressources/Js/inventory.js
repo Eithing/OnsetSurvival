@@ -327,6 +327,10 @@ class Inventory {
         return document.getElementById("weight_label").innerHTML = Weight+'/<b style="font-size: 14px;">'+MaxWeight+"</b>";
     }
 
+    updateMoney(money){
+        return document.getElementById("money_label").innerHTML = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(money);
+    }
+
     mathclamp(num, min, max){
         if (num < min) {
             return min;

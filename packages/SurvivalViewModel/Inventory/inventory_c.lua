@@ -44,14 +44,21 @@ function UpdateMaxWeightInventory(Weight, MaxWeight)
 end
 AddRemoteEvent("UpdateMaxWeightInventory",  UpdateMaxWeightInventory)
 
-function IsGettingMaxWeight(Weight, MaxWeight)
+function UpdateMoneyInventory(money)
+    SView.ExecuteJs("inventory", "inventory.updateMoney('"..money.."')")
+end
+AddRemoteEvent("UpdateMoneyInventory",  UpdateMoneyInventory)
+
+function IsGettingMaxWeight(Weight, MaxWeight, Money)
     UpdateMaxWeightInventory(Weight, MaxWeight)
+    UpdateMoneyInventory(Money)
     SetIgnoreMoveInput(true)
 end
 AddRemoteEvent("IsGettingMaxWeight",  IsGettingMaxWeight)
 
-function IsGettingCorrectWeight(Weight, MaxWeight)
+function IsGettingCorrectWeight(Weight, MaxWeight, Money)
     UpdateMaxWeightInventory(Weight, MaxWeight)
+    UpdateMoneyInventory(Money)
     SetIgnoreMoveInput(false)
 end
 AddRemoteEvent("IsGettingCorrectWeight",  IsGettingCorrectWeight)
