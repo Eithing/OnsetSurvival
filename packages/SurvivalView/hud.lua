@@ -44,8 +44,6 @@ end)
 function ExecuteJs(hud, js)
     if hud == "inventory" then
         ExecuteWebJS(inventoryHud, js)
-   --[[  elseif hud == "craft" then
-        ExecuteWebJS(CraftHud, js) ]]
     elseif hud == "vitalIndicator"then
         ExecuteWebJS(PlayerHud, js)
     elseif hud == "vehicle" then

@@ -5,11 +5,15 @@ AddRemoteEvent("DisplayCreateCharacter",  DisplayCreateCharacter)
 
 local LastSoundPlayed = 0
 
-function PlayAudioFile(file, x, y, z, radius)
+function PlayAudioFile(file, x, y, z, radius, volume)
 	DestroySound(LastSoundPlayed)
 
-	LastSoundPlayed = CreateSound3D("../SurvivalView/Ressources/sounds/"..file, x, y, z, radius)
-	SetSoundVolume(LastSoundPlayed, 0.7)
+	LastSoundPlayed = CreateSound3D("Ressources/sounds/"..file, x, y, z, radius)
+    SetSoundVolume(LastSoundPlayed, volume)
+    
+    Delay(math.Seconds(2), function()
+        DestroySound(LastSoundPlayed)
+    end)
 end
 AddRemoteEvent("PlayAudioFile", PlayAudioFile)
 

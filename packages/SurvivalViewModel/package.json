@@ -26,5 +26,8 @@
         "Vehicle/vehicle_c.lua",
         "Vehicle/garage_c.lua"
     ],
-    "files": []
+    "files": [
+        "Ressources/sounds/carLock.mp3",
+        "Ressources/sounds/carUnlock.mp3"
+    ]
 }

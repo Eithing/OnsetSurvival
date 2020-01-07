@@ -14,10 +14,6 @@ body {
     background-position-x: 0;
     background-position-y: 0, 50%, 100%, 100%;
     background-repeat: repeat-x;
-    -webkit-animation-name: linemove;
-    -webkit-animation-duration: 20s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
 }
 
 .container1 {
@@ -100,11 +96,108 @@ body {
     left: 0;
 }
 
-@-webkit-keyframes linemove {
-    from {
-        background-position-x: 0;
-    }
-    to {
-        background-position-x: 500px, 500px, 500px, 500px;
-    }
+.radio {
+    position: fixed;
+    float: right;
+    bottom: 0;
+    right: 0;
+    margin-right: 12px;
+    margin-bottom: 13px;
+    font-size: 14px;
+    color: white;
+    text-shadow: 1px 0 0 grey, -2px 0 0 grey, 0 2px 0 grey, 0 -2px 0 grey, 1px 1px grey, -1px -1px 0 grey, 1px -1px 0 grey, -1px 1px 0 grey;
+}
+
+.menu {
+    background-color: rgba(0, 0, 0, 0.596);
+    height: 100px;
+    width: 100px;
+    transform: scale(0);
+    border-radius: 50%;
+    border-style: double;
+    border-color: #00000096;
+    position: fixed;
+    margin: auto;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: -1;
+    transition: 0.7s;
+  }
+  
+.menu div {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    opacity: 0;
+    transition: 0.7s;
+}
+
+.menu div:hover{
+    cursor: pointer;
+}
+
+.menu div:nth-child(1){
+    top: -20px;
+    left: 18px;
+    transition: 0.5s;
+}
+  
+.menu div:nth-child(2){
+    top: 0px;
+    left: 50px;
+    transition: 0.55s;
+}
+  
+.menu div:nth-child(3){
+    top: 30px;
+    left: 47px;
+    transition: 0.6s;
+}
+  
+.menu div:nth-child(4){
+    top: 54px;
+    left: 18px;
+    transition: 0.66s;
+}
+  
+.menu div:nth-child(5){
+    top: 30px;
+    left: -10px;
+    transition: 0.7s;
+}
+  
+.menu div:nth-child(6){
+    top: 0px;
+    left: -15px;
+    transition: 0.75s;
+}
+
+.menu div:nth-child(7){
+    top: 31px;
+    left: 36px;
+    width: 24px;
+    height: 24px;
+    transition: 0.79s;
+}
+
+.close {
+    background: rgba(240, 255, 240, 0.05);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: double;
+    border-color: #00000096;
+    transition: 0.7s;
+}
+  
+.radioicons {
+    background: url('radio.png') no-repeat;
+    overflow: hidden;
+    width: 64px;
+    height: 64px;
+    transform: scale(0.3,0.3);
 }

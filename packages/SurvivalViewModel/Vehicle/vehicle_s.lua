@@ -1,3 +1,4 @@
+-- Fuel
 AddEvent("OnPackageStart", function()
     print("Vehicle ServerSide Loaded")
     CreateTimer(function()
@@ -9,7 +10,6 @@ AddEvent("OnPackageStart", function()
                 end
                 if(GetVehicleVelocity(v) < 0 or GetVehicleVelocity(v) > 0)then
                     ConsumeFuel(v, v_consomevalue)
-                    --print(VehicleData[k].fuel) -- Print l'essence du véhicule
                 end
                 if VehicleData[v].fuel <= 0 then
                     StopVehicleEngine(v)
@@ -34,9 +34,9 @@ AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
     if seat == 1 then
         CallRemoteEvent(player, "OnUpdateVehicleHud")
         CallRemoteEvent(player, "OnUpdateFuel", VehicleData[vehicle].fuel)
+        CallRemoteEvent(player, "radio:EnterRadio", vehicle)
         if VehicleData[vehicle].fuel <= 0 then
             StopVehicleEngine(vehicle)
-            AddNotification(player, "La voiture a plus d'essence !", "error")
         end
     end
     return true
@@ -111,6 +111,7 @@ function SetFuel(vehicle, count)
 end
 AddRemoteEvent("SetFuel", SetFuel)
 
+-- Repair
 function Repair(vehicle, count)
     count = tonumber(count)
     if IsValidVehicle(vehicle) then
@@ -124,6 +125,7 @@ function Repair(vehicle, count)
 end
 AddRemoteEvent("Repair", Repair)
 
+-- Lock - UnLock
 function LockUnLockVehicle(player, vehicle)
     if VehicleData[vehicle] ~= nil then
         if VehicleData[vehicle].locked == true then
@@ -140,7 +142,7 @@ function LockVehicle(player, vehicle)
         VehicleData[vehicle].locked = true
         SetVehiclePropertyValue(vehicle, "locked", true, true)
         AddNotification(player, "Véhicule verrouillé !", "success")
-        CallRemoteEvent(player, "PlayAudioFile", "carUnlock.mp3", x, y, z, 100)
+        CallRemoteEvent(player, "PlayAudioFile", "carUnlock.mp3", x, y, z, 300, 0.7)
     end
 end
 
@@ -150,10 +152,11 @@ function UnLockVehicle(player, vehicle)
         VehicleData[vehicle].locked = false
         SetVehiclePropertyValue(vehicle, "locked", false, true)
         AddNotification(player, "Véhicule déverrouillé !", "success")
-        CallRemoteEvent(player, "PlayAudioFile", "carLock.mp3", x, y, z, 100)
+        CallRemoteEvent(player, "PlayAudioFile", "carLock.mp3", x, y, z, 300, 0.7)
     end
 end
 
+-- UnFlip
 function UnflipVehicle(player) 
     local vehicle = VGetNearestVehicle(player, 120)
     if vehicle ~= 0 and IsValidVehicle(vehicle) then
@@ -162,6 +165,54 @@ function UnflipVehicle(player)
     end
 end
 AddRemoteEvent("UnflipVehicle", UnflipVehicle)
+
+-- ChangeSeat
+AddRemoteEvent("ChangeSeat", function(player, seat)
+    local veh = tonumber(GetPlayerVehicle(player))
+    local seatplace = tonumber(seat)
+    if GetPlayerVehicleSeat(player) ~= seatplace then
+        if GetVehiclePassenger(veh, seatplace) > 0 then
+            AddNotification(player, "Impossible de changer de place !", "error")
+        else
+            SetPlayerInVehicle(player, veh, seatplace)
+        end
+    end
+ end)
+
+--[[ RADIO SYSTEM - github.com/frederic2ec/onsetrp/blob/master/vehicle_radio ]]
+ AddRemoteEvent("radio:getplayersinvehicle", function(player, radioStatus, volume, channel)
+    local vehicle = GetPlayerVehicle(player) -- On récupère le véhicle
+    local nbSeats = GetVehicleNumberOfSeats(vehicle) -- On récupère le nombre de places
+    local passengers = {} -- On définie un array
+    for i=1,nbSeats do 
+        passengers[i] = GetVehiclePassenger(vehicle, i) -- Pour chaque place, on récupère le player qui l'occupe
+    end
+    
+    if GetPlayerVehicleSeat(player) == 1 or GetPlayerVehicleSeat(player) == 2 then -- Si le joueur qui déclence est devant, la radio peut être allumée
+        for k,v in pairs(passengers) do
+            if v ~= 0 then
+                if volume ~= nil then
+                    CallRemoteEvent(v, "radio:setvolume", vehicle, volume) 
+                elseif channel ~= nil then
+                    CallRemoteEvent(v, "radio:setchannel", vehicle, channel) 
+                elseif radioStatus ~= nil then
+                    if radioStatus == 0 then
+                        CallRemoteEvent(v, "radio:turnonradio", vehicle) 
+                    else
+                        CallRemoteEvent(v, "radio:turnoffradio", vehicle) 
+                    end
+                end
+            end
+        end
+    end
+end)
+
+AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
+    if seat == 1 then
+        CallRemoteEvent(player, "radio:switchtrack3d", vehicle) 
+    end
+end)
+
 
 -- Fonction --
 function VGetNearestVehicle(player, nearest_dist) -- Trouvée le véhicule le plus proche

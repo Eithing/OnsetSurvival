@@ -1,28 +1,87 @@
 <html>
-
 <head>
+    <link rel="stylesheet" type="text/css" href="vehicle.css" />
 </head>
-
 <body>
-    <div>
-        <div class="progress">
-            <img src="fuel.png" class="image">
-            <div class="container1">
-                <div class="progress1 progress-striped1">
-                    <div class="progress-bar1" id="editable1">
-                    </div>
+    <div class="menu" id="menu">
+        <div id="1" class="radioicons" style="background-position: -0px -0px"></div>
+        <div id="2" class="radioicons" style="background-position: -64px -0px"></div>
+        <div id="3" class="radioicons" style="background-position: -0px -64px"></div>
+        <div id="4" class="radioicons" style="background-position: -64px -64px"></div>
+        <div id="5" class="radioicons" style="background-position: -0px -128px"></div>
+        <div id="6" class="radioicons" style="background-position: -64px -128px"></div>
+        <div class="close" id="close">X</div>
+  </div>
+    <div class="radio">
+        <p id="radiolabel">Radio : NRJ</p>
+    </div>
+    <div class="progress">
+        <img src="fuel.png" class="image">
+        <div class="container1">
+            <div class="progress1 progress-striped1">
+                <div class="progress-bar1" id="editable1">
                 </div>
             </div>
         </div>
-
     </div>
+
+    <script>
+        try {
+            ue == null
+        } catch (err) {
+            window.ue = {
+                game: {
+                    callevent: console.log
+                }
+            }
+        }
+
+        function UpdateFuel(fuel) {
+            document.getElementById("editable1").style.width = fuel + "%";
+        }
+    
+        function UpdateRadio(radio){
+            document.getElementById("radiolabel").innerHTML = "Radio : "+radio;
+        }
+
+
+        var i=0;
+        function expand(){
+            if(i==0){
+                document.getElementById("menu").style.transform="scale(3)"; 
+                i=1;
+                setTimeout(function(){
+                    for (const key in document.getElementById("menu").children) {
+                        if (document.getElementById("menu").children.hasOwnProperty(key)) {
+                            const element = document.getElementById("menu").children[key];
+                            element.style.opacity="1";
+                        }
+                    }
+                }, 300)
+            }
+            else{
+                for (const key in document.getElementById("menu").children) {
+                    if (document.getElementById("menu").children.hasOwnProperty(key)) {
+                        const element = document.getElementById("menu").children[key];
+                        element.style.opacity="0";
+                    }
+                }
+                setTimeout(function(){
+                    document.getElementById("menu").style.transform="scale(0)"; 
+                    i=0;
+                }, 300)
+            }
+        }
+
+        document.getElementById("close").addEventListener('click', (event) => {
+            ue.game.callevent("SetRadioVisibility");
+        }, false);
+
+        Array.from(document.getElementsByClassName("radioicons")).forEach(function(element) {
+            element.addEventListener('click', (event) => {
+                ue.game.callevent("OnChangeRadio", JSON.stringify([event.target.id]));
+            }, false);
+        });
+    </script>
 </body>
-
 </html>
-<link rel="stylesheet" type="text/css" href="vehicle.css" />
-
-<script>
-    function UpdateFuel(...coucou) {
-        document.getElementById("editable1").style.width = coucou[0] + "%";
-    }
-</script>

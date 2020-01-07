@@ -29,6 +29,7 @@
         "Vehicle/vehicle.css",
         "Vehicle/vehicle.html",
         "Vehicle/fuel.png",
+        "Vehicle/radio.png",
 
         "Character/character.css",
         "Character/character.html",
@@ -46,8 +47,6 @@
         "Ressources/images/Cars.jpg",
         "Ressources/images/Cloth.jpg",
         "Ressources/images/Weapons.png",
-        "Ressources/images/consommable.png",
-        "Ressources/sounds/carLock.mp3",
-        "Ressources/sounds/carUnlock.mp3"
+        "Ressources/images/consommable.png"
     ]
 }
