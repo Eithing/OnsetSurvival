@@ -97,6 +97,16 @@ function setthirst_commands(player, count)
 end
 AddCommand("setthirst", setthirst_commands)
 
+-- Set Money
+function setmoney_commands(player, money)
+	if IsAdmin(player) then
+		setMoney(player, math.clamp(tonumber(money), 0, p_maxMoney))
+		print("Admin : Argent set : "..money.." (for "..player..")")
+	end
+	return
+end
+AddCommand("setmoney", setmoney_commands)
+
 -- Spawn un npc
 function npc_commands(player)
 	if IsAdmin(player) then

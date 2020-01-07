@@ -242,6 +242,46 @@ AddRemoteEvent("InsertPlayer", function(player, name)
     SavePlayer(player, PlayerData[player])
 end)
 
+-- Argent (money) --
+function updateHudMoney(player)
+    CallRemoteEvent(player, "UpdateMoneyInventory", PlayerData[player].argent)
+end
+
+function getMoney(player)
+    return PlayerData[player].argent
+end
+
+function haveMoney(player, money)
+    local calcul = PlayerData[player].argent - money
+    if calcul >= 0 then
+        return true
+    else
+        return false
+    end
+end
+
+function setMoney(player, money)
+    PlayerData[player].argent = math.clamp(money, 0, p_maxMoney)
+    updateHudMoney(player)
+end
+
+function addMoney(player, money)
+    local calcul = PlayerData[player].argent - money
+    PlayerData[player].argent = math.clamp(calcul, 0, p_maxMoney)
+    updateHudMoney(player)
+end
+
+function removeMoney(player, money)
+    local calcul = PlayerData[player].argent - money
+    if calcul >= 0 then
+        PlayerData[player].argent = math.clamp(calcul, 0, p_maxMoney)
+        updateHudMoney(player)
+        return true
+    else
+        return false
+    end
+end
+
 -- Teleport --
 function PlayerTeleport(player, x, y, z)
     SetPlayerLocation(player, x, y, z+250)
