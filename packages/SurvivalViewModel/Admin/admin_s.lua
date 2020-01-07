@@ -187,3 +187,12 @@ function repair_commands(player)
 	return
 end
 AddCommand("repair", repair_commands)
+
+-- flip
+function flip_commands(player)
+	if IsAdmin(player) then
+		UnflipVehicle(player)
+	end
+	return
+end
+AddCommand("flip", flip_commands)
