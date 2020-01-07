@@ -129,3 +129,11 @@ function addthirst(player, count)
 	PlayerData[player].thirst = math.clamp(PlayerData[player].thirst+count,0,p_defaultthirst)
 	CallRemoteEvent(player, "OnUpdateVitalIndicator", GetPlayerHealth(player), PlayerData[player].hunger, PlayerData[player].thirst)
 end
+
+function gethunger(player)
+	return PlayerData[player].hunger
+end
+
+function getthirst(player)
+	return PlayerData[player].thirst
+end
