@@ -105,7 +105,17 @@ AddEvent("OnKeyPress", function(key)
 end)
 
 AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
-    StartRadio(vehicle)
+    if VehRadio[vehicle] == nil then
+        VehRadio[vehicle] = {}
+        VehRadio[vehicle].Vehicle = vehicle
+        VehRadio[vehicle].RadioStatus = 0
+        VehRadio[vehicle].Track = nil
+        VehRadio[vehicle].CurrentRadio = 1
+        VehRadio[vehicle].Volume = 0.5
+    end
+    if VehRadio[vehicle].RadioStatus == 1 then
+        StartRadio(vehicle)
+    end
 end)
 
 AddEvent("OnPlayerStartExitVehicle", function(vehicle)
