@@ -85,12 +85,6 @@ function ConsumeFuel(vehicle, count)
         else
             VehicleData[vehicle].fuel = math.clamp(VehicleData[vehicle].fuel - count, 0, 100)
         end
-        local x, y, z = GetVehicleVelocity(vehicle)
-        x = math.abs(x)
-        y = math.abs(y)
-        z = math.abs(z)
-        local hmh = math.floor((190*math.abs(x+y+z))/ 5320.7950973511)
-        print(tostring(hmh).."km/h")
         local driver = GetVehicleDriver(vehicle)
         if IsValidPlayer(driver) then
             CallRemoteEvent(driver, "OnUpdateFuel", VehicleData[vehicle].fuel)
@@ -185,72 +179,39 @@ AddRemoteEvent("ChangeSeat", function(player, seat)
     end
  end)
 
---[[ RADIO SYSTEM ]]
-sr = ImportPackage("soundstreamer")
-
-local VehicleRadio = {}
-AddRemoteEvent("radio:getplayersinvehicle", function(player, radioStatus, volume, channel)
+--[[ RADIO SYSTEM - github.com/frederic2ec/onsetrp/blob/master/vehicle_radio ]]
+ AddRemoteEvent("radio:getplayersinvehicle", function(player, radioStatus, volume, channel)
     local vehicle = GetPlayerVehicle(player) -- On récupère le véhicle
-    if VehicleRadio[vehicle] == nil then
-        VehicleRadio[vehicle] = {}
-        VehicleRadio[vehicle].vehicle = vehicle
-        VehicleRadio[vehicle].track = nil
-        VehicleRadio[vehicle].volume = 0.5
-        VehicleRadio[vehicle].CurrentRadio = 1
-        VehicleRadio[vehicle].isEnabled = false
+    local nbSeats = GetVehicleNumberOfSeats(vehicle) -- On récupère le nombre de places
+    local passengers = {} -- On définie un array
+    for i=1,nbSeats do 
+        passengers[i] = GetVehiclePassenger(vehicle, i) -- Pour chaque place, on récupère le player qui l'occupe
     end
-    VehicleRadio[vehicle].vehicle = vehicle
-    VehicleRadio[vehicle].LastPos = GetVehicleLocation(vehicle)
-    local x, y, z = GetVehicleLocation(vehicle)
     
-    if volume ~= nil then
-        if volume == 1 and VehicleRadio[vehicle].volume < 1.0 then --Monte le son
-            VehicleRadio[vehicle].volume = math.clamp(VehicleRadio[vehicle].volume + 0.05, 0, 1)
-        elseif volume == 0 and VehicleRadio[vehicle].volume > 0.0 then -- baisse le son
-            VehicleRadio[vehicle].volume = math.clamp(VehicleRadio[vehicle].volume - 0.05, 0, 1)
-        end
-        sr.SetSound3DVolume(VehicleRadio[vehicle].track, VehicleRadio[vehicle].volume)
-    elseif channel ~= nil then
-        sr.DestroySound3D(VehicleRadio[vehicle].track)
-        VehicleRadio[vehicle].track = nil
-        VehicleRadio[vehicle].CurrentRadio = channel
-        VehicleRadio[vehicle].track = sr.CreateSound3D(v_radios[VehicleRadio[vehicle].CurrentRadio].url, x, y, z, 800.0)
-        sr.SetSound3DVolume(VehicleRadio[vehicle].track, VehicleRadio[vehicle].volume)
-    elseif radioStatus ~= nil then
-        if (radioStatus == true or radioStatus == 2) and VehicleRadio[vehicle].isEnabled == false then
-            if VehicleRadio[vehicle].track == nil then
-                VehicleRadio[vehicle].track = sr.CreateSound3D(v_radios[VehicleRadio[vehicle].CurrentRadio].url, x, y, z, 800.0)
-                sr.SetSound3DVolume(VehicleRadio[vehicle].track, VehicleRadio[vehicle].volume)
-                VehicleRadio[vehicle].isEnabled = true
+    if GetPlayerVehicleSeat(player) == 1 or GetPlayerVehicleSeat(player) == 2 then -- Si le joueur qui déclence est devant, la radio peut être allumée
+        for k,v in pairs(passengers) do
+            if v ~= 0 then
+                if volume ~= nil then
+                    CallRemoteEvent(v, "radio:setvolume", vehicle, volume) 
+                elseif channel ~= nil then
+                    CallRemoteEvent(v, "radio:setchannel", vehicle, channel) 
+                elseif radioStatus ~= nil then
+                    if radioStatus == 0 then
+                        CallRemoteEvent(v, "radio:turnonradio", vehicle) 
+                    else
+                        CallRemoteEvent(v, "radio:turnoffradio", vehicle) 
+                    end
+                end
             end
-        elseif (radioStatus == false or radioStatus == 2) and VehicleRadio[vehicle].isEnabled == true then
-            sr.DestroySound3D(VehicleRadio[vehicle].track)
-            VehicleRadio[vehicle].track = nil
-            VehicleRadio[vehicle].isEnabled = false
         end
     end
 end)
 
-CreateTimer(function()
-    for k, v in pairs(VehicleRadio) do
-        local vehicle = v.vehicle
-        local pos = GetVehicleLocation(vehicle)
-        if IsValidVehicle(vehicle) and VehicleRadio[vehicle] ~= nil and VehicleRadio[vehicle].track ~= nil then
-            print("VehicleRadio TIMER")
-            local x, y, z = GetVehicleLocation(vehicle)
-            print(sr.SetSound3DLocation(VehicleRadio[vehicle].track, x, y, z))
-            print(sr.GetSound3DLocation(VehicleRadio[vehicle].track))
-            VehicleRadio[vehicle].LastPos = pos
-        end
+AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
+    if seat == 1 then
+        CallRemoteEvent(player, "radio:switchtrack3d", vehicle) 
     end
-end, 1000)
-
-
--- AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
---     if seat == 1 then
---         CallRemoteEvent(player, "radio:switchtrack3d", vehicle) 
---     end
--- end)
+end)
 
 
 -- Fonction --
