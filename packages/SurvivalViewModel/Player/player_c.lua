@@ -80,7 +80,7 @@ end
 
 InitNotif("garage", g_Points, "Appuyer sur E pour ouvrir le garage", "OnOpenGarage", false)
 InitNotif("garagestore", gstore_Points, "Appuyer sur E pour stocker votre véhicule", "StoreVehicleToGarage", true)
-InitNotif("recolte", r_Points, "Appuyer sur E pour recolter", "OnOpenGarage", false)
+InitNotif("recolte", r_Points, "Appuyer sur E pour recolter", "Harvesting", false)
 
 function OnKeyPress(key)
     if key == "E" then
@@ -90,7 +90,7 @@ function OnKeyPress(key)
                 break
             end
             if PlayerIsInVehicle() == v.incar then
-                local zone = GetNearestZone(v.zone, x, y, z)
+                local zone, dist = GetNearestZone(v.zone, x, y, z)
                 if zone ~= 0 then
                     CallRemoteEvent(v.CallRemonte)
                     break
@@ -101,22 +101,33 @@ function OnKeyPress(key)
 end
 AddEvent("OnKeyPress", OnKeyPress)
 
+local lastZone = nil
+local lastZoneDist = nil
 CreateTimer(function()
     local x, y, z = GetPlayerLocation()
     for k, v in pairs(notifid) do
-        if GetNearestZone(v.zone, x, y, z) ~= 0 then
+        local found, dist = GetNearestZone(v.zone, x, y, z)
+        if found ~= 0 then
             if v.notif == false then
                 if PlayerIsInVehicle() == v.incar then
                     v.id = AddNotification(v.msg, "default", 999)
                     v.notif = true
+                    lastZone = k
+                    lastZoneDist = found
                 end
             end
-        else
-            if v.notif == true then
-                SView.ExecuteJs("vitalIndicator", 'RemoveNotification("'..v.id..'")')
-                v.id = 0
-                v.notif = false
-            end
+        end
+    end
+
+    if lastZone ~= nil then
+        local x2, y2, z2 = lastZoneDist.x, lastZoneDist.y, lastZoneDist.z
+        local dist = GetDistance3D(x, y, z, x2, y2, z2)
+        if (tonumber(dist) > tonumber(lastZoneDist.radius) and notifid[lastZone].notif == true) or PlayerIsInVehicle() ~= notifid[lastZone].incar then
+            SView.ExecuteJs("vitalIndicator", 'RemoveNotification("'..notifid[lastZone].id..'")')
+            notifid[lastZone].id = 0
+            notifid[lastZone].notif = false
+            lastZone = nil
+            lastZoneDist = nil
         end
     end
 end, 500)

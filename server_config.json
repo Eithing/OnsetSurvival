@@ -15,6 +15,7 @@
     ],
     "packages": [
         "default",
+        "soundstreamer",
         "SurvivalLogic",
         "SurvivalView",
         "SurvivalViewModel"

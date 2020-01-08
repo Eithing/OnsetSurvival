@@ -11,6 +11,7 @@ p_spawn = {x=125773.000000, y=80246.000000, z=1567.000000} -- Position du spawn
 p_delayNotif = 20 -- Delay de base pour une notif (en secondes)
 p_delayvitalnotif = 30 -- Envoie une notif pour la faim et la soif (en secondes)
 p_maxMoney = 999999999 -- Argent max
+p_bagDisappearTime = 20*1000
 
 -- INVENTORY CONFIG --
 i_maxWeight = 80 -- Valeur par défault
@@ -68,16 +69,18 @@ end
 
 function GetNearestZone(zone, x, y, z)
 	local found = 0
+	local fdist = 0
 	for k, v in pairs(zone) do
         local x2, y2, z2 = v.x, v.y, v.z
 		local dist = GetDistance3D(x, y, z, x2, y2, z2)
 		if dist < tonumber(v.radius) then
 			found = v
+			fdist = dist
 			break
 		end
 	end
 
-	return found
+	return found, fdist
 end
 
 

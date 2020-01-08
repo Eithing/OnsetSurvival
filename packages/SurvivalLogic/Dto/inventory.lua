@@ -51,8 +51,8 @@ end
 AddFunctionExport("GetLastPlayerItem", GetLastPlayerItem)
 
 -- Insert Item --
-function SetUserInventory(compteId, itemId, count, var)
-	local query = mariadb_prepare(sql, "INSERT INTO inventory(compteId, itemId, itemCount, var) VALUES ('?','?','?','?')", tonumber(compteId), tonumber(itemId), tonumber(count), var)
+function SetUserInventory(compteId, item)
+	local query = mariadb_prepare(sql, "INSERT INTO inventory(compteId, itemId, itemCount, var) VALUES ('?','?','?','?')", tonumber(compteId), tonumber(item.itemId), tonumber(item.itemCount), item.var)
 	local result = mariadb_query(sql, query)
 	mariadb_delete_result(result)
 end
@@ -75,3 +75,25 @@ function RemovePlayerItem(item)
     return true
 end
 AddFunctionExport("RemovePlayerItem", RemovePlayerItem)
+
+--GetAllItems --
+function GetAllItems()
+    local query = mariadb_prepare(sql, "SELECT * FROM items;")
+    local result = mariadb_await_query(sql, query)
+    local AllItems = {}
+    local rows = mariadb_get_row_count() or 0
+	for i=1, rows do
+        AllItems[i] = {	id = mariadb_get_value_name(i, "id"),
+                        nom = mariadb_get_value_name(i, "nom"),
+                        poids = mariadb_get_value_name(i, "poids"),
+                        type = mariadb_get_value_name(i, "type"),
+                        imageId = mariadb_get_value_name(i, "imageId"),
+                        modelId = mariadb_get_value_name(i, "modelId"),
+                        value = mariadb_get_value_name(i, "value"),
+                        maxStack = mariadb_get_value_name(i, "maxStack"),
+                        isstackable = mariadb_get_value_name(i, "isstackable")}
+	end
+	mariadb_delete_result(result)
+	return AllItems
+end
+AddFunctionExport("GetAllItems", GetAllItems)

@@ -63,6 +63,8 @@ function CreatePlayerData(player)
         PlayerData[player].IsInMaxWeight = false
         PlayerData[player].NotifWeight = false
         PlayerData[player].MaxWeight = i_maxWeight
+        PlayerData[player].bag = 0
+        SetPlayerPropertyValue(player, "harvesting", false)
         print("PlayerData created for : "..player)
 
         table.insert(PlayerData[player].clothing, "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR")
@@ -147,6 +149,8 @@ function LoadPlayerAccount(player, rows, result)
         PlayerData[player].IsInMaxWeight = false
         PlayerData[player].NotifWeight = false
         PlayerData[player].MaxWeight = math.tointeger(result.maxweight)
+        PlayerData[player].bag = 0
+        SetPlayerPropertyValue(player, "harvesting", false)
 
 		SetPlayerHealth(player, tonumber(result['health']))
 		SetPlayerArmor(player, tonumber(result['armor']))
@@ -242,6 +246,7 @@ AddRemoteEvent("InsertPlayer", function(player, name)
     SavePlayer(player, PlayerData[player])
 end)
 
+
 -- Argent (money) --
 function updateHudMoney(player)
     CallRemoteEvent(player, "UpdateMoneyInventory", PlayerData[player].argent)
@@ -281,6 +286,11 @@ function removeMoney(player, money)
         return false
     end
 end
+
+AddEvent("OnPlayerDamage", function(player, weapon, hittype, hitid, hitx, hity, hitz, startx, starty, startz, normalx, normaly, normalz)
+    
+end)
+
 
 -- Teleport --
 function PlayerTeleport(player, x, y, z)

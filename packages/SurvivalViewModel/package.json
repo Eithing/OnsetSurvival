@@ -22,7 +22,6 @@
         "Admin/admin_c.lua",
         "Inventory/inventory_c.lua",
         "Job/craft_c.lua",
-        "Job/recolt_c.lua",
         "Vehicle/vehicle_c.lua",
         "Vehicle/garage_c.lua"
     ],

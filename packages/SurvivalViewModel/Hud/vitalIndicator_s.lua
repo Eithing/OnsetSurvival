@@ -40,10 +40,10 @@ CreateTimer(function(UpdateVital)
 			compteur[v].calculedTime = 0
         end
 		if tonumber(PlayerData[v].hunger) > 0 then
-			PlayerData[v].hunger = math.clamp((PlayerData[v].hunger - toRemove), 0, 100) 
+			PlayerData[v].hunger = math.clamp(PlayerData[v].hunger - toRemove, 0, 100) 
 		end
 		if tonumber(PlayerData[v].thirst) > 0 then
-			PlayerData[v].thirst = math.clamp((PlayerData[v].thirst - toRemove), 0, 100) 
+			PlayerData[v].thirst = math.clamp(PlayerData[v].thirst - toRemove, 0, 100) 
 		end
 		if tonumber(PlayerData[v].hunger) <= 0 or tonumber(PlayerData[v].thirst) <= 0 then
 			if PlayerData[v].vitalnotif == false then

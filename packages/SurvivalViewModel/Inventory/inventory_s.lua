@@ -36,11 +36,15 @@ end
 AddRemoteEvent("RemoveItem", RemoveItem)
 
 function DropItem(player, idUnique, count)
+	if GetPlayerMovementMode(player) == 5 then
+		AddNotification(player, "Vous ne pouvez pas jeter un objet !", "error")
+		return
+	end
 	local x,y,z = GetPlayerLocation(player)
 	local newitem
 	for i, item in pairs(PlayerData[player].inventory) do
 		if tonumber(item.id) == tonumber(idUnique) then
-			local newitem = CreatePickup(item.modelId, x, y, z - 88)
+			local newitem = CreateObject(item.modelId, x, y, z - 94, 90, 0, 0)
 			ItemPickups[newitem] = {}
 			ItemPickups[newitem].item = {
 				id = item.id,
@@ -54,6 +58,8 @@ function DropItem(player, idUnique, count)
 				itemCount = tonumber(count),
 				var = item.var
 			}
+			SetObjectPropertyValue(newitem, "IsItemInventory", true, true)
+			SetObjectPropertyValue(newitem, "DontCollison", true, true)
 
 			local itemc = math.floor(math.clamp(item.itemCount - count, 0, tonumber(item.maxStack)))
 			if itemc <= 0 then
@@ -74,8 +80,8 @@ end
 AddRemoteEvent("DropItem", DropItem)
 
 -- Pickup --
-AddEvent("OnPlayerPickupHit", function(player, Pickup)
-	if(ItemPickups[Pickup] ~= nil)then
+AddRemoteEvent("ItemPickup", function(player, Pickup)
+	if IsValidObject(Pickup) and ItemPickups[Pickup] ~= nil then
 		if PlayerData[player].PickupS == true then
 			return
 		end
@@ -83,7 +89,7 @@ AddEvent("OnPlayerPickupHit", function(player, Pickup)
 			return
 		end
 		PickupItem(player, ItemPickups[Pickup].item)
-		DestroyPickup(Pickup)
+		DestroyObject(Pickup)
 		ItemPickups[Pickup] = nil
 		PlayerData[player].PickupS = true
 		Delay(2000, function()
@@ -96,7 +102,8 @@ function PickupItem(player, Pitem)
 	local found = false
 	for i, item in pairs(PlayerData[player].inventory) do
 		if tonumber(item.itemId) == tonumber(Pitem.itemId) then
-			if tonumber(item.isstackable) ~= 0 then
+			local calcul = item.itemCount + Pitem.itemCount
+			if tonumber(item.isstackable) ~= 0 and calcul <= tonumber(item.maxStack) then
 				item.itemCount = math.floor(math.clamp(item.itemCount + Pitem.itemCount, 0, tonumber(item.maxStack)))
 				SLogic.UpdatePlayerItem(item)
 				CallRemoteEvent(player, "UpdateItemInventory", item)
@@ -107,7 +114,7 @@ function PickupItem(player, Pitem)
 		end
 	end
 	if found == false then
-		SLogic.SetUserInventory(PlayerData[player].id, Pitem.itemId, Pitem.itemCount, Pitem.var)
+		SLogic.SetUserInventory(PlayerData[player].id, Pitem)
 		Delay(500, function()
 			Player_CreateNewItem(player)
 		end)
@@ -257,6 +264,49 @@ function UpdateWeight(player, visibility)
 end
 AddRemoteEvent("UpdateWeight", UpdateWeight)
 
+-- Mort
+AddEvent("OnPlayerDeath", function(player, instigator)
+	-- supression suivit sac + apparition au sol
+	if (PlayerData[player].bag ~= 0) then
+		DestroyObject(PlayerData[player].bag)
+		PlayerData[player].bag = 0
+	end
+	local x, y, z = GetPlayerLocation(player)
+	local object = CreateObject(1282, x, y, z-100)
+	DeadPlayerBags[object] = {}
+	DeadPlayerBags[object].inventory = PlayerData[player].inventory
+	DeadPlayerBags[object].x = x
+	DeadPlayerBags[object].y = y
+	DeadPlayerBags[object].z = z
+	PlayerData[player].bag = object
+	
+	SetObjectPropertyValue(object, "DontCollison", true, true)
+
+	Delay(p_bagDisappearTime, function()
+		DestroyObject(object)
+		DeadPlayerBags[object] = nil
+	end)
+end)
+
+-- SearchProximityInventory --
+function SearchProximityInventory(player, visibility)
+	local found = false
+	if visibility then
+		local x,y,z = GetPlayerLocation(player)
+		for i, inventory in pairs(DeadPlayerBags) do
+			if GetDistance3D(x, y, z, inventory.x, inventory.y, inventory.z) < 100 then
+				SetPlayerAnimation(player, 'SIT06')
+				found = true
+				break
+			end
+		end
+		if found == false then
+		end
+	else
+		SetPlayerAnimation(player, 'STOP')
+	end
+end
+AddRemoteEvent("SearchProximityInventory", SearchProximityInventory)
 
 -- Fonctions --
 function GetItemByIdUnique(player, idUnique)
@@ -272,7 +322,7 @@ end
 
 function GetItemDataByItemID(itemID)
 	local found = 0
-	for i, item in pairs(ItemData) do
+	for i, item in pairs(ItemDB) do
 		if tonumber(item.id) == tonumber(itemID) then
 			found = item
 			break

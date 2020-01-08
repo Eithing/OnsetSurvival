@@ -1,6 +1,6 @@
 AddRemoteEvent("OnOpenGarage", function(player)
     local x, y, z = GetPlayerLocation(player)
-    local NearestGarage = GetNearestZone(g_Points, x, y, z)
+    local NearestGarage, dist = GetNearestZone(g_Points, x, y, z)
     if NearestGarage ~= 0 then
         CallRemoteEvent(player, "OpenGarage", NearestGarage.id, PlayerData[player].vehicles)
     end
@@ -8,7 +8,7 @@ end)
 
 AddRemoteEvent("StoreVehicleToGarage", function(player)
     local x, y, z = GetPlayerLocation(player)
-    local NearestGarageStore = GetNearestZone(gstore_Points, x, y, z)
+    local NearestGarageStore, dist = GetNearestZone(gstore_Points, x, y, z)
     if NearestGarageStore ~= 0 then
         local vehicle = GetPlayerVehicle(player)
         if vehicle ~= 0 and VehicleData[vehicle] ~= nil then
@@ -26,7 +26,7 @@ end)
 
 AddRemoteEvent("SpawnVehicleFromGarage", function(player, vehicleid)
     local x, y, z = GetPlayerLocation(player)
-    local NearestGarage = GetNearestZone(g_Points, x, y, z)
+    local NearestGarage, dist = GetNearestZone(g_Points, x, y, z)
     if NearestGarage ~= 0 then
         local vehicle = Garage_GetVehicleById(player, vehicleid)
         if vehicle ~= 0 then
