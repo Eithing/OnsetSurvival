@@ -214,6 +214,7 @@ AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
 end)
 
 AddRemoteEvent("OnPlayerExitDamage", function(player, speed)
+    print(GetSpeedVehicle(GetPlayerVehicle(player)), speed)
     if speed > 15 then
         local calcul = speed/1.5
         sethealth(player, GetPlayerHealth(player) - calcul)
@@ -235,4 +236,25 @@ function VGetNearestVehicle(player, nearest_dist) -- Trouvée le véhicule le pl
 		end
 	end
 	return found, nearest_dist
+end
+
+function GetVehiclesDataByVehicleID(VehicleID)
+	local found = 0
+	for i, vehicle in pairs(VehicleDB) do
+		if tonumber(vehicle.id) == tonumber(VehicleID) then
+			found = vehicle
+			break
+		end
+	end
+	return found
+end
+
+function GetSpeedVehicle(vehicle)
+    local x, y, z = GetVehicleVelocity(vehicle)
+    local len = math.sqrt(x * x + y * y + z * z)
+    local kmh = string.sub(math.ceil(len * 36.0), 0, 2)
+    if tonumber(kmh) > 99 then
+        kmh = string.sub(kmh, 0, 3)
+    end
+    return kmh
 end

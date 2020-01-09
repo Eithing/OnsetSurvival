@@ -1,8 +1,10 @@
 .inventory-container-Global {
     background-color: rgba(0, 0, 0, 0.847);
-    width: 800px;
+    width: 790px;
     height: 300px;
     border-radius: 2%;
+    box-shadow: 0 0 13px black;
+    user-select: none;
 }
 
 .inventory-container-SubGlobal {
@@ -15,6 +17,12 @@
     border: 1px solid rgb(33, 33, 33);
     border-radius: 15%;
     position: relative;
+    transition: 0.7s;
+}
+
+.item:hover {
+    cursor: pointer;
+    border: 1px solid rgb(0, 0, 0);
 }
 
 .item-image {
@@ -70,6 +78,7 @@ img {
     border-radius: 15%;
     text-align: right;
     background-color: #ffffff3a;
+    text-shadow: 1px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -85,9 +94,9 @@ img {
 
 .scroll {
     overflow: auto;
-    margin: 0 11px;
+    margin: 11px;
     background-color: rgba(240, 255, 240, 0.11);
-    width: 240px;
+    width: 234px;
     height: 260px;
     border-radius: 2%;
     display: flex;
@@ -117,8 +126,71 @@ img {
 }
 
 .craft-container {
+    position: relative;
     background-color: rgba(240, 255, 240, 0.11);
     width: 253px;
-    height: 100px;
+    height: 260px;
     border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.craft-container div{
+    background: rgba(0, 0, 0, 0.596);
+    color: white;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.7s;
+}
+
+.craft-container div:hover{
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.craft-container div:hover{
+    cursor: pointer;
+}
+
+.buttons div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.596);
+    color: white;
+    height: 40px;
+    margin: 0;
+    transition: 0.7s;
+}
+
+.buttons div:hover{
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.needing {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    margin-top: 5px;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+}
+
+.needing p{
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 0;
+    margin-bottom: 4px;
+    padding: 2px;
+    transition: 0.7s;
+}
+
+#itemcraft:hover {
+    cursor: default;
 }

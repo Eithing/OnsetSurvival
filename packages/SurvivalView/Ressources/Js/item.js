@@ -2,7 +2,8 @@ class Item {
     constructor(itemid, type, imageId, ammout, name, desc="") {
         const {
             spriteColonnes,
-            space,
+            wspace,
+            hspace,
             url
         } = CONFIG[type]
 
@@ -21,8 +22,8 @@ class Item {
 
         this.image.style.backgroundImage = url;
         this.image.id = imageId;
-        let y = Math.floor((imageId - 1) / spriteColonnes) * space
-        let x = ((imageId - 1) % spriteColonnes) * space
+        let y = Math.floor((imageId - 1) / spriteColonnes) * hspace
+        let x = ((imageId - 1) % spriteColonnes) * wspace
         this.image.style.backgroundPosition = "-" + x + "px -" + y + "px";
 
         this.element.appendChild(this.image);
@@ -43,31 +44,36 @@ const CONFIG = {
     'main': {
         spriteLignes: 2,
         spriteColonnes: 2,
-        space: 48,
+        wspace: 48,
+        hspace: 48,
         url: "url('./../../Ressources/images/Admin.jpg')"
     },
     'cloth': {
         spriteLignes: 6,
         spriteColonnes: 5,
-        space: 50,
+        wspace: 50,
+        hspace: 50,
         url: "url('./../../Ressources/images/Cloth.jpg')"
     },
     'weapons': {
         spriteLignes: 5,
         spriteColonnes: 4,
-        space: 50,
+        wspace: 50,
+        hspace: 50,
         url: "url('./../Ressources/images/Weapons.png')"
     },
     'cars': {
         spriteLignes: 5,
         spriteColonnes: 5,
-        space: 64,
-        url: "url('./../../Ressources/images/Cars.jpg')"
+        wspace: 128,
+        hspace: 104,
+        url: "url('./../Ressources/images/Cars.jpg')"
     },
     'consommable': {
         spriteLignes: 3,
         spriteColonnes: 2,
-        space: 40,
+        wspace: 40,
+        hspace: 40,
         url: "url('./../Ressources/images/consommable.png')"
     },
 }

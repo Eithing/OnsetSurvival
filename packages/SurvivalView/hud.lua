@@ -39,6 +39,12 @@ AddEvent("OnPackageStart", function()
     SetWebAnchors(inventoryHud, 0.0, 0.0, 1.0, 1.0)
     LoadWebFile(inventoryHud, "http://asset/SurvivalView/Inventory/inventory.html")
     SetWebVisibility(inventoryHud, WEB_HIDDEN)
+
+    CraftHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    SetWebAlignment(CraftHud, 1.0, 0.0)
+    SetWebAnchors(CraftHud, 0.0, 0.0, 1.0, 1.0)
+    LoadWebFile(CraftHud, "http://asset/SurvivalView/Craft/craft.html")
+    SetWebVisibility(CraftHud, WEB_HIDDEN)
 end)
 
 function ExecuteJs(hud, js)
@@ -54,6 +60,8 @@ function ExecuteJs(hud, js)
         ExecuteWebJS(garageHud, js)
     elseif hud == "admin" then
         ExecuteWebJS(adminHud, js)
+    elseif hud == "craft" then
+        ExecuteWebJS(CraftHud, js)
     else
         ExecuteWebJS(hud, js)
     end
@@ -105,6 +113,9 @@ function RemoveAllHud(hud)
     end
     if hud ~= "inventory" then
         QuitCloseHud(inventoryHud)
+    end
+    if hud ~= "craft" then
+        QuitCloseHud(CraftHud)
     end
 end
 AddFunctionExport("RemoveAllHud", RemoveAllHud)

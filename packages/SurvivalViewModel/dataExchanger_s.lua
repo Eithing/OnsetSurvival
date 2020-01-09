@@ -8,5 +8,6 @@ ItemPickups = {}
 DeadPlayerBags = {}
 
 AddEvent("OnPackageStart", function()
+    VehicleDB = SLogic.GetAllVehicles()
     ItemDB = SLogic.GetAllItems()
 end)

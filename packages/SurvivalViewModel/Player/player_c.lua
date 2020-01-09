@@ -11,10 +11,6 @@ function PlayAudioFile(file, x, y, z, radius, volume)
 
 	LastSoundPlayed = CreateSound3D("Ressources/sounds/"..file, x, y, z, radius)
     SetSoundVolume(LastSoundPlayed, volume)
-    
-    Delay(math.Seconds(2), function()
-        DestroySound(LastSoundPlayed)
-    end)
 end
 AddRemoteEvent("PlayAudioFile", PlayAudioFile)
 

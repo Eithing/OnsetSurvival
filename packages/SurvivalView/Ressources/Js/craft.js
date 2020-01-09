@@ -1,6 +1,6 @@
 class Craft {
     constructor(selector) {
-        this.element = document.getElementById(selector);
+        this.element = document.getElementById("player-inventory");
         this.inventory = {
             element: document.getElementById("inventory-container"),
             items: []
@@ -10,104 +10,110 @@ class Craft {
             items: []
         };
         this.receipts = {
-            element: document.getElementById("receipts-container"),
-            items: []
+            element: document.getElementById("receipt-container"),
+            current: 0,
+            receipt: []
         };
-
-        this.dragging = null;
-        this.elementToDrag = null;
-        this.dropIntoTarget = null;
-
-        let previousContainer;
-        let previousImageDiv;
-        let previousImage;
-        this.mouseDownHandler = (evt) => {
-            evt.preventDefault();
-            //on recupere la cible cliquer
-            let target = evt.target.parentNode;
-            previousContainer = evt.target.parentNode.parentNode;
-            previousImageDiv = evt.target.parentNode;
-            previousImage = evt.target;
-            if (target && target.className === 'item' && this.dragging == null) {
-                this.elementToDrag = target;
-                this.elementToDrag.style.opacity = 0.5;
-                this.dragging = target.cloneNode(true);
-                this.dragging.classList.add('item-draggable');
-                this.element.appendChild(this.dragging);
-            }
-        }
-        this.mouseUpHandler = (evt) => {
-            evt.preventDefault();
-
-            let target = evt.target.parentNode;
-            if (target && target.className === 'item' && this.dragging !== null) {
-                this.dropIntoTarget = target;
-                if (previousImageDiv.id == "weapons")
-                    onEquipWeapons(previousImage.id, 3, 999)
-            }
-            target = evt.target;
-            if (target && target.id === 'player-inventory-stuff1' && this.dragging !== null && previousContainer.id != target.id && previousImageDiv.id == "helmet") {
-                this.dropIntoTarget = target;
-            }
-        }
-
-        /* this.stuff1.element.addEventListener('mousedown', this.mouseDownHandler);
-        this.stuff1.element.addEventListener('mouseup', this.mouseUpHandler);
-        this.stuff2.element.addEventListener('mousedown', this.mouseDownHandler);
-        this.stuff2.element.addEventListener('mouseup', this.mouseUpHandler); */
-
-        setInterval(() => {
-            if (this.dragging) {
-                if (mouse.targetElement && mouse.targetElement.parentNode.className === 'item') {
-                    mouse.targetElement.parentNode.style.background = 'yellow';
-                    const highLight = function() {
-                        this.style.background = '';
-                    };
-                    mouse.targetElement.parentNode.onmouseleave = highLight;
-                }
-                if (mouse.leftClick) {
-                    this.dragging.style.left = (mouse.position.x - 24) + 'px';
-                    this.dragging.style.top = (mouse.position.y - 24) + 'px';
-                }
-                if (!mouse.leftClick) {
-                    //if(previousContainer.id != target.id)
-                    this.elementToDrag.style = null;
-                    if (this.dropIntoTarget) {
-                        if (this.dropIntoTarget.className != this.elementToDrag.className) {
-                            this.dropIntoTarget.appendChild(this.elementToDrag);
-                        } else {
-                            this.dropIntoTarget.style = null;
-                            let refElement = this.dropIntoTarget.cloneNode(true);
-                            let ref2Element = this.elementToDrag.cloneNode(true);
-                            this.dropIntoTarget.replaceWith(ref2Element);
-                            this.elementToDrag.replaceWith(refElement);
-                        }
-                    }
-                    this.element.removeChild(this.dragging);
-                    this.dragging = null;
-                    this.elementToDrag = null;
-                    this.dropIntoTarget = null;
-                }
-            }
-        }, 1000 / 60)
     }
 
-    addItem(type, item) {
-        const itemSlot = this[type].items.push(item);
-        item.element.setAttribute("item-id", itemSlot);
+    addItem(idUnique, item) {
+        this.inventory.items[idUnique] = item
+        item.element.setAttribute("item-id", idUnique);
 
-        this[type].element.appendChild(item.element);
+        this.inventory.element.appendChild(item.element);
         return this;
     }
 
-    removeItem(itemId) {
-        var totalInventoryChild = inventory.stuff.items.concat(inventory.container.items).concat(inventory.slot.items);
+    removeAllItems() {
+        this.inventory.element.innerHTML = ""
+        this.inventory.items = []
+        return this;
+    }
 
-        totalInventoryChild.forEach(inventoryItemChild => {
-            if (inventoryItemChild.element.getAttribute("item-id") == itemId) {
-                inventoryItemChild.element.parentNode.removeChild(inventoryItemChild.element);
+    removeItem(idUnique, item) {
+        if(this.inventory.items[idUnique] != null){
+            this.inventory.items[idUnique].element.remove()
+            this.inventory.items[idUnique] = null
+            return true
+        } else {
+            return false
+        }
+    }
+
+    addReceipt(idUnique, receipt) {
+        this.receipts.receipt[idUnique] = receipt
+        this.receipts.element.appendChild(receipt.element);
+
+        return this;
+    }
+
+    removeAllReceipt() {
+        this.receipts.element.innerHTML = ""
+        this.receipts.receipt = []
+
+        return this;
+    }
+}
+
+class Receipt {
+    constructor(craftid, itemid, type, imageId, name, need) {
+        const {
+            spriteColonnes,
+            wspace,
+            hspace,
+            url
+        } = CONFIG[type]
+
+        this.craftid = craftid
+        this.itemid = itemid
+        this.type = type
+        this.imageId = imageId
+        this.name = name
+        this.need = need
+
+        //info sur la recette
+        this.element = newEl('div');
+        this.element.id = type.toString();
+        this.element.classList.add('item');
+
+        this.image = newEl('div');
+        this.image.classList.add('item-image')
+        this.image.setAttribute("name", name);
+
+        if(type == "cars"){
+            this.element.style.height = "104px";
+            this.element.style.width = "128px";
+            this.image.style.height = "104px";
+            this.image.style.width = "128px";
+        }
+
+        this.image.style.backgroundImage = url;
+        this.image.id = imageId;
+        let y = Math.floor((imageId - 1) / spriteColonnes) * hspace
+        let x = ((imageId - 1) % spriteColonnes) * wspace
+        this.image.style.backgroundPosition = "-" + x + "px -" + y + "px";
+
+        this.element.appendChild(this.image);
+
+        this.element.addEventListener('click', (event) => {
+            event.preventDefault();
+            if(type == "cars"){
+                document.getElementById("itemcraft").setAttribute('craft-count', 1)
+                document.getElementById("bcraft").innerHTML = "Craft x"+1
             }
-        });
+            document.getElementById("itemcraft").innerHTML = name
+            document.getElementById("itemcraft").setAttribute('craft-id', craftid)
+            document.getElementById("needing").innerHTML = ""
+            need.forEach(element => {
+                let needp = newEl('p');
+                let craftcount = parseInt(document.getElementById("itemcraft").getAttribute('craft-count'))
+                let count = parseInt(element.count)*craftcount
+                needp.innerHTML = count+" "+element.name
+                document.getElementById("needing").appendChild(needp)
+            });
+            craftInventory.receipts.current = craftid
+        }, false);
+
         return this;
     }
 }

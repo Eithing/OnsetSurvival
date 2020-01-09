@@ -261,6 +261,10 @@ function UpdateWeight(player, visibility)
 		end
 		PlayerData[player].IsInMaxWeight = false
 	end
+
+	Delay(800, function()
+		CallRemoteEvent(player, "PopulateCraft", PlayerData[player].inventory, c_Receipts)
+	end)
 end
 AddRemoteEvent("UpdateWeight", UpdateWeight)
 
@@ -318,6 +322,18 @@ function GetItemByIdUnique(player, idUnique)
 		end
 	end
 	return found
+end
+
+function GetItemCountByItemID(player, itemId)
+	local count = 0
+	local id = 0
+	for i, item in pairs(PlayerData[player].inventory) do
+		if tonumber(item.itemId) == tonumber(itemId) then
+			id = item.id
+			count = count + item.itemCount
+		end
+	end
+	return {id = id, count = count}
 end
 
 function GetItemDataByItemID(itemID)

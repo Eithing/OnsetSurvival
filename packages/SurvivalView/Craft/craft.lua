@@ -9,6 +9,7 @@ function SetCraftVisibility()
 end
 AddFunctionExport("SetCraftVisibility", SetCraftVisibility)
 
---[[ AddEvent("onEquipWeapon", function(id, slot, ammo)
-    SViewModel.ExecuteFromServer("equipWeapon", id, slot, ammo)
-end) ]]
+AddEvent("onCraft", function(id, count)
+    SetCraftVisibility()
+    SViewModel.ExecuteFromServer("Craft", id, count)
+end)

@@ -3,13 +3,15 @@ function OnUpdateFuel(fuel)
 end
 AddRemoteEvent("OnUpdateFuel",  OnUpdateFuel)
 
-function OnUpdateRadio(radio)
+function OnUpdateRadio(id, radio)
     SView.ExecuteJs("vehicle", "UpdateRadio('"..tostring(radio).."')")
+    SView.ExecuteJs("vehicle", "setChannel("..tonumber(id)..")")
 end
 AddRemoteEvent("OnUpdateRadio",  OnUpdateRadio)
 
 AddRemoteEvent("OnUpdateVehicleHud", function()
     CallRemoteEvent("UpdateWeight", SView.SetVehicleVisibility())
+    SetVehicleInfo()
 end)
 
 -- Enter - Exit Véhicle
@@ -97,6 +99,7 @@ AddEvent("OnKeyPress", function(key)
     -- Radio ON/OFF    
     if IsCtrlPressed() and key == 'R' then
         CallRemoteEvent("radio:getplayersinvehicle", VehRadio[vehicle].RadioStatus)
+        SetVehicleInfo()
     end
 
     -- Radio volume
@@ -167,7 +170,7 @@ end)
 
 AddRemoteEvent("radio:EnterRadio", function(vehicle)
     if VehRadio[vehicle] ~= nil then
-        OnUpdateRadio(v_radios[VehRadio[vehicle].CurrentRadio].label)
+        OnUpdateRadio(VehRadio[vehicle].CurrentRadio, v_radios[VehRadio[vehicle].CurrentRadio].label)
     end
 end)
 
@@ -188,7 +191,7 @@ function StartRadio(vehicle)
     
     VehRadio[vehicle].Track = CreateSound(v_radios[VehRadio[vehicle].CurrentRadio].url)
     SetSoundVolume(VehRadio[vehicle].Track, VehRadio[vehicle].Volume)
-    OnUpdateRadio(v_radios[VehRadio[vehicle].CurrentRadio].label)
+    OnUpdateRadio(VehRadio[vehicle].CurrentRadio, v_radios[VehRadio[vehicle].CurrentRadio].label)
 end
 
 function StopRadio(vehicle)
@@ -219,7 +222,7 @@ function SetChannel(vehicle, channel)
     
     VehRadio[vehicle].Track = CreateSound(v_radios[VehRadio[vehicle].CurrentRadio].url)
     SetSoundVolume(VehRadio[vehicle].Track, VehRadio[vehicle].Volume)
-    OnUpdateRadio(v_radios[VehRadio[vehicle].CurrentRadio].label)
+    OnUpdateRadio(VehRadio[vehicle].CurrentRadio, v_radios[VehRadio[vehicle].CurrentRadio].label)
 end
 
 AddEvent("OnVehicleStreamOut", function(vehicle, player)
@@ -228,3 +231,35 @@ AddEvent("OnVehicleStreamOut", function(vehicle, player)
         VehRadio[vehicle] = nil
     end
 end)
+
+function GetVehicleInData()
+    if PlayerIsInVehicle() == false then
+		return false
+    end
+    local vehicle = GetPlayerVehicle()
+    if VehRadio[vehicle] == nil then
+        return false
+    end
+    return VehRadio[vehicle]
+end
+AddFunctionExport("GetVehicleInData", GetVehicleInData)
+
+
+CreateTimer(function()
+    SetVehicleInfo()
+end, math.Seconds(1))
+
+function SetVehicleInfo()
+    if PlayerIsInVehicle() == false then
+		return
+    end
+    local speed = math.tointeger(math.floor(GetVehicleForwardSpeed(GetPlayerVehicle())))
+    if speed <= 0 then
+        return
+    end
+    SView.ExecuteJs("vehicle", "UpdateSpeed('"..tostring(speed).."')")
+    local x, y, z = GetVehicleLocation(GetPlayerVehicle())
+    SView.ExecuteJs("vehicle", 'UpdatePos("'..math.ceil(x)..'","'..math.ceil(y)..'","'..math.ceil(z)..'")')
+    local vehhealth = math.ceil(GetVehicleHealth(GetPlayerVehicle()) )
+    SView.ExecuteJs("vehicle", "UpdateHealth('"..tostring(vehhealth).."')")
+end

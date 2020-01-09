@@ -2,94 +2,111 @@
 <html>
 
 <head>
-
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="craft.css" />
 </head>
-<link rel="stylesheet" type="text/css" href="craft.css" />
 
 <body>
     <div class="parent-container">
         <div class="inventory-container-Global" id="player-inventory">
             <label class="title_label">Craft</label>
             <div class="inventory-container-SubGlobal">
-                <div class="inventory-container scroll" id="inventory-container"></div>
-                <div class="craft-container scroll" id="craft-container"></div>
-                <div class="receipts-container scroll" id="receipts-container"></div>
+                <div class="inventory-container scroll" id="inventory-container">
+
+                </div>
+                <div class="craft-container scroll" id="craft-container">
+                    <div id="itemcraft">Selectionner un craft</div>
+                    <div class="buttons" style="background: none; cursor: default; margin-top: 5px;">
+                        <div id="previous" style="margin-left: 5px; margin-right: 5px;"><</div>
+                        <div id="bcraft" style="margin-left: 5px; margin-right: 5px;">Craft</div>
+                        <div id="next" style="margin-left: 5px; margin-right: 5px;">></div>
+                    </div>
+                    <div id="needing" class="scroll needing" style="height: 170px; justify-content: flex-start; cursor: default;">
+                    </div>
+                </div>
+
+                <div class="receipt-container scroll" id="receipt-container">
+
+                </div>
             </div>
         </div>
     </div>
-</body>
-
-</html>
-<script type="text/javascript" src="./../Ressources/Js/craft.js"></script>
-<script type="text/javascript" src="./../Ressources/Js/item.js"></script>
-<script>
-    function newEl(tagType) {
-        return document.createElement(tagType);
-    }
-
-    class MouseTracker {
-        constructor() {
-            this.position = {
-                x: 0,
-                y: 0
-            }
-            this.targetElement = null;
-            this.leftClick = false;
-            this.rightClick = false;
-            this.middleClick = false;
-            this.moveHandler = (evt) => {
-                this.position.x = evt.pageX;
-                this.position.y = evt.pageY;
-                this.targetElement = evt.target;
-            }
-
-            let clickSwap = (button, bool) => {
-                if (button == 0)
-                    this.leftClick = bool;
-                if (button == 1)
-                    this.middleClick = bool;
-                if (button == 2)
-                    this.rightClick = bool;
-            }
-
-            this.mouseDownHandler = (evt) => {
-                clickSwap(evt.button, true);
-            }
-            this.mouseUpHandler = (evt) => {
-                clickSwap(evt.button, false);
-                let elements = document.getElementsByClassName("inventory-slot");
-                for (var i = 0; i < elements.length; i++) {
-                    elements[i].style.backgroundColor = "rgba(240, 255, 240, 0.11)";
+    <script type="text/javascript" src="./../Ressources/Js/craft.js"></script>
+    <script type="text/javascript" src="./../Ressources/Js/item.js"></script>
+    <script>
+        try {
+            ue == null
+        } catch (err) {
+            window.ue = {
+                game: {
+                    callevent: console.log
                 }
             }
-
-            document.addEventListener('mousemove', this.moveHandler);
-            document.addEventListener('mousedown', this.mouseDownHandler);
-            document.addEventListener('mouseup', this.mouseUpHandler);
         }
 
-        disableContextMenu() {
-            document.oncontextmenu = function() {
-                return false;
+        document.oncontextmenu = function() {
+            return false;
+        }
+
+        function newEl(tagType) {
+            return document.createElement(tagType);
+        }
+
+        var craftInventory = new Craft()
+
+        let maxCraft = 64
+
+        let craftid = document.getElementById("itemcraft").getAttribute('craft-id')
+        document.getElementById("itemcraft").setAttribute('craft-count', 1)
+        document.getElementById("bcraft").innerHTML = "Craft x1"
+
+        document.getElementById("bcraft").addEventListener("click", function(event){
+            event.preventDefault();
+            ue.game.callevent("onCraft", JSON.stringify([document.getElementById("itemcraft").getAttribute('craft-id'), document.getElementById("itemcraft").getAttribute('craft-count')]));
+        });
+
+        document.getElementById("previous").addEventListener("click", function(event){
+            event.preventDefault();
+            let craftcount = parseInt(document.getElementById("itemcraft").getAttribute('craft-count'))
+            ToggleCraft(craftcount - 1)
+        });
+
+        document.getElementById("next").addEventListener("click", function(event){
+            event.preventDefault();
+            let craftcount = parseInt(document.getElementById("itemcraft").getAttribute('craft-count'))
+            ToggleCraft(craftcount + 1)
+        });
+
+        function ToggleCraft(num){
+            if(num < 1){
+                num = 1
+            }else if(num > maxCraft){
+                num = maxCraft
             }
+            document.getElementById("itemcraft").setAttribute('craft-count', num)
+            document.getElementById("bcraft").innerHTML = "Craft x"+num
+
+            if(craftInventory.receipts.current != 0){
+                let currentReceipt = craftInventory.receipts.receipt[craftInventory.receipts.current]
+                if(currentReceipt.type == "cars"){
+                    document.getElementById("itemcraft").setAttribute('craft-count', 1)
+                    document.getElementById("bcraft").innerHTML = "Craft x"+1
+                    return num
+                }
+                document.getElementById("itemcraft").innerHTML = currentReceipt.name
+                document.getElementById("itemcraft").setAttribute('craft-id', currentReceipt.craftid)
+                document.getElementById("needing").innerHTML = ""
+                currentReceipt.need.forEach(element => {
+                    let needp = newEl('p');
+                    let craftcount = parseInt(document.getElementById("itemcraft").getAttribute('craft-count'))
+                    let count = parseInt(element.count)*craftcount
+                    needp.innerHTML = count+" "+element.name
+                    document.getElementById("needing").appendChild(needp)
+                });
+            }
+
+            return num
         }
-
-        enableContextMenu() {
-            document.oncontextmenu = null;
-        }
-
-        destroy() {
-            document.removeEventListener('mousemove', this.moveHandler);
-            document.removeEventListener('mousedown', this.mouseDownHandler);
-            document.removeEventListener('mouseup', this.mouseUpHandler);
-        }
-    }
-
-
-    /* EXEMPLE */
-    var mouse = new MouseTracker();
-
-    mouse.disableContextMenu()
-
-    var craftInventory = new Craft('craft-inventory')
-</script>
+    </script>
+</body>
+</html>

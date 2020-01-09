@@ -76,11 +76,11 @@ function RemovePlayerItem(item)
 end
 AddFunctionExport("RemovePlayerItem", RemovePlayerItem)
 
---GetAllItems --
+-- ITEMS DATA --
+local AllItems = {}
 function GetAllItems()
     local query = mariadb_prepare(sql, "SELECT * FROM items;")
     local result = mariadb_await_query(sql, query)
-    local AllItems = {}
     local rows = mariadb_get_row_count() or 0
 	for i=1, rows do
         AllItems[i] = {	id = mariadb_get_value_name(i, "id"),

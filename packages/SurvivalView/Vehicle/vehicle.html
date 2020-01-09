@@ -1,18 +1,10 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="vehicle.css" />
+    <link rel="stylesheet" href="./../Ressources/css/ionicons.min.css">
 </head>
 <body>
-    <div class="menu" id="menu">
-        <div id="1" class="radioicons" style="background-position: -0px -0px"></div>
-        <div id="2" class="radioicons" style="background-position: -64px -0px"></div>
-        <div id="3" class="radioicons" style="background-position: -0px -64px"></div>
-        <div id="4" class="radioicons" style="background-position: -64px -64px"></div>
-        <div id="5" class="radioicons" style="background-position: -0px -128px"></div>
-        <div id="6" class="radioicons" style="background-position: -64px -128px"></div>
-        <div class="close" id="close">X</div>
-  </div>
-    <div class="radio">
+    <div class="sradio">
         <p id="radiolabel">Radio : NRJ</p>
     </div>
     <div class="progress">
@@ -24,6 +16,60 @@
             </div>
         </div>
     </div>
+    <main id="radiomenu">
+        <h1 id="vehiclename">Car control</h1>
+        <section>
+          <div class="player">
+            <div class="radio">
+              <span class="ion-music-note" id="radiocon"></span>
+              <span id="vehicleradio" class="radio-des">Avicii, Hey Brother</span>
+            </div>
+            <span id="previous" class="ion-skip-backward"></span>
+            <span id="pause" class="ion-pause"></span>
+            <span id="next" class="ion-skip-forward"></span>
+          </div>
+          <div class="left-down">
+            <div class="info">
+              <div class="row">
+              <span class="ion-ios-speedometer"></span> 
+              <span id="vehiclespeed" class="info-des">137 km/h</span>
+              </div>
+              <div class="row">
+                <span class="ion-stats-bars"></span>
+                <span class="info-des">1L/s</span>
+              </div>
+              <div class="row">
+                <span class="ion-android-car"></span>
+                <span id="vehiclefuel" class="info-des">32l
+              </div>
+                <div class="row">
+                  <span class="ion-android-locate"></span>
+                  <span id="vehiclepos" class="info-des">X:1589, Y:1548, Z:1485</span>
+                </div>
+                <div class="row">
+                  <span class="ion-alert-circled"></span>
+                  <span id="vehiclehealth" class="info-des">50%</span>
+                </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="wrapper">
+            <div id="volumeplus" class="kachel">
+              <h2><span class="ion-android-add-circle"></span</h2>
+                <h4>Volume +</h4>
+              </div>
+            <div id="volumemoins" class="kachel">
+              <h2><span class="ion-android-remove-circle"></span</h2>
+                <h4>Volume -</h4>
+            </div>
+            <div class="kachel" id="quit">
+              <h2 ><span class="ion-gear-a"></span></h2>
+                <h4>Quitter</h4>
+            </div>
+          </div>
+        </section>
+      </main>
 
     <script>
         try {
@@ -36,52 +82,98 @@
             }
         }
 
+        let channel = 1
+        let maxChannel = 6
+
+        function selectchannel(num){
+            if(num < 1){
+                num = maxChannel
+            }else if(num > maxChannel){
+                num = 1
+            }
+            ue.game.callevent("OnChangeRadio", JSON.stringify([num]));
+        }
+
+        function setChannel(id){
+            channel = id
+        }
+
+        document.getElementById("previous").addEventListener('click', (event) => {
+            event.preventDefault();
+            selectchannel(channel-1)
+        }, false);
+
+        document.getElementById("pause").addEventListener('click', (event) => {
+            event.preventDefault();
+            ue.game.callevent("OnChangePause");
+        }, false);
+
+        document.getElementById("next").addEventListener('click', (event) => {
+            event.preventDefault();
+            selectchannel(channel+1)
+        }, false);
+
+        document.getElementById("quit").addEventListener('click', (event) => {
+            event.preventDefault();
+            ue.game.callevent("SetRadioVisibility");
+        }, false);
+
+        document.getElementById("volumeplus").addEventListener('click', (event) => {
+            event.preventDefault();
+            ue.game.callevent("OnChangeVolume", JSON.stringify([1]));
+        }, false);
+
+        document.getElementById("volumemoins").addEventListener('click', (event) => {
+            event.preventDefault();
+            ue.game.callevent("OnChangeVolume", JSON.stringify([0]));
+        }, false);
+
         function UpdateFuel(fuel) {
             document.getElementById("editable1").style.width = fuel + "%";
+            document.getElementById("vehiclefuel").innerHTML = fuel+"L";
         }
     
         function UpdateRadio(radio){
             document.getElementById("radiolabel").innerHTML = "Radio : "+radio;
+            document.getElementById("vehicleradio").innerHTML = radio;
         }
 
 
         var i=0;
         function expand(){
             if(i==0){
-                document.getElementById("menu").style.transform="scale(3)"; 
+                document.getElementById("radiomenu").style.transform="scale(1)"; 
                 i=1;
                 setTimeout(function(){
-                    for (const key in document.getElementById("menu").children) {
-                        if (document.getElementById("menu").children.hasOwnProperty(key)) {
-                            const element = document.getElementById("menu").children[key];
+                    for (const key in document.getElementById("radiomenu").children) {
+                        if (document.getElementById("radiomenu").children.hasOwnProperty(key)) {
+                            const element = document.getElementById("radiomenu").children[key];
                             element.style.opacity="1";
                         }
                     }
                 }, 300)
             }
             else{
-                for (const key in document.getElementById("menu").children) {
-                    if (document.getElementById("menu").children.hasOwnProperty(key)) {
-                        const element = document.getElementById("menu").children[key];
-                        element.style.opacity="0";
-                    }
-                }
-                setTimeout(function(){
-                    document.getElementById("menu").style.transform="scale(0)"; 
-                    i=0;
-                }, 300)
+                document.getElementById("radiomenu").style.transform="scale(0)"; 
+                i=0;
             }
         }
 
-        document.getElementById("close").addEventListener('click', (event) => {
-            ue.game.callevent("SetRadioVisibility");
-        }, false);
+        function UpdateSpeed(speed) {
+	        document.getElementById("vehiclespeed").innerHTML = speed+" km/h";
+        }
+        
+        function UpdateName(name) {
+	        document.getElementById("vehiclename").innerHTML = name;
+	    }
 
-        Array.from(document.getElementsByClassName("radioicons")).forEach(function(element) {
-            element.addEventListener('click', (event) => {
-                ue.game.callevent("OnChangeRadio", JSON.stringify([event.target.id]));
-            }, false);
-        });
+	    function UpdatePos(x, y, z) {
+	        document.getElementById("vehiclepos").innerHTML = "X:"+x+", Y:"+y+", Z:"+z;
+        }
+        
+        function UpdateHealth(health) {
+	        document.getElementById("vehiclehealth").innerHTML = health+"%";
+	    }
     </script>
 </body>
 </html>
