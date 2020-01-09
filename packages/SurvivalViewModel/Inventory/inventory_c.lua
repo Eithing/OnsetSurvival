@@ -1,6 +1,7 @@
 local isInventoryLoaded = false
 AddEvent("OnKeyRelease", function(key)
     if key == "F1" then
+        RemoveAllHud("inventory")
         local visibility = SView.SetInventoryVisibility()
         CallRemoteEvent("UpdateWeight", visibility)
         if isInventoryLoaded == false then

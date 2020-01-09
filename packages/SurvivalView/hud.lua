@@ -52,6 +52,8 @@ function ExecuteJs(hud, js)
         ExecuteWebJS(characterHud, js)
     elseif hud == "garage" then
         ExecuteWebJS(garageHud, js)
+    elseif hud == "admin" then
+        ExecuteWebJS(adminHud, js)
     else
         ExecuteWebJS(hud, js)
     end
@@ -90,3 +92,19 @@ AddEvent("OnWebLoadComplete", function(web)
         SViewModel.ExecuteFromServer("OnPlayerHudLoadComplete")
     end
 end)
+
+function RemoveAllHud(hud)
+    if hud ~= "character" then
+        QuitCloseHud(characterHud)
+    end
+    if hud ~= "admin" then
+        QuitCloseHud(adminHud)
+    end
+    if hud ~= "garage" then
+        QuitCloseHud(garageHud)
+    end
+    if hud ~= "inventory" then
+        QuitCloseHud(inventoryHud)
+    end
+end
+AddFunctionExport("RemoveAllHud", RemoveAllHud)

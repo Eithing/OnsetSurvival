@@ -5,6 +5,7 @@ AddEvent("OnKeyRelease", function(key)
 end)
 
 function AdminOpenMenu(player)
+    RemoveAllHud("admin")
     CallRemoteEvent("UpdateWeight", SView.SetAdminVisibility())
 end
 AddRemoteEvent("AdminOpenMenu",  AdminOpenMenu)

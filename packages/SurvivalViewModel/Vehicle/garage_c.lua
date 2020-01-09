@@ -19,5 +19,6 @@ end
 
 AddRemoteEvent("OpenGarage", function(garageid, vehicles)
     ReloadVehicles(garageid, vehicles)
+    RemoveAllHud("garage")
     SView.SetGarageVisibility()
 end)

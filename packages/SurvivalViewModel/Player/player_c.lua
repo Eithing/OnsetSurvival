@@ -1,4 +1,5 @@
 function DisplayCreateCharacter()
+    RemoveAllHud("character")
     SView.SetCharacterVisibility()
 end
 AddRemoteEvent("DisplayCreateCharacter",  DisplayCreateCharacter)
@@ -142,3 +143,7 @@ function OnScriptError(message)
     AddPlayerChat('<span color="#ff0000bb" style="bold" size="10">'..message..'</>')
 end
 AddEvent("OnScriptError", OnScriptError)
+
+function RemoveAllHud(hud)
+    SView.RemoveAllHud(hud)
+end
