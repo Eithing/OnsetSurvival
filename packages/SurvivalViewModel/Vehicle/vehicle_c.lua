@@ -42,6 +42,9 @@ function OnPlayerStartExitVehicle(vehicle)
         end
         return false 
     end 
+
+    local speed = math.tointeger(math.floor(GetVehicleForwardSpeed(vehicle)))
+    CallRemoteEvent("OnPlayerExitDamage", speed)
 end
 AddEvent("OnPlayerStartExitVehicle", OnPlayerStartExitVehicle)
 
@@ -119,7 +122,7 @@ AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
 end)
 
 AddEvent("OnPlayerStartExitVehicle", function(vehicle)
-    StopRadio(vehicle)
+    -- StopRadio(vehicle)
 end)
 
 AddRemoteEvent("radio:switchtrack3d", function(vehicle)

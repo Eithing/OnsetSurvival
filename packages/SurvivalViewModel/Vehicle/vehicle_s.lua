@@ -213,6 +213,12 @@ AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
     end
 end)
 
+AddRemoteEvent("OnPlayerExitDamage", function(player, speed)
+    if speed > 15 then
+        local calcul = speed/1.5
+        sethealth(player, GetPlayerHealth(player) - calcul)
+    end
+end)
 
 -- Fonction --
 function VGetNearestVehicle(player, nearest_dist) -- Trouvée le véhicule le plus proche
