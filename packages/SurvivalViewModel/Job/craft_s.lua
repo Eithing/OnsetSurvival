@@ -30,7 +30,6 @@ end
 AddRemoteEvent("RequestPopulateCraft", RequestPopulateCraft)
 
 function Craft(player, id, count)
-	UpdateWeight(player, false)
 	local itemcraft = GetCraft(id)
 	if itemcraft ~= 0 then
 		if itemcraft.type == "vehicle" then
