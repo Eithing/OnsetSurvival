@@ -35,6 +35,26 @@ function RemoveItem(player, idUnique, count)
 end
 AddRemoteEvent("RemoveItem", RemoveItem)
 
+function RemoveItemByItemID(player, itemId, count)
+	count = tonumber(count)
+	for i, item in pairs(PlayerData[player].inventory) do
+		if tonumber(item.itemId) == tonumber(itemId) and count > 0 then
+			item.itemCount = math.clamp(item.itemCount - count, 0, tonumber(item.maxStack))
+			if(item.itemCount > 1)then
+				SLogic.UpdatePlayerItem(item)
+				CallRemoteEvent(player, "UpdateItemInventory", item)
+			else
+				SLogic.RemovePlayerItem(tonumber(item.id))
+				CallRemoteEvent(player, "RemoveItemInventory", item)
+				PlayerData[player].inventory[i] = nil
+			end
+			count = math.floor(count - item.itemCount)
+		end
+	end
+	UpdateWeight(player, false)
+end
+AddRemoteEvent("RemoveItem", RemoveItem)
+
 function DropItem(player, idUnique, count)
 	if GetPlayerMovementMode(player) == 5 then
 		AddNotification(player, "Vous ne pouvez pas jeter un objet !", "error")
@@ -114,15 +134,16 @@ function PickupItem(player, Pitem)
 		end
 	end
 	if found == false then
-		SLogic.SetUserInventory(PlayerData[player].id, Pitem)
+		local id = SLogic.SetUserInventory(PlayerData[player].id, Pitem)
 		Delay(500, function()
-			Player_CreateNewItem(player)
+			print(id)
+			Player_CreateNewItem(player, id)
 		end)
 	end
 end
 
-function Player_CreateNewItem(player)
-	local newItem = SLogic.GetLastPlayerItem(PlayerData[player].id)
+function Player_CreateNewItem(player, id)
+	local newItem = SLogic.GetLastPlayerItem(PlayerData[player].id, id)
 	table.insert(PlayerData[player].inventory, newItem)
 	CallRemoteEvent(player, "AddItemInventory", newItem)
 	UpdateWeight(player, false)
@@ -139,6 +160,7 @@ function UseItem(player, idUnique, count)
 			local vehicle, Dist = VGetNearestVehicle(player, 200)
 			if(IsValidVehicle(vehicle))then
 				if GetPlayerVehicle(player) == vehicle then
+					AddNotification(player, "Vous etes dans un véhicule !", "error")
 					return
 				end
 				for i=1, tonumber(count) do
@@ -154,6 +176,7 @@ function UseItem(player, idUnique, count)
 					end
 				end
 			else
+				AddNotification(player, "Aucun véhicule a proximité !", "error")
 				count = 0
 			end
 		end
@@ -164,10 +187,14 @@ function UseItem(player, idUnique, count)
 					for k, v in pairs(SLogic.json_decode(UsingItem.var)) do
 						if tonumber(v) == tonumber(VehicleData[vehicle].cles) then
 							LockUnLockVehicle(player, vehicle)
+							count = 0
 							break
 						end
 					end
 				end
+			else
+				AddNotification(player, "Aucun véhicule a proximité !", "error")
+				count = 0
 			end
 		end
 		if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
@@ -191,6 +218,7 @@ function UseItem(player, idUnique, count)
 					end
 				end
 			else
+				AddNotification(player, "Aucun véhicule a proximité !", "error")
 				count = 0
 			end
 		end
@@ -223,10 +251,8 @@ function UseItem(player, idUnique, count)
 			end
 		end
 
-		if(tonumber(UsingItem.itemId) ~= 30)then
-			if count > 0 then
-				RemoveItem(player, tonumber(idUnique), tonumber(count))
-			end
+		if count > 0 then
+			RemoveItem(player, tonumber(idUnique), tonumber(count))
 		end
 		
 		UpdateWeight(player, false)
@@ -324,16 +350,25 @@ function GetItemByIdUnique(player, idUnique)
 	return found
 end
 
-function GetItemCountByItemID(player, itemId)
-	local count = 0
-	local id = 0
+function GetItemByItemID(player, itemId)
+	local found = 0
 	for i, item in pairs(PlayerData[player].inventory) do
 		if tonumber(item.itemId) == tonumber(itemId) then
-			id = item.id
+			found = item
+			break
+		end
+	end
+	return found
+end
+
+function GetItemCountByItemID(player, itemId)
+	local count = 0
+	for i, item in pairs(PlayerData[player].inventory) do
+		if tonumber(item.itemId) == tonumber(itemId) then
 			count = count + item.itemCount
 		end
 	end
-	return {id = id, count = count}
+	return count
 end
 
 function GetItemDataByItemID(itemID)

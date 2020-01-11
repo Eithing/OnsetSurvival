@@ -25,8 +25,8 @@ end
 AddFunctionExport("GetPlayerInventory", GetPlayerInventory)
 
 -- Get Last Player Item --
-function GetLastPlayerItem(id)
-    local query = mariadb_prepare(sql, "SELECT inventory.id, items.nom, items.value, items.maxStack, items.isstackable, items.poids, items.type, items.imageId, items.modelId, inventory.compteId, inventory.itemId, inventory.itemCount, inventory.var FROM items INNER JOIN inventory ON items.id = inventory.itemId WHERE inventory.compteId = '?' ORDER BY inventory.id DESC LIMIT 1;", tonumber(id))
+function GetLastPlayerItem(id, idunique)
+    local query = mariadb_prepare(sql, "SELECT inventory.id, items.nom, items.value, items.maxStack, items.isstackable, items.poids, items.type, items.imageId, items.modelId, inventory.compteId, inventory.itemId, inventory.itemCount, inventory.var FROM items INNER JOIN inventory ON items.id = inventory.itemId WHERE inventory.compteId = '?' AND inventory.id='?' ORDER BY inventory.id DESC LIMIT 1;", tonumber(id), tonumber(idunique))
     local result = mariadb_await_query(sql, query)
     local Player_Inventory = {}
     local rows = mariadb_get_row_count() or 0
@@ -53,8 +53,11 @@ AddFunctionExport("GetLastPlayerItem", GetLastPlayerItem)
 -- Insert Item --
 function SetUserInventory(compteId, item)
 	local query = mariadb_prepare(sql, "INSERT INTO inventory(compteId, itemId, itemCount, var) VALUES ('?','?','?','?')", tonumber(compteId), tonumber(item.itemId), tonumber(item.itemCount), item.var)
-	local result = mariadb_query(sql, query)
-	mariadb_delete_result(result)
+    local result = mariadb_await_query(sql, query)
+    local id = mariadb_get_insert_id()
+    mariadb_delete_result(result)
+
+    return id
 end
 AddFunctionExport("SetUserInventory", SetUserInventory)
 

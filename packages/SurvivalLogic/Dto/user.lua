@@ -60,6 +60,15 @@ function InsertNewUser(player, maxweight)
 end
 AddFunctionExport("InsertNewUser", InsertNewUser)
 
+function UpdateMoney(player, user)
+	local query = mariadb_prepare(sql, "UPDATE comptes SET argent = ? WHERE id = ? LIMIT 1;",
+        user.argent,
+		user.id
+	)
+    mariadb_query(sql, query)
+end
+AddFunctionExport("UpdateMoney", UpdateMoney)
+
 -- BANS --
 
 function NewBanIp(ip, reason)

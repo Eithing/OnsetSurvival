@@ -70,8 +70,8 @@ const CONFIG = {
         url: "url('./../Ressources/images/Cars.jpg')"
     },
     'consommable': {
-        spriteLignes: 3,
-        spriteColonnes: 2,
+        spriteLignes: 7,
+        spriteColonnes: 5,
         wspace: 40,
         hspace: 40,
         url: "url('./../Ressources/images/consommable.png')"

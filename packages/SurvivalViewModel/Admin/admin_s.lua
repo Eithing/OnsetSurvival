@@ -107,6 +107,42 @@ function setmoney_commands(player, money)
 end
 AddCommand("setmoney", setmoney_commands)
 
+-- giveitem
+function giveitem_commands(player, itemId, count)
+	if IsAdmin(player) then
+		if count == nil or itemId == nil then
+			AddPlayerChat(player, "/giveitem itemId count")
+			return
+		end
+		count = tonumber(count)
+		itemId = tonumber(itemId)
+		local CraftItem = {}
+		local itemData = GetItemDataByItemID(itemId)
+		CraftItem = {
+			nom = itemData.nom,
+			poids = tonumber(itemData.poids),
+			type = itemData.type,
+			imageId = tonumber(itemData.imageId),
+			modelId = tonumber(itemData.modelId),
+			compteId = tonumber(PlayerData[player].id),
+			itemId = tonumber(itemData.id),
+			maxStack = tonumber(itemData.maxStack),
+			isstackable = itemData.isstackable,
+			value = tonumber(itemData.value),
+			itemCount = count,
+			var = "[]",
+		}
+		PickupItem(player, CraftItem)
+		Delay(800, function()
+			CallRemoteEvent(player, "PopulateCraft", PlayerData[player].inventory, c_Receipts)
+		end)
+		UpdateWeight(player, false)
+		print("Admin : give item "..itemId.." (for "..player..")")
+	end
+	return
+end
+AddCommand("giveitem", giveitem_commands)
+
 -- Spawn un npc
 function npc_commands(player)
 	if IsAdmin(player) then

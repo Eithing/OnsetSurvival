@@ -3,8 +3,8 @@ c_Receipts = {}
 
 AddEvent("OnPackageStart", function()
 	Delay(math.Seconds(1), function()
-		CreateCraft(26, 20, GetItemDataByItemID(26).nom,  "item", GetItemDataByItemID(26).type, {
-			{name = GetItemDataByItemID(40).nom, itemId = 34, count = 20},
+		CreateItemCraft(26, 20, {
+			{name = GetItemDataByItemID(40).nom, itemId = 40, count = 20},
 			{name = GetItemDataByItemID(41).nom, itemId = 41, count = 20}
 		}, 5)
 		
@@ -39,35 +39,43 @@ function Craft(player, id, count)
 		print(count)
 		local needitems = SLogic.json_decode(itemcraft.need)
 		for k, v in pairs(needitems) do
+			local id = GetItemByItemID(player, v.itemId)
 			local itemcount = GetItemCountByItemID(player, v.itemId)
-			if (itemcount.id == 0 or itemcount.count == 0) or tonumber(itemcount.count) < (tonumber(v.count)*count) then
+			if tonumber(itemcount) < (tonumber(v.count)*count) then
 				AddNotification(player, "Vous avez pas assez de ressources sur vous!", "error")
 				return false
 			else
-				RemoveItem(player, tonumber(itemcount.id), (tonumber(v.count)*count))
+				RemoveItemByItemID(player, v.itemId, (tonumber(v.count)*count))
 			end
 		end
 
 		SetPlayerAnimation(player, 'COMBINE')
 		Delay(math.Seconds(itemcraft.time*count), function()
 			if itemcraft.type == "item" then
-				local CraftItem = {}
 				local itemData = GetItemDataByItemID(itemcraft.itemId)
-				CraftItem = {
-					nom = itemData.nom,
-					poids = tonumber(itemData.poids),
-					type = itemData.type,
-					imageId = tonumber(itemData.imageId),
-					modelId = tonumber(itemData.modelId),
-					compteId = tonumber(PlayerData[player].id),
-					itemId = tonumber(itemData.id),
-					maxStack = tonumber(itemData.maxStack),
-					isstackable = itemData.isstackable,
-					value = tonumber(itemData.value),
-					itemCount = tonumber(count),
-					var = "[]",
-				}
-				PickupItem(player, CraftItem)
+				count = tonumber(count)
+				for i=1, count do
+					if count > 0 then
+						local CraftItem = {}
+						local calcul = math.clamp(tonumber(count), 0, tonumber(itemData.maxStack))
+						CraftItem = {
+							nom = itemData.nom,
+							poids = tonumber(itemData.poids),
+							type = itemData.type,
+							imageId = tonumber(itemData.imageId),
+							modelId = tonumber(itemData.modelId),
+							compteId = tonumber(PlayerData[player].id),
+							itemId = tonumber(itemData.id),
+							maxStack = tonumber(itemData.maxStack),
+							isstackable = itemData.isstackable,
+							value = tonumber(itemData.value),
+							itemCount = calcul,
+							var = "[]",
+						}
+						PickupItem(player, CraftItem)
+						count = count - calcul
+					end
+				end
 				Delay(800, function()
 					CallRemoteEvent(player, "PopulateCraft", PlayerData[player].inventory, c_Receipts)
 				end)
@@ -78,6 +86,7 @@ function Craft(player, id, count)
 				local newvehicle = CreateVehicle(vehicle.modelId, x, y, z, GetPlayerHeading(player))
 				local vcles = PlayerData[player].id..vehicle.modelId..Random(0, 9999)
                 VehicleData[newvehicle] = {id = 0, garageid = 1, compteId = 0, modelid = vehicle.modelId, health = v_health, degats = {}, imageid = vehicle.imageId, nom = vehicle.nom, cles = vcles, poids = vehicle.poids, fuel = 100, inventory = {}, locked = false}
+				SetVehicleRespawnParams(newvehicle, false)
 				SetPlayerInVehicle(player, newvehicle)
 
 				local CraftItem = {}
@@ -111,6 +120,15 @@ AddRemoteEvent("Craft", Craft)
 -- FONCTIONS --
 
 function CreateCraft(itemId, imageId, nom, type, itemType, need, time)
+
+	for k, v in pairs(need) do
+		local theitem = GetItemDataByItemID(tonumber(v.itemId))
+		if theitem == 0 then
+			print("Impossible de créer le craft ("..v.itemId..") | 'SurvivalViewModel/Job/craft_s.lua':127")
+			return false
+		end
+	end
+
 	table.insert(c_Receipts, {
 		id = Random(0, 99999),
 		itemId = itemId,
@@ -121,6 +139,28 @@ function CreateCraft(itemId, imageId, nom, type, itemType, need, time)
 		time = time,
 		need = SLogic.json_encode(need)
 	})
+	print("Nouveau craft : "..nom)
+end
+
+function CreateItemCraft(itemId, imageId, need, time)
+	local theitem = GetItemDataByItemID(tonumber(itemId))
+	if theitem ~= 0 then
+		table.insert(c_Receipts, {
+			id = Random(0, 99999),
+			itemId = itemId,
+			type = "item",
+			itemType = theitem.type,
+			imageId = imageId,
+			nom = theitem.nom,
+			time = time,
+			need = SLogic.json_encode(need)
+		})
+		print("Nouveau craft : "..theitem.nom)
+		return true
+	else
+		print("Impossible de créer le craft ("..itemId..") | 'SurvivalViewModel/Job/craft_s.lua':152")
+		return false
+	end
 end
 
 function GetCraft(id)

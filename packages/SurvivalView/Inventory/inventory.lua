@@ -24,3 +24,7 @@ end)
 AddEvent("OnDropItem", function(id, count)
     SViewModel.ExecuteFromServer("DropItem", tonumber(id), math.floor(tonumber(count)))
 end)
+
+AddEvent("OnDropMoney", function(count)
+    SViewModel.ExecuteFromServer("DropMoney", math.floor(tonumber(count)))
+end)

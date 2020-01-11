@@ -248,6 +248,47 @@ end)
 
 
 -- Argent (money) --
+AddRemoteEvent("DropMoney", function(player, count)
+    count = tonumber(count)
+    if PlayerData[player] ~= nil and count > 0 then
+        local playermoney = getMoney(player)
+        if playermoney > 0 and haveMoney(player, count) then
+            removeMoney(player, count)
+            AddNotification(player, "Vous avez jeter "..count.."€ !", "success")
+
+            local x,y,z = GetPlayerLocation(player)
+            local newitem = CreateObject(615, x, y, z - 98, 0, 0, 0)
+			ItemPickups[newitem] = {}
+			ItemPickups[newitem].money = count
+			SetObjectPropertyValue(newitem, "IsMoney", true, true)
+			SetObjectPropertyValue(newitem, "DontCollison", true, true)
+        else
+            AddNotification(player, "Vous avez pas assez d'argent !", "success")
+        end
+    end
+end)
+
+-- Pickup --
+AddRemoteEvent("MoneyPickup", function(player, Pickup)
+	if IsValidObject(Pickup) and ItemPickups[Pickup] ~= nil then
+		if PlayerData[player].PickupS == true then
+			return
+		end
+		if GetPlayerVehicle(player) ~= 0 then
+			return
+        end
+        
+        addMoney(player, ItemPickups[Pickup].money)
+
+		DestroyObject(Pickup)
+		ItemPickups[Pickup] = nil
+		PlayerData[player].PickupS = true
+		Delay(2000, function()
+			PlayerData[player].PickupS = false
+		end)
+	end
+end)
+
 function updateHudMoney(player)
     CallRemoteEvent(player, "UpdateMoneyInventory", PlayerData[player].argent)
 end
@@ -266,20 +307,23 @@ function haveMoney(player, money)
 end
 
 function setMoney(player, money)
-    PlayerData[player].argent = math.clamp(money, 0, p_maxMoney)
+    PlayerData[player].argent = tonumber(math.floor(math.clamp(money, 0, p_maxMoney)))
+    SLogic.UpdateMoney(player, PlayerData[player])
     updateHudMoney(player)
 end
 
 function addMoney(player, money)
-    local calcul = PlayerData[player].argent - money
-    PlayerData[player].argent = math.clamp(calcul, 0, p_maxMoney)
+    local calcul = PlayerData[player].argent + money
+    PlayerData[player].argent = tonumber(math.floor(math.clamp(calcul, 0, p_maxMoney)))
+    SLogic.UpdateMoney(player, PlayerData[player])
     updateHudMoney(player)
 end
 
 function removeMoney(player, money)
     local calcul = PlayerData[player].argent - money
     if calcul >= 0 then
-        PlayerData[player].argent = math.clamp(calcul, 0, p_maxMoney)
+        PlayerData[player].argent = tonumber(math.floor(math.clamp(calcul, 0, p_maxMoney)))
+        SLogic.UpdateMoney(player, PlayerData[player])
         updateHudMoney(player)
         return true
     else

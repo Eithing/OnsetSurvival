@@ -1,6 +1,7 @@
 class Inventory {
     constructor(selector) {
         this.element = document.getElementById(selector);
+        this.money = 0
         this.stuff1 = {
             element: document.getElementById(selector + "-stuff1"),
             items: []
@@ -245,7 +246,7 @@ class Inventory {
         return this;
     }
 
-    removeItem(itemId, consume, drop, count=1) {
+    removeItem(itemId, consume, drop, money, count=1) {
         count = parseInt(count)
         document.getElementById("infos-image").style.backgroundImage = null;
         document.getElementById("infos-image").style.backgroundPosition = null;
@@ -253,6 +254,12 @@ class Inventory {
         document.getElementById("infos-desc").innerHTML = null;
         document.getElementById("item-info").style.visibility = "hidden";
         document.getElementById("infos-use").style.visibility = "hidden";
+
+        if(money == true || money == "true"){
+            ue.game.callevent("OnDropMoney", JSON.stringify([this.mathclamp(count, 0, this.money)]));
+            return this;
+        }
+
         let keys = ['stuff1', 'stuff2', 'stuff3', 'container', 'slot1', 'slot2', 'slot3']
         for (const k of keys) {
             if(inventory[k].items[itemId] != null){
@@ -272,21 +279,6 @@ class Inventory {
                         ue.game.callevent("OnRemoveItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
                     }
                 }
-
-                // GESTION DES ITEMS EN JS (JE PREFERE LE GERER EN LUA COMME SA SI IL PEUT PAS L'UTILISER SA LUI ENLEVE PAS)
-                // if(inventory[k].items[itemId].itemId != 30){
-                //     if(parseInt(inventory[k].items[itemId].label.innerText) > 1 || count > 1){
-                //         inventory[k].items[itemId].label.innerText = this.mathclamp(parseInt(inventory[k].items[itemId].label.innerText) - count, 0, parseInt(inventory[k].items[itemId].label.innerText))
-                //         if(parseInt(inventory[k].items[itemId].label.innerText) <= 0){
-                //             inventory[k].items[itemId].element.remove()
-                //             inventory[k].items[itemId] = null
-                //         }
-                //     } else {
-                //         inventory[k].items[itemId].element.remove()
-                //         inventory[k].items[itemId] = null
-                //     }
-                // }
-
                 break
             }
         }
@@ -328,6 +320,7 @@ class Inventory {
     }
 
     updateMoney(money){
+        this.money = money
         return document.getElementById("money_label").innerHTML = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(money);
     }
 

@@ -16,8 +16,10 @@ AddEvent("OnKeyRelease", function(key)
         local x, y, z = GetPlayerLocation()
         for k, v in pairs(GetStreamedObjects()) do
             local x2, y2, z2 = GetObjectLocation(v)
-            if GetObjectPropertyValue(v, "IsItemInventory") ~= nil and GetDistance3D(x, y, z, x2, y2, z2) < 100 then
+            if GetObjectPropertyValue(v, "IsItemInventory") ~= nil and GetDistance3D(x, y, z, x2, y2, z2) < 150 then
                 CallRemoteEvent("ItemPickup", v)
+            elseif GetObjectPropertyValue(v, "IsMoney") ~= nil and GetDistance3D(x, y, z, x2, y2, z2) < 150 then
+                CallRemoteEvent("MoneyPickup", v)
             end
         end
     end
@@ -30,7 +32,7 @@ CreateTimer(function()
     local x, y, z = GetPlayerLocation()
     for k, v in pairs(GetStreamedObjects()) do
         local x2, y2, z2 = GetObjectLocation(v)
-        if GetObjectPropertyValue(v, "IsItemInventory") ~= nil and GetDistance3D(x, y, z, x2, y2, z2) < 150 then
+        if (GetObjectPropertyValue(v, "IsItemInventory") ~= nil or GetObjectPropertyValue(v, "IsMoney") ~= nil) and GetDistance3D(x, y, z, x2, y2, z2) < 150 then
             if itemnotif == false and PlayerIsInVehicle() == false then
                 itemnotifid = AddNotification("Appuyer sur E pour ramasser", "default", 999)
                 itemnotif = true
@@ -39,9 +41,16 @@ CreateTimer(function()
         end
     end
     
-    if itemnotifobject ~= nil and IsValidObject(itemnotifobject) then
-        local x2, y2, z2 = GetObjectLocation(itemnotifobject)
-        if GetDistance3D(x, y, z, x2, y2, z2) > 150 and itemnotif == true then
+    if itemnotifobject ~= nil then
+        if IsValidObject(itemnotifobject) then
+            local x2, y2, z2 = GetObjectLocation(itemnotifobject)
+            if GetDistance3D(x, y, z, x2, y2, z2) > 150 and itemnotif == true then
+                SView.ExecuteJs("vitalIndicator", 'RemoveNotification("'..itemnotifid..'")')
+                itemnotif = false
+                itemnotifid = 0
+                itemnotifobject = nil
+            end
+        else
             SView.ExecuteJs("vitalIndicator", 'RemoveNotification("'..itemnotifid..'")')
             itemnotif = false
             itemnotifid = 0

@@ -137,6 +137,20 @@
             let itemId;
             this.itemCount = 1;
             let downTarget;
+
+            document.getElementById("money_label").addEventListener("click", (evt) => {
+                CloseInfoBox();
+                document.getElementById("ItemOption").style.visibility = "visible"
+                document.getElementById("ItemOption_nom").innerHTML = "Argent - <b style='font-size: 13px'>"+document.getElementById("money_label").innerHTML+"</b>"
+                document.getElementById("ItemOption_Button").innerHTML = "Jeter"
+                document.getElementById("ItemOption_input").setAttribute("item-using", false)
+                document.getElementById("ItemOption_input").setAttribute("item-drop", false)
+                document.getElementById("ItemOption_input").setAttribute("item-money", true)
+                document.getElementById("ItemOption_input").setAttribute("item-id", inventory.money)
+                document.getElementById("ItemOption_input").value = 1
+                this.itemCount = inventory.money
+            }, false);
+
             this.mouseDownHandler = (evt) => {
                 downTarget = evt.target;
                 itemId = evt.target.parentNode.getAttribute("item-id");
@@ -230,6 +244,7 @@
                 document.getElementById("ItemOption_Button").innerHTML = "Jeter"
                 document.getElementById("ItemOption_input").setAttribute("item-using", false)
                 document.getElementById("ItemOption_input").setAttribute("item-drop", true)
+                document.getElementById("ItemOption_input").setAttribute("item-money", false)
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
                 document.getElementById("ItemOption_input").value = 1
                 this.currentIdShow = null
@@ -244,6 +259,7 @@
                 document.getElementById("ItemOption_Button").innerHTML = "Utiliser"
                 document.getElementById("ItemOption_input").setAttribute("item-using", true)
                 document.getElementById("ItemOption_input").setAttribute("item-drop", false)
+                document.getElementById("ItemOption_input").setAttribute("item-money", false)
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
                 document.getElementById("ItemOption_input").value = 1
                 this.currentIdShow = null
@@ -275,7 +291,7 @@
         onClickOptionItem(evt) {
             CloseInfoBox()
             if(document.getElementById("ItemOption_input").value > 0){
-                inventory.removeItem(document.getElementById("ItemOption_input").getAttribute("item-id"), document.getElementById("ItemOption_input").getAttribute("item-using"), document.getElementById("ItemOption_input").getAttribute("item-drop"), parseInt(document.getElementById("ItemOption_input").value))
+                inventory.removeItem(document.getElementById("ItemOption_input").getAttribute("item-id"), document.getElementById("ItemOption_input").getAttribute("item-using"), document.getElementById("ItemOption_input").getAttribute("item-drop"), document.getElementById("ItemOption_input").getAttribute("item-money"), parseInt(document.getElementById("ItemOption_input").value))
                 document.getElementById("ItemOption_input").value = 1
             }
         }
