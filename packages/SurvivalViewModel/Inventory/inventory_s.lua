@@ -136,7 +136,6 @@ function PickupItem(player, Pitem)
 	if found == false then
 		local id = SLogic.SetUserInventory(PlayerData[player].id, Pitem)
 		Delay(500, function()
-			print(id)
 			Player_CreateNewItem(player, id)
 		end)
 	end

@@ -143,9 +143,7 @@
                 document.getElementById("ItemOption").style.visibility = "visible"
                 document.getElementById("ItemOption_nom").innerHTML = "Argent - <b style='font-size: 13px'>"+document.getElementById("money_label").innerHTML+"</b>"
                 document.getElementById("ItemOption_Button").innerHTML = "Jeter"
-                document.getElementById("ItemOption_input").setAttribute("item-using", false)
-                document.getElementById("ItemOption_input").setAttribute("item-drop", false)
-                document.getElementById("ItemOption_input").setAttribute("item-money", true)
+                document.getElementById("ItemOption_input").setAttribute("item-type", "money")
                 document.getElementById("ItemOption_input").setAttribute("item-id", inventory.money)
                 document.getElementById("ItemOption_input").value = 1
                 this.itemCount = inventory.money
@@ -171,7 +169,7 @@
                     this.itemCount = parseInt(evt.toElement.nextElementSibling.innerHTML)
                 }
                 if (evt.target.className == "parent-container") {
-                    inventory.removeItem(parseInt(itemId), false, true, parseInt(this.itemCount));
+                    inventory.removeItem(parseInt(itemId), "drop", parseInt(this.itemCount));
                 }
                 if (evt.target === downTarget && evt.target.className === "item-image") {
                     if(document.getElementById("ItemOption").style.visibility == "visible"){
@@ -188,6 +186,8 @@
 
                     if (evt.target.parentNode.id === "consommable") {
                         document.getElementById("infos-use").style.visibility = "visible";
+                    } else {
+                        document.getElementById("infos-use").style.visibility = "hidden";
                     }
                 }
                 let elements = document.getElementsByClassName("inventory-slot");
@@ -242,9 +242,7 @@
                 document.getElementById("ItemOption").style.visibility = "visible"
                 document.getElementById("ItemOption_nom").innerHTML = document.getElementById("infos-title").innerHTML
                 document.getElementById("ItemOption_Button").innerHTML = "Jeter"
-                document.getElementById("ItemOption_input").setAttribute("item-using", false)
-                document.getElementById("ItemOption_input").setAttribute("item-drop", true)
-                document.getElementById("ItemOption_input").setAttribute("item-money", false)
+                document.getElementById("ItemOption_input").setAttribute("item-type", "drop")
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
                 document.getElementById("ItemOption_input").value = 1
                 this.currentIdShow = null
@@ -257,9 +255,7 @@
                 document.getElementById("ItemOption").style.visibility = "visible"
                 document.getElementById("ItemOption_nom").innerHTML = document.getElementById("infos-title").innerHTML
                 document.getElementById("ItemOption_Button").innerHTML = "Utiliser"
-                document.getElementById("ItemOption_input").setAttribute("item-using", true)
-                document.getElementById("ItemOption_input").setAttribute("item-drop", false)
-                document.getElementById("ItemOption_input").setAttribute("item-money", false)
+                document.getElementById("ItemOption_input").setAttribute("item-type", "consume")
                 document.getElementById("ItemOption_input").setAttribute("item-id", this.currentIdShow)
                 document.getElementById("ItemOption_input").value = 1
                 this.currentIdShow = null
@@ -291,7 +287,7 @@
         onClickOptionItem(evt) {
             CloseInfoBox()
             if(document.getElementById("ItemOption_input").value > 0){
-                inventory.removeItem(document.getElementById("ItemOption_input").getAttribute("item-id"), document.getElementById("ItemOption_input").getAttribute("item-using"), document.getElementById("ItemOption_input").getAttribute("item-drop"), document.getElementById("ItemOption_input").getAttribute("item-money"), parseInt(document.getElementById("ItemOption_input").value))
+                inventory.removeItem(document.getElementById("ItemOption_input").getAttribute("item-id"), document.getElementById("ItemOption_input").getAttribute("item-type"), parseInt(document.getElementById("ItemOption_input").value))
                 document.getElementById("ItemOption_input").value = 1
             }
         }

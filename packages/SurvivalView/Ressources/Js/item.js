@@ -76,4 +76,12 @@ const CONFIG = {
         hspace: 40,
         url: "url('./../Ressources/images/consommable.png')"
     },
+
+    'ressource': {
+        spriteLignes: 7,
+        spriteColonnes: 5,
+        wspace: 40,
+        hspace: 40,
+        url: "url('./../Ressources/images/consommable.png')"
+    },
 }

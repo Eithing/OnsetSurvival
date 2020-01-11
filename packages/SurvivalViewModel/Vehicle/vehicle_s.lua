@@ -214,7 +214,6 @@ AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
 end)
 
 AddRemoteEvent("OnPlayerExitDamage", function(player, speed)
-    print(GetSpeedVehicle(GetPlayerVehicle(player)), speed)
     if speed > 15 then
         local calcul = speed/1.5
         sethealth(player, GetPlayerHealth(player) - calcul)

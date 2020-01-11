@@ -4,14 +4,14 @@ c_Receipts = {}
 AddEvent("OnPackageStart", function()
 	Delay(math.Seconds(1), function()
 		CreateItemCraft(26, 20, {
-			{name = GetItemDataByItemID(40).nom, itemId = 40, count = 20},
-			{name = GetItemDataByItemID(41).nom, itemId = 41, count = 20}
+			{name = GetItemDataByItemID(52).nom, itemId = 52, count = 20},
+			{name = GetItemDataByItemID(53).nom, itemId = 53, count = 20}
 		}, 5)
 		
 		CreateCraft(25, 25, "Dacia 2000", "vehicle", "cars", {
-			{name = GetItemDataByItemID(40).nom, itemId = 40, count = 20},
-			{name = GetItemDataByItemID(41).nom, itemId = 41, count = 20},
-			{name = GetItemDataByItemID(43).nom, itemId = 43, count = 20}
+			{name = GetItemDataByItemID(51).nom, itemId = 51, count = 20},
+			{name = GetItemDataByItemID(52).nom, itemId = 52, count = 20},
+			{name = GetItemDataByItemID(53).nom, itemId = 53, count = 20}
 		}, 5)
 	end)
 end)
@@ -36,7 +36,6 @@ function Craft(player, id, count)
 		if itemcraft.type == "vehicle" then
 			count = 1
 		end
-		print(count)
 		local needitems = SLogic.json_decode(itemcraft.need)
 		for k, v in pairs(needitems) do
 			local id = GetItemByItemID(player, v.itemId)

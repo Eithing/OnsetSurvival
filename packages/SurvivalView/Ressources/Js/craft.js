@@ -30,7 +30,7 @@ class Craft {
         return this;
     }
 
-    removeItem(idUnique, item) {
+    removeItem(idUnique) {
         if(this.inventory.items[idUnique] != null){
             this.inventory.items[idUnique].element.remove()
             this.inventory.items[idUnique] = null

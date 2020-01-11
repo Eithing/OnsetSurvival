@@ -246,7 +246,7 @@ class Inventory {
         return this;
     }
 
-    removeItem(itemId, consume, drop, money, count=1) {
+    removeItem(itemId, type, count=1) {
         count = parseInt(count)
         document.getElementById("infos-image").style.backgroundImage = null;
         document.getElementById("infos-image").style.backgroundPosition = null;
@@ -255,7 +255,9 @@ class Inventory {
         document.getElementById("item-info").style.visibility = "hidden";
         document.getElementById("infos-use").style.visibility = "hidden";
 
-        if(money == true || money == "true"){
+        alert(type)
+
+        if(type == "money"){
             ue.game.callevent("OnDropMoney", JSON.stringify([this.mathclamp(count, 0, this.money)]));
             return this;
         }
@@ -270,10 +272,10 @@ class Inventory {
                 } else if (k === "slot3") {
                     ue.game.callevent("onEquipWeapon", JSON.stringify([1, 3, 0]));
                 }
-                if (consume == true || consume == "true") {
+                if (type == "consume") {
                     ue.game.callevent("OnUseItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
                 } else {
-                    if(drop == true || drop == "true"){
+                    if(type == "drop"){
                         ue.game.callevent("OnDropItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));
                     } else {
                         ue.game.callevent("OnRemoveItem", JSON.stringify([itemId, this.mathclamp(count, 0, parseInt(inventory[k].items[itemId].label.innerText))]));

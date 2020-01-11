@@ -137,7 +137,7 @@ function giveitem_commands(player, itemId, count)
 			CallRemoteEvent(player, "PopulateCraft", PlayerData[player].inventory, c_Receipts)
 		end)
 		UpdateWeight(player, false)
-		print("Admin : give item "..itemId.." (for "..player..")")
+		print("Admin : give item "..itemId.." "..count.." (for "..PlayerData[player].name..")")
 	end
 	return
 end
