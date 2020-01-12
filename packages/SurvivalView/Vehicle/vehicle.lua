@@ -26,7 +26,6 @@ function SetRadioVisibility()
 end
 AddFunctionExport("SetRadioVisibility", SetRadioVisibility)
 
-
 AddEvent("OnChangeRadio", function(id)
     SViewModel.ExecuteFromServer("radio:getplayersinvehicle", nil, nil, tonumber(id))
 end)

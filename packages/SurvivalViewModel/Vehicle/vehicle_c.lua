@@ -91,6 +91,7 @@ AddEvent("OnKeyPress", function(key)
     local vehicle = GetPlayerVehicle()
     if IsCtrlPressed() == false and key == 'R' and radiohud == false then
         CallRemoteEvent("UpdateWeight", SView.SetRadioVisibility())
+        RemoveAllHud("vehicle")
         radiohud = true
         Delay(math.Seconds(1), function()
             radiohud = false

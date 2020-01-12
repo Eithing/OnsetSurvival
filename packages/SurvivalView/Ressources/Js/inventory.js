@@ -255,8 +255,6 @@ class Inventory {
         document.getElementById("item-info").style.visibility = "hidden";
         document.getElementById("infos-use").style.visibility = "hidden";
 
-        alert(type)
-
         if(type == "money"){
             ue.game.callevent("OnDropMoney", JSON.stringify([this.mathclamp(count, 0, this.money)]));
             return this;

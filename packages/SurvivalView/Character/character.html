@@ -22,7 +22,8 @@
             </select>
             <p>Personnage :</p>
             <div class="selectclothing">
-                <div id="clothing" value="7">
+                <div id="clothing">
+
                 </div>
             </div>
             <div style="display: flex; margin-top: 40px;">
@@ -44,6 +45,10 @@
                     callevent: console.log
                 }
             }
+        }
+
+        document.oncontextmenu = function() {
+            return false;
         }
 
         let theclothing = 6

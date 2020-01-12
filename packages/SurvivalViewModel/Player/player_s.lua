@@ -217,6 +217,9 @@ function SavePlayer(player)
 end
 
 function IsAdmin(player)
+    if PlayerData[player] == nil then
+        return false
+    end
 	return PlayerData[player].admin == 1
 end
 AddFunctionExport("isAdmin", IsAdmin)

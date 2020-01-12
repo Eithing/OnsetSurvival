@@ -117,5 +117,8 @@ function RemoveAllHud(hud)
     if hud ~= "craft" then
         QuitCloseHud(CraftHud)
     end
+    if hud ~= "vehicle" then
+        SetRadioVisibility()
+    end
 end
 AddFunctionExport("RemoveAllHud", RemoveAllHud)
