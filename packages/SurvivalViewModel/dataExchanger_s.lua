@@ -3,6 +3,7 @@ SLogic = ImportPackage("SurvivalLogic")
 -- Enregistrement des variables global serveur
 PlayerData = {}
 VehicleData = {}
+ZombiesData = {}
 ItemDB = {}
 ItemPickups = {}
 DeadPlayerBags = {}

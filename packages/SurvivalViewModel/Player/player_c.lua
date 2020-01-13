@@ -94,7 +94,11 @@ function OnKeyPress(key)
                 end
             end
         end
-	end
+    end
+    if key == "M" then
+        RemoveAllHud("map")
+        CallRemoteEvent("UpdateWeight", SView.SetMapVisibility())
+    end
 end
 AddEvent("OnKeyPress", OnKeyPress)
 

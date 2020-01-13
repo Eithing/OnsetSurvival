@@ -55,6 +55,9 @@ table.insert(gstore_Points, {id = 2, x = 128115, y = 77886,  z = 1568, radius = 
 r_Points = {}
 table.insert(r_Points, {id = 1, nom = "Mine dawp", itemId = 26, count = 1, x = 132512, y = 77888,  z = 1568, radius = 150.0})
 
+-- ZOMBIES CONFIG --
+z_rewards = 150 -- argent gagné lors d'un kill de zombie
+
 -- Fonction Global --
 
 function math.clamp(num, min, max)
@@ -80,6 +83,21 @@ function GetNearestZone(zone, x, y, z)
 		end
 	end
 
+	return found, fdist
+end
+
+function GetNearestPlayer(x, y, z, radius)
+	local found = 0
+	local fdist = 0
+	for k, v in pairs(GetAllPlayers()) do
+        local x2, y2, z2 = GetPlayerLocation(v)
+		local dist = GetDistance3D(x, y, z, x2, y2, z2)
+		if dist < tonumber(radius) then
+			found = v
+			fdist = dist
+			break
+		end
+	end
 	return found, fdist
 end
 

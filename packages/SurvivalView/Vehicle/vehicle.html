@@ -141,22 +141,21 @@
 
         var i=0;
         function expand(){
-            if(i==0){
-                document.getElementById("radiomenu").style.transform="scale(1)"; 
-                i=1;
-                setTimeout(function(){
-                    for (const key in document.getElementById("radiomenu").children) {
-                        if (document.getElementById("radiomenu").children.hasOwnProperty(key)) {
-                            const element = document.getElementById("radiomenu").children[key];
-                            element.style.opacity="1";
-                        }
-                    }
-                }, 300)
-            }
-            else{
-                document.getElementById("radiomenu").style.transform="scale(0)"; 
-                i=0;
-            }
+          document.getElementById("radiomenu").style.transform="scale(1)"; 
+          i=1;
+          setTimeout(function(){
+              for (const key in document.getElementById("radiomenu").children) {
+                  if (document.getElementById("radiomenu").children.hasOwnProperty(key)) {
+                      const element = document.getElementById("radiomenu").children[key];
+                      element.style.opacity="1";
+                  }
+              }
+          }, 300)
+        }
+
+        function RemoveMenu() {
+          document.getElementById("radiomenu").style.transform="scale(0)"; 
+          i=0;
         }
 
         function UpdateSpeed(speed) {

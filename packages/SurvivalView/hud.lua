@@ -45,6 +45,12 @@ AddEvent("OnPackageStart", function()
     SetWebAnchors(CraftHud, 0.0, 0.0, 1.0, 1.0)
     LoadWebFile(CraftHud, "http://asset/SurvivalView/Craft/craft.html")
     SetWebVisibility(CraftHud, WEB_HIDDEN)
+
+    MapHud = CreateWebUI(0, 0, 0, 0, 0, 28)
+    SetWebAlignment(MapHud, 1.0, 0.0)
+    SetWebAnchors(MapHud, 0.0, 0.0, 1.0, 1.0)
+    LoadWebFile(MapHud, "http://asset/SurvivalView/Map/map.html")
+    SetWebVisibility(MapHud, WEB_HIDDEN)
 end)
 
 function ExecuteJs(hud, js)
@@ -62,6 +68,8 @@ function ExecuteJs(hud, js)
         ExecuteWebJS(adminHud, js)
     elseif hud == "craft" then
         ExecuteWebJS(CraftHud, js)
+    elseif hud == "map" then
+        ExecuteWebJS(MapHud, js)
     else
         ExecuteWebJS(hud, js)
     end
@@ -118,7 +126,17 @@ function RemoveAllHud(hud)
         QuitCloseHud(CraftHud)
     end
     if hud ~= "vehicle" then
-        SetRadioVisibility()
+        if GetWebVisibility(VehicleHud) == WEB_HITINVISIBLE or GetWebVisibility(VehicleHud) == WEB_VISIBLE then
+            SetVisibility(VehicleHud, "HitInvisible")
+            ShowMouseCursor(false)
+            SetIgnoreLookInput(false)
+            SetIgnoreMoveInput(false)
+            SetInputMode(INPUT_GAME)
+            ExecuteJs("vehicle", "RemoveMenu()")
+        end
+    end
+    if hud ~= "map" then
+        QuitCloseHud(MapHud)
     end
 end
 AddFunctionExport("RemoveAllHud", RemoveAllHud)

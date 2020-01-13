@@ -12,7 +12,8 @@
         "Job/recolt_s.lua",
         "Vehicle/vehicle_s.lua",
         "Vehicle/garage_s.lua",
-        "Chat/chat_s.lua"
+        "Chat/chat_s.lua",
+        "zombies/zombie_s.lua"
     ],
     "client_scripts": [
         "config.lua",
@@ -23,7 +24,8 @@
         "Inventory/inventory_c.lua",
         "Job/craft_c.lua",
         "Vehicle/vehicle_c.lua",
-        "Vehicle/garage_c.lua"
+        "Vehicle/garage_c.lua",
+        "zombies/zombie_c.lua"
     ],
     "files": [
         "Ressources/sounds/carLock.mp3",

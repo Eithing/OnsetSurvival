@@ -9,7 +9,8 @@
         "Craft/craft.lua",
         "Vehicle/vehicle.lua",
         "Character/character.lua",
-        "Garage/garage.lua"
+        "Garage/garage.lua",
+        "Map/map.lua"
     ],
     "files": [
         "VitalIndicator/health.html",
@@ -36,6 +37,9 @@
         "Garage/garage.css",
         "Garage/garage.html",
 
+        "Map/map.css",
+        "Map/map.html",
+
         "Ressources/css/ionicons.min.css",
         "Ressources/fonts/ionicons.ttf",
         
@@ -49,6 +53,7 @@
         "Ressources/images/Cars.jpg",
         "Ressources/images/Cloth.jpg",
         "Ressources/images/Weapons.png",
-        "Ressources/images/consommable.png"
+        "Ressources/images/consommable.png",
+        "Ressources/images/map.jpg"
     ]
 }

@@ -1,0 +1,41 @@
+* 
+{
+    box-sizing: border-box;
+}
+
+body {
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+    margin: 0;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+#mapdiv {
+    position: relative;
+    filter: drop-shadow(-1px -1px 0 black) 
+            drop-shadow( 1px -1px 0 black)
+            drop-shadow(-1px  1px 0 black) 
+            drop-shadow( 1px  1px 0 black);
+}
+
+.blip {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    filter: drop-shadow(-1px -1px 0 black) 
+            drop-shadow( 1px -1px 0 black)
+            drop-shadow(-1px  1px 0 black) 
+            drop-shadow( 1px  1px 0 black);
+}
