@@ -17,6 +17,9 @@ p_bagDisappearTime = 20*1000
 i_maxWeight = 80 -- Valeur par défault
 i_maxStack = 99 -- Stack max d'un item
 
+-- CRAFT CONFIG --
+c_CraftMessage = "Fabrication de %s(%s) dans" -- marche avec "string.format"
+
 -- VEHICLE CONFIG --
 v_health = 1500 -- Vie max d'un véhicule
 v_delayconsume = 1000 -- delai de la cosomation d'essence
@@ -112,4 +115,16 @@ end
 
 function math.Hours(num) -- Heures en Ms
 	return num * 3,6e+6
+end
+
+function math.MsToSeconds(num) -- Ms en Secondes
+	return num / 1000
+end
+
+function math.MsToMinutes(num) -- MS en Minutes
+	return num / 60000
+end
+
+function math.MsToHours(num) -- MS en Heures
+	return num / 3,6e+6
 end

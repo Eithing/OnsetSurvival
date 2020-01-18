@@ -371,3 +371,15 @@ function AddNotification(player, msg, type, delay)
     end
     return CallRemoteEvent(player, "ClientAddNotification", msg, type, delay)
 end
+
+function AddNotificationTimer(player, msg, delay)
+    if msg == "" or msg == nil then
+        print("Notification : Message Invalide")
+        return
+    end
+    if delay == nil or delay == 0 then
+        print("Notification : Delay Invalide")
+        return
+    end
+    return CallRemoteEvent(player, "ClientAddNotificationTimer", msg, delay)
+end

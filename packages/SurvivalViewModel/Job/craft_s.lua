@@ -6,13 +6,13 @@ AddEvent("OnPackageStart", function()
 		CreateItemCraft(26, 20, {
 			{name = GetItemDataByItemID(52).nom, itemId = 52, count = 20},
 			{name = GetItemDataByItemID(53).nom, itemId = 53, count = 20}
-		}, 5)
+		}, 20)
 		
 		CreateCraft(25, 25, "Dacia 2000", "vehicle", "cars", {
 			{name = GetItemDataByItemID(51).nom, itemId = 51, count = 20},
 			{name = GetItemDataByItemID(52).nom, itemId = 52, count = 20},
 			{name = GetItemDataByItemID(53).nom, itemId = 53, count = 20}
-		}, 5)
+		}, 20)
 	end)
 end)
 
@@ -32,6 +32,7 @@ AddRemoteEvent("RequestPopulateCraft", RequestPopulateCraft)
 function Craft(player, id, count)
 	local itemcraft = GetCraft(id)
 	if itemcraft ~= 0 then
+		itemcraft.time = tonumber(itemcraft.time)
 		if itemcraft.type == "vehicle" then
 			count = 1
 		end
@@ -48,6 +49,11 @@ function Craft(player, id, count)
 		end
 
 		SetPlayerAnimation(player, 'COMBINE')
+
+		print(player, string.format(c_CraftMessage, tostring(itemcraft.nom), tostring(count)), math.floor(itemcraft.time*count))
+		
+		AddNotificationTimer(player, string.format(c_CraftMessage, tostring(itemcraft.nom), tostring(count)), math.floor(itemcraft.time*count))
+
 		Delay(math.Seconds(itemcraft.time*count), function()
 			if itemcraft.type == "item" then
 				local itemData = GetItemDataByItemID(itemcraft.itemId)

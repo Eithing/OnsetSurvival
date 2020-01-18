@@ -195,26 +195,55 @@ function UseItem(player, idUnique, count)
 				AddNotification(player, "Aucun véhicule a proximité !", "error")
 				count = 0
 			end
+			count = 0
 		end
 		if(tonumber(UsingItem.itemId) == 31)then --Kit de réparation
+			local ExtincteurItem = GetItemDataByItemID(71)
+			
 			local vehicle, Dist = VGetNearestVehicle(player, 200)
 			if(IsValidVehicle(vehicle))then
-				for i=1, tonumber(count) do
-					if GetVehicleHealth(vehicle) ~= v_health then
-						SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle)+UsingItem.value, 0, v_health))
-						if GetVehicleHealth(vehicle) > v_health/2 then
-							for i=1, 8 do
-								SetVehicleDamage(vehicle, i, 0)
+				if GetVehicleHealth(vehicle) >= tonumber(ExtincteurItem.value) then
+					for i=1, tonumber(count) do
+						if GetVehicleHealth(vehicle) ~= v_health then
+							SetVehicleHealth(vehicle, math.clamp(GetVehicleHealth(vehicle)+UsingItem.value, 0, v_health))
+							if GetVehicleHealth(vehicle) > v_health/2 then
+								for i=1, 8 do
+									SetVehicleDamage(vehicle, i, 0)
+								end
 							end
-						end
-					else
-						if i == 1 then
-							count = 0
 						else
-							count = i
+							if i == 1 then
+								count = 0
+							else
+								count = i
+							end
+							break
 						end
-						break
 					end
+				else
+					AddNotification(player, "Le véhicule est en feu !", "error")
+					count = 0
+				end
+			else
+				AddNotification(player, "Aucun véhicule a proximité !", "error")
+				count = 0
+			end
+		end
+		if(tonumber(UsingItem.itemId) == 71)then --Extincteur
+			local vehicle, Dist = VGetNearestVehicle(player, 200)
+			if(IsValidVehicle(vehicle))then
+				print("Vehicle health : ", GetVehicleHealth(vehicle))
+				if GetVehicleHealth(vehicle) <= tonumber(UsingItem.value) then
+					if GetVehicleHealth(vehicle) ~= v_health then
+						SetVehicleHealth(vehicle, math.clamp(tonumber(UsingItem.value), 0, v_health))
+						count = 1
+					else
+						AddNotification(player, "Le véhicule n'a pas besoin d'etre réparer !", "error")
+						count = 0
+					end
+				else
+					AddNotification(player, "Le véhicule n'est pas en feu !", "error")
+					count = 0
 				end
 			else
 				AddNotification(player, "Aucun véhicule a proximité !", "error")

@@ -43,6 +43,7 @@
         "Ressources/css/ionicons.min.css",
         "Ressources/fonts/ionicons.ttf",
         
+        "Ressources/Js/config.js",
         "Ressources/Js/item.js",
         "Ressources/Js/inventory.js",
         "Ressources/Js/craft.js",

@@ -62,6 +62,21 @@ function AddNotification(msg, type, delay)
 end
 AddRemoteEvent("ClientAddNotification",  AddNotification)
 
+function AddNotificationTimer(msg, delay)
+    local id = Random(1,99999)
+    if msg == nil or msg == "" then
+        return
+    end
+    if delay == nil or delay == 0 then
+        delay = p_delayNotif
+    end
+    delay = math.Seconds(delay)
+    AddPlayerChat(id.." "..msg.." "..delay.."s")
+    SView.ExecuteJs("vitalIndicator", 'AddNotificationTimer("'..id..'","'..msg..'",'..delay..')')
+    return id
+end
+AddRemoteEvent("ClientAddNotificationTimer",  AddNotificationTimer)
+
 -- All Notif
 local notifid = {}
 
