@@ -16,7 +16,7 @@ function SetRadioVisibility()
         SetIgnoreLookInput(false)
         SetIgnoreMoveInput(false)
         SetInputMode(INPUT_GAME)
-        ExecuteJs("vehicle", "expand()")
+        ExecuteJs("vehicle", "RemoveMenu()")
         return true
     else
         SetVisibility(VehicleHud, "VisibleMove")
@@ -27,14 +27,15 @@ end
 AddFunctionExport("SetRadioVisibility", SetRadioVisibility)
 
 AddEvent("OnChangeRadio", function(id)
-    SViewModel.ExecuteFromServer("radio:getplayersinvehicle", nil, nil, tonumber(id))
+    SViewModel.ExecuteFromServer("radio:getplayersinvehicle", nil, nil, math.floor(tonumber(id)))
 end)
 
 AddEvent("OnChangePause", function()
-    local vehicle = SViewModel.GetVehicleInData()
-    if vehicle ~= false then
-        SViewModel.ExecuteFromServer("radio:getplayersinvehicle", vehicle.RadioStatus)
+    if PlayerIsInVehicle() == false then
+		return false
     end
+    
+    SViewModel.ExecuteFromServer("radio:getplayersinvehicle", GetVehiclePropertyValue(GetPlayerVehicle(), "RadioPause"))
 end)
 
 AddEvent("OnChangeVolume", function(type)

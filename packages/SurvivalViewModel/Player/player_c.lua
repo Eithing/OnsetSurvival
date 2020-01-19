@@ -154,10 +154,9 @@ end
 
 
 -- DEV NE PAS LAISSER EN PRODUCTION --
-function OnScriptError(message)
+AddEvent("OnScriptError", function(message)
     AddPlayerChat('<span color="#ff0000bb" style="bold" size="10">'..message..'</>')
-end
-AddEvent("OnScriptError", OnScriptError)
+end)
 
 function RemoveAllHud(hud)
     SView.RemoveAllHud(hud)

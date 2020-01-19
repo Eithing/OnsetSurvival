@@ -383,3 +383,9 @@ function AddNotificationTimer(player, msg, delay)
     end
     return CallRemoteEvent(player, "ClientAddNotificationTimer", msg, delay)
 end
+
+
+-- DEV NE PAS LAISSER EN PRODUCTION --
+AddEvent("OnScriptError", function(message)
+    print(message)
+end)

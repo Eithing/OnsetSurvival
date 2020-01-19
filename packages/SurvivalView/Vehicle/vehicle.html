@@ -22,7 +22,7 @@
           <div class="player">
             <div class="radio">
               <span class="ion-music-note" id="radiocon"></span>
-              <span id="vehicleradio" class="radio-des">Avicii, Hey Brother</span>
+              <span id="vehicleradio" class="radio-des">NRJ</span>
             </div>
             <span id="previous" class="ion-skip-backward"></span>
             <span id="pause" class="ion-pause"></span>
@@ -91,6 +91,7 @@
             }else if(num > maxChannel){
                 num = 1
             }
+            channel = num
             ue.game.callevent("OnChangeRadio", JSON.stringify([num]));
         }
 
